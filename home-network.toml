@@ -1,0 +1,35 @@
+dns = "192.168.1.1"
+subnet = "24"
+
+[devices.jupiter]
+ip = "192.168.1.101"
+vip = "192.168.195.155"
+hosts = ["jupiter.5kw.li"]
+
+
+[devices.saturn]
+ip = "192.168.1.100"
+vip = "192.168.195.114"
+hosts = [
+    "saturn.5kw.li", 
+    "a.5kw.li",
+    "b.5kw.li",
+    "bitwarden-rs.5kw.li", 
+    "c.5kw.li", 
+    "ca.5kw.li",
+    "d.5kw.li",
+    "git-home.5kw.li",
+    "gitlab.5kw.li",
+    "torrent.5kw.li",
+    "unifi.5kw.li",
+]
+
+[devices.ceres]
+ip = "192.168.1.160"
+vip = "192.168.195.230"
+hosts = ["ceres.5kw.li"]
+
+[devices.mars]
+ip = "192.168.1.166"
+vip = "192.168.195.200"
+hosts = ["mars.5kw.li"]
