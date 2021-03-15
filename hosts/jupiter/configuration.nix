@@ -1,11 +1,11 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    ../../roles/amd-gpu.nix
-    ../../roles/bluetooth.nix
-    ../../roles/desktop.nix
-    ../../roles/graphical.nix
-    ../../roles/home.nix
-    ../../roles/x86.nix
+    ../../profiles/amd-gpu.nix
+    ../../profiles/bluetooth.nix
+    ../../profiles/desktop.nix
+    ../../profiles/graphical.nix
+    ../../profiles/home.nix
+    ../../profiles/x86.nix
     ./hardware-configuration.nix
   ];
 
