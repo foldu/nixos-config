@@ -8,7 +8,7 @@ in
     xdg.configFile."doom" = {
       source = ../../config/doom;
       recursive = true;
-      # FIXME: this is only eventually consistent
+      # FIXME: do this properly
       onChange = ''
         #!/bin/sh
         set -e
