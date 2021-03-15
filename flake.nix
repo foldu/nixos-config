@@ -128,7 +128,7 @@
           modules = [
             nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
             nixos-hardware.nixosModules.common-pc-laptop-ssd
-            ./dev/mars/configuration.nix
+            ./hosts/mars/configuration.nix
           ];
         };
 
@@ -136,7 +136,7 @@
           system = "x86_64-linux";
           modules = [
             nixos-hardware.nixosModules.common-pc-ssd
-            ./dev/jupiter/configuration.nix
+            ./hosts/jupiter/configuration.nix
           ];
         };
       };
