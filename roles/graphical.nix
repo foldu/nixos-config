@@ -9,7 +9,6 @@ in
     ./generic.nix
     ./graphical/bfq.nix
     ./graphical/desktop-portal.nix
-    ./graphical/dolphin.nix
     ./graphical/emacs.nix
     ./graphical/fancy-login.nix
     ./graphical/fonts.nix

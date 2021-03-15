@@ -53,10 +53,11 @@
       command = "emacsclient";
       desktopFile = "emacsclient.desktop";
     };
+    # nautilus sucks but dolphin has too many buttons
     fileBrowser = {
-      pkg = pkgs.dolphin;
-      command = "dolphin";
-      desktopFile = "org.kde.dolphin.desktop";
+      pkg = pkgs.gnome3.nautilus;
+      command = "nautilus";
+      desktopFile = "org.gnome.Nautilus.desktop";
     };
     torrentClient = {
       pkg = pkgs.transmission-remote-gtk;
