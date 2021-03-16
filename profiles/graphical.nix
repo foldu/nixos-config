@@ -177,11 +177,6 @@ in
         };
       };
 
-    programs.direnv = {
-      enable = true;
-      enableNixDirenvIntegration = true;
-    };
-
     programs.firefox = {
       enable = true;
       profiles =
