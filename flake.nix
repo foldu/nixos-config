@@ -2,6 +2,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    flake-utils.url = "github:numtide/flake-utils";
+
     home-manager = {
       url = "github:rycee/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,6 +58,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.naersk.follows = "naersk";
     };
+
+    huh = {
+      type = "git";
+      url = "https://git-home.5kw.li/foldu/huh";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.naersk.follows = "naersk";
+    };
   };
 
   outputs =
@@ -66,33 +75,37 @@
     , nixos-hardware
     , pickwp
     , wrrr
+    , huh
+    , flake-utils
     , ...
     }@inputs:
     let
       home-network = fromTOML (builtins.readFile ./home-network.toml);
+      mkPkgs = system: import inputs.nixpkgs {
+        inherit system;
+        overlays = [
+          emacs-overlay.overlay
+          rust-overlay.overlay
+          pickwp.overlay
+          wrrr.overlay
+          huh.overlay
+          (final: prev:
+            let
+              putput = [
+                "wscrot"
+              ];
+            in
+            prev.lib.genAttrs putput (
+              name:
+              inputs.${name}.defaultPackage.${system}
+            )
+          )
+        ];
+        config.allowUnfree = true;
+      };
       mkHost = { system, hostName, modules }:
         let
-          pkgs = import inputs.nixpkgs {
-            inherit system;
-            overlays = [
-              emacs-overlay.overlay
-              rust-overlay.overlay
-              pickwp.overlay
-              wrrr.overlay
-              (final: prev:
-                let
-                  putput = [
-                    "wscrot"
-                  ];
-                in
-                prev.lib.genAttrs putput (
-                  name:
-                  inputs.${name}.defaultPackage.${system}
-                )
-              )
-            ];
-            config.allowUnfree = true;
-          };
+          pkgs = mkPkgs system;
           configSettings = import ./settings.nix {
             inherit pkgs;
           };
@@ -140,5 +153,14 @@
           ];
         };
       };
-    };
+    } // flake-utils.lib.eachDefaultSystem (system:
+    let
+      pkgs = mkPkgs system;
+    in
+    {
+      devShell = pkgs.mkShell {
+        # FIXME: make shell completion work
+        buildInputs = [ pkgs.huh ];
+      };
+    });
 }
