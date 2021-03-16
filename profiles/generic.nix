@@ -53,7 +53,6 @@
     uid = 1000;
     shell = pkgs.fish;
     extraGroups = [ "wheel" "video" "audio" "dialout" ];
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ+TsvKvdWG+9KLVeg5N4y1Ce1jr/fP3ELTHVWLxZOR" ];
   };
 
   nixpkgs.config.allowUnfree = true;
