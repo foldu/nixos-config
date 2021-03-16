@@ -21,11 +21,6 @@
       inputs.naersk.follows = "naersk";
     };
 
-    catclock = {
-      url = "github:BarkyTheDog/catclock";
-      flake = false;
-    };
-
     wscrot = {
       type = "git";
       url = "https://git-home.5kw.li/foldu/wscrot";
@@ -60,10 +55,10 @@
     };
 
     huh = {
-      type = "git";
-      url = "https://git-home.5kw.li/foldu/huh";
+      url = "github:foldu/huh";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.naersk.follows = "naersk";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 
@@ -77,7 +72,10 @@
     , wrrr
     , huh
     , flake-utils
-    , ...
+    , home-manager
+    , naersk
+    , wscrot
+    , doom-emacs
     }@inputs:
     let
       home-network = fromTOML (builtins.readFile ./home-network.toml);

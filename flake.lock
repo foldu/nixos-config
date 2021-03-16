@@ -1,21 +1,5 @@
 {
   "nodes": {
-    "catclock": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1585431892,
-        "narHash": "sha256-aKJc42ZMoI4wc2kHaJlpQieLSvMg0hJAyJaaM72NpEI=",
-        "owner": "BarkyTheDog",
-        "repo": "catclock",
-        "rev": "9de77d05e04bc463bdbd8cfe1f9247042369e3f9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "BarkyTheDog",
-        "repo": "catclock",
-        "type": "github"
-      }
-    },
     "doom-emacs": {
       "flake": false,
       "locked": {
@@ -64,21 +48,6 @@
     },
     "flake-utils_2": {
       "locked": {
-        "lastModified": 1614513358,
-        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_3": {
-      "locked": {
         "lastModified": 1598466101,
         "narHash": "sha256-JPhv+Ay98KMWRVRFlLEK9+eLpvNjhTBGWdFKZsE97ck=",
         "owner": "numtide",
@@ -92,7 +61,7 @@
         "type": "github"
       }
     },
-    "flake-utils_4": {
+    "flake-utils_3": {
       "locked": {
         "lastModified": 1609246779,
         "narHash": "sha256-eq6ZXE/VWo3EMC65jmIT6H/rrUc9UWOWVujkzav025k=",
@@ -107,7 +76,7 @@
         "type": "github"
       }
     },
-    "flake-utils_5": {
+    "flake-utils_4": {
       "locked": {
         "lastModified": 1614513358,
         "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
@@ -122,7 +91,7 @@
         "type": "github"
       }
     },
-    "flake-utils_6": {
+    "flake-utils_5": {
       "locked": {
         "lastModified": 1598466101,
         "narHash": "sha256-JPhv+Ay98KMWRVRFlLEK9+eLpvNjhTBGWdFKZsE97ck=",
@@ -160,7 +129,9 @@
     },
     "huh": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": [
+          "flake-utils"
+        ],
         "naersk": [
           "naersk"
         ],
@@ -169,17 +140,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1615897676,
-        "narHash": "sha256-sdldaDX4G8ympRJixUA5BpmtCyw25tLK+GLEEqtlHJ0=",
-        "ref": "master",
-        "rev": "b023ab70697b51bdff81862d0c3d93cde9d5c50c",
-        "revCount": 13,
-        "type": "git",
-        "url": "https://git-home.5kw.li/foldu/huh"
+        "lastModified": 1615898507,
+        "narHash": "sha256-dXEjsAJyolAKphPszIlqWnmDhBY3NnzlqhD1SkctF+4=",
+        "owner": "foldu",
+        "repo": "huh",
+        "rev": "34569f9693fa93d5f40d058d9e3c879e288056ad",
+        "type": "github"
       },
       "original": {
-        "type": "git",
-        "url": "https://git-home.5kw.li/foldu/huh"
+        "owner": "foldu",
+        "repo": "huh",
+        "type": "github"
       }
     },
     "naersk": {
@@ -235,7 +206,7 @@
     },
     "pickwp": {
       "inputs": {
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_2",
         "naersk": [
           "naersk"
         ],
@@ -259,7 +230,6 @@
     },
     "root": {
       "inputs": {
-        "catclock": "catclock",
         "doom-emacs": "doom-emacs",
         "emacs-overlay": "emacs-overlay",
         "flake-utils": "flake-utils",
@@ -276,7 +246,7 @@
     },
     "rust-overlay": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -297,7 +267,7 @@
     },
     "wrrr": {
       "inputs": {
-        "flake-utils": "flake-utils_5",
+        "flake-utils": "flake-utils_4",
         "naersk": [
           "naersk"
         ],
@@ -321,7 +291,7 @@
     },
     "wscrot": {
       "inputs": {
-        "flake-utils": "flake-utils_6",
+        "flake-utils": "flake-utils_5",
         "naersk": [
           "naersk"
         ],
