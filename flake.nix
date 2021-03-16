@@ -132,7 +132,7 @@
           };
 
       mkHosts = nixpkgs.lib.attrsets.mapAttrs
-        (name: value: mkHost ({ hostName = name; } // value));
+        (name: value: mkHost (nixpkgs.lib.recursiveUpdate { hostName = name; } value));
     in
     {
       nixosConfigurations = mkHosts {
