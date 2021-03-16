@@ -55,8 +55,6 @@
     extraGroups = [ "wheel" "video" "audio" "dialout" ];
   };
 
-  nixpkgs.config.allowUnfree = true;
-
   # why is this false by default?
   systemd.coredump.enable = true;
 
@@ -68,6 +66,8 @@
   home-manager.useGlobalPkgs = true;
 
   boot.tmpOnTmpfs = true;
+
+  networking.firewall.enable = true;
 
   # increase fd limits because they're way too low
   security.pam.loginLimits = [

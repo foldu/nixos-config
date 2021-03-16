@@ -2,6 +2,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    stable.url = "github:NixOS/nixpkgs/nixos-20.09";
+
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
@@ -60,6 +62,13 @@
       inputs.naersk.follows = "naersk";
       inputs.flake-utils.follows = "flake-utils";
     };
+
+    blocklistdownloadthing = {
+      url = "github:foldu/blocklistdownloadthing";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.naersk.follows = "naersk";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs =
@@ -76,10 +85,12 @@
     , naersk
     , wscrot
     , doom-emacs
+    , stable
+    , blocklistdownloadthing
     }@inputs:
     let
       home-network = fromTOML (builtins.readFile ./home-network.toml);
-      mkPkgs = system: import inputs.nixpkgs {
+      mkPkgs = inputPkgs: system: (import inputPkgs {
         inherit system;
         overlays = [
           emacs-overlay.overlay
@@ -87,6 +98,7 @@
           pickwp.overlay
           wrrr.overlay
           huh.overlay
+          blocklistdownloadthing.overlay
           (final: prev:
             let
               putput = [
@@ -100,17 +112,18 @@
           )
         ];
         config.allowUnfree = true;
-      };
-      mkHost = { system, hostName, modules }:
+      });
+      mkHost = { system, hostName, modules, pkgs }:
         let
-          pkgs = mkPkgs system;
+          hostPkgs = mkPkgs pkgs system;
           configSettings = import ./settings.nix {
-            inherit pkgs;
+            pkgs = hostPkgs;
           };
         in
         nixpkgs.lib.nixosSystem
           {
-            inherit system pkgs;
+            inherit system;
+            pkgs = hostPkgs;
             specialArgs = { inherit inputs home-network configSettings; };
             modules = [
               ({ pkgs, ... }: {
@@ -136,6 +149,7 @@
       nixosConfigurations = mkHosts {
         mars = {
           system = "x86_64-linux";
+          pkgs = inputs.nixpkgs;
           modules = [
             nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
             nixos-hardware.nixosModules.common-pc-laptop-ssd
@@ -145,20 +159,20 @@
 
         jupiter = {
           system = "x86_64-linux";
+          pkgs = inputs.nixpkgs;
           modules = [
             nixos-hardware.nixosModules.common-pc-ssd
             ./hosts/jupiter/configuration.nix
           ];
         };
+
+        ceres = {
+          system = "aarch64-linux";
+          pkgs = inputs.nixpkgs;
+          modules = [
+            ./hosts/ceres/configuration.nix
+          ];
+        };
       };
-    } // flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = mkPkgs system;
-    in
-    {
-      devShell = pkgs.mkShell {
-        # FIXME: make shell completion work
-        buildInputs = [ pkgs.huh ];
-      };
-    });
+    };
 }
