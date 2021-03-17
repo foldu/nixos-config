@@ -56,6 +56,13 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
+    eunzip = {
+      url = "github:foldu/eunzip";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.naersk.follows = "naersk";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+
     blocklistdownloadthing = {
       url = "github:foldu/blocklistdownloadthing";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -79,6 +86,7 @@
     , doom-emacs
     , stable
     , blocklistdownloadthing
+    , eunzip
     }@inputs:
     let
       home-network = fromTOML (builtins.readFile ./home-network.toml);
@@ -88,6 +96,7 @@
           emacs-overlay.overlay
           rust-overlay.overlay
           pickwp.overlay
+          eunzip.overlay
           wrrr.overlay
           huh.overlay
           blocklistdownloadthing.overlay

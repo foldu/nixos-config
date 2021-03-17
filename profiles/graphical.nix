@@ -67,6 +67,7 @@ in
 
     # TODO: sort this wall of crap
     home.packages = with pkgs; [
+      eunzip
       ffmpeg
       youtube-dl
       pass

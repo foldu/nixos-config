@@ -57,6 +57,32 @@
         "type": "github"
       }
     },
+    "eunzip": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "naersk": [
+          "naersk"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1616001247,
+        "narHash": "sha256-LgYXbat3dclQ33OHCiwPsd+slZ10l4fRufJFQI3/Lwo=",
+        "owner": "foldu",
+        "repo": "eunzip",
+        "rev": "42688eb53c19b3cd2b1a5c79808318e3b329b765",
+        "type": "github"
+      },
+      "original": {
+        "owner": "foldu",
+        "repo": "eunzip",
+        "type": "github"
+      }
+    },
     "flake-utils": {
       "locked": {
         "lastModified": 1614513358,
@@ -244,6 +270,7 @@
         "blocklistdownloadthing": "blocklistdownloadthing",
         "doom-emacs": "doom-emacs",
         "emacs-overlay": "emacs-overlay",
+        "eunzip": "eunzip",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "huh": "huh",
