@@ -91,6 +91,7 @@
           wrrr.overlay
           huh.overlay
           blocklistdownloadthing.overlay
+          (import ./overlays)
         ];
         config.allowUnfree = true;
       });

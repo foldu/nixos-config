@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   services.xserver.desktopManager = {
     gnome3.enable = true;
-    xterm.enable = false;
+    xterm.enable = lib.mkForce false;
   };
 
   environment.gnome3.excludePackages = with pkgs.gnome3; [
@@ -11,7 +11,6 @@
     gedit
     gnome-photos
     gnome-logs
-    gnome-calendar
     gnome-contacts
     epiphany
     gnome-music
@@ -20,6 +19,7 @@
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
     appindicator
+    pkgs.myGnomeExtensions.pop-os-shell
   ];
 
   # gunome _still_ has no server side decorations and alacritty windows look weird
