@@ -73,7 +73,6 @@ in
       pulsemixer
       zip
       dua
-      wscrot
       imagemagick
       gnupg
       brave

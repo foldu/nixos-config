@@ -23,13 +23,6 @@
       inputs.naersk.follows = "naersk";
     };
 
-    wscrot = {
-      type = "git";
-      url = "https://git-home.5kw.li/foldu/wscrot";
-      inputs.nixpkgs.follows = "/nixpkgs";
-      inputs.naersk.follows = "/naersk";
-    };
-
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
     };
@@ -83,7 +76,6 @@
     , flake-utils
     , home-manager
     , naersk
-    , wscrot
     , doom-emacs
     , stable
     , blocklistdownloadthing
@@ -99,17 +91,6 @@
           wrrr.overlay
           huh.overlay
           blocklistdownloadthing.overlay
-          (final: prev:
-            let
-              putput = [
-                "wscrot"
-              ];
-            in
-            prev.lib.genAttrs putput (
-              name:
-              inputs.${name}.defaultPackage.${system}
-            )
-          )
         ];
         config.allowUnfree = true;
       });
