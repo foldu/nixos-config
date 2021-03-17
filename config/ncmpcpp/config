@@ -508,12 +508,15 @@ visualizer_color = blue, cyan, green, yellow, magenta, red
 #
 #active_window_border = red
 #
-#visualizer_fifo_path = "/tmp/mpd.fifo"
-#visualizer_output_name = "fiffi"
-#visualizer_sync_interval = "30"
-visualizer_look = e?
-#visualizer_look = ▮
+visualizer_data_source = "/run/user/1000/mpd.fifo"
+visualizer_output_name = "mpd_fifo"
 visualizer_in_stereo = "yes"
+#visualizer_type = "spectrum"
+visualizer_look = "+|"
+#visualizer_sync_interval = "30"
+#visualizer_look = e?
+#visualizer_look = ▮
+#visualizer_in_stereo = "yes"
 #visualizer_type = "wave" #(spectrum/wave)
 #visualizer_type = "spectrum" #(spectrum/wave)
 #visualizer_type = "ellipse" #	(spectrum/wave)
