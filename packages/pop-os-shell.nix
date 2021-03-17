@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, nodePackages, glib, substituteAll, gjs }:
+{ stdenv, fetchFromGitHub, nodePackages, glib, substituteAll, gjs, lib }:
 
 stdenv.mkDerivation rec {
   pname = "pop-os-shell";
@@ -27,7 +27,7 @@ stdenv.mkDerivation rec {
     rm -rf $out/bin
   '';
 
-   meta = with stdenv.lib; {
+  meta = with lib; {
     description = "Keyboard-driven layer for GNOME Shell";
     license = licenses.gpl3Only;
     homepage = "https://github.com/pop-os/shell";
