@@ -6,6 +6,7 @@
     ./homeserver/unifi-docker.nix
     ./homeserver/transmission.nix
     ./homeserver/step-ca.nix
+    "${inputs.homeserver-sekret}"
   ];
 
   users.users.barnabas.extraGroups = [ "transmission" ];

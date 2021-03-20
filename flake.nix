@@ -67,6 +67,12 @@
       inputs.naersk.follows = "naersk";
       inputs.flake-utils.follows = "flake-utils";
     };
+
+    homeserver-sekret = {
+      type = "git";
+      url = "https://git-home.5kw.li/foldu/sekret";
+      flake = false;
+    };
   };
 
   outputs =
@@ -84,6 +90,7 @@
     , doom-emacs
     , blocklistdownloadthing
     , eunzip
+    , homeserver-sekret
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache

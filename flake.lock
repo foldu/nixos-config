@@ -164,6 +164,22 @@
         "type": "github"
       }
     },
+    "homeserver-sekret": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1616264040,
+        "narHash": "sha256-fJmqRQVzCN/JCi7pEk8pYcHhTBgEnLzX9XcCeQPwmAg=",
+        "ref": "master",
+        "rev": "f8067e436f1b6192f9650f94bb6a8390779d3de4",
+        "revCount": 12,
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/sekret"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/sekret"
+      }
+    },
     "huh": {
       "inputs": {
         "flake-utils": [
@@ -273,6 +289,7 @@
         "eunzip": "eunzip",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "homeserver-sekret": "homeserver-sekret",
         "huh": "huh",
         "naersk": "naersk",
         "nixos-hardware": "nixos-hardware",
