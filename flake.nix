@@ -2,8 +2,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    stable.url = "github:NixOS/nixpkgs/nixos-20.09";
-
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
@@ -84,13 +82,15 @@
     , home-manager
     , naersk
     , doom-emacs
-    , stable
     , blocklistdownloadthing
     , eunzip
     }@inputs:
+    # NOTE: don't try to use two different nixpkgs for
+    # different NixOS hosts in the same flake or you'll get a headache
     let
+      lib = nixpkgs.lib;
       home-network = fromTOML (builtins.readFile ./home-network.toml);
-      mkPkgs = inputPkgs: system: (import inputPkgs {
+      mkPkgs = system: import nixpkgs {
         inherit system;
         overlays = [
           emacs-overlay.overlay
@@ -103,44 +103,40 @@
           (import ./overlays)
         ];
         config.allowUnfree = true;
-      });
-      mkHost = { system, hostName, modules, pkgs }:
+      };
+      mkHost = { system, hostName, modules }:
         let
-          hostPkgs = mkPkgs pkgs system;
+          pkgs = mkPkgs system;
           configSettings = import ./settings.nix {
-            pkgs = hostPkgs;
+            inherit pkgs;
           };
         in
-        nixpkgs.lib.nixosSystem
-          {
-            inherit system;
-            pkgs = hostPkgs;
-            specialArgs = { inherit inputs home-network configSettings; };
-            modules = [
-              ({ pkgs, ... }: {
-                networking.hostName = hostName;
-                # Let 'nixos-version --json' know about the Git revision
-                # of this flake.
-                system.configurationRevision = nixpkgs.lib.mkIf (self ? rev) self.rev;
-                nix.registry = {
-                  nixpkgs.flake = nixpkgs;
-                };
-                environment.systemPackages = with pkgs; [
-                  git
-                  git-crypt
-                ];
-              })
-            ] ++ modules;
-          };
+        lib.nixosSystem {
+          inherit system pkgs;
+          specialArgs = { inherit inputs home-network configSettings; };
+          modules = [
+            ({ pkgs, ... }: {
+              networking.hostName = hostName;
+              # Let 'nixos-version --json' know about the Git revision
+              # of this flake.
+              system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+              nix.registry = {
+                nixpkgs.flake = nixpkgs;
+              };
+              environment.systemPackages = with pkgs; [
+                git
+                git-crypt
+              ];
+            })
+          ] ++ modules;
+        };
 
-      mkHosts = nixpkgs.lib.attrsets.mapAttrs
-        (name: value: mkHost (nixpkgs.lib.recursiveUpdate { hostName = name; } value));
+      mkHosts = lib.attrsets.mapAttrs (name: value: mkHost (lib.recursiveUpdate { hostName = name; } value));
     in
     {
       nixosConfigurations = mkHosts {
         mars = {
           system = "x86_64-linux";
-          pkgs = inputs.nixpkgs;
           modules = [
             nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
             nixos-hardware.nixosModules.common-pc-laptop-ssd
@@ -150,7 +146,6 @@
 
         jupiter = {
           system = "x86_64-linux";
-          pkgs = inputs.nixpkgs;
           modules = [
             nixos-hardware.nixosModules.common-pc-ssd
             ./hosts/jupiter/configuration.nix
@@ -159,9 +154,15 @@
 
         ceres = {
           system = "aarch64-linux";
-          pkgs = inputs.nixpkgs;
           modules = [
             ./hosts/ceres/configuration.nix
+          ];
+        };
+
+        saturn = {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/saturn/configuration.nix
           ];
         };
       };
