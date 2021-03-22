@@ -1,14 +1,12 @@
 { config, lib, pkgs, inputs, ... }: {
   imports = [
-    "${inputs.homeserver-sekret}"
     ./homeserver/bitwarden.nix
     ./homeserver/file-server.nix
     ./homeserver/gitea.nix
-    ./homeserver/gitlab.nix
-    ./homeserver/secrets.nix
-    ./homeserver/step-ca.nix
-    ./homeserver/transmission.nix
     ./homeserver/unifi-docker.nix
+    ./homeserver/transmission.nix
+    ./homeserver/step-ca.nix
+    "${inputs.homeserver-sekret}"
   ];
 
   users.users.barnabas.extraGroups = [ "transmission" ];
