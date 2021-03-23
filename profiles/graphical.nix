@@ -83,6 +83,7 @@ in
       dfeet
       gimp
       streamlink
+      wpp
       wl-clipboard
       manpages
       (

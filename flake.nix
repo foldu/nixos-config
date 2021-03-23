@@ -45,6 +45,7 @@
       url = "https://git-home.5kw.li/foldu/wrrr";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.naersk.follows = "naersk";
+      inputs.flake-utils.follows = "flake-utils";
     };
 
     huh = {
@@ -73,6 +74,15 @@
       url = "https://git-home.5kw.li/foldu/sekret";
       flake = false;
     };
+
+
+    wpp = {
+      type = "git";
+      url = "https://git-home.5kw.li/foldu/wpp";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.naersk.follows = "naersk";
+    };
   };
 
   outputs =
@@ -91,6 +101,7 @@
     , blocklistdownloadthing
     , eunzip
     , homeserver-sekret
+    , wpp
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
@@ -105,6 +116,7 @@
           pickwp.overlay
           eunzip.overlay
           wrrr.overlay
+          wpp.overlay
           huh.overlay
           blocklistdownloadthing.overlay
           (import ./overlays)

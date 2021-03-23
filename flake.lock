@@ -128,21 +128,6 @@
         "type": "github"
       }
     },
-    "flake-utils_4": {
-      "locked": {
-        "lastModified": 1614513358,
-        "narHash": "sha256-LakhOx3S1dRjnh0b5Dg3mbZyH0ToC9I8Y2wKSkBaTzU=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "5466c5bbece17adaab2d82fae80b46e807611bf3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -296,6 +281,7 @@
         "nixpkgs": "nixpkgs",
         "pickwp": "pickwp",
         "rust-overlay": "rust-overlay",
+        "wpp": "wpp",
         "wrrr": "wrrr"
       }
     },
@@ -320,9 +306,37 @@
         "type": "github"
       }
     },
+    "wpp": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "naersk": [
+          "naersk"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1616521435,
+        "narHash": "sha256-d1lZEJqjTqyMcDKW5CkyG8uuewVBn0+bRMlO3NsyOkE=",
+        "ref": "master",
+        "rev": "11a5aad587dead2509d9107d8fc955f1f65fe19c",
+        "revCount": 19,
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/wpp"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/wpp"
+      }
+    },
     "wrrr": {
       "inputs": {
-        "flake-utils": "flake-utils_4",
+        "flake-utils": [
+          "flake-utils"
+        ],
         "naersk": [
           "naersk"
         ],
