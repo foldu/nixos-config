@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, home-network, ... }: {
   imports = [
     ../../profiles/home.nix
     ../../profiles/homeserver.nix
@@ -17,15 +17,19 @@
   networking.hostId = "964725e9";
 
   services.resolved.enable = false;
-  systemd.network = {
-    enable = true;
-    networks.home = {
-      name = "enp5s0";
-      address = [ "192.168.1.100/24" ];
-      dns = [ "192.168.1.1" ];
-      gateway = [ "192.168.1.1" ];
+  systemd.network =
+    let
+      ip = "${home-network.devices.${config.networking.hostName}.ip}/${home-network.subnet}";
+    in
+    {
+      enable = true;
+      networks.home = {
+        name = "enp5s0";
+        address = [ ip ];
+        dns = home-network.dns;
+        gateway = [ home-network.gateway ];
+      };
     };
-  };
 
   system.stateVersion = "20.09";
 }
