@@ -6,6 +6,8 @@
     ./homeserver/unifi-docker.nix
     ./homeserver/transmission.nix
     ./homeserver/step-ca.nix
+    ./homeserver/drone
+    ./homeserver/secrets.nix
     "${inputs.homeserver-sekret}"
   ];
 

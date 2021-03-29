@@ -18,8 +18,8 @@ hosts = [
     "c.5kw.li",
     "ca.5kw.li",
     "d.5kw.li",
+    "drone.5kw.li",
     "git-home.5kw.li",
-    "gitlab.5kw.li",
     "torrent.5kw.li",
     "unifi.5kw.li",
 ]

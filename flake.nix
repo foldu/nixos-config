@@ -123,6 +123,9 @@
           specialArgs = { inherit inputs home-network configSettings; };
           modules = [
             ({ pkgs, ... }: {
+              imports = [
+                ./modules
+              ];
               networking.hostName = hostName;
               # Let 'nixos-version --json' know about the Git revision
               # of this flake.

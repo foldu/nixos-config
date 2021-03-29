@@ -63,7 +63,7 @@ in
         timerConfig.OnCalendar = "daily";
       };
       services.blocklistdownloadthing = {
-        after = [ "network.target" "systemd-tmpfiles-setup.service" ];
+        after = [ "network.target" ];
         serviceConfig = {
           Type = "oneshot";
         };

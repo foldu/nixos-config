@@ -7,6 +7,7 @@ in
     ./hardware-configuration.nix
     ../../profiles/server.nix
     ../../profiles/home-dns.nix
+    ../../profiles/home.nix
   ];
 
   boot = {
