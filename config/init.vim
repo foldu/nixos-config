@@ -11,9 +11,9 @@ syntax enable
 set fillchars+=vert:│
 runtime colors.vim
 
-colorscheme nord
+colorscheme gruvbox
 set background=dark
-let g:lightline = { 'colorscheme': 'nord' }
+"let g:lightline = { 'colorscheme': 'gruvbox' }
 
 " Use the damn clipboard
 set clipboard=unnamedplus
