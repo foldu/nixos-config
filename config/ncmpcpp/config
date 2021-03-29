@@ -235,7 +235,7 @@ ncmpcpp_directory = ~/.config/ncmpcpp
 #
 ## Note: colors are not supported for below variable.
 ##
-#song_window_title_format = {%a - }{%t}|{%f}
+song_window_title_format = ncmpcpp | {%a - }{%t}|{%f}
 #
 ##### columns settings #####
 ##
@@ -532,5 +532,6 @@ visualizer_look = "▋▋"
 #visualizer_type = "ellipse" #	(spectrum/wave)
 visualizer_type = "spectrum"
 #visualizer_type = "wave_filled"
-song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b}
+song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[16]{t|f:Title} (20)[cyan]{b}
+#song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b}
 #song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[black]{t|f:Title} (20)[cyan]{b}
