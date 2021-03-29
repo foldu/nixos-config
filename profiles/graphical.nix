@@ -147,7 +147,9 @@ in
           colors = {
             primary = {
               # hard contrast background - '#1d2021'
-              #background = "#282828";
+              background = "#282828";
+              #background = "#32302f";
+              #background = "#1d2021";
               # soft contrast background - "#32302f"
               foreground = "#fbf1c7";
               bright_foreground = "#f9f5d7";
