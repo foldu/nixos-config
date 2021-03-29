@@ -29,6 +29,15 @@ let
       customRC = builtins.readFile ./config/init.vim;
     };
   };
+
+  base16-fish = pkgs.fetchFromGitHub {
+    owner = "tomyun";
+    repo = "base16-fish";
+    rev = "675d53a0dd1aed0fc5927f26a900f5347d446459";
+    sha256 = "sha256-Mc5Dwo6s8ljhla8cjnWymKqCcy3y0WDx51Ig82DS4VI=";
+  };
+
+  gruvbox-fun = builtins.readFile "${base16-fish}/functions/base16-gruvbox-dark-medium.fish";
 in
 {
   environment.systemPackages = with pkgs; [
@@ -101,32 +110,9 @@ in
       };
 
       interactiveShellInit = ''
-        # nord theme
-        set -U fish_color_normal normal
-        set -U fish_color_command 81a1c1
-        set -U fish_color_quote a3be8c
-        set -U fish_color_redirection b48ead
-        set -U fish_color_end 88c0d0
-        set -U fish_color_error ebcb8b
-        set -U fish_color_param eceff4
-        set -U fish_color_comment 434c5e
-        set -U fish_color_match --background=brblue
-        set -U fish_color_selection white --bold --background=brblack
-        set -U fish_color_search_match bryellow --background=brblack
-        set -U fish_color_history_current --bold
-        set -U fish_color_operator 00a6b2
-        set -U fish_color_escape 00a6b2
-        set -U fish_color_cwd green
-        set -U fish_color_cwd_root red
-        set -U fish_color_valid_path --underline
-        set -U fish_color_autosuggestion 4c566a
-        set -U fish_color_user brgreen
-        set -U fish_color_host normal
-        set -U fish_color_cancel -r
-        set -U fish_pager_color_completion normal
-        set -U fish_pager_color_description B3A06D yellow
-        set -U fish_pager_color_prefix white --bold --underline
-        set -U fish_pager_color_progress brwhite --background=cyan
+        ${gruvbox-fun}
+
+        base16-gruvbox-dark-medium
 
         # set features
         set -U fish_features stderr-nocaret qmark-noglob

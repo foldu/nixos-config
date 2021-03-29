@@ -75,7 +75,6 @@
       flake = false;
     };
 
-
     wpp = {
       type = "git";
       url = "https://git-home.5kw.li/foldu/wpp";
