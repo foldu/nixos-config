@@ -121,9 +121,6 @@
 (use-package! nixpkgs-fmt
   :commands nixpkgs-fmt nixpkgs-fmt-buffer)
 
-(use-package! svg-tag-mode
-  :config
-  (setq svg-tag-tags '(("TODO:" . (svg-tag-make "TODO")))))
 
 ;; (use-package! emms
 ;; ;;   :config
@@ -219,9 +216,6 @@
 
 ;; disable autocomplete for nix (hangs emacs)
 (set-company-backend! 'nix-mode nil)
-
-;; Load my email config
-(load! "email" doom-private-dir t)
 
 (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
 

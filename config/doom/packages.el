@@ -50,7 +50,7 @@
 ;(unpin! t)
 (package! nixpkgs-fmt :pin "213251f82a69edc033766ec96948e83aeb428cd2")
 
-(let ((tree-sitter-rev "d569763c143fdf4ba8480befbb4b8ce1e49df5e2"))
+(let ((tree-sitter-rev "ae26995c4b006f37b8e46a6125e0b60100b42974"))
   (package! tree-sitter
     :recipe (:host github
              :repo "ubolonton/emacs-tree-sitter"
@@ -69,11 +69,6 @@
              :files ("langs/*.el" "langs/queries"))
     :pin tree-sitter-rev))
 
-(package! svg-tag-mode
-  :recipe (:host github
-           :repo "rougier/svg-tag-mode"
-           :files ("svg-tag-mode.el"))
-  :pin "ffc6631dd25f433f8ee86ac574d7dc0ecd9c16b6")
 
 ;; (package! mu4e-alert
 ;;   :recipe (:host github
