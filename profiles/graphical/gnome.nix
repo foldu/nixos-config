@@ -160,6 +160,10 @@
         sidebar = false;
         statusbar = true;
       };
+
+      "org/gnome/mutter" = {
+        "center-new-windows" = true;
+      };
     };
   };
 }
