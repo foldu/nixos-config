@@ -8,8 +8,10 @@
     enable = true;
     displayManager = {
       sessionPackages = [ pkgs.sway ];
-      gdm.enable = true;
-      #lightdm.enable = true;
+      gdm = {
+        enable = true;
+        autoSuspend = false;
+      };
     };
   };
 }
