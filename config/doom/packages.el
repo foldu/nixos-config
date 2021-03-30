@@ -48,30 +48,9 @@
 ;(unpin! pinned-package another-pinned-package)
 ;; ...Or *all* packages (NOT RECOMMENDED; will likely break things)
 ;(unpin! t)
+
+;; new versions don't work for some reason
 (package! nixpkgs-fmt :pin "213251f82a69edc033766ec96948e83aeb428cd2")
 
-(let ((tree-sitter-rev "ae26995c4b006f37b8e46a6125e0b60100b42974"))
-  (package! tree-sitter
-    :recipe (:host github
-             :repo "ubolonton/emacs-tree-sitter"
-             :files ("lisp/*.el"))
-    :pin tree-sitter-rev)
-
-  (package! tsc
-    :recipe (:host github
-             :repo "ubolonton/emacs-tree-sitter"
-             :files ("core/*.el"))
-    :pin tree-sitter-rev)
-
-  (package! tree-sitter-langs
-    :recipe (:host github
-             :repo "ubolonton/emacs-tree-sitter"
-             :files ("langs/*.el" "langs/queries"))
-    :pin tree-sitter-rev))
-
-
-;; (package! mu4e-alert
-;;   :recipe (:host github
-;;            :repo "iqbalansari/mu4e-alert"
-;;            :files ("mu4e-alert.el"))
-;;   :pin "91f0657c5b245a9de57aa38391221fb5d141d9bd")
+(package! tree-sitter :pin "3a600d769bd5da95bf46bec58893934370c6c04f")
+(package! tree-sitter-langs :pin "5d362ce98dcf656d7a55fcad6ae21c0a2caca861")

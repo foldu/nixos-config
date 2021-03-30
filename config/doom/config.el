@@ -45,94 +45,16 @@
 ;; Turn on buffer previews
 (setq +ivy-buffer-preview t)
 
-;; nixos things
-(setq nixos-config-directory
-      (or (getenv "NIXOS_CONFIG_DIRECTORY")
-          (file-name-as-directory (expand-file-name "~/nixos-config"))))
-
-(defun nixos-edit-config ()
-  "Open nixos config in project mode."
-  (interactive)
-  (doom-project-find-file nixos-config-directory))
-
-(defun nixos-config-dired ()
-  "Open nixos config in dired."
-  (interactive)
-  (find-file nixos-config-directory))
-
-(defun nixos-edit-doom ()
-  "Edit Emacs doom config."
-  (interactive)
-  (doom-project-find-file
-   (f-join nixos-config-directory "config/doom")))
-
-(map! :leader "f n" #'nixos-edit-config
-      :leader "f N" #'nixos-config-dired
-      :leader "f e" #'nixos-edit-doom)
-
-(defun fd/ivy-select-mode ()
-  "Select major mode with ivy."
-  (interactive)
-  (let* ((mode-name-list '(("python-mode" . python-mode)
-                           ("emacs-lisp-mode/elisp-mode" . emacs-lisp-mode)))
-         (selected (ivy-read "Select major mode: "
-                             (mapcar #'car mode-name-list)
-                             :require-match t)))
-    (when selected
-      (funcall (cdr (assoc selected mode-name-list))))))
-
-;; FIXME: figure out how to start at beginning of buffer
-(defun nixos-rebuild (subcmd)
-  "Run nixos-rebuild SUBCMD as root."
-  (let ((buf (get-buffer-create "*nixos-rebuild*"))
-        (default-directory "/sudo::/"))
-    (with-output-to-temp-buffer buf
-      (start-file-process "nixos-rebuild" buf
-                          "nixos-rebuild" subcmd "--flake" nixos-config-directory))))
-
-(defun nixos-rebuild-test ()
-  "Run nixos-rebuild test for nixos-config-directory flake."
-  (interactive)
-  (nixos-rebuild "test"))
-
-(defun nixos-rebuild-switch ()
-  "Run nixos-rebuild switch for nixos-config-directory flake."
-  (interactive)
-  (nixos-rebuild "switch"))
-
-(map! :map nix-mode-map
-      :localleader "t" #'nixos-rebuild-test
-      :localleader "T" #'nixos-rebuild-switch)
-
-(map! :map emacs-lisp-mode-map
-      :localleader "t" #'nixos-rebuild-test
-      :localleader "T" #'nixos-rebuild-switch)
-
 ;; Better syntax highlighting
 (use-package! tree-sitter
-  :defer 2
   :config
-  (global-tree-sitter-mode t)
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-(use-package! tree-sitter-langs)
 
 ;; Use nixpkgs-fmt for formatting nix files
 (use-package! nixpkgs-fmt
   :commands nixpkgs-fmt nixpkgs-fmt-buffer)
-
-
-;; (use-package! emms
-;; ;;   :config
-;; ;;   (require 'emms-setup)
-;; ;;   (require 'emms-player-mpd)
-;; ;;   (emms-all)
-;; ;;   (setq emms-player-mpd-music-directory (expand-file-name "~/lan/music"))
-;; ;;   (setq emms-player-list '(emms-player-mpd))
-;; ;;   (setq emms-info-functions '(emms-info-mpd))
-;; ;;   (map! :leader "o E" #'emms-smart-browse)
-;; ;;   (map! :leader "o e" #'emms)
-;; ;;   (emms-player-mpd-connect))
 
 (set-formatter! 'nixpkgs-fmt #'nixpkgs-fmt
   :modes '(nix-mode))
@@ -202,27 +124,10 @@
 
 (setq fancy-splash-image "~/fancy_splash_image.png")
 
-;; (defun rustic-cargo-add (&optional arg)
-;;   "Add crate to Cargo.toml using 'cargo add'.
-;; If running with prefix command `C-u', read whole command from minibuffer."
-;;   (interactive "P")
-;;   (let* ((command (if arg
-;;                       (read-from-minibuffer "Cargo add command: " "cargo add ")
-;;                     (concat "cargo add " (read-from-minibuffer "Crate: ")))))
-;;     (rustic-run-cargo-command command)))
-
-;; (map! :map conf-toml-mode-map
-;;       :localleader "a" #'rustic-cargo-add)
-
 ;; disable autocomplete for nix (hangs emacs)
 (set-company-backend! 'nix-mode nil)
 
 (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
-
-;; (after! mue4e
-;;   (use-package! mu4e-alert)
-;;   (mu4e-alert-set-default-style 'libnotify)
-;;   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
