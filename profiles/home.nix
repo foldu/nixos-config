@@ -4,11 +4,6 @@ let
   home-network = fromTOML (builtins.readFile ../home-network.toml);
 in
 {
-  services.zerotierone = {
-    enable = true;
-    joinNetworks = (import ../secrets).zerotierNetworks;
-  };
-
   # does it even matter if this thing is not secret
   security.pki.certificateFiles = [ ../secrets/home_ca.crt ];
 

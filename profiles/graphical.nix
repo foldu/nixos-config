@@ -101,6 +101,7 @@ in
           ];
         }
       )
+      rustfmt
       cargo-deny
       cargo-outdated
       rnix-lsp
