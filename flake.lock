@@ -266,6 +266,32 @@
         "url": "https://git-home.5kw.li/foldu/pickwp"
       }
     },
+    "pickwp-gtk": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "naersk": [
+          "naersk"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1617351789,
+        "narHash": "sha256-JGD8iiORtwDGUsu897E8OAGM2d1z9aBPdeJPw5qtLsw=",
+        "ref": "master",
+        "rev": "4883fe08fd8e3f27ab8a430bc9a5232c2e983d7e",
+        "revCount": 3,
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/pickwp-gtk"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/pickwp-gtk"
+      }
+    },
     "root": {
       "inputs": {
         "blocklistdownloadthing": "blocklistdownloadthing",
@@ -280,6 +306,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "pickwp": "pickwp",
+        "pickwp-gtk": "pickwp-gtk",
         "rust-overlay": "rust-overlay",
         "wpp": "wpp",
         "wrrr": "wrrr"

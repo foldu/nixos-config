@@ -14,6 +14,9 @@
     dump.enable = true;
   };
 
+  # FIXME:
+  firewall.allowedTCPPorts = [ config.services.gitea.httpPort ];
+
   services.caddy.config = ''
     git-home.5kw.li {
       reverse_proxy localhost:${toString config.services.gitea.httpPort}

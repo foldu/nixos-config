@@ -82,6 +82,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.naersk.follows = "naersk";
     };
+
+    pickwp-gtk = {
+      type = "git";
+      url = "https://git-home.5kw.li/foldu/pickwp-gtk";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.naersk.follows = "naersk";
+    };
   };
 
   outputs =
@@ -101,6 +109,7 @@
     , eunzip
     , homeserver-sekret
     , wpp
+    , pickwp-gtk
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
@@ -110,6 +119,7 @@
       mkPkgs = system: import nixpkgs {
         inherit system;
         overlays = [
+
           emacs-overlay.overlay
           rust-overlay.overlay
           pickwp.overlay
@@ -117,6 +127,7 @@
           wrrr.overlay
           wpp.overlay
           huh.overlay
+          pickwp-gtk.overlay
           blocklistdownloadthing.overlay
           (import ./overlays)
         ];
