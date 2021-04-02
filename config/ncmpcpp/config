@@ -535,3 +535,4 @@ visualizer_type = "spectrum"
 song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[16]{t|f:Title} (20)[cyan]{b}
 #song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b}
 #song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[black]{t|f:Title} (20)[cyan]{b}
+visualizer_spectrum_dft_size = 1
