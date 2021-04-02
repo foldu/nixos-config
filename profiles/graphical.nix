@@ -83,6 +83,7 @@ in
       pwgen
       dfeet
       gimp
+      pickwp-gtk
       streamlink
       wpp
       wl-clipboard
