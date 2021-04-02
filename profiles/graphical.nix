@@ -68,6 +68,7 @@ in
     # TODO: sort this wall of crap
     home.packages = with pkgs; [
       eunzip
+      croc
       ffmpeg
       youtube-dl
       pass
