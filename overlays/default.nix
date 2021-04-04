@@ -1,3 +1,3 @@
 final: prev: {
-  myGnomeExtensions.pop-os-shell = prev.callPackage ../packages/pop-os-shell.nix { };
+  myGnomeExtensions.pop-os-shell = prev.callPackage ../packages/pop-os-shell { };
 }
