@@ -8,6 +8,7 @@
     ./homeserver/step-ca.nix
     ./homeserver/drone
     ./homeserver/secrets.nix
+    ./homeserver/cachecache.nix
     "${inputs.homeserver-sekret}"
   ];
 
@@ -54,6 +55,8 @@
     ca = "https://ca.5kw.li:4321/acme/acme/directory";
     email = "webmaster@5kw.li";
   };
+
+  services.nginx.recommendedOptimisation = true;
 
   networking.firewall.allowedTCPPorts = [
     80

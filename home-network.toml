@@ -11,7 +11,6 @@ hosts = ["jupiter.5kw.li"]
 ip = "192.168.1.100"
 vip = "192.168.195.114"
 hosts = [
-    "saturn.5kw.li",
     "a.5kw.li",
     "b.5kw.li",
     "bitwarden-rs.5kw.li",
@@ -20,6 +19,8 @@ hosts = [
     "d.5kw.li",
     "drone.5kw.li",
     "git-home.5kw.li",
+    "nix-cache-cache.5kw.li",
+    "saturn.5kw.li",
     "torrent.5kw.li",
     "unifi.5kw.li",
 ]

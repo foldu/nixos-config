@@ -17,6 +17,10 @@ in
     sshfs
   ];
 
+  nix.extraOptions = ''
+    substituters = https://nix-cache-cache.5kw.li
+  '';
+
   users.users.barnabas = {
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ+TsvKvdWG+9KLVeg5N4y1Ce1jr/fP3ELTHVWLxZOR" ];
   };
