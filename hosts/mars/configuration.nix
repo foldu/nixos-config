@@ -2,7 +2,7 @@
   imports = [
     ../../profiles/amd-gpu.nix
     ../../profiles/bluetooth.nix
-    ../../profiles/graphical.nix
+    ../../profiles/graphical
     ../../profiles/home.nix
     ../../profiles/laptop.nix
     ../../profiles/x86.nix

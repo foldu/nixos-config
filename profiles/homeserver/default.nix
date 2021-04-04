@@ -1,13 +1,14 @@
 { config, lib, pkgs, inputs, ... }: {
   imports = [
-    ./homeserver/bitwarden.nix
-    ./homeserver/file-server.nix
-    ./homeserver/gitea.nix
-    ./homeserver/transmission.nix
-    ./homeserver/step-ca.nix
-    ./homeserver/drone
-    ./homeserver/secrets.nix
-    ./homeserver/cachecache.nix
+    ../generic.nix
+    ./bitwarden.nix
+    ./file-server.nix
+    ./gitea.nix
+    ./transmission.nix
+    ./step-ca.nix
+    ./drone
+    ./secrets.nix
+    ./cachecache.nix
     "${inputs.homeserver-sekret}"
   ];
 

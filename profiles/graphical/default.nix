@@ -6,20 +6,20 @@ let
 in
 {
   imports = [
-    ./generic.nix
-    ./graphical/bfq.nix
-    ./graphical/desktop-portal.nix
-    ./graphical/emacs.nix
-    ./graphical/fancy-login.nix
-    ./graphical/fonts.nix
-    ./graphical/gnome-keyring.nix
-    ./graphical/gnome.nix
-    ./graphical/kde-connect.nix
-    ./graphical/nfs.nix
-    ./graphical/pipewire.nix
-    ./graphical/qt5.nix
-    ./graphical/syncthing.nix
-    ../terminal-environment.nix
+    ../generic.nix
+    ./bfq.nix
+    ./desktop-portal.nix
+    ./emacs.nix
+    ./fancy-login.nix
+    ./fonts.nix
+    ./gnome-keyring.nix
+    ./gnome.nix
+    ./kde-connect.nix
+    ./nfs.nix
+    ./pipewire.nix
+    ./qt5.nix
+    ./syncthing.nix
+    ../../terminal-environment.nix
   ];
 
   virtualisation.docker = {
@@ -54,16 +54,16 @@ in
 
   home-manager.users.barnabas = { config, ... }: {
     imports = [
-      ./graphical/celluloid.nix
-      ./graphical/xdg-userdirs.nix
-      ./graphical/xdg.nix
-      ./graphical/gtk.nix
-      ./graphical/mpd.nix
+      ./celluloid.nix
+      ./xdg-userdirs.nix
+      ./xdg.nix
+      ./gtk.nix
+      ./mpd.nix
       inputs.pickwp.homeManagerModule
       inputs.wrrr.homeManagerModule
     ];
 
-    home.file.".ssh/config".source = ../secrets/ssh-config;
+    home.file.".ssh/config".source = ../../secrets/ssh-config;
 
     # TODO: sort this wall of crap
     home.packages = with pkgs; [
@@ -209,8 +209,8 @@ in
       profiles =
         let
           genericProfile = {
-            userChrome = lib.readFile ../config/firefox/userChrome.css;
-            settings = import ../config/firefox/userjs.nix;
+            userChrome = lib.readFile ../../config/firefox/userChrome.css;
+            settings = import ../../config/firefox/userjs.nix;
           };
         in
         {
