@@ -3,7 +3,6 @@
     ./homeserver/bitwarden.nix
     ./homeserver/file-server.nix
     ./homeserver/gitea.nix
-    ./homeserver/unifi-docker.nix
     ./homeserver/transmission.nix
     ./homeserver/step-ca.nix
     ./homeserver/drone
