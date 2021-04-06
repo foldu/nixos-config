@@ -115,6 +115,7 @@ in
       gdb
       openocd
       clang_11
+      clang-tools
       julia
       lld_11
       sqlite-interactive
