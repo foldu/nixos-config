@@ -71,6 +71,7 @@ in
       croc
       ffmpeg
       youtube-dl
+      freetube
       pass
       pulsemixer
       zip
