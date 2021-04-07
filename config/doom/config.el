@@ -130,26 +130,28 @@
 (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
 
 (defun dwim-compile ()
-  "Just compile the current project"
+  "Just compile the current project."
   (interactive)
   (let ((current-project (project-current)))
     (if (not current-project)
         (error "Not in a project, I have no idea how to figure out what you mean")
       (let ((workdir (cdr current-project)))
-        (cond ((file-exists-p (concat workdir "Makefile"))
-               (compile "make -k"))
-              ((file-exists-p (concat workdir "CMakeLists.txt"))
-               (let ((build-dir (concat workdir "build")))
-                 (unless (file-directory-p build-dir) (make-directory build-dir))
-                 (let ((default-directory build-dir))
-                   (when (directory-empty-p build-dir)
-                     (shell-command "cmake -G Ninja .."))
-                   (compile "ninja"))))
-              ((file-exists-p (concat workdir "Cargo.toml"))
-               (let ((default-directory workdir))
-                 (compile "cargo b")))
-              (t
-               (error "I don't know how to compile this")))))))
+        (cond
+         ((file-exists-p (concat workdir "Makefile"))
+          (compile "make -k"))
+         ((file-exists-p (concat workdir "CMakeLists.txt"))
+          (let ((build-dir (concat workdir "build")))
+            (unless (file-directory-p build-dir) (make-directory build-dir))
+            (let ((default-directory build-dir))
+              (when (directory-empty-p build-dir)
+                (shell-command "cmake -G Ninja .."))
+              (compile "ninja"))))
+         ((file-exists-p (concat workdir "Cargo.toml"))
+          (let ((default-directory workdir))
+            (compile "cargo b")))
+         (t
+          (message "I don't know how to compile this")
+          (compile)))))))
 
 (map!
  :leader
