@@ -17,19 +17,8 @@
   networking.hostId = "964725e9";
 
   services.resolved.enable = false;
-  systemd.network =
-    let
-      ip = "${home-network.devices.${config.networking.hostName}.ip}/${home-network.subnet}";
-    in
-    {
-      enable = true;
-      networks.home = {
-        name = "enp5s0";
-        address = [ ip ];
-        dns = home-network.dns;
-        gateway = [ home-network.gateway ];
-      };
-    };
+
+  networking.interfaces.enp5s0.useDHCP = true;
 
   system.stateVersion = "20.09";
 }

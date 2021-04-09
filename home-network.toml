@@ -1,36 +1,19 @@
-gateway = "192.168.1.1"
-dns = ["192.168.1.1"]
-subnet = "24"
+gateway = "192.168.88.1"
+network = "192.168.88.0/24"
+dns = ["192.168.88.1"]
 
 [devices.jupiter]
-ip = "192.168.1.101"
+ip = "192.168.88.254"
 vip = "192.168.195.155"
-hosts = ["jupiter.5kw.li"]
 
 [devices.saturn]
-ip = "192.168.1.100"
+ip = "192.168.88.253"
 vip = "192.168.195.114"
-hosts = [
-    "a.5kw.li",
-    "b.5kw.li",
-    "bitwarden-rs.5kw.li",
-    "c.5kw.li",
-    "ca.5kw.li",
-    "d.5kw.li",
-    "drone.5kw.li",
-    "git-home.5kw.li",
-    "nix-cache-cache.5kw.li",
-    "saturn.5kw.li",
-    "torrent.5kw.li",
-    "unifi.5kw.li",
-]
 
 [devices.ceres]
-ip = "192.168.1.160"
+ip = "192.168.88.251"
 vip = "192.168.195.230"
-hosts = ["ceres.5kw.li"]
 
 [devices.mars]
-ip = "192.168.1.166"
+ip = "192.168.88.252"
 vip = "192.168.195.200"
-hosts = ["mars.5kw.li"]

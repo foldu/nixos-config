@@ -1,11 +1,11 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, home-network, ... }: {
   users.users.wangblows.name = "wangblows";
   services.samba = {
     enable = true;
 
     extraConfig = ''
       # allow only local subnet
-      hosts allow = 192.168.1.0/24 localhost
+      hosts allow = 192.168.88.0/24 localhost
       hosts deny = 0.0.0.0/0
 
       min protocol = SMB2
@@ -41,13 +41,13 @@
     lockdPort = 2201;
     mountdPort = 2202;
     exports = ''
-      /srv/media/aux/downloads 192.168.1.0/24(rw,all_squash,anonuid=${toString config.users.users.transmission.uid})
-      /srv/media/main/vid 192.168.1.0/24(rw)
-      /srv/media/cia/cache 192.168.1.0/24(rw)
-      /srv/media/cia/data/img 192.168.1.0/24(rw)
-      /srv/media/cia/data/music 192.168.1.0/24(rw)
-      /srv/media/main/smb 192.168.1.0/24(rw)
-      /srv/media/main/other 192.168.1.0/24(rw)
+      /srv/media/aux/downloads ${home-network.network}(rw,all_squash,anonuid=${toString config.users.users.transmission.uid})
+      /srv/media/main/vid ${home-network.network}(rw)
+      /srv/media/cia/cache ${home-network.network}(rw)
+      /srv/media/cia/data/img ${home-network.network}(rw)
+      /srv/media/cia/data/music ${home-network.network}(rw)
+      /srv/media/main/smb ${home-network.network}(rw)
+      /srv/media/main/other ${home-network.network}(rw)
     '';
   };
 

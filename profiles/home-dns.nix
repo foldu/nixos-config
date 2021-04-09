@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, home-network, ... }:
 let
   blocklistPath = "/var/lib/unbound/blocklist.conf";
 in
@@ -85,7 +85,7 @@ in
 
   services.unbound = {
     enable = true;
-    allowedAccess = [ "127.0.0.0/8" "192.168.1.0/24" ];
+    allowedAccess = [ "127.0.0.0/8" home-network.network ];
     interfaces = [ "0.0.0.0" ];
     forwardAddresses = [
       "1.1.1.1@853#cloudflare-dns.com"

@@ -21,14 +21,12 @@ in
     };
   };
 
-  boot.loader.generic-extlinux-compatible.enable = true;
-
   services.printing = {
     enable = true;
     drivers = [ pkgs.foo2zjs ];
   };
 
-  networking.interfaces.eht0.useDHCP = true;
+  networking.interfaces.eth0.useDHCP = true;
 
   services.journald.extraConfig = ''
     Storage=volatile
@@ -47,5 +45,5 @@ in
     fsType = "xfs";
   };
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "21.03";
 }
