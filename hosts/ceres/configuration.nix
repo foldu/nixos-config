@@ -1,10 +1,5 @@
-{ config, lib, pkgs, ... }:
-let
-  ssdRoot = "/run/media/ext-ssd";
-in
-{
+{ config, lib, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
     ../../profiles/server.nix
     ../../profiles/home-dns.nix
     ../../profiles/home.nix
@@ -36,14 +31,36 @@ in
     backup-ssd = {
       allowSubRepos = true;
       authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEj/BMq4VOAyu8QPsJhpmwlz/VNImsKLrkS2ZYYAJRb8" ];
-      path = "${ssdRoot}/backup";
+      path = "/var/backup";
     };
   };
 
-  fileSystems."${ssdRoot}" = {
-    device = "/dev/disk/by-uuid/2d9dc857-8fd9-49da-b974-40f7ab803713";
-    fsType = "xfs";
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/886e8c0f-209e-48c0-a749-2e090802aca5";
+    options = [
+      "compression=zstd"
+      "noatime"
+    ];
+    fsType = "btrfs";
+  };
+
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/BBAE-10F7";
+    fsType = "vfat";
   };
 
   system.stateVersion = "21.03";
+
+  home-manager.sharedModules = [{ manual.manpages.enable = false; }];
+
+  swapDevices = [ ];
+  nix.maxJobs = lib.mkDefault 4;
+  powerManagement.cpuFreqGovernor = lib.mkDefault "ondemand";
+  boot.initrd.availableKernelModules = [
+    "usbhid"
+    "btrfs"
+  ];
+  boot.initrd.kernelModules = [ ];
+  boot.kernelModules = [ ];
+  boot.extraModulePackages = [ ];
 }

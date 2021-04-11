@@ -9,6 +9,9 @@
     ./hardware-configuration.nix
   ];
 
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
   # TODO: fprintd
 
   boot.loader = {
