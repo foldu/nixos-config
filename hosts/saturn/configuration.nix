@@ -16,8 +16,6 @@
 
   networking.hostId = "964725e9";
 
-  services.resolved.enable = false;
-
   networking.interfaces.enp5s0.useDHCP = true;
 
   system.stateVersion = "20.09";

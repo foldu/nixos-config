@@ -6,13 +6,14 @@ in
   networking.firewall.allowedUDPPorts = [ 53 ];
   networking.firewall.allowedTCPPorts = [ 53 ];
 
+  networking.resolvconf.useLocalResolver = false;
+  services.resolved.enable = false;
+
   systemd =
     let
       blocklist = pkgs.writeText "blocklist" (
         builtins.toJSON {
-          host_whitelist = [
-            "play.googleapis.com"
-          ];
+          host_whitelist = [ ];
           host_blacklist = [ ];
           blocklists = [
             # needs more blocklists
@@ -67,7 +68,6 @@ in
         serviceConfig = {
           Type = "oneshot";
         };
-        wantedBy = [ "multi-user.target" ];
         script = ''
           ${pkgs.doas}/bin/doas -u unbound \
           ${pkgs.blocklistdownloadthing}/bin/blocklistdownloadthing \
