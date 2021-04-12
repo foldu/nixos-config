@@ -18,14 +18,10 @@ in
           blocklists = [
             # needs more blocklists
             "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
-            "https://mirror1.malwaredomains.com/files/justdomains"
-            "http://sysctl.org/cameleon/hosts"
-            "https://zeustracker.abuse.ch/blocklist.php?download=domainblocklist"
             "https://s3.amazonaws.com/lists.disconnect.me/simple_tracking.txt"
             "https://s3.amazonaws.com/lists.disconnect.me/simple_ad.txt"
             "https://raw.githubusercontent.com/imkarthikk/pihole-facebook/master/pihole-facebook.txt"
             "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt"
-            "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/extra.txt"
             "https://adaway.org/hosts.txt"
             "https://v.firebog.net/hosts/AdguardDNS.txt"
             "https://v.firebog.net/hosts/Easylist.txt"
@@ -38,7 +34,8 @@ in
             "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV.txt"
             "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/pinterest/all"
             "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/facebook/all"
-            "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all"
+            #"https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/extra.txt"
+            #"https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all"
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/shortlinksparsed"
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/proxiesparsed"
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/productsparsed"
@@ -51,6 +48,13 @@ in
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/dnsparsed"
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/androidparsed"
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/analyticsparsed"
+
+            # new
+
+            # "suspicious"
+            "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt"
+            "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts"
+            "https://v.firebog.net/hosts/static/w3kbl.txt"
           ];
         }
       );
