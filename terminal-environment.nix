@@ -107,6 +107,7 @@ in
         cdoc = "cargo doc --no-deps --open -p";
         wlc = "wl-copy";
         wlp = "wl-paste";
+        rsync = "rsync -v --info=progress2";
       };
 
       interactiveShellInit = ''
