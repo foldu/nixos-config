@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    ./hardware-configuration.nix
+    ./manual-hardware-configuration.nix
     ../../profiles/server.nix
     ../../profiles/home-dns.nix
     ../../profiles/home.nix
@@ -8,12 +8,14 @@
 
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4;
+    kernelParams = [
+      "usb-storage.quirks=152d:0578:u"
+    ];
     loader = {
       grub.enable = false;
+      generic-extlinux-compatible.enable = true;
     };
   };
-
-  boot.loader.generic-extlinux-compatible.enable = true;
 
   services.printing = {
     enable = true;
