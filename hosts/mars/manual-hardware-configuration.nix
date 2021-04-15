@@ -1,6 +1,13 @@
 # modify this file!
-{ config, lib, pkgs, modulesPath, ... }:
+{ config, lib, pkgs, modulesPath, mylib, ... }:
 
+let
+  subvol = mylib.btrfsSubvolOn "/dev/disk/by-uuid/eec24fdd-613a-45f5-8749-0057b3b89ffc" [
+    "noatime"
+    "compress-force=zstd"
+    "autodefrag"
+  ];
+in
 {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
@@ -11,45 +18,17 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/eec24fdd-613a-45f5-8749-0057b3b89ffc";
-    fsType = "btrfs";
-    options = [ "subvol=@" "autodefrag" "noatime" "compress-force=zstd" ];
-  };
-
-  fileSystems."/nix" = {
-    device = "/dev/disk/by-uuid/eec24fdd-613a-45f5-8749-0057b3b89ffc";
-    fsType = "btrfs";
-    options = [ "subvol=@nix" "autodefrag" "noatime" "compress-force=zstd" ];
-  };
-
-  fileSystems."/var" = {
-    device = "/dev/disk/by-uuid/eec24fdd-613a-45f5-8749-0057b3b89ffc";
-    fsType = "btrfs";
-    options = [ "subvol=@var" "autodefrag" "noatime" "compress-force=zstd" ];
-  };
-
-  fileSystems."/home" = {
-    device = "/dev/disk/by-uuid/eec24fdd-613a-45f5-8749-0057b3b89ffc";
-    fsType = "btrfs";
-    options = [ "subvol=@home" "autodefrag" "noatime" "compress-force=zstd" ];
-  };
-
-  fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-uuid/8796-8505";
-    fsType = "vfat";
-  };
-
-  fileSystems."/var/cache" = {
-    device = "/dev/disk/by-uuid/eec24fdd-613a-45f5-8749-0057b3b89ffc";
-    fsType = "btrfs";
-    options = [ "subvol=@var/cache" "autodefrag" "noatime" "compress-force=zstd" ];
-  };
-
-  fileSystems."/var/log" = {
-    device = "/dev/disk/by-uuid/eec24fdd-613a-45f5-8749-0057b3b89ffc";
-    fsType = "btrfs";
-    options = [ "subvol=@var/log" "autodefrag" "noatime" "compress-force=zstd" ];
+  fileSystems = {
+    "/" = subvol "@";
+    "/nix" = subvol "@nix";
+    "/var" = subvol "@var";
+    "/var/log" = subvol "@var/log";
+    "/var/cache" = subvol "@var/cache";
+    "/home" = subvol "@home";
+    "/boot/efi" = {
+      device = "/dev/disk/by-uuid/8796-8505";
+      fsType = "vfat";
+    };
   };
 
   swapDevices = [

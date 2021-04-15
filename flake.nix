@@ -116,6 +116,7 @@
     let
       lib = nixpkgs.lib;
       home-network = fromTOML (builtins.readFile ./home-network.toml);
+      mylib = import ./lib { inherit lib; };
       mkPkgs = system: import nixpkgs {
         inherit system;
         overlays = [
@@ -142,7 +143,7 @@
         in
         lib.nixosSystem {
           inherit system pkgs;
-          specialArgs = { inherit inputs home-network configSettings; };
+          specialArgs = { inherit inputs home-network configSettings mylib; };
           modules = [
             ({ pkgs, ... }: {
               imports = [
