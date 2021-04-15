@@ -6,20 +6,29 @@
     ../../profiles/home.nix
     ../../profiles/laptop.nix
     ../../profiles/x86.nix
-    ./hardware-configuration.nix
+    ./manual-hardware-configuration.nix
   ];
 
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
-  # TODO: fprintd
-
+  # uefi suxxxxx
   boot.loader = {
-    systemd-boot = {
-      enable = true;
-      editor = false;
+    efi = {
+      #canTouchEfiVariables = true;
+      efiSysMountPoint = "/boot/efi";
     };
-    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiInstallAsRemovable = true;
+      efiSupport = true;
+    };
+  };
+
+  services.btrfs.autoScrub = {
+    enable = true;
+    fileSystems = [ "/" ];
   };
 
   system.stateVersion = "20.09";
