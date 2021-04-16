@@ -102,7 +102,7 @@ in
 
       shellAliases = {
         rm = "rm -v";
-        cp = "cp -iv";
+        cp = "cp -iv --reflink=auto";
         mv = "mv -iv";
         cdoc = "cargo doc --no-deps --open -p";
         wlc = "wl-copy";
