@@ -97,7 +97,6 @@ in
         nse = "nix search nixpkgs";
         nsh = "nix shell nixpkgs#";
         o = "xdg-open";
-        mpv = "celluloid";
       };
 
       shellAliases = {

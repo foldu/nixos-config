@@ -54,7 +54,6 @@ in
 
   home-manager.users.barnabas = { config, ... }: {
     imports = [
-      ./celluloid.nix
       ./xdg-userdirs.nix
       ./xdg.nix
       ./gtk.nix
@@ -67,6 +66,7 @@ in
 
     # TODO: sort this wall of crap
     home.packages = with pkgs; [
+      gnome-podcasts
       eunzip
       croc
       ffmpeg
@@ -85,6 +85,7 @@ in
       dfeet
       gimp
       pickwp-gtk
+      mpv
       streamlink
       wpp
       wl-clipboard

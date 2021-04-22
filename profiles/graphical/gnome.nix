@@ -6,7 +6,6 @@
 
   environment.gnome3.excludePackages = with pkgs.gnome3; [
     cheese
-    totem
     gedit
     gnome-photos
     gnome-logs
