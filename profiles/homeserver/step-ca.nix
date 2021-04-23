@@ -23,7 +23,10 @@
     };
   };
 
-  users.users.step-ca = { extraGroups = [ "secrets" ]; };
+  users.users.step-ca = {
+    extraGroups = [ "secrets" ];
+    isSystemUser = true;
+  };
   users.groups.step-ca = { };
 
   systemd.tmpfiles.rules = [

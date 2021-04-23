@@ -1,5 +1,5 @@
 { config, lib, pkgs, home-network, ... }: {
-  users.users.wangblows.name = "wangblows";
+  users.users.wangblows.isNormalUser = true;
   services.samba = {
     enable = true;
 
