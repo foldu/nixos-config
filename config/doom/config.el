@@ -46,11 +46,11 @@
 (setq +ivy-buffer-preview t)
 
 ;; Better syntax highlighting
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; (use-package! tree-sitter
+;;   :config
+;;   (require 'tree-sitter-langs)
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; Use nixpkgs-fmt for formatting nix files
 (use-package! nixpkgs-fmt
@@ -120,7 +120,7 @@
 
 ;; show completion with less timeout
 (after! company
-  (setq company-idle-delay 0.5))
+  (setq company-idle-delay 0.25))
 
 (setq fancy-splash-image "~/fancy_splash_image.png")
 
