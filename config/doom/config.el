@@ -27,7 +27,9 @@
                      (font-spec :family "Iosevka" :size size)))
   (setq doom-font (monospace 16))
   (setq doom-variable-pitch-font (font-spec :family "ETBembo" :size 16))
-  (setq doom-big-font (monospace 19)))
+  (setq doom-big-font (monospace 19))
+  ;; make ivy font readabler
+  (setq ivy-posframe-font (monospace 18)))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -97,6 +99,7 @@
                         :require-match t)))
     (fd/emacs-set-name-to name)))
 
+
 (defun fd/seq-random-pick (seq)
   "Picks a random element from SEQ. Return nil when seq lenght equals zero."
   (if (not (sequencep seq))
@@ -118,16 +121,55 @@
 ;; make which key pop up faster
 (setq which-key-idle-delay 0.5)
 
-;; show completion with less timeout
 (after! company
+  ;; show completion with less timeout
   (setq company-idle-delay 0.25))
-
-(setq fancy-splash-image "~/fancy_splash_image.png")
 
 ;; disable autocomplete for nix (hangs emacs)
 (set-company-backend! 'nix-mode nil)
 
+(after! nix-mode
+  (add-hook 'nix-mode-local-vars-hook #'lsp!))
+
+(after! lsp-mode
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("rnix-lsp"))
+    :major-modes '(nix-mode)
+    :server-id 'nix)))
+
+(after! ivy-posframe
+  ;; center ivy-posframe
+  ;; TODO: don't iterate list for each insert
+  (mapc (lambda (thing)
+          (setf (alist-get thing ivy-posframe-display-functions-alist)
+                #'ivy-posframe-display-at-frame-center))
+        '(t counsel-rg))
+
+  ;; prevent ivy-posframe from spazzing out when typing
+  (defun fd/ivy-posframe-get-size-no-spazz ()
+    "Set the ivy-posframe size according to the current frame."
+    (let ((height (or ivy-posframe-height (or ivy-height 10)))
+          (width (min (or ivy-posframe-width 200) (round (* .25 (frame-width))))))
+      (list :height height :width width :min-height height :min-width width)))
+  (setq ivy-posframe-size-function 'fd/ivy-posframe-get-size-no-spazz))
+
+(setq fancy-splash-image "~/fancy_splash_image.png")
+
+;; XML
+(push '("\\.ui$" . nxml-mode) auto-mode-alist)
+(push '("\\.xsd$" . nxml-mode) auto-mode-alist)
+(after! lsp-mode
+  ;; TODO: make MR on lsp-mode
+  ;; (setf (lsp--client-activation-fn (gethash 'xmlls lsp-clients))
+  ;;       (lsp-activate-on "xml"))
+  (add-hook 'nxml-mode-local-vars-hook #'lsp!))
+
 (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
+
+;; TODO: switch to company-text-mode-margin
+;; +childframe on doom company currently works better
+;; (setq company-format-margin-function #'company-vscode-dark-icons-margin-function)
 
 (defun dwim-compile ()
   "Just compile the current project."
@@ -148,10 +190,12 @@
               (compile "ninja"))))
          ((file-exists-p (concat workdir "Cargo.toml"))
           (let ((default-directory workdir))
-            (compile "cargo b")))
+            (rustic-compile "cargo build")))
          (t
           (message "I don't know how to compile this")
           (compile)))))))
+
+;; (setq rustic-compile-command "cargo check")
 
 (map!
  :leader

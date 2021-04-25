@@ -52,5 +52,4 @@
 ;; new versions don't work for some reason
 (package! nixpkgs-fmt :pin "213251f82a69edc033766ec96948e83aeb428cd2")
 
-(package! tree-sitter :pin "3a600d769bd5da95bf46bec58893934370c6c04f")
-(package! tree-sitter-langs :pin "5d362ce98dcf656d7a55fcad6ae21c0a2caca861")
+(package! ivy-posframe :pin "7f1ab7890040c4b8dc4e9645c824cd35210e1121")

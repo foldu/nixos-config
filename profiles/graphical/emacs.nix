@@ -53,6 +53,8 @@ in
       pandoc
       plantuml
       libnotify
+      # for lemminx
+      jre
     ];
   };
 }
