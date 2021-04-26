@@ -160,7 +160,7 @@
 (push '("\\.ui$" . nxml-mode) auto-mode-alist)
 (push '("\\.xsd$" . nxml-mode) auto-mode-alist)
 (after! lsp-mode
-  ;; TODO: make MR on lsp-mode
+  ;; (push '(nxml-mode . "xml") lsp-language-id-configuration)
   ;; (setf (lsp--client-activation-fn (gethash 'xmlls lsp-clients))
   ;;       (lsp-activate-on "xml"))
   (add-hook 'nxml-mode-local-vars-hook #'lsp!))
@@ -197,6 +197,8 @@
 
 ;; (setq rustic-compile-command "cargo check")
 
+(use-package! protobuf-mode
+  :mode "\\.proto$")
 (map!
  :leader
  :nv
