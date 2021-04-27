@@ -12,7 +12,6 @@ in
     ./emacs.nix
     ./fancy-login.nix
     ./fonts.nix
-    ./gnome-keyring.nix
     ./gnome.nix
     ./kde-connect.nix
     ./nfs.nix
