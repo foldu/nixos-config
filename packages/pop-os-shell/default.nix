@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "pop-os-shell";
-  version = "77650a9aafa2f7adc328424e36dc91705411feb4";
+  version = "1.2.0";
 
   src = fetchFromGitHub {
     owner = "pop-os";
     repo = "shell";
     rev = version;
-    sha256 = "sha256-z9qJ9fG0mr7czhEDIhHH6Kb99eowzeX/x6LPgehDzjU=";
+    sha256 = "sha256-igggV9qPyck34DmtGGeeVtFODp8NP19Llw8zMm22Qa0=";
   };
 
   nativeBuildInputs = [ glib nodePackages.typescript gjs ];
@@ -26,12 +26,4 @@ stdenv.mkDerivation rec {
     chmod +x $out/share/gnome-shell/extensions/pop-shell@system76.com/color_dialog/main.js
     rm -rf $out/bin
   '';
-
-  meta = with lib; {
-    description = "Keyboard-driven layer for GNOME Shell";
-    license = licenses.gpl3Only;
-    homepage = "https://github.com/pop-os/shell";
-    platforms = platforms.linux;
-    maintainers = with maintainers; [ remunds ];
-  };
 }
