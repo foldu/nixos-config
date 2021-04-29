@@ -90,7 +90,7 @@ in
       wl-clipboard
       manpages
       (
-        pkgs.rust-bin.nightly.latest.rust.override {
+        pkgs.rust-bin.nightly.latest.minimal.override {
           extensions = [
             "rust-src"
             "clippy"
