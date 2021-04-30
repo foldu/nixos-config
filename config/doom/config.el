@@ -156,6 +156,8 @@
 
 (setq fancy-splash-image "~/fancy_splash_image.png")
 
+(setq lsp-ui-sideline-show-diagnostics nil)
+
 ;; XML
 (push '("\\.ui$" . nxml-mode) auto-mode-alist)
 (push '("\\.xsd$" . nxml-mode) auto-mode-alist)
@@ -194,8 +196,6 @@
          (t
           (message "I don't know how to compile this")
           (compile)))))))
-
-;; (setq rustic-compile-command "cargo check")
 
 (use-package! protobuf-mode
   :mode "\\.proto$")
