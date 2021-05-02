@@ -54,7 +54,6 @@ in
   home-manager.users.barnabas = { config, ... }: {
     imports = [
       ./gtk.nix
-      ./mpd.nix
       ./rust.nix
       ./xdg-userdirs.nix
       ./xdg.nix
