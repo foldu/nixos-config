@@ -129,14 +129,8 @@
 (set-company-backend! 'nix-mode nil)
 
 (after! nix-mode
-  (add-hook 'nix-mode-Inconsolatalocal-vars-hook #'lsp!))
+  (add-hook 'nix-mode-local-vars-hook #'lsp!))
 
-(after! lsp-mode
-  (lsp-register-client
-   (make-lsp-client
-    :new-connection (lsp-stdio-connection '("rnix-lsp"))
-    :major-modes '(nix-mode)
-    :server-id 'nix)))
 
 (after! ivy-posframe
   ;; center ivy-posframe
@@ -162,9 +156,7 @@
 (push '("\\.ui$" . nxml-mode) auto-mode-alist)
 (push '("\\.xsd$" . nxml-mode) auto-mode-alist)
 (after! lsp-mode
-  ;; (push '(nxml-mode . "xml") lsp-language-id-configuration)
-  ;; (setf (lsp--client-activation-fn (gethash 'xmlls lsp-clients))
-  ;;       (lsp-activate-on "xml"))
+  (push "[/\\\\]\\.direnv\\'" lsp-file-watch-ignored-directories)
   (add-hook 'nxml-mode-local-vars-hook #'lsp!))
 
 (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
