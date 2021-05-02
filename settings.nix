@@ -18,12 +18,12 @@
     sans = {
       pkg = pkgs.inter;
       name = "Inter";
-      size = 12;
+      size = 11;
     };
     serif = {
       pkg = pkgs.inter;
       name = "Inter";
-      size = 12;
+      size = 11;
     };
   };
   apps = {
