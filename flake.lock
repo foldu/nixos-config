@@ -245,19 +245,16 @@
     "pickwp": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "naersk": [
-          "naersk"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1619695980,
-        "narHash": "sha256-dKlKV+1s9KPWHl6qXi0oSH6vDGe7I1ROQScqXzK7VMA=",
+        "lastModified": 1619992957,
+        "narHash": "sha256-cxyJ+EMTwJSLSUOAuBB1sQlXl/UXjz1K21kmNpOchEU=",
         "ref": "master",
-        "rev": "3e4ea56956efe5f8462b6cbf7acbd0e6eaccc9d3",
-        "revCount": 172,
+        "rev": "048248fe696fd5802506658da12104563aaff746",
+        "revCount": 180,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/pickwp"
       },
@@ -279,11 +276,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1619697604,
-        "narHash": "sha256-hLL0B5UWcofCQ1hbuNoY6DmuIkCdpGHWZooiwPkBo78=",
+        "lastModified": 1619991909,
+        "narHash": "sha256-lbAAH9I2UCGOD7sRHnntvps+CfPgE76FvaAYG1Y8Q+g=",
         "ref": "master",
-        "rev": "cde618e8320278fde171fd49b847238f553495aa",
-        "revCount": 14,
+        "rev": "a3f8a137d5c1d3de3a7ccec95dc8a3c8f67ae91c",
+        "revCount": 17,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/pickwp-gtk"
       },
