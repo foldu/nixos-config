@@ -189,14 +189,22 @@
           (message "I don't know how to compile this")
           (compile)))))))
 
-(use-package! protobuf-mode
-  :mode "\\.proto$")
 (map!
  :leader
  :nv
  :desc "dwim compile"
  "cc"
  #'dwim-compile)
+
+(use-package! protobuf-mode
+  :mode "\\.proto$")
+
+;; highlight trailing whitespace in eye destroying red
+(setq-default show-trailing-whitespace t)
+;; except for terminals
+(add-hook 'vterm-mode-hook
+          (lambda ()
+            (setq show-trailing-whitespace nil)))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
