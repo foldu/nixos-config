@@ -13,8 +13,8 @@ in
     let
       blocklist = pkgs.writeText "blocklist" (
         builtins.toJSON {
-          host_whitelist = [ ];
-          host_blacklist = [ ];
+          host_whitelist = [];
+          host_blacklist = [];
           blocklists = [
             # needs more blocklists
             "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
@@ -61,31 +61,31 @@ in
       cacheDir = "/var/cache/blocklists";
       user = "unbound";
     in
-    {
-      timers.blocklistdownloadthing = {
-        wantedBy = [ "timers.target" ];
-        partOf = [ "blocklistdownloadthing.service" ];
-        timerConfig.OnCalendar = "daily";
-      };
-      services.blocklistdownloadthing = {
-        after = [ "network.target" ];
-        serviceConfig = {
-          Type = "oneshot";
+      {
+        timers.blocklistdownloadthing = {
+          wantedBy = [ "timers.target" ];
+          partOf = [ "blocklistdownloadthing.service" ];
+          timerConfig.OnCalendar = "daily";
         };
-        script = ''
-          ${pkgs.doas}/bin/doas -u unbound \
-          ${pkgs.blocklistdownloadthing}/bin/blocklistdownloadthing \
-              -o ${blocklistPath} \
-              --cache "${cacheDir}" \
-              --format unbound \
-              --config "${blocklist}"
-          systemctl restart unbound
-        '';
+        services.blocklistdownloadthing = {
+          after = [ "network.target" ];
+          serviceConfig = {
+            Type = "oneshot";
+          };
+          script = ''
+            ${pkgs.doas}/bin/doas -u unbound \
+            ${pkgs.blocklistdownloadthing}/bin/blocklistdownloadthing \
+                -o ${blocklistPath} \
+                --cache "${cacheDir}" \
+                --format unbound \
+                --config "${blocklist}"
+            systemctl restart unbound
+          '';
+        };
+        tmpfiles.rules = [
+          "d ${cacheDir} 755 ${user}"
+        ];
       };
-      tmpfiles.rules = [
-        "d ${cacheDir} 755 ${user}"
-      ];
-    };
 
   services.unbound = {
     enable = true;

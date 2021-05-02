@@ -7,7 +7,6 @@
 with lib;
 
 let
-
   cfg = config.services.binary-cache-cache;
 
   nginxCfg = config.services.nginx;
@@ -148,10 +147,12 @@ in
           set $upstream_endpoint https://cache.nixos.org;
         '';
 
-        listen = lib.mkIf (cfg.port != null) [{
-          addr = "0.0.0.0";
-          port = cfg.port;
-        }];
+        listen = lib.mkIf (cfg.port != null) [
+          {
+            addr = "0.0.0.0";
+            port = cfg.port;
+          }
+        ];
 
         locations."/" = {
           root = indexDir;

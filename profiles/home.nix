@@ -26,26 +26,26 @@ in
         myUser = config.users.users.barnabas;
         uid = toString myUser.uid;
       in
-      {
-        name = "/run/media/home/${hostName}";
-        value = {
-          # can't set device to ${myUser.home} because of infinite recursion
-          # TODO: investigate
-          device = "barnabas@${device.ip}:/home/barnabas";
-          fsType = "fuse.sshfs";
-          options = [
-            "IdentityFile=${myUser.home}/.ssh/home"
-            "IdentityAgent=/run/user/${uid}/ssh-agent"
-            "noauto"
-            "_netdev"
-            "x-systemd.automount"
-            "x-systemd.device-timeout=10"
-            "idmap=user"
-            "user"
-            "allow_other"
-            "uid=${uid}"
-          ];
-        };
-      }
+        {
+          name = "/run/media/home/${hostName}";
+          value = {
+            # can't set device to ${myUser.home} because of infinite recursion
+            # TODO: investigate
+            device = "barnabas@${device.ip}:/home/barnabas";
+            fsType = "fuse.sshfs";
+            options = [
+              "IdentityFile=${myUser.home}/.ssh/home"
+              "IdentityAgent=/run/user/${uid}/ssh-agent"
+              "noauto"
+              "_netdev"
+              "x-systemd.automount"
+              "x-systemd.device-timeout=10"
+              "idmap=user"
+              "user"
+              "allow_other"
+              "uid=${uid}"
+            ];
+          };
+        }
   );
 }
