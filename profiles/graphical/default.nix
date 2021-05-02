@@ -100,7 +100,7 @@ in
       lld_11
       sqlite-interactive
       litecli
-      pgcli
+      #pgcli
       binutils
       nodePackages.pyright
       cookiecutter
