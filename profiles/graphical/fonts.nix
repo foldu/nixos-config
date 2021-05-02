@@ -4,10 +4,11 @@
   fonts = {
     fontDir.enable = true;
     fontconfig.defaultFonts = {
-      #sansSerif = [ configSettings.font.sans.name ];
-      #serif = [ configSettings.font.serif.name ];
+      sansSerif = [ configSettings.font.sans.name ];
+      serif = [ configSettings.font.serif.name ];
       monospace = [ configSettings.font.monospace.name ];
     };
+    fontconfig.hinting.enable = true;
     fonts = with pkgs; [
       corefonts
       noto-fonts
@@ -19,16 +20,18 @@
       libertine
       inconsolata
       cascadia-code
-      # the same thing as Iosevka but with more glyphs
-      # also has no emojis
-      # this is a feature.
-      sarasa-gothic
-      # why is this camelCase?
+      inter
+      vistafonts
+      iosevka
       etBook
+      jetbrains-mono
     ] ++ lib.mapAttrsToList (_: f: f.pkg) configSettings.font;
   };
 
   home-manager.users.barnabas = { config, ... }: {
-    gtk.font.name = configSettings.font.sans.name;
+    gtk.font = {
+      name = configSettings.font.sans.name;
+      size = configSettings.font.sans.size;
+    };
   };
 }

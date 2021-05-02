@@ -24,7 +24,7 @@
 
 ;; lisp-2's sux
 (cl-flet ((monospace (size)
-                     (font-spec :family "Iosevka" :size size)))
+                     (font-spec :family "Consolas" :size size)))
   (setq doom-font (monospace 16))
   (setq doom-variable-pitch-font (font-spec :family "ETBembo" :size 16))
   (setq doom-big-font (monospace 19))
@@ -129,7 +129,7 @@
 (set-company-backend! 'nix-mode nil)
 
 (after! nix-mode
-  (add-hook 'nix-mode-local-vars-hook #'lsp!))
+  (add-hook 'nix-mode-Inconsolatalocal-vars-hook #'lsp!))
 
 (after! lsp-mode
   (lsp-register-client

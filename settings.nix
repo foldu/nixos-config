@@ -3,12 +3,12 @@
     monospace = {
       pkg = pkgs.fira-mono;
       name = "Fira Mono";
-      size = 11;
+      size = 12;
     };
     devMonospace = {
-      pkg = pkgs.iosevka;
-      name = "Iosevka";
-      size = 11;
+      pkg = pkgs.vistafonts;
+      name = "Consolas";
+      size = 12;
     };
     documents = {
       pkg = pkgs.roboto-slab;
@@ -16,13 +16,13 @@
       size = 11;
     };
     sans = {
-      pkg = pkgs.fira;
-      name = "Fira Sans Regular";
+      pkg = pkgs.inter;
+      name = "Inter";
       size = 12;
     };
     serif = {
-      pkg = pkgs.fira;
-      name = "Fira Sans Regular";
+      pkg = pkgs.inter;
+      name = "Inter";
       size = 12;
     };
   };

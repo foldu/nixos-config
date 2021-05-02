@@ -54,7 +54,7 @@
       };
 
       "org/gnome/desktop/wm/preferences" = {
-        titlebar-font = "Fira Sans Semi-Bold 10";
+        titlebar-font = "Inter Semi Bold 10";
       };
 
       "org/gnome/desktop/privacy" = {
