@@ -131,7 +131,6 @@
 (after! nix-mode
   (add-hook 'nix-mode-local-vars-hook #'lsp!))
 
-
 (after! ivy-posframe
   ;; center ivy-posframe
   ;; TODO: don't iterate list for each insert
@@ -161,9 +160,7 @@
 
 (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
 
-;; TODO: switch to company-text-mode-margin
-;; +childframe on doom company currently works better
-;; (setq company-format-margin-function #'company-vscode-dark-icons-margin-function)
+(setq company-format-margin-function #'company-vscode-dark-icons-margin)
 
 (defun dwim-compile ()
   "Just compile the current project."

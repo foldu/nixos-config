@@ -55,3 +55,6 @@
 (package! ivy-posframe :pin "7f1ab7890040c4b8dc4e9645c824cd35210e1121")
 
 (package! protobuf-mode)
+(unpin!
+ lsp-mode
+ company)
