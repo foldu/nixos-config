@@ -50,11 +50,17 @@
 ;(unpin! t)
 
 ;; new versions don't work for some reason
-(package! nixpkgs-fmt :pin "213251f82a69edc033766ec96948e83aeb428cd2")
+(package! nixpkgs-fmt
+  :pin "213251f82a69edc033766ec96948e83aeb428cd2")
 
-(package! ivy-posframe :pin "7f1ab7890040c4b8dc4e9645c824cd35210e1121")
+(package! ivy-posframe
+  :pin "7f1ab7890040c4b8dc4e9645c824cd35210e1121")
 
-(package! protobuf-mode)
-(unpin!
- lsp-mode
- company)
+(package! protobuf-mode
+  :pin "28101c3e39408c04e4d959ccd9cdf1f4dbd5e012")
+
+(package! lsp-mode
+  :pin "3aebec085afdf0b9bad4adee1b06abc80e90fb3f")
+
+(package! company
+  :pin "4ce6c5890437c473530faef876e6d232e83e9924")

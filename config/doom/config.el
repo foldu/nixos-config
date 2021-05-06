@@ -145,6 +145,7 @@
     (let ((height (or ivy-posframe-height (or ivy-height 10)))
           (width (min (or ivy-posframe-width 200) (round (* .25 (frame-width))))))
       (list :height height :width width :min-height height :min-width width)))
+
   (setq ivy-posframe-size-function 'fd/ivy-posframe-get-size-no-spazz))
 
 (setq fancy-splash-image "~/fancy_splash_image.png")
@@ -155,7 +156,6 @@
 (push '("\\.ui$" . nxml-mode) auto-mode-alist)
 (push '("\\.xsd$" . nxml-mode) auto-mode-alist)
 (after! lsp-mode
-  (push "[/\\\\]\\.direnv\\'" lsp-file-watch-ignored-directories)
   (add-hook 'nxml-mode-local-vars-hook #'lsp!))
 
 (setq lsp-julia-default-environment "~/.julia/environments/v1.5")
@@ -194,7 +194,7 @@
  #'dwim-compile)
 
 (use-package! protobuf-mode
-  :mode "\\.proto$")
+  :mode "\\.proto\\'")
 
 ;; highlight trailing whitespace in eye destroying red
 (setq-default show-trailing-whitespace t)
