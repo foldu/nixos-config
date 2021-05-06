@@ -203,6 +203,9 @@
           (lambda ()
             (setq show-trailing-whitespace nil)))
 
+;; reduce avy timeout waiting
+(setq avy-timeout-seconds 0.2)
+
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
