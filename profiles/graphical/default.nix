@@ -94,7 +94,7 @@ in
       openocd
       clang_11
       clang-tools
-      julia
+      julia_15
       lld_11
       sqlite-interactive
       litecli
