@@ -15,6 +15,9 @@
     file-roller
   ];
 
+  # conflicts with tlp
+  services.power-profiles-daemon.enable = false;
+
   environment.systemPackages = with pkgs.gnomeExtensions; [
     appindicator
     pkgs.myGnomeExtensions.pop-os-shell
@@ -25,7 +28,7 @@
   environment.sessionVariables.WINIT_UNIX_BACKEND = "x11";
 
   # remove gnome software
-  services.flatpak.guiPackages = lib.mkForce [ ];
+  services.flatpak.guiPackages = lib.mkForce [];
 
   services.gnome3 = {
     gnome-online-miners.enable = lib.mkForce false;
@@ -106,7 +109,7 @@
 
       "org/gnome/desktop/wm/keybindings" = {
         close = [ "<Super>q" ];
-        minimize = [ ];
+        minimize = [];
         move-to-monitor-left = "@as []";
         move-to-monitor-right = "@as []";
         move-to-workspace-down = "@as []";
