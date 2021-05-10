@@ -64,6 +64,16 @@ in
 
     # TODO: sort this wall of crap
     home.packages = with pkgs; [
+      (
+        python39.withPackages (
+          p: with p; [
+            sh
+            requests
+            ipython
+            black
+          ]
+        )
+      )
       gnome-podcasts
       eunzip
       croc
