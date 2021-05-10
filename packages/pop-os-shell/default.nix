@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "pop-os-shell";
-  version = "1.2.0";
+  version = "9507dc38f75f56e657cf071d5f8dc578c5dc9352";
 
   src = fetchFromGitHub {
     owner = "pop-os";
     repo = "shell";
     rev = version;
-    sha256 = "sha256-igggV9qPyck34DmtGGeeVtFODp8NP19Llw8zMm22Qa0=";
+    sha256 = "sha256-9Z1SDg9TWdk5W22FkGYGQW1iMdS+T+hUpzZMW7whKZg=";
   };
 
   nativeBuildInputs = [ glib nodePackages.typescript gjs ];
