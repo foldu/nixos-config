@@ -136,7 +136,9 @@ in
           settings = {
             env.TERM = "xterm-256color";
             cursor.unfocused_hollow = true;
-            cursor.style = "Block";
+            cursor.style = {
+              blinking = "On";
+            };
             font = { size = 12.0; } // fontSpec;
             colors = {
               primary = {
