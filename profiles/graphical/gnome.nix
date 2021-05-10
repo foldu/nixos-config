@@ -112,10 +112,10 @@
         minimize = [];
         move-to-monitor-left = "@as []";
         move-to-monitor-right = "@as []";
-        move-to-workspace-down = "@as []";
-        move-to-workspace-up = "@as []";
-        switch-to-workspace-down = [ "<Primary><Super>j" ];
-        switch-to-workspace-up = [ "<Primary><Super>k" ];
+        move-to-workspace-left = "@as []";
+        move-to-workspace-right = "@as []";
+        switch-to-workspace-left = [ "<Primary><Super>j" ];
+        switch-to-workspace-right = [ "<Primary><Super>k" ];
       };
 
       "org/gnome/shell/keybindings" = {
