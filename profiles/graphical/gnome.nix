@@ -108,12 +108,16 @@
       };
 
       "org/gnome/desktop/wm/keybindings" = {
+        # remove unused bindings so they don't conflict
+        switch-to-workspace-up = "@as []";
+        switch-to-workspace-down = "@as []";
+
         close = [ "<Super>q" ];
         minimize = [];
         move-to-monitor-left = "@as []";
         move-to-monitor-right = "@as []";
-        move-to-workspace-left = "@as []";
-        move-to-workspace-right = "@as []";
+        move-to-workspace-left = ["<Primary><Shift><Super>j"];
+        move-to-workspace-right = ["<Primary><Shift><Super>k"];
         switch-to-workspace-left = [ "<Primary><Super>j" ];
         switch-to-workspace-right = [ "<Primary><Super>k" ];
       };
