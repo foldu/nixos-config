@@ -20,6 +20,7 @@
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
     appindicator
+    blur-my-shell
     pkgs.myGnomeExtensions.pop-os-shell
   ];
 
