@@ -30,7 +30,7 @@
   environment.sessionVariables.WINIT_UNIX_BACKEND = "x11";
 
   # remove gnome software
-  services.flatpak.guiPackages = lib.mkForce [];
+  services.flatpak.guiPackages = lib.mkForce [ ];
 
   services.gnome3 = {
     gnome-online-miners.enable = lib.mkForce false;
@@ -113,13 +113,15 @@
         # remove unused bindings so they don't conflict
         switch-to-workspace-up = "@as []";
         switch-to-workspace-down = "@as []";
+        move-to-workspace-up = "@as []";
+        move-to-workspace-down = "@as []";
 
         close = [ "<Super>q" ];
-        minimize = [];
+        minimize = [ ];
         move-to-monitor-left = "@as []";
         move-to-monitor-right = "@as []";
-        move-to-workspace-left = ["<Primary><Shift><Super>j"];
-        move-to-workspace-right = ["<Primary><Shift><Super>k"];
+        move-to-workspace-left = [ "<Primary><Shift><Super>j" ];
+        move-to-workspace-right = [ "<Primary><Shift><Super>k" ];
         switch-to-workspace-left = [ "<Primary><Super>j" ];
         switch-to-workspace-right = [ "<Primary><Super>k" ];
       };
@@ -155,9 +157,39 @@
           "appindicatorsupport@rgcjonas.gmail.com"
           "user-theme@gnome-shell-extensions.gcampax.github.com"
           "pop-shell@system76.com"
+          "blur-my-shell@aunetx"
+          "just-perfection-desktop@just-perfection"
         ];
-      };
 
+        "org/gnome/shell/extensions/just-perfection" = {
+          animation = 4;
+          background-menu = true;
+          clock-menu-position = 0;
+          clock-menu-position-offset = 0;
+          dash = false;
+          hot-corner = true;
+          osd = true;
+          panel = true;
+          panel-arrow = true;
+          search = false;
+          theme = false;
+          top-panel-position = 0;
+          workspace = true;
+          workspace-switcher-size = 15;
+        };
+
+        "org/gnome/shell/extensions/blur-my-shell" = {
+          blur-dash = false;
+          blur-lockscreen = true;
+          blur-overview = true;
+          blur-panel = false;
+          brightness = 0.6;
+          dash-opacity = 0.12;
+          hacks-level = 1;
+          sigma = 30;
+          static-blur = true;
+        };
+      };
 
       "org/gnome/eog/plugins" = {
         active-plugins = [ "fullscreen" ];
