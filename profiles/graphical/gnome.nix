@@ -22,7 +22,7 @@
     appindicator
     blur-my-shell
     just-perfection
-    pkgs.myGnomeExtensions.pop-os-shell
+    pop-os-shell
   ];
 
   # gunome _still_ has no server side decorations and alacritty windows look weird
