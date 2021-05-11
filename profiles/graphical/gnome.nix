@@ -161,34 +161,35 @@
           "just-perfection-desktop@just-perfection"
         ];
 
-        "org/gnome/shell/extensions/just-perfection" = {
-          animation = 4;
-          background-menu = true;
-          clock-menu-position = 0;
-          clock-menu-position-offset = 0;
-          dash = false;
-          hot-corner = true;
-          osd = true;
-          panel = true;
-          panel-arrow = true;
-          search = false;
-          theme = false;
-          top-panel-position = 0;
-          workspace = true;
-          workspace-switcher-size = 15;
-        };
+      };
 
-        "org/gnome/shell/extensions/blur-my-shell" = {
-          blur-dash = false;
-          blur-lockscreen = true;
-          blur-overview = true;
-          blur-panel = false;
-          brightness = 0.6;
-          dash-opacity = 0.12;
-          hacks-level = 1;
-          sigma = 30;
-          static-blur = true;
-        };
+      "org/gnome/shell/extensions/just-perfection" = {
+        animation = 4;
+        background-menu = true;
+        clock-menu-position = 0;
+        clock-menu-position-offset = 0;
+        dash = false;
+        hot-corner = true;
+        osd = true;
+        panel = true;
+        panel-arrow = true;
+        search = false;
+        theme = false;
+        top-panel-position = 0;
+        workspace = true;
+        workspace-switcher-size = 15;
+      };
+
+      "org/gnome/shell/extensions/blur-my-shell" = {
+        blur-dash = false;
+        blur-lockscreen = true;
+        blur-overview = true;
+        blur-panel = false;
+        brightness = 0.6;
+        dash-opacity = 0.12;
+        hacks-level = 1;
+        sigma = 30;
+        static-blur = true;
       };
 
       "org/gnome/eog/plugins" = {
