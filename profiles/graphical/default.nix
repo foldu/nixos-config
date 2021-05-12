@@ -10,6 +10,7 @@ in
     ./bfq.nix
     ./desktop-portal.nix
     # FIXME: doesn't compile on latest nixos-unstable
+    # FIXME: still doesn't compile on nixos-unstable
     #./emacs.nix
     ./fancy-login.nix
     ./fonts.nix
