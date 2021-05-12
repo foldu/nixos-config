@@ -1,10 +1,10 @@
 { config, lib, pkgs, ... }: {
   services.xserver.desktopManager = {
-    gnome3.enable = true;
+    gnome.enable = true;
     xterm.enable = lib.mkForce false;
   };
 
-  environment.gnome3.excludePackages = with pkgs.gnome3; [
+  environment.gnome.excludePackages = with pkgs.gnome; [
     cheese
     gedit
     gnome-photos
@@ -32,17 +32,17 @@
   # remove gnome software
   services.flatpak.guiPackages = lib.mkForce [ ];
 
-  services.gnome3 = {
-    gnome-online-miners.enable = lib.mkForce false;
-    gnome-user-share.enable = false;
+  services.gnome = {
+    #gnome-online-miners.enable = lib.mkForce false;
+    #gnome-user-share.enable = false;
     gnome-initial-setup.enable = false;
     gnome-remote-desktop.enable = false;
   };
 
   home-manager.users.barnabas = { config, ... }: {
     home.packages = with pkgs; [
-      gnome3.gnome-tweak-tool
-      gnome3.dconf-editor
+      gnome.gnome-tweak-tool
+      gnome.dconf-editor
       dconf2nix
     ];
 
