@@ -1,5 +1,5 @@
 final: prev: {
-  gnome3 = prev.gnome3.overrideScope' (gnomeFinal: gnomePrev: {
+  gnome = prev.gnome.overrideScope' (gnomeFinal: gnomePrev: {
     mutter = gnomePrev.mutter.overrideAttrs (oldAttrs: {
       patches = (oldAttrs.patches or [ ]) ++ [
         # fixes https://github.com/pop-os/shell/issues/912
