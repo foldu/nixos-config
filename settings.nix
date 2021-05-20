@@ -48,6 +48,11 @@
       command = "eog";
       desktopFile = "org.gnome.eog.desktop";
     };
+    videoPlayer = {
+      pkg = pkgs.gnome3.totem;
+      command = "totem";
+      desktopFile = "org.gnome.Totem.desktop";
+    };
     graphicalEditor = {
       pkg = null;
       command = "emacsclient";
