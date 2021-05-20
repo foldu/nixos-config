@@ -131,7 +131,6 @@
             pickwp-gtk.overlay
             blocklistdownloadthing.overlay
             (import ./overlays)
-            (import ./overlays/fix-mutter.nix)
           ];
           config.allowUnfree = true;
         };

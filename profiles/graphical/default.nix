@@ -9,9 +9,7 @@ in
     ../generic.nix
     ./bfq.nix
     ./desktop-portal.nix
-    # FIXME: doesn't compile on latest nixos-unstable
-    # FIXME: still doesn't compile on nixos-unstable
-    #./emacs.nix
+    ./emacs.nix
     ./fancy-login.nix
     ./fonts.nix
     ./gnome.nix
