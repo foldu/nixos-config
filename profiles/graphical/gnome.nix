@@ -141,7 +141,7 @@
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Super>t";
-        command = "kitty";
+        command = "kitty --single-instance";
         name = "Open terminal";
       };
 
@@ -149,7 +149,7 @@
         favorite-apps = [
           "brave-browser.desktop"
           "telegramdesktop.desktop"
-          "Alacritty.desktop"
+          "kitty.desktop"
           "emacs.desktop"
         ];
         enabled-extensions = [

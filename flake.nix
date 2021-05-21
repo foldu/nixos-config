@@ -120,7 +120,6 @@
         mkPkgs = system: import nixpkgs {
           inherit system;
           overlays = [
-
             emacs-overlay.overlay
             rust-overlay.overlay
             pickwp.overlay
@@ -131,6 +130,7 @@
             pickwp-gtk.overlay
             blocklistdownloadthing.overlay
             (import ./overlays)
+            (import ./overlays/customizations.nix)
           ];
           config.allowUnfree = true;
         };

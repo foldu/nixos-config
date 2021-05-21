@@ -128,8 +128,8 @@ in
       keybindings = {
         "ctrl+c" = "copy_or_interrupt";
         "ctrl+v" = "paste_from_clipboard";
-        "ctrl+shift+[" = "previous_tab";
-        "ctrl+shift+]" = "next_tab";
+        "ctrl+shift+j" = "previous_tab";
+        "ctrl+shift+k" = "next_tab";
       };
       settings = {
         tab_bar_style = "powerline";
