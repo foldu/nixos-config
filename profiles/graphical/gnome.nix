@@ -30,7 +30,7 @@
   environment.sessionVariables.WINIT_UNIX_BACKEND = "x11";
 
   # remove gnome software
-  services.flatpak.guiPackages = lib.mkForce [ ];
+  services.flatpak.guiPackages = lib.mkForce [];
 
   services.gnome = {
     #gnome-online-miners.enable = lib.mkForce false;
@@ -117,11 +117,11 @@
         move-to-workspace-down = "@as []";
 
         close = [ "<Super>q" ];
-        minimize = [ ];
+        minimize = [];
         move-to-monitor-left = "@as []";
         move-to-monitor-right = "@as []";
-        move-to-workspace-left = [ "<Primary><Shift><Super>j" ];
-        move-to-workspace-right = [ "<Primary><Shift><Super>k" ];
+        move-to-workspace-left = [ "<Shift><Super>j" ];
+        move-to-workspace-right = [ "<Shift><Super>k" ];
         switch-to-workspace-left = [ "<Primary><Super>j" ];
         switch-to-workspace-right = [ "<Primary><Super>k" ];
       };
@@ -141,7 +141,7 @@
 
       "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
         binding = "<Super>t";
-        command = "alacritty";
+        command = "kitty";
         name = "Open terminal";
       };
 
