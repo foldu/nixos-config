@@ -89,17 +89,25 @@ in
 
   services.unbound = {
     enable = true;
-    allowedAccess = [ "127.0.0.0/8" home-network.network ];
-    interfaces = [ "0.0.0.0" ];
-    forwardAddresses = [
-      "1.1.1.1@853#cloudflare-dns.com"
-      "1.0.0.1@853#cloudflare-dns.com"
-    ];
-    extraConfig = ''
-      so-reuseport: yes
-      tls-cert-bundle: /etc/ssl/certs/ca-certificates.crt
-      tls-upstream: yes
-      include: ${blocklistPath}
-    '';
+    settings = {
+      server = {
+        access-control = [
+          "127.0.0.0/8 allow"
+          "${home-network.network} allow"
+        ];
+        interface = [ "0.0.0.0" ];
+        so-reuseport = true;
+        tls-upstream = true;
+        tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
+        include = "${blocklistPath}";
+      };
+      forward-zone = [{
+        name = ".";
+        forward-addr = [
+          "1.1.1.1@853#cloudflare-dns.com"
+          "1.0.0.1@853#cloudflare-dns.com"
+        ];
+      }];
+    };
   };
 }
