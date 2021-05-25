@@ -13,6 +13,7 @@
     epiphany
     gnome-music
     file-roller
+    gnome-software
   ];
 
   # conflicts with tlp
@@ -28,9 +29,6 @@
   # gunome _still_ has no server side decorations and alacritty windows look weird
   # because of that
   environment.sessionVariables.WINIT_UNIX_BACKEND = "x11";
-
-  # remove gnome software
-  services.flatpak.guiPackages = lib.mkForce [];
 
   services.gnome = {
     #gnome-online-miners.enable = lib.mkForce false;
