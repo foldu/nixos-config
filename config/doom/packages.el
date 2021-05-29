@@ -59,8 +59,8 @@
 (package! protobuf-mode
   :pin "28101c3e39408c04e4d959ccd9cdf1f4dbd5e012")
 
-(package! lsp-mode
-  :pin "3aebec085afdf0b9bad4adee1b06abc80e90fb3f")
+;; (package! lsp-mode
+;;   :pin "3aebec085afdf0b9bad4adee1b06abc80e90fb3f")
 
-(package! company
-  :pin "4ce6c5890437c473530faef876e6d232e83e9924")
+;; (package! company
+;;   :pin "4ce6c5890437c473530faef876e6d232e83e9924")
