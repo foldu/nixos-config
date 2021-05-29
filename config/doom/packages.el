@@ -62,5 +62,5 @@
 ;; (package! lsp-mode
 ;;   :pin "3aebec085afdf0b9bad4adee1b06abc80e90fb3f")
 
-;; (package! company
-;;   :pin "4ce6c5890437c473530faef876e6d232e83e9924")
+(package! company
+   :pin "ee3177cdad47cbe92242eeb52c7bdb9505282db6")
