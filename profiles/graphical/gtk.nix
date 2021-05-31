@@ -1,17 +1,17 @@
-{ config, lib, pkgs, ... }: 
+{ config, lib, pkgs, ... }:
 let
-  iconTheme = "Pop";
-  gtkTheme = "Pop-dark";
+  iconTheme = "Yaru";
+  gtkTheme = "Yaru-dark";
 in
 {
   gtk = {
     enable = true;
     iconTheme = {
-      package = pkgs.pop-icon-theme;
+      package = pkgs.yaru-theme;
       name = iconTheme;
     };
     theme = {
-      package = pkgs.pop-gtk-theme;
+      package = pkgs.yaru-theme;
       name = gtkTheme;
     };
     gtk3.extraConfig.gtk-key-theme-name = "Emacs";

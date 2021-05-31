@@ -105,7 +105,7 @@
       };
 
       "org/gnome/shell/extensions/user-theme" = {
-        name = "pop-dark";
+        name = "Yaru";
       };
 
       "org/gnome/desktop/wm/keybindings" = {
