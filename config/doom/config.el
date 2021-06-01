@@ -219,6 +219,11 @@
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
+(map!
+ :m "gs"
+ (cmd! (let ((current-prefix-arg t)) (evil-avy-goto-char-timer))))
+
+
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
