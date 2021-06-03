@@ -15,6 +15,11 @@
             "datareporting.healthreport.uploadEnabled" = false;
             "datareporting.healthreport.service.enabled" = false;
             "toolkit.coverage.enabled" = false;
+            "toolkit.telemetry.unified" = false;
+            "browser.tabs.crashReporting.sendReport" = false;
+            "devtools.onboarding.telemetry.logged" = false;
+            "browser.ping-centre.telemetry" = false;
+            "browser.newtabpage.activity-stream.feeds.telemetry" = false;
 
             # do not load random things I didn't even click on
             "network.dns.disablePrefetch" = true;
@@ -42,6 +47,9 @@
 
             # no
             "app.normandy.enabled" = false;
+
+            # disable pdf scripts
+            "pdfjs.enableScripting" = false;
           };
         };
       in
