@@ -15,7 +15,29 @@ in
         builtins.toJSON {
           host_whitelist = [];
           host_blacklist = [
-            "https://incoming.telemetry.mozilla.org"
+            # mostly telemetry
+            "incoming.telemetry.mozilla.org"
+            "Iphone-id.apple.com"
+            "Iphone-ld.apple.com"
+            "albert.apple.com"
+            "app-measurement.com"
+            "bag.itunes.apple.com"
+            "cf.iadsdk.apple.com"
+            "growth-pa.googleapis.com"
+            "iadsdk.apple.com"
+            "idiagnostics.apple.com"
+            "init.gc.apple.com"
+            "iphone-ld.apple.com"
+            "mobilenetworkscoring-pa.googleapis.com"
+            "pagead2.googlesyndication.com"
+            "pdate.googleapis.com"
+            "profile.gc.apple.com"
+            "sa.apple.com"
+            "smp-device-content.apple.com"
+            "ssl.google-analytics.com"
+            "ssl.google−analytics.com"
+            "static.gc.apple.com"
+            "www.googleadservices.com"
           ];
           blocklists = [
             # needs more blocklists
@@ -38,18 +60,18 @@ in
             "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/facebook/all"
             #"https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/extra.txt"
             #"https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/shortlinksparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/proxiesparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/productsparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/mailparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/generalparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/fontsparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/firebaseparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/doubleclickparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/domainsparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/dnsparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/androidparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/analyticsparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/shortlinksparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/proxiesparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/productsparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/mailparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/generalparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/fontsparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/firebaseparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/doubleclickparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/domainsparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/dnsparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/androidparsed"
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/analyticsparsed"
 
             # new
 
@@ -57,6 +79,24 @@ in
             "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt"
             "https://raw.githubusercontent.com/FadeMind/hosts.extras/master/add.Spam/hosts"
             "https://v.firebog.net/hosts/static/w3kbl.txt"
+
+            # nextdns privacy native
+            "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/alexa"
+            "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/apple"
+            "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/huawei"
+            "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/roku"
+            "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/samsung"
+            "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/sonos"
+            "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/windows"
+            "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/xiaomi"
+
+            "https://someonewhocares.org/hosts/hosts"
+
+            # some google stuff that hopefully doesn't break too much
+            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/doubleclickparsed"
+            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/domainsparsed"
+            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/dnsparsed"
+            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/analyticsparsed"
           ];
         }
       );
@@ -103,13 +143,15 @@ in
         tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
         include = "${blocklistPath}";
       };
-      forward-zone = [{
-        name = ".";
-        forward-addr = [
-          "1.1.1.1@853#cloudflare-dns.com"
-          "1.0.0.1@853#cloudflare-dns.com"
-        ];
-      }];
+      forward-zone = [
+        {
+          name = ".";
+          forward-addr = [
+            "1.1.1.1@853#cloudflare-dns.com"
+            "1.0.0.1@853#cloudflare-dns.com"
+          ];
+        }
+      ];
     };
   };
 }
