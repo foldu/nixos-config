@@ -14,7 +14,9 @@ in
       blocklist = pkgs.writeText "blocklist" (
         builtins.toJSON {
           host_whitelist = [];
-          host_blacklist = [];
+          host_blacklist = [
+            "https://incoming.telemetry.mozilla.org"
+          ];
           blocklists = [
             # needs more blocklists
             "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts"
