@@ -219,6 +219,7 @@
           (rename-file filename new-name t)
           (set-visited-file-name new-name t t)))))))
 
+;; TODO: get this to work on restart
 (map!
  :m "gs"
  (cmd! (let ((current-prefix-arg t)) (evil-avy-goto-char-timer))))
