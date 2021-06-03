@@ -29,8 +29,8 @@
   apps = {
     browser = {
       pkg = null;
-      command = "brave";
-      desktopFile = "brave-browser.desktop";
+      command = "firefox";
+      desktopFile = "firefox.desktop";
 
     };
     pdfViewer = {
