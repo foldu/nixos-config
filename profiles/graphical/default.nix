@@ -176,6 +176,9 @@ in
 
               # enable userChrome.css
               "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+
+              # no
+              "app.normandy.enabled" = false;
             };
           };
         in
