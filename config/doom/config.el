@@ -128,8 +128,6 @@
 ;; disable autocomplete for nix (hangs emacs)
 (set-company-backend! 'nix-mode nil)
 
-(after! nix-mode
-  (add-hook 'nix-mode-local-vars-hook #'lsp!))
 
 (after! ivy-posframe
   ;; center ivy-posframe

@@ -99,7 +99,6 @@ in
       wpp
       wl-clipboard
       manpages
-      rnix-lsp
       tokei
       gdb
       openocd
