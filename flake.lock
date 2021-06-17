@@ -250,11 +250,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1619992957,
-        "narHash": "sha256-cxyJ+EMTwJSLSUOAuBB1sQlXl/UXjz1K21kmNpOchEU=",
+        "lastModified": 1622032944,
+        "narHash": "sha256-bFCwMKYEmQGnvwt4XLDr0/xjxXJJa3DzTz+Fev9y4go=",
         "ref": "master",
-        "rev": "048248fe696fd5802506658da12104563aaff746",
-        "revCount": 180,
+        "rev": "8fd0c2d7b5e2142165cb5ee641166840f4af3de7",
+        "revCount": 181,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/pickwp"
       },
@@ -276,11 +276,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1623169452,
-        "narHash": "sha256-D3Wqhm8a0czjf0mt0JDc+2yyBy7PtAun0K1zGF3yNwE=",
+        "lastModified": 1623941227,
+        "narHash": "sha256-nlOM1modGBRh+TuJeFWPq3EcGr/wbdAUEWBLas4OirM=",
         "ref": "master",
-        "rev": "7ab30f76d4cedc1af06e2f73aab286fb8716ca0a",
-        "revCount": 25,
+        "rev": "37b77e4e69b6a3c13294eeaadd8fe30e00b64ac7",
+        "revCount": 26,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/pickwp-gtk"
       },
