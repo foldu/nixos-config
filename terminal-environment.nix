@@ -67,11 +67,11 @@ in
 
     programs.htop = {
       enable = true;
-      vimMode = true;
-      # need to configure this because too many cores
-      meters = {
-        left = [ "LeftCPUs2" "Memory" "Swap" ];
-        right = [ "RightCPUs2" "Tasks" "LoadAverage" "Uptime" ];
+      settings = {
+        vimMode = true;
+        # need to configure this because too many cores
+        left_meters = [ "LeftCPUs2" "Memory" "Swap" ];
+        right_meters = [ "RightCPUs2" "Tasks" "LoadAverage" "Uptime" ];
       };
     };
 
@@ -135,7 +135,7 @@ in
 
     programs.direnv = {
       enable = true;
-      enableNixDirenvIntegration = true;
+      nix-direnv.enable = true;
     };
 
   };
