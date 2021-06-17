@@ -343,11 +343,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1616521435,
-        "narHash": "sha256-d1lZEJqjTqyMcDKW5CkyG8uuewVBn0+bRMlO3NsyOkE=",
+        "lastModified": 1623942237,
+        "narHash": "sha256-dliKs8ihlzCkcDTcuRfczuhl81ZDkJz+1s69Pigll1A=",
         "ref": "master",
-        "rev": "11a5aad587dead2509d9107d8fc955f1f65fe19c",
-        "revCount": 19,
+        "rev": "ee7d247fc9eeb7eadf0b444c5f9e60e9fa4acb3e",
+        "revCount": 20,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/wpp"
       },
