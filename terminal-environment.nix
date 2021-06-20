@@ -91,6 +91,10 @@ in
     programs.fish = {
       enable = true;
 
+      functions = {
+        fish_greeting = "";
+      };
+
       shellAbbrs = {
         sudo = "doas";
         usv = "systemctl --user";
