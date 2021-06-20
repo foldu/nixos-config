@@ -20,6 +20,10 @@ in
     ../../terminal-environment.nix
   ];
 
+  # FIXME: temporary fix until I figure out why some gtk applications
+  # ignore both settings.ini and the thing in dconf
+  environment.sessionVariables.GTK_THEME = "Yaru-dark";
+
   virtualisation.docker = {
     enable = true;
     autoPrune = {
