@@ -120,7 +120,7 @@ in
         set -U fish_features stderr-nocaret qmark-noglob
 
         set -U tide_left_prompt_items context pwd git prompt_char
-        set -U tide_right_prompt_items tide_right_prompt_items status cmd_duration jobs time
+        set -U tide_right_prompt_items status cmd_duration jobs time
         set -U tide_time_color white
 
         bind \cX\cE edit_command_buffer
