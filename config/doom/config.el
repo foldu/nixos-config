@@ -123,7 +123,7 @@
 
 (after! company
   ;; show completion with less timeout
-  (setq company-idle-delay 0.2))
+  (setq company-idle-delay 0.1))
 
 ;; disable autocomplete for nix (hangs emacs)
 (set-company-backend! 'nix-mode nil)
