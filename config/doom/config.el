@@ -123,7 +123,7 @@
 
 (after! company
   ;; show completion with less timeout
-  (setq company-idle-delay 0.25))
+  (setq company-idle-delay 0.2))
 
 ;; disable autocomplete for nix (hangs emacs)
 (set-company-backend! 'nix-mode nil)
@@ -221,6 +221,9 @@
 (map!
  :m "gs"
  (cmd! (let ((current-prefix-arg t)) (evil-avy-goto-char-timer))))
+
+(after! lsp-mode
+  (setq lsp-rust-analyzer-proc-macro-enable t))
 
 
 
