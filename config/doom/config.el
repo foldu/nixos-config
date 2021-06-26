@@ -144,7 +144,11 @@
           (width (min (or ivy-posframe-width 200) (round (* .25 (frame-width))))))
       (list :height height :width width :min-height height :min-width width)))
 
-  (setq ivy-posframe-size-function 'fd/ivy-posframe-get-size-no-spazz))
+  (setq ivy-posframe-size-function 'fd/ivy-posframe-get-size-no-spazz)
+  (setq ivy-posframe-parameters
+        '((min-width . 80)
+          (left-fringe . 5)
+          (right-fringe . 5))))
 
 (setq fancy-splash-image "~/fancy_splash_image.png")
 
@@ -204,23 +208,17 @@
 ;; reduce avy timeout waiting
 (setq avy-timeout-seconds 0.2)
 
-(defun rename-file-and-buffer ()
-  "Rename the current buffer and file it is visiting."
-  (interactive)
-  (let ((filename (buffer-file-name)))
-    (if (not (and filename (file-exists-p filename)))
-        (message "Buffer is not visiting a file!")
-      (let ((new-name (read-file-name "New name: " filename)))
-        (cond
-         ((vc-backend filename) (vc-rename-file filename new-name))
-         (t
-          (rename-file filename new-name t)
-          (set-visited-file-name new-name t t)))))))
-
 ;; TODO: get this to work on restart
-(map!
- :m "gs"
- (cmd! (let ((current-prefix-arg t)) (evil-avy-goto-char-timer))))
+(after! evil-easymotion
+  (map!
+   :m "gs"
+   (cmd! (let ((current-prefix-arg t)) (evil-avy-goto-char-timer))))
+  (map!
+   :m "gj"
+   #'evil-avy-goto-line-below)
+  (map!
+   :m "gk"
+   #'evil-avy-goto-line-above))
 
 (after! lsp-mode
   (setq lsp-rust-analyzer-proc-macro-enable t))
