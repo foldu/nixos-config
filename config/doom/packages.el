@@ -53,8 +53,6 @@
 (package! nixpkgs-fmt
   :pin "213251f82a69edc033766ec96948e83aeb428cd2")
 
-(package! ivy-posframe
-  :pin "7f1ab7890040c4b8dc4e9645c824cd35210e1121")
 
 (package! protobuf-mode
   :pin "28101c3e39408c04e4d959ccd9cdf1f4dbd5e012")
