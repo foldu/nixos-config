@@ -62,3 +62,7 @@
 
 (package! company
    :pin "ee3177cdad47cbe92242eeb52c7bdb9505282db6")
+
+(package! tree-sitter)
+
+(package! tree-sitter-langs)

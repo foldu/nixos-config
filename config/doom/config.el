@@ -48,11 +48,11 @@
 (setq +ivy-buffer-preview t)
 
 ;; Better syntax highlighting
-;; (use-package! tree-sitter
-;;   :config
-;;   (require 'tree-sitter-langs)
-;;   (global-tree-sitter-mode)
-;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;; Use nixpkgs-fmt for formatting nix files
 (use-package! nixpkgs-fmt
@@ -98,7 +98,6 @@
                         (fd/vector-to-list fd/emacs-abbr)
                         :require-match t)))
     (fd/emacs-set-name-to name)))
-
 
 (defun fd/seq-random-pick (seq)
   "Picks a random element from SEQ. Return nil when seq lenght equals zero."
@@ -198,17 +197,21 @@
 (use-package! protobuf-mode
   :mode "\\.proto\\'")
 
-;; highlight trailing whitespace in eye destroying red
+;; highlight trailing whitespace
 (setq-default show-trailing-whitespace t)
+
 ;; except for terminals
 (add-hook 'vterm-mode-hook
           (lambda ()
             (setq show-trailing-whitespace nil)))
 
+;; don't destroy my eyes while trailing whitespace is enabled
+(custom-set-faces!
+  '(trailing-whitespace :background "gray"))
+
 ;; reduce avy timeout waiting
 (setq avy-timeout-seconds 0.2)
 
-;; TODO: get this to work on restart
 (after! evil-easymotion
   (map!
    :m "gs"
