@@ -36,7 +36,7 @@ in
 
     programs.emacs = {
       enable = true;
-      package = pkgs.emacsPgtkGcc;
+      package = pkgs.emacs;
       extraPackages = epkgs: [
         epkgs.vterm
       ];
