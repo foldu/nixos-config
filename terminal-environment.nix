@@ -1,34 +1,14 @@
 { config, lib, pkgs, ... }:
 
 let
-  nice-neovim = pkgs.neovim.override {
-    viAlias = true;
-    vimAlias = true;
-    withRuby = false;
-    withNodeJs = false;
-    withPython = false;
-    withPython3 = false;
-    configure = {
-      packages.myPlugins = with pkgs.vimPlugins; {
-        start = [
-          nord-vim
-          gruvbox
-          lightline-vim
-          vim-surround
-          vim-repeat
-          vim-rsi
-          editorconfig-vim
-          vim-which-key
-          vim-highlightedyank
-          vim-matchup
-          vim-polyglot
-          undotree
-        ];
-      };
-
-      customRC = builtins.readFile ./config/init.vim;
-    };
-  };
+  nice-neovim = pkgs.neovim-nightly;#.override {
+ #   viAlias = true;
+ #   vimAlias = true;
+ #   withRuby = false;
+ #   withNodeJs = false;
+ #   withPython = false;
+ #   withPython3 = false;
+ # };
 
   base16-fish = pkgs.fetchFromGitHub {
     owner = "tomyun";
@@ -58,6 +38,8 @@ in
       neofetch
       rename
       huh
+      sumneko-lua-language-server
+      luaformatter
     ];
 
     programs.tmux = {

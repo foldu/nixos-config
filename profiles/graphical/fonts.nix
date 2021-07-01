@@ -14,17 +14,17 @@
       noto-fonts
       dejavu_fonts
       noto-fonts-cjk
-      ibm-plex
-      source-code-pro
-      fira-mono
-      libertine
-      inconsolata
-      cascadia-code
       inter
       vistafonts
-      iosevka
-      etBook
       jetbrains-mono
+      ubuntu_font_family
+      ibm-plex
+      fira-mono
+      (nerdfonts.override {
+        fonts = [
+          "3270"
+        ];
+      })
     ] ++ lib.mapAttrsToList (_: f: f.pkg) configSettings.font;
   };
 

@@ -26,7 +26,6 @@
 (cl-flet ((monospace (size)
                      (font-spec :family "Consolas" :size size)))
   (setq doom-font (monospace 16))
-  (setq doom-variable-pitch-font (font-spec :family "ETBembo" :size 16))
   (setq doom-big-font (monospace 19))
   ;; make ivy font readabler
   (setq ivy-posframe-font (monospace 18)))

@@ -90,6 +90,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.naersk.follows = "naersk";
     };
+
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -110,6 +115,7 @@
     , homeserver-sekret
     , wpp
     , pickwp-gtk
+    , neovim-nightly-overlay
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
@@ -129,6 +135,7 @@
             huh.overlay
             pickwp-gtk.overlay
             blocklistdownloadthing.overlay
+            neovim-nightly-overlay.overlay
             (import ./overlays)
             (import ./overlays/customizations.nix)
           ];

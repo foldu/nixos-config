@@ -86,6 +86,7 @@ in
           ]
         )
       )
+      neovide
       gnome-podcasts
       eunzip
       croc
@@ -113,8 +114,8 @@ in
       tokei
       gdb
       openocd
-      clang_11
       clang-tools
+      gcc
       lld_11
       sqlite-interactive
       litecli
