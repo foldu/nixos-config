@@ -15,6 +15,7 @@
   environment.sessionVariables = {
     EDITOR = "vi";
     LESS = "-gciMRwX";
+    NIX_GCC = "${pkgs.gcc}/bin/gcc";
   };
 
   # this is set to false in the default config for reasons I forgot so do it here too

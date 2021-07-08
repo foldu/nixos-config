@@ -115,8 +115,9 @@ in
       gdb
       openocd
       clang-tools
-      gcc
-      lld_11
+      clang_12
+      # gcc
+      lld_12
       sqlite-interactive
       litecli
       #pgcli
