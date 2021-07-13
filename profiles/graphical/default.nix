@@ -101,7 +101,7 @@ in
       gnupg
       brave
       chromium
-      tdesktop
+      #tdesktop
       pwgen
       dfeet
       gimp
