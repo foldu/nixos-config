@@ -114,6 +114,7 @@ in
       tokei
       gdb
       openocd
+      ccls
       clang-tools
       clang_12
       # gcc
