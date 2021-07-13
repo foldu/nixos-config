@@ -39,7 +39,7 @@ in
       rename
       huh
       sumneko-lua-language-server
-      luaformatter
+      stylua
     ];
 
     programs.tmux = {
