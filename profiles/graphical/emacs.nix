@@ -45,7 +45,6 @@ in
     home.packages = with pkgs; [
       wordnet
       nixpkgs-fmt
-      texlive.combined.scheme-full
       gnumake
       texlab
       nodePackages.typescript-language-server
