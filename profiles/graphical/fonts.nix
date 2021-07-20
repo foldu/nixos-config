@@ -16,6 +16,9 @@
       noto-fonts-cjk
       inter
       vistafonts
+      etBook
+      eb-garamond
+      domitian
       jetbrains-mono
       ubuntu_font_family
       ibm-plex
