@@ -3,6 +3,31 @@ let
   theme = configSettings.theme;
   systemConfig = config;
   hostName = config.networking.hostName;
+
+  lol = pkgs.stdenv.mkDerivation {
+    pname = "ble-ws-central-dbus";
+    src = ''
+      <?xml version="1.0" encoding="UTF-8"?>
+      <!DOCTYPE busconfig PUBLIC
+      "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+      "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+      <busconfig>
+        <policy user="barnabas">
+          <allow own="li._5kw.BleWsCentral"/>
+        </policy>
+        <policy context="default">
+          <allow send_destination="li._5kw.BleWsCentral"/>
+          <allow receive_sender="li._5kw.BleWsCentral"/>
+        </policy>
+      </busconfig>
+    '';
+    dontUnpack = true;
+    version = "0.1";
+    installPhase = ''
+      mkdir -p "$out/share/dbus-1/system.d"
+      echo "$src" > "$out/share/dbus-1/system.d/li._5kw.BleWsCentral.conf"
+    '';
+  };
 in
 {
   imports = [
@@ -44,6 +69,8 @@ in
     dev.enable = true;
     info.enable = false;
   };
+
+  environment.systemPackages = [ lol ];
 
   services.flatpak.enable = true;
 
