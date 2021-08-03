@@ -7,6 +7,7 @@
     ../../profiles/home.nix
     ../../profiles/x86.nix
     ./hardware-configuration.nix
+    ../../profiles/builder.nix
   ];
 
   boot.loader = {

@@ -6,7 +6,7 @@
     documents = "\$HOME/doc";
     download = "\$HOME/downloads";
     pictures = "\$HOME/img";
-    music = "/run/media/music";
+    music = "/run/media/beets-lib";
     videos = "/run/media/videos";
   };
 }

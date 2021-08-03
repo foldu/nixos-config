@@ -94,6 +94,7 @@ in
       ./rust.nix
       ./xdg-userdirs.nix
       ./xdg.nix
+      ./beets.nix
       ./firefox.nix
       inputs.pickwp.homeManagerModule
       inputs.wrrr.homeManagerModule

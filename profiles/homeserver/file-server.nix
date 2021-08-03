@@ -46,6 +46,7 @@
       /srv/media/cia/cache ${home-network.network}(rw)
       /srv/media/cia/data/img ${home-network.network}(rw)
       /srv/media/cia/data/music ${home-network.network}(rw)
+      /srv/media/cia/data/beets-lib ${home-network.network}(rw)
       /srv/media/main/smb ${home-network.network}(rw)
       /srv/media/main/other ${home-network.network}(rw)
     '';
