@@ -114,7 +114,6 @@ in
           ]
         )
       )
-      neovide
       gnome-podcasts
       eunzip
       croc

@@ -17,6 +17,7 @@
     #)
     rustc
     cargo
+    clippy
     rust-analyzer
     rustfmt
     cargo-deny
