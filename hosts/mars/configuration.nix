@@ -9,7 +9,7 @@
     ./manual-hardware-configuration.nix
   ];
 
-  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+  nix.distributedBuilds = true;
 
   # uefi suxxxxx
   boot.loader = {
