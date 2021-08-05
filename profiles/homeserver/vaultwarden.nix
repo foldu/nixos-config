@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-  services.bitwarden_rs = {
+  services.vaultwarden = {
     enable = true;
     config = {
       rocketPort = 4000;
@@ -9,7 +9,7 @@
   };
 
   services.caddy.config = ''
-    bitwarden-rs.5kw.li {
+    vaultwarden.5kw.li {
       header {
         # Enable cross-site filter (XSS) and tell browser to block detected attacks
         X-XSS-Protection "1; mode=block"
@@ -22,13 +22,13 @@
       }
 
       # The negotiation endpoint is also proxied to Rocket
-      reverse_proxy /notifications/hub/negotiate localhost:${toString config.services.bitwarden_rs.config.rocketPort}
+      reverse_proxy /notifications/hub/negotiate localhost:${toString config.services.vaultwarden.config.rocketPort}
 
       # Notifications redirected to the websockets server
-      reverse_proxy /notifications/hub localhost:${toString config.services.bitwarden_rs.config.websocketPort}
+      reverse_proxy /notifications/hub localhost:${toString config.services.vaultwarden.config.websocketPort}
 
        # Proxy the Root directory to Rocket
-      reverse_proxy localhost:${toString config.services.bitwarden_rs.config.rocketPort}
+      reverse_proxy localhost:${toString config.services.vaultwarden.config.rocketPort}
     }
   '';
 }

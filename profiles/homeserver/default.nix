@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, ... }: {
   imports = [
     ../generic.nix
-    ./bitwarden.nix
+    ./vaultwarden.nix
     ./file-server.nix
     ./gitea.nix
     ./transmission.nix

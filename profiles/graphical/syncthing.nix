@@ -28,14 +28,12 @@ in
       user = "barnabas";
       group = "users";
       configDir = "/home/barnabas/.config/syncthing";
-      declarative = {
-        devices = otherDevices;
-        folders = {
-          "/home/barnabas/downloads" = mkSharedShare "downloads";
-          "/home/barnabas/uni" = mkSharedShare "uni";
-          "/home/barnabas/org" = mkSharedShare "org";
-          "/home/barnabas/.local/share/mpd/playlists" = mkSharedShare "playlists";
-        };
+      devices = otherDevices;
+      folders = {
+        "/home/barnabas/downloads" = mkSharedShare "downloads";
+        "/home/barnabas/uni" = mkSharedShare "uni";
+        "/home/barnabas/org" = mkSharedShare "org";
+        "/home/barnabas/.local/share/mpd/playlists" = mkSharedShare "playlists";
       };
     };
 }
