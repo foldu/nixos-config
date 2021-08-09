@@ -153,6 +153,17 @@ in
       nodePackages.pyright
       cookiecutter
       lollypop
+      element-desktop
+
+      nixpkgs-fmt
+      texlab
+      nodePackages.typescript-language-server
+      nodePackages.typescript
+      nodePackages.prettier
+      nodePackages.bash-language-server
+      nodePackages.yaml-language-server
+      taplo-lsp
+      plantuml
     ];
 
     services.pickwp.enable = true;
