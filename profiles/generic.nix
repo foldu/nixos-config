@@ -13,7 +13,7 @@
   time.timeZone = "Europe/Amsterdam";
 
   environment.sessionVariables = {
-    EDITOR = "vi";
+    EDITOR = "nvim";
     LESS = "-gciMRwX";
     NIX_GCC = "${pkgs.gcc}/bin/gcc";
   };
