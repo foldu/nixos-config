@@ -154,6 +154,7 @@ in
       cookiecutter
       lollypop
       element-desktop
+      minicom
 
       nixpkgs-fmt
       texlab
