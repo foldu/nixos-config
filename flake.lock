@@ -166,11 +166,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1623942490,
-        "narHash": "sha256-e5xGI0byxDXDgwFBfuifgOdNutrN3F9s1WOtq7bXRX4=",
+        "lastModified": 1629729582,
+        "narHash": "sha256-P8bSE0v/alIafhsDVPwIZyBMz4YfHc2H0mOabnsf1so=",
         "owner": "rycee",
         "repo": "home-manager",
-        "rev": "6d9bff77eda4426b7b9a5e8f0e9b94fe47798582",
+        "rev": "9029fd2b9de2147480efab55f351343f4fed73b9",
         "type": "github"
       },
       "original": {
