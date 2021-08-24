@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   hardware.bluetooth = {
     enable = true;
-    package = pkgs.enableDebugging pkgs.bluezFull;
+    package = pkgs.bluezFull;
     powerOnBoot = false;
   };
 
