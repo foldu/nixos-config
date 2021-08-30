@@ -44,15 +44,7 @@ in
 
     home.packages = with pkgs; [
       wordnet
-      nixpkgs-fmt
       gnumake
-      texlab
-      nodePackages.typescript-language-server
-      nodePackages.typescript
-      nodePackages.prettier
-      pandoc
-      plantuml
-      libnotify
       # for lemminx
       jre
     ];

@@ -39,7 +39,7 @@
       desktopFile = "org.gnome.Evince.desktop";
     };
     consoleEditor = {
-      pkg = pkgs.neovim;
+      pkg = null;
       command = "nvim";
       desktopFile = "neovim.desktop";
     };

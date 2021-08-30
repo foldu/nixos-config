@@ -1,15 +1,26 @@
 { config, lib, pkgs, ... }:
 
 let
-  nice-neovim = pkgs.neovim-nightly;#.override {
- #   viAlias = true;
- #   vimAlias = true;
- #   withRuby = false;
- #   withNodeJs = false;
- #   withPython = false;
- #   withPython3 = false;
- # };
-
+  minimal-neovim = pkgs.neovim.override {
+    configure = {
+      packages.myPlugins = with pkgs.vimPlugins; {
+        start = [
+          vim-nix
+          vim-surround
+          gruvbox-nvim
+          vim-oscyank
+        ];
+        opt = [ ];
+      };
+      customRC = ''
+        luafile ${./config/init.lua}
+      '';
+    };
+    withRuby = false;
+    withNodeJs = false;
+    withPython = false;
+    withPython3 = false;
+  };
   base16-fish = pkgs.fetchFromGitHub {
     owner = "tomyun";
     repo = "base16-fish";
@@ -23,13 +34,12 @@ in
   environment.systemPackages = with pkgs; [
     wget
     curl
-    nice-neovim
     fd
     ripgrep
     file
     libarchive
     unzip
-  ];
+  ] ++ lib.optional (!config.programs.neovim-ide.enable) minimal-neovim;
 
   programs.fish.enable = true;
 
@@ -38,8 +48,6 @@ in
       neofetch
       rename
       huh
-      sumneko-lua-language-server
-      stylua
     ];
 
     programs.tmux = {
@@ -132,6 +140,5 @@ in
         enableFlakes = true;
       };
     };
-
   };
 }

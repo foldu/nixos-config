@@ -45,6 +45,8 @@ in
     ../../terminal-environment.nix
   ];
 
+  programs.neovim-ide.enable = true;
+
   environment.sessionVariables = {
     # FIXME: temporary fix until I figure out why some gtk applications
     # ignore both settings.ini and the thing in dconf
@@ -115,7 +117,6 @@ in
             sh
             requests
             ipython
-            black
           ]
         )
       )
@@ -133,7 +134,6 @@ in
       gnupg
       brave
       chromium
-      #tdesktop
       pwgen
       dfeet
       gimp
@@ -146,7 +146,6 @@ in
       tokei
       gdb
       openocd
-      ccls
       clang-tools
       clang_12
       # gcc
@@ -155,21 +154,10 @@ in
       litecli
       #pgcli
       binutils
-      nodePackages.pyright
       cookiecutter
       lollypop
       element-desktop
       minicom
-
-      nixpkgs-fmt
-      texlab
-      nodePackages.typescript-language-server
-      nodePackages.typescript
-      nodePackages.prettier
-      nodePackages.bash-language-server
-      nodePackages.yaml-language-server
-      taplo-lsp
-      plantuml
     ];
 
     services.pickwp.enable = true;

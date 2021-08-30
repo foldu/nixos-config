@@ -18,8 +18,6 @@
     rustc
     cargo
     clippy
-    rust-analyzer
-    rustfmt
     cargo-deny
     cargo-outdated
     cargo-edit
