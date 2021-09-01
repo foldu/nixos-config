@@ -26,6 +26,7 @@ in
 
       black
       ccls
+      lldb
       nixpkgs-fmt
       nodePackages.bash-language-server
       nodePackages.prettier

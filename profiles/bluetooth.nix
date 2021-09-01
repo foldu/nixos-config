@@ -1,7 +1,10 @@
 { config, lib, pkgs, ... }: {
   hardware.bluetooth = {
     enable = true;
-    package = pkgs.bluezFull;
+    package = pkgs.bluezFull.overrideAttrs (oldAttrs: {
+      dontStrip = true;
+      NIX_CFLAGS_COMPILE = "-ggdb -Og";
+    });
     powerOnBoot = false;
   };
 
