@@ -138,6 +138,7 @@ in
       dfeet
       gimp
       pickwp-gtk
+      tdesktop
       mpv
       streamlink
       wpp
