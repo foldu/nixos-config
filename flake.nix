@@ -119,94 +119,94 @@
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
-      let
-        lib = nixpkgs.lib;
-        home-network = fromTOML (builtins.readFile ./home-network.toml);
-        mylib = import ./lib { inherit lib; };
-        mkPkgs = system: import nixpkgs {
-          inherit system;
-          overlays = [
-            emacs-overlay.overlay
-            rust-overlay.overlay
-            pickwp.overlay
-            eunzip.overlay
-            wrrr.overlay
-            wpp.overlay
-            huh.overlay
-            pickwp-gtk.overlay
-            blocklistdownloadthing.overlay
-            #neovim-nightly-overlay.overlay
-            (import ./overlays)
-            (import ./overlays/customizations.nix)
-          ];
-          config.allowUnfree = true;
-        };
-        mkHost = { system, hostName, modules }:
-          let
-            pkgs = mkPkgs system;
-            configSettings = import ./settings.nix {
-              inherit pkgs;
-            };
-          in
-            lib.nixosSystem {
-              inherit system pkgs;
-              specialArgs = { inherit inputs home-network configSettings mylib; };
-              modules = [
-                (
-                  { pkgs, ... }: {
-                    imports = [
-                      ./modules
-                    ];
-                    networking.hostName = hostName;
-                    # Let 'nixos-version --json' know about the Git revision
-                    # of this flake.
-                    system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-                    nix.registry = {
-                      nixpkgs.flake = nixpkgs;
-                    };
-                    environment.systemPackages = with pkgs; [
-                      git
-                      git-crypt
-                    ];
-                  }
-                )
-              ] ++ modules;
-            };
-
-        mkHosts = lib.attrsets.mapAttrs (name: value: mkHost (lib.recursiveUpdate { hostName = name; } value));
-      in
-        {
-          nixosConfigurations = mkHosts {
-            mars = {
-              system = "x86_64-linux";
-              modules = [
-                nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
-                nixos-hardware.nixosModules.common-pc-laptop-ssd
-                ./hosts/mars/configuration.nix
-              ];
-            };
-
-            jupiter = {
-              system = "x86_64-linux";
-              modules = [
-                nixos-hardware.nixosModules.common-pc-ssd
-                ./hosts/jupiter/configuration.nix
-              ];
-            };
-
-            ceres = {
-              system = "aarch64-linux";
-              modules = [
-                ./hosts/ceres/configuration.nix
-              ];
-            };
-
-            saturn = {
-              system = "x86_64-linux";
-              modules = [
-                ./hosts/saturn/configuration.nix
-              ];
-            };
+    let
+      lib = nixpkgs.lib;
+      home-network = fromTOML (builtins.readFile ./home-network.toml);
+      mylib = import ./lib { inherit lib; };
+      mkPkgs = system: import nixpkgs {
+        inherit system;
+        overlays = [
+          emacs-overlay.overlay
+          rust-overlay.overlay
+          pickwp.overlay
+          eunzip.overlay
+          wrrr.overlay
+          wpp.overlay
+          huh.overlay
+          pickwp-gtk.overlay
+          blocklistdownloadthing.overlay
+          #neovim-nightly-overlay.overlay
+          (import ./overlays)
+          (import ./overlays/customizations.nix)
+        ];
+        config.allowUnfree = true;
+      };
+      mkHost = { system, hostName, modules }:
+        let
+          pkgs = mkPkgs system;
+          configSettings = import ./settings.nix {
+            inherit pkgs;
           };
+        in
+        lib.nixosSystem {
+          inherit system pkgs;
+          specialArgs = { inherit inputs home-network configSettings mylib; };
+          modules = [
+            (
+              { pkgs, ... }: {
+                imports = [
+                  ./modules
+                ];
+                networking.hostName = hostName;
+                # Let 'nixos-version --json' know about the Git revision
+                # of this flake.
+                system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+                nix.registry = {
+                  nixpkgs.flake = nixpkgs;
+                };
+                environment.systemPackages = with pkgs; [
+                  git
+                  git-crypt
+                ];
+              }
+            )
+          ] ++ modules;
         };
+
+      mkHosts = lib.attrsets.mapAttrs (name: value: mkHost (lib.recursiveUpdate { hostName = name; } value));
+    in
+    {
+      nixosConfigurations = mkHosts {
+        mars = {
+          system = "x86_64-linux";
+          modules = [
+            nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
+            nixos-hardware.nixosModules.common-pc-laptop-ssd
+            ./hosts/mars/configuration.nix
+          ];
+        };
+
+        jupiter = {
+          system = "x86_64-linux";
+          modules = [
+            nixos-hardware.nixosModules.common-pc-ssd
+            ./hosts/jupiter/configuration.nix
+          ];
+        };
+
+        ceres = {
+          system = "aarch64-linux";
+          modules = [
+            ./hosts/ceres/configuration.nix
+          ];
+        };
+
+        saturn = {
+          system = "x86_64-linux";
+          modules = [
+            ./hosts/saturn/configuration.nix
+          ];
+        };
+      };
+    };
 }
