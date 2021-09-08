@@ -135,7 +135,7 @@
             huh.overlay
             pickwp-gtk.overlay
             blocklistdownloadthing.overlay
-            neovim-nightly-overlay.overlay
+            #neovim-nightly-overlay.overlay
             (import ./overlays)
             (import ./overlays/customizations.nix)
           ];

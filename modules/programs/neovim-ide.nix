@@ -4,7 +4,7 @@ with lib;
 
 let
   cfg = config.programs.neovim-ide;
-  cleaned-neovim = pkgs.neovim-nightly.overrideAttrs (oldAttrs: {
+  cleaned-neovim = pkgs.neovim.overrideAttrs (oldAttrs: {
     # the default colorthemes kind of suck so just kill them
     postInstall = ''
       find $out/share/nvim/runtime/colors -not -name 'default.vim' -type f -delete
