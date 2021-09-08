@@ -1,5 +1,5 @@
 { pkgs, ... }: {
-  programs.qt5ct.enable = true;
+  #programs.qt5ct.enable = true;
   environment.systemPackages = [
     pkgs.breeze-gtk
     pkgs.breeze-icons
