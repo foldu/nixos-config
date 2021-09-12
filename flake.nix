@@ -95,6 +95,12 @@
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ble-ws-central = {
+      url = "github:foldu/ble-ws-central";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
   };
 
   outputs =
@@ -116,6 +122,7 @@
     , wpp
     , pickwp-gtk
     , neovim-nightly-overlay
+    , ble-ws-central
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
@@ -135,6 +142,7 @@
           huh.overlay
           pickwp-gtk.overlay
           blocklistdownloadthing.overlay
+          ble-ws-central.overlay
           #neovim-nightly-overlay.overlay
           (import ./overlays)
           (import ./overlays/customizations.nix)
@@ -156,6 +164,7 @@
               { pkgs, ... }: {
                 imports = [
                   ./modules
+                  ble-ws-central.nixosModule
                 ];
                 networking.hostName = hostName;
                 # Let 'nixos-version --json' know about the Git revision
