@@ -143,7 +143,7 @@
           pickwp-gtk.overlay
           blocklistdownloadthing.overlay
           ble-ws-central.overlay
-          #neovim-nightly-overlay.overlay
+          neovim-nightly-overlay.overlay
           (import ./overlays)
           (import ./overlays/customizations.nix)
         ];
