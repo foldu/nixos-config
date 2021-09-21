@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitHub, nodePackages, glib, substituteAll, gjs, lib }:
+{ stdenv, fetchFromGitHub, fetchpatch, nodePackages, glib, substituteAll, gjs, lib }:
 
 stdenv.mkDerivation rec {
   pname = "pop-os-shell";
@@ -17,6 +17,12 @@ stdenv.mkDerivation rec {
 
   patches = [
     ./fix-gjs.patch
+    (fetchpatch {
+      url = "https://github.com/pop-os/shell/commit/1e24cd7ed64b138f1aa8b2aceb31ce9f55eaf594.patch";
+      sha256 =
+        "sha256-V18/7K45QAeVM4SkchHKUvvHww8oaet/tB5ReoU0Vr8=";
+
+    })
   ];
 
   makeFlags = [ "INSTALLBASE=$(out)/share/gnome-shell/extensions PLUGIN_BASE=$(out)/share/pop-shell/launcher SCRIPTS_BASE=$(out)/bin" ];
