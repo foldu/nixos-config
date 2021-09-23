@@ -38,7 +38,7 @@
     gnome-remote-desktop.enable = false;
   };
 
-  home-manager.users.barnabas = { config, ... }: {
+  home-manager.users.barnabas = { lib, config, ... }: {
     home.packages = with pkgs; [
       gnome.gnome-tweak-tool
       gnome.dconf-editor
@@ -71,9 +71,14 @@
         repeat-interval = 25;
       };
 
-      "org/gnome/desktop/input-sources" = {
-        xkb-options = [ "caps:escape" "compose:ralt" ];
-      };
+      "org/gnome/desktop/input-sources" =
+        let
+          mkTuple = lib.hm.gvariant.mkTuple;
+        in
+        {
+          sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "us+intl" ]) ];
+          xkb-options = [ "caps:escape" ];
+        };
 
       "org/gnome/settings-daemon/plugins/color" = {
         active = true;
@@ -116,7 +121,7 @@
         move-to-workspace-down = "@as []";
 
         close = [ "<Super>q" ];
-        minimize = [];
+        minimize = [ ];
         move-to-monitor-left = "@as []";
         move-to-monitor-right = "@as []";
         move-to-workspace-left = [ "<Shift><Super>j" ];
