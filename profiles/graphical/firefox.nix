@@ -16,7 +16,6 @@
             "datareporting.policy.dataSubmissionEnabled" = false;
             "devtools.onboarding.telemetry.logged" = false;
             "security.protectionspopup.recordEventTelemetry" = false;
-            "toolkit.coverage.enabled" = false;
             "toolkit.coverage.enabled" = true;
             "toolkit.coverage.opt-out" = true;
             "toolkit.telemetry.bhrPing.enabled" = false;
