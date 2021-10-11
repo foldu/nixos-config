@@ -7,24 +7,43 @@
           userChrome = lib.readFile ../../config/firefox/userChrome.css;
           settings = {
             # turn off all(hopefully) telemetry
-            "toolkit.telemetry.enabled" = false;
+            "browser.newtabpage.activity-stream.feeds.telemetry" = false;
             "browser.newtabpage.activity-stream.telemetry.structuredIngestion.endpoint" = "";
+            "browser.ping-centre.telemetry" = false;
+            "browser.tabs.crashReporting.sendReport" = false;
+            "datareporting.healthreport.service.enabled" = false;
+            "datareporting.healthreport.uploadEnabled" = false;
+            "datareporting.policy.dataSubmissionEnabled" = false;
+            "devtools.onboarding.telemetry.logged" = false;
+            "security.protectionspopup.recordEventTelemetry" = false;
+            "toolkit.coverage.enabled" = false;
+            "toolkit.coverage.enabled" = true;
+            "toolkit.coverage.opt-out" = true;
+            "toolkit.telemetry.bhrPing.enabled" = false;
+            "toolkit.telemetry.enabled" = false;
+            "toolkit.telemetry.reportingpolicy.firstRun" = false;
             "toolkit.telemetry.server" = "";
             "toolkit.telemetry.shutdownPingSender.enabled" = false;
-            "toolkit.telemetry.updatePing.enabled" = false;
-            "datareporting.healthreport.uploadEnabled" = false;
-            "datareporting.healthreport.service.enabled" = false;
-            "toolkit.coverage.enabled" = false;
             "toolkit.telemetry.unified" = false;
-            "browser.tabs.crashReporting.sendReport" = false;
-            "devtools.onboarding.telemetry.logged" = false;
-            "browser.ping-centre.telemetry" = false;
-            "browser.newtabpage.activity-stream.feeds.telemetry" = false;
+            "toolkit.telemetry.updatePing.enabled" = false;
 
             # do not load random things I didn't even click on
             "network.dns.disablePrefetch" = true;
             "network.predictor.enable-prefetch" = false;
             "network.prefetch-next" = false;
+
+            # disable logging of search queries and sending them to third parties
+            # FIXME: is this the correct key?
+            "browser.urlbar.suggest.quicksuggest.sponsored.enable" = false;
+
+            # disable American state propaganda in new tab
+            "browser.newtabpage.activity-stream.section.highlights.includePocket" = false;
+            "browser.newtabpage.activity-stream.discoverystream.enabled" = false;
+
+            # disable ads in new tab
+            "browser.newtabpage.activity-stream.showSponsored" = false;
+            "browser.newtabpage.activity-stream.showSponsoredTopSites" = false;
+            "browser.newtabpage.activity-stream.feeds.snippets" = false;
 
             # false by default, but set in case Google orders Mozilla to enable it by default
             "browser.send_pings" = false;
@@ -47,18 +66,19 @@
 
             # no
             "app.normandy.enabled" = false;
+            "app.shield.optoutstudies.enabled" = false;
 
             # disable pdf scripts
             "pdfjs.enableScripting" = false;
           };
         };
       in
-        {
-          "normal" = genericProfile // {
-            id = 0;
-            isDefault = true;
-          };
-          "backup" = genericProfile // { id = 1; };
+      {
+        "normal" = genericProfile // {
+          id = 0;
+          isDefault = true;
         };
+        "backup" = genericProfile // { id = 1; };
+      };
   };
 }
