@@ -34,7 +34,6 @@ in
     ../generic.nix
     ./bfq.nix
     ./desktop-portal.nix
-    ./emacs.nix
     ./fancy-login.nix
     ./fonts.nix
     ./gnome.nix

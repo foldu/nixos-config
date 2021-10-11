@@ -21,20 +21,6 @@
       inputs.naersk.follows = "naersk";
     };
 
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-    };
-
-    doom-emacs = {
-      url = "github:hlissner/doom-emacs";
-      flake = false;
-    };
-
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nixos-hardware = {
       url = "github:NixOS/nixos-hardware";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -106,8 +92,6 @@
   outputs =
     { self
     , nixpkgs
-    , emacs-overlay
-    , rust-overlay
     , nixos-hardware
     , pickwp
     , wrrr
@@ -115,7 +99,6 @@
     , flake-utils
     , home-manager
     , naersk
-    , doom-emacs
     , blocklistdownloadthing
     , eunzip
     , homeserver-sekret
@@ -133,8 +116,6 @@
       mkPkgs = system: import nixpkgs {
         inherit system;
         overlays = [
-          emacs-overlay.overlay
-          rust-overlay.overlay
           pickwp.overlay
           eunzip.overlay
           wrrr.overlay
