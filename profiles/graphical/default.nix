@@ -117,6 +117,7 @@ in
             sh
             requests
             ipython
+            arrow
           ]
         )
       )
