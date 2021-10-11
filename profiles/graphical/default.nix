@@ -107,7 +107,7 @@ in
       pinentryFlavor = "curses";
     };
 
-    home.file.".ssh/config".source = ../../secrets/ssh-config;
+    #home.file.".ssh/config".source = ../../secrets/ssh-config;
 
     # TODO: sort this wall of crap
     home.packages = with pkgs; [

@@ -5,7 +5,7 @@ let
 in
 {
   # does it even matter if this thing is not secret
-  security.pki.certificateFiles = [ ../secrets/home_ca.crt ];
+  security.pki.certificateFiles = [ ../home_ca.crt ];
 
   environment.systemPackages = with pkgs; [
     fuse
