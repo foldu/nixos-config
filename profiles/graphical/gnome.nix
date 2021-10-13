@@ -202,6 +202,14 @@
         increase-thumbnails-size = false;
       };
 
+      "org/gnome/shell/extensions/pop-shell" = {
+        hint-color-rgba = "rgba(223, 74, 22, 1)";
+        active-hint = true;
+        show-title = true;
+        smart-gaps = true;
+        tile-by-default = true;
+      };
+
       "org/gnome/eog/plugins" = {
         active-plugins = [ "fullscreen" ];
       };
