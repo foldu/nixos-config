@@ -25,6 +25,7 @@
 
   users.users.step-ca = {
     extraGroups = [ "secrets" ];
+    group = "step-ca";
     isSystemUser = true;
   };
   users.groups.step-ca = { };
