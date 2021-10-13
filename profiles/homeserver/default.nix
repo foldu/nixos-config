@@ -6,6 +6,8 @@
     ./gitea.nix
     ./transmission.nix
     ./step-ca.nix
+    ./libreddit.nix
+    ./nitter.nix
     ./drone
     ./secrets.nix
     ./cachecache.nix
