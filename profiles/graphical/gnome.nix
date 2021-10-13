@@ -210,6 +210,13 @@
         tile-by-default = true;
       };
 
+      "org/gnome/desktop/peripherals/touchpad" = {
+        natural-scroll = false;
+        tap-to-click = true;
+        two-finger-scrolling-enabled = true;
+
+      };
+
       "org/gnome/eog/plugins" = {
         active-plugins = [ "fullscreen" ];
       };
