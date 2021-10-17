@@ -228,7 +228,9 @@
       };
 
       "org/gnome/mutter" = {
-        "center-new-windows" = true;
+        center-new-windows = true;
+        dynamic-workspaces = true;
+        workspaces-only-on-primary = true;
       };
     };
   };
