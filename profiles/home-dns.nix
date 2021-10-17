@@ -60,22 +60,6 @@ in
             "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV.txt"
             "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/pinterest/all"
             "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/facebook/all"
-            #"https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/extra.txt"
-            #"https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/microsoft/all"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/shortlinksparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/proxiesparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/productsparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/mailparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/generalparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/fontsparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/firebaseparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/doubleclickparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/domainsparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/dnsparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/androidparsed"
-            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/analyticsparsed"
-
-            # new
 
             # "suspicious"
             "https://raw.githubusercontent.com/PolishFiltersTeam/KADhosts/master/KADhosts.txt"
@@ -92,8 +76,6 @@ in
             "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/windows"
             "https://raw.githubusercontent.com/nextdns/metadata/master/privacy/native/xiaomi"
 
-            "https://someonewhocares.org/hosts/hosts"
-
             # some google stuff that hopefully doesn't break too much
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/doubleclickparsed"
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/domainsparsed"
@@ -107,11 +89,9 @@ in
             "https://raw.githubusercontent.com/crazy-max/WindowsSpyBlocker/master/data/hosts/spy.txt"
             "https://hostfiles.frogeye.fr/firstparty-trackers-hosts.txt"
             "https://hostfiles.frogeye.fr/multiparty-trackers-hosts.txt"
-            "https://www.github.developerdan.com/hosts/lists/ads-and-tracking-extended.txt"
             "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/android-tracking.txt"
             "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/SmartTV.txt"
             "https://raw.githubusercontent.com/Perflyst/PiHoleBlocklist/master/AmazonFireTV.txt"
-            "https://gitlab.com/quidsup/notrack-blocklists/raw/master/notrack-blocklist.txt"
           ];
         }
       );
