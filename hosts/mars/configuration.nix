@@ -33,5 +33,9 @@
     fileSystems = [ "/" ];
   };
 
+  environment.sessionVariables = {
+    MAKEFLAGS = "-j 16";
+  };
+
   system.stateVersion = "20.09";
 }

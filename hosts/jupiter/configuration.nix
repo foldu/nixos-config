@@ -18,5 +18,9 @@
     efi.canTouchEfiVariables = true;
   };
 
+  environment.sessionVariables = {
+    MAKEFLAGS = "-j 32";
+  };
+
   system.stateVersion = "20.09";
 }
