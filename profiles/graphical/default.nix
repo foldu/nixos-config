@@ -71,7 +71,7 @@ in
     info.enable = false;
   };
 
-  environment.systemPackages = [ lol ];
+  environment.systemPackages = [ lol pkgs.zsh ];
 
   services.flatpak.enable = true;
 
@@ -184,6 +184,7 @@ in
         update_check_interval = 0;
         linux_display_server = "x11";
       };
+      extraConfig = lib.readFile "${inputs.kitty-themes}/themes/gruvbox_dark.conf";
     };
   };
 }

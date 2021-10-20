@@ -91,6 +91,11 @@
     sops-nix = {
       url = "github:Mic92/sops-nix";
     };
+
+    kitty-themes = {
+      url = "github:kovidgoyal/kitty-themes";
+      flake = false;
+    };
   };
 
   outputs =
@@ -111,6 +116,7 @@
     , neovim-nightly-overlay
     , ble-ws-central
     , sops-nix
+    , kitty-themes
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache

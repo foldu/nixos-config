@@ -41,7 +41,10 @@ in
     unzip
   ] ++ lib.optional (!config.programs.neovim-ide.enable) minimal-neovim;
 
+  environment.pathsToLink = [ "/share/zsh" ];
+
   programs.fish.enable = true;
+  programs.zsh.enable = true;
 
   home-manager.users.barnabas = { config, ... }: {
     home.packages = with pkgs; [
@@ -76,7 +79,11 @@ in
       };
     };
 
-    programs.zoxide.enable = true;
+    home.file = {
+      ".zshrc".source = ./config/zsh/zshrc.zsh;
+      ".zshenv".source = ./config/zsh/zshenv.zsh;
+      ".p10k.zsh".source = ./config/zsh/p10k.zsh;
+    };
 
     programs.fish = {
       enable = true;

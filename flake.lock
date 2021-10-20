@@ -199,6 +199,22 @@
         "type": "github"
       }
     },
+    "kitty-themes": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1633678485,
+        "narHash": "sha256-hbAQKhDzLu+kjfHU8UHLnw8vnuw7vXhO/DuD4vx9w10=",
+        "owner": "kovidgoyal",
+        "repo": "kitty-themes",
+        "rev": "753f7ed97b4fa77f6a52e8f493ef3f21a478c8f9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "kovidgoyal",
+        "repo": "kitty-themes",
+        "type": "github"
+      }
+    },
     "naersk": {
       "inputs": {
         "nixpkgs": [
@@ -352,6 +368,7 @@
         "home-manager": "home-manager",
         "homeserver-sekret": "homeserver-sekret",
         "huh": "huh",
+        "kitty-themes": "kitty-themes",
         "naersk": "naersk",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixos-hardware": "nixos-hardware",
