@@ -114,6 +114,7 @@ alias tree='tree -a -I .git'
 alias mv="mv -iv"
 alias cp="cp -iv"
 alias rm="rm -v"
+alias rsync="rsync -av --info=progress2"
 abbrev-alias cdoc='cargo doc --no-deps --open -p'
 abbrev-alias sudo=doas
 abbrev-alias usv=systemctl --user
