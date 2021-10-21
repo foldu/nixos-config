@@ -50,11 +50,6 @@ in
     # FIXME: temporary fix until I figure out why some gtk applications
     # ignore both settings.ini and the thing in dconf
     GTK_THEME = "Yaru-dark";
-
-    # FIXME: incremental compilation is kind of broken on stable so this needs
-    # to be set to reenable it
-    # I'd rather have broken incremental builds than none at all
-    RUSTC_FORCE_INCREMENTAL = "1";
   };
 
   virtualisation.docker = {
