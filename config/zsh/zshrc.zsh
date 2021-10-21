@@ -89,11 +89,32 @@ autoload -Uz zmv
 function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
 compdef _directories md
 
+function edit-link() {
+    if [[ $# == 1 ]]; then
+        if test -L "$1" && test -f "$1"; then
+            local tempfile=$(mktemp -- "$(dirname "$1")/XXXXXX")
+            cat -- "$1" > "$tempfile"
+            mv -f -- "$tempfile" "$1"
+            "${EDITOR:-vi}" "$1"
+        else
+            echo "$1 is not a symlink to a file"
+            return 1
+        fi
+    else
+        echo "Usage: edit-link SYMLINK"
+        return 1
+    fi
+}
+
 # Define named directories: ~w <=> Windows home directory on WSL.
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
 
 # Define aliases.
 alias tree='tree -a -I .git'
+alias mv="mv -iv"
+alias cp="cp -iv"
+alias rm="rm -v"
+abbrev-alias cdoc='cargo doc --no-deps --open -p'
 abbrev-alias sudo=doas
 abbrev-alias usv=systemctl --user
 abbrev-alias sv=systemctl
