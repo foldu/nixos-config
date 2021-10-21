@@ -154,6 +154,7 @@ in
       sqlite-interactive
       litecli
       #pgcli
+      catclock
       binutils
       cookiecutter
       lollypop

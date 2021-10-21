@@ -5,5 +5,6 @@ final: prev: {
   };
   domitian = prev.callPackage ../packages/domitian { };
   sumneko-lua-language-server = prev.callPackage ../packages/sumneko-language-server { };
+  catclock = prev.callPackage ../packages/catclock { };
   #pop-gtk-theme = prev.callPackage ../packages/pop-gtk-theme {};
 }
