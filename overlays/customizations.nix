@@ -19,6 +19,7 @@ final: prev: {
         ];
         flagString = prev.lib.concatStringsSep " " flags;
       in
+      # FIXME: this is a terrible abomination
       ''
         sed -i -E 's/^exec.+/\0 ${flagString}/' "$out/bin/brave"
         sed -i -E 's|^exec.+|export LD_LIBRARY_PATH=${libPath}\n\0|' "$out/bin/brave"
