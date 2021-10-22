@@ -4,6 +4,9 @@ let
   home-network = fromTOML (builtins.readFile ../home-network.toml);
 in
 {
+  imports = [
+    ./nebula-node.nix
+  ];
   # does it even matter if this thing is not secret
   security.pki.certificateFiles = [ ../home_ca.crt ];
 
