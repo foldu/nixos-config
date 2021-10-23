@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, config, lib, ... }: {
   services.nebula.networks.evil = {
     enable = true;
     key = "/var/secrets/nebula/key.key";
@@ -12,13 +12,31 @@
           proto = "any";
         }
       ];
-      inbound = [
-        {
-          host = "any";
-          port = "any";
-          proto = "icmp";
-        }
-      ];
+      inbound =
+        let
+          bridgePorts = proto: builtins.map
+            (port:
+              {
+                inherit proto;
+                port = toString port;
+                host = "any";
+                groups = [ "home" ];
+              });
+        in
+        [
+          {
+            host = "any";
+            port = "any";
+            proto = "icmp";
+          }
+          {
+            groups = [ "home" ];
+            port = "22";
+            proto = "tcp";
+          }
+        ]
+      ++ bridgePorts "tcp" config.networking.firewall.allowedTCPPorts
+      ++ bridgePorts "udp" config.networking.firewall.allowedUDPPorts;
     };
     lighthouses = [ "192.168.100.1" ];
     staticHostMap = {

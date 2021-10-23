@@ -1,7 +1,7 @@
 { config, lib, pkgs, home-network, ... }:
 let
   nfsMount = mountpoint: {
-    device = "${home-network.devices.saturn.ip}:${mountpoint}";
+    device = "${home-network.devices.saturn.vip}:${mountpoint}";
     fsType = "nfs";
     options = [
       "noauto"

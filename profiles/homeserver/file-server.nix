@@ -41,17 +41,18 @@
     lockdPort = 2201;
     mountdPort = 2202;
     exports = ''
-      /srv/media/aux/downloads ${home-network.network}(rw,all_squash,anonuid=${toString config.users.users.transmission.uid})
-      /srv/media/main/vid ${home-network.network}(rw)
-      /srv/media/cia/cache ${home-network.network}(rw)
-      /srv/media/cia/data/img ${home-network.network}(rw)
-      /srv/media/cia/data/music ${home-network.network}(rw)
-      /srv/media/cia/data/beets-lib ${home-network.network}(rw)
-      /srv/media/main/smb ${home-network.network}(rw)
-      /srv/media/main/other ${home-network.network}(rw)
+      /srv/media/aux/downloads ${home-network.virtual-network}(rw,all_squash,anonuid=${toString config.users.users.transmission.uid})
+      /srv/media/main/vid ${home-network.virtual-network}(rw)
+      /srv/media/cia/cache ${home-network.virtual-network}(rw)
+      /srv/media/cia/data/img ${home-network.virtual-network}(rw)
+      /srv/media/cia/data/music ${home-network.virtual-network}(rw)
+      /srv/media/cia/data/beets-lib ${home-network.virtual-network}(rw)
+      /srv/media/main/smb ${home-network.virtual-network}(rw)
+      /srv/media/main/other ${home-network.virtual-network}(rw)
     '';
   };
 
+  # TODO: only allow nfs on nebula interface
   networking.firewall = {
     allowedTCPPorts = [
       # samba
