@@ -115,6 +115,7 @@ alias mv="mv -iv"
 alias cp="cp -iv"
 alias rm="rm -v"
 alias rsync="rsync -av --info=progress2"
+alias del-result="find . -type l -name result -delete"
 abbrev-alias cdoc='cargo doc --no-deps --open -p'
 abbrev-alias sudo=doas
 abbrev-alias usv=systemctl --user
