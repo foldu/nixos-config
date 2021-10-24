@@ -1,7 +1,11 @@
 { config, pkgs, lib, ... }: {
+  imports = [
+    ./nebula-dns.nix
+  ];
+
   networking.networkmanager = {
     enable = true;
-    dns = "dnsmasq";
+    dns = "systemd-resolved";
     wifi = {
       backend = "iwd";
       powersave = true;

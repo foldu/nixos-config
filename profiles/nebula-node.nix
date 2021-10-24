@@ -35,8 +35,8 @@
             proto = "tcp";
           }
         ]
-      ++ bridgePorts "tcp" config.networking.firewall.allowedTCPPorts
-      ++ bridgePorts "udp" config.networking.firewall.allowedUDPPorts;
+        ++ bridgePorts "tcp" config.networking.firewall.allowedTCPPorts
+        ++ bridgePorts "udp" config.networking.firewall.allowedUDPPorts;
     };
     lighthouses = [ "192.168.100.1" ];
     staticHostMap = {
