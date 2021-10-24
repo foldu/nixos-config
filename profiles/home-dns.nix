@@ -1,19 +1,19 @@
 { config, lib, pkgs, home-network, ... }:
 let
-  blocklistPath = "/var/lib/unbound/blocklist.conf";
+  blocklistDir = "/var/lib/blocklistdownloadthing";
+  blocklistPath = "${blocklistDir}/hosts.blocklist";
 in
 {
   networking.firewall.allowedUDPPorts = [ 53 ];
   networking.firewall.allowedTCPPorts = [ 53 ];
 
-  networking.resolvconf.useLocalResolver = false;
   services.resolved.enable = false;
 
   systemd =
     let
       blocklist = pkgs.writeText "blocklist" (
         builtins.toJSON {
-          host_whitelist = [];
+          host_whitelist = [ ];
           host_blacklist = [
             # mostly telemetry
             "incoming.telemetry.mozilla.org"
@@ -93,57 +93,65 @@ in
         }
       );
       cacheDir = "/var/cache/blocklists";
-      user = "unbound";
+      user = "blocklist";
     in
-      {
-        timers.blocklistdownloadthing = {
-          wantedBy = [ "timers.target" ];
-          partOf = [ "blocklistdownloadthing.service" ];
-          timerConfig.OnCalendar = "daily";
-        };
-        services.blocklistdownloadthing = {
-          after = [ "network.target" ];
-          serviceConfig = {
-            Type = "oneshot";
-          };
-          script = ''
-            ${pkgs.doas}/bin/doas -u unbound \
-            ${pkgs.blocklistdownloadthing}/bin/blocklistdownloadthing \
-                -o ${blocklistPath} \
-                --cache "${cacheDir}" \
-                --format unbound \
-                --config "${blocklist}"
-            systemctl restart unbound
-          '';
-        };
-        tmpfiles.rules = [
-          "d ${cacheDir} 755 ${user}"
-        ];
+    {
+      timers.blocklistdownloadthing = {
+        wantedBy = [ "timers.target" ];
+        partOf = [ "blocklistdownloadthing.service" ];
+        timerConfig.OnCalendar = "daily";
       };
-
-  services.unbound = {
-    enable = true;
-    settings = {
-      server = {
-        access-control = [
-          "127.0.0.0/8 allow"
-          "${home-network.network} allow"
-        ];
-        interface = [ "0.0.0.0" ];
-        so-reuseport = true;
-        tls-upstream = true;
-        tls-cert-bundle = "/etc/ssl/certs/ca-certificates.crt";
-        include = "${blocklistPath}";
+      services.blocklistdownloadthing = {
+        after = [ "network.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+        };
+        script = ''
+          ${pkgs.blocklistdownloadthing}/bin/blocklistdownloadthing \
+              -o ${blocklistPath} \
+              --cache "${cacheDir}" \
+              --format hosts \
+              --config "${blocklist}"
+        '';
       };
-      forward-zone = [
-        {
-          name = ".";
-          forward-addr = [
-            "1.1.1.1@853#cloudflare-dns.com"
-            "1.0.0.1@853#cloudflare-dns.com"
-          ];
-        }
+      tmpfiles.rules = [
+        "d ${cacheDir} 755 ${user}"
+        "Z ${cacheDir} 755 ${user}"
+        "d ${blocklistDir} 755 ${user}"
+        "Z ${blocklistDir} 755 ${user}"
       ];
     };
+
+  users.users.blocklist = {
+    group = "blocklist";
+    isSystemUser = true;
+  };
+
+  users.groups.blocklist = { };
+
+  services.coredns = {
+    enable = true;
+    config = ''
+      (global) {
+        log
+        errors
+        cache
+      }
+
+      nebula.5kw.li:53 {
+        import global
+        forward . 192.168.100.1
+      }
+
+      .:53 {
+        import global
+        hosts ${blocklistPath} {
+          fallthrough
+        }
+        forward . tls://1.1.1.1 tls://1.0.0.1 {
+          tls_servername cloudflare-dns.com
+        }
+      }
+    '';
   };
 }
