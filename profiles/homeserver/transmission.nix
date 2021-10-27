@@ -12,7 +12,7 @@
   };
 
   services.caddy.config = ''
-    torrent.5kw.li {
+    torrent.nebula.5kw.li {
       reverse_proxy localhost:${toString config.services.transmission.port}
     }
   '';
