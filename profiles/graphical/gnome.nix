@@ -27,6 +27,9 @@
     pop-os-shell
   ];
 
+  # disable laptop melting service
+  services.gnome.tracker-miners.enable = false;
+
   # gunome _still_ has no server side decorations and alacritty windows look weird
   # because of that
   environment.sessionVariables.WINIT_UNIX_BACKEND = "x11";
