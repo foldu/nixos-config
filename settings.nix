@@ -6,8 +6,8 @@
       size = 12;
     };
     devMonospace = {
-      pkg = pkgs.vistafonts;
-      name = "Consolas";
+      pkg = pkgs.ubuntu_font_family;
+      name = "Ubuntu Mono";
       size = 12;
     };
     documents = {
