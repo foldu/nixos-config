@@ -37,6 +37,7 @@ in
       plantuml
       rust-analyzer
       rustfmt
+      shfmt
       stylua
       sumneko-lua-language-server
       taplo-lsp
