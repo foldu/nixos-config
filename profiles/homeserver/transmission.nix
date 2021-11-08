@@ -7,13 +7,13 @@
       incomplete-dir-enabled = true;
       rpc-host-whitelist = "torrent.nebula.5kw.li";
       rpc-whitelist = "127.0.0.1,192.168.1.*,192.168.100.*";
+      rpc-port = 9091;
     };
-    port = 9091;
   };
 
   services.caddy.config = ''
     torrent.nebula.5kw.li {
-      reverse_proxy localhost:${toString config.services.transmission.port}
+      reverse_proxy localhost:${toString config.services.transmission.settings.rpc-port}
     }
   '';
 }
