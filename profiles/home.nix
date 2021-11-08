@@ -16,7 +16,7 @@ in
   ];
 
   nix.buildMachines = [{
-    hostName = "jupiter.5kw.li";
+    hostName = "jupiter.nebula.5kw.li";
     systems = [ "x86_64-linux" "aarch64-linux" ];
     # if the builder supports building for multiple architectures, 
     # replace the previous line by, e.g.,
