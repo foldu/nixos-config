@@ -25,8 +25,6 @@
     };
   };
 
-  # FIXME: linux 5.14 has even worse ACPI issues than 5.10
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_5_10;
 
   services.btrfs.autoScrub = {
     enable = true;
