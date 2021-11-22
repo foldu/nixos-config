@@ -168,7 +168,7 @@
           "pop-shell@system76.com"
           "user-theme@gnome-shell-extensions.gcampax.github.com"
         ];
-
+        disable-extension-version-validation = true;
       };
 
       "org/gnome/shell/extensions/just-perfection" = {
