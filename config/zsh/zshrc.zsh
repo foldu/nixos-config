@@ -110,7 +110,10 @@ function tmp-clone() {
     local match=$(echo "$1" | sed -E 's|^(https?://github.com/[^/]+/[^/]+).*|\1|')
     local repo_name=$(echo "$1" | sed -E  's|^https?://github.com/[^/]+/([^/]+).*|\1|')
     local tmp_dir="/tmp/${repo_name}"
-    if [[ -n "$match" ]]; then
+    if [[ -d "$tmp_dir" ]]; then
+        echo "Already cloned"
+        cd "$tmp_dir"
+    elif [[ -n "$match" ]]; then
         git clone --depth 1 "$match" "$tmp_dir" || return 1
         cd "$tmp_dir"
     else
