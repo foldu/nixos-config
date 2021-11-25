@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "pop-os-shell";
-  version = "e7f30249a18317de3a54dc185e3a547ee4a74022";
+  version = "676729ffa5361cbcf1236a7594c7f0240da1043c";
 
   src = fetchFromGitHub {
     owner = "pop-os";
     repo = "shell";
     rev = version;
-    sha256 = "sha256-TULRwO+23V0/9Du8nolWfjWz9TLg2V3COneZVB+DLX0=";
+    sha256 = "sha256-BWoarKD6YgDNfrqPVu+DRGw2hAQYFFIiVYr3SFQTAh8=";
   };
 
   nativeBuildInputs = [ glib nodePackages.typescript gjs ];
@@ -18,8 +18,6 @@ stdenv.mkDerivation rec {
   preBuildHook = ''
     find . -name '*.ts' -exec sed -i -E 's|^#!/usr/bin/gjs|#!/usr/bin/env gjs|' \{\} \;
   '';
-
-  patches = [ ./gnome-41.patch ];
 
   makeFlags = [ "INSTALLBASE=$(out)/share/gnome-shell/extensions PLUGIN_BASE=$(out)/share/pop-shell/launcher SCRIPTS_BASE=$(out)/bin" ];
 
