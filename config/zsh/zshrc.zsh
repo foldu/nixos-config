@@ -106,6 +106,19 @@ function edit-link() {
     fi
 }
 
+function tmp-clone() {
+    local match=$(echo "$1" | sed -E 's|^(https?://github.com/[^/]+/[^/]+).*|\1|')
+    local repo_name=$(echo "$1" | sed -E  's|^https?://github.com/[^/]+/([^/]+).*|\1|')
+    local tmp_dir="/tmp/${repo_name}"
+    if [[ -n "$match" ]]; then
+        git clone --depth 1 "$match" "$tmp_dir" || return 1
+        cd "$tmp_dir"
+    else
+        echo "Usage: tmp-clone GITHUB_REPO"
+        return 1
+    fi
+}
+
 # Define named directories: ~w <=> Windows home directory on WSL.
 [[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
 
