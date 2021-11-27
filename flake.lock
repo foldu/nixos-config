@@ -376,7 +376,7 @@
         "pickwp": "pickwp",
         "pickwp-gtk": "pickwp-gtk",
         "sops-nix": "sops-nix",
-        "wpp": "wpp",
+        "wpp-gtk": "wpp-gtk",
         "wrrr": "wrrr"
       }
     },
@@ -400,7 +400,7 @@
         "type": "github"
       }
     },
-    "wpp": {
+    "wpp-gtk": {
       "inputs": {
         "flake-utils": [
           "flake-utils"
@@ -413,17 +413,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1623942237,
-        "narHash": "sha256-dliKs8ihlzCkcDTcuRfczuhl81ZDkJz+1s69Pigll1A=",
+        "lastModified": 1638010392,
+        "narHash": "sha256-YL3+YDWfmDGaXWyBNyyVWHHdnyQ+3+ZFEqrfdNjasy0=",
         "ref": "master",
-        "rev": "ee7d247fc9eeb7eadf0b444c5f9e60e9fa4acb3e",
-        "revCount": 20,
+        "rev": "e889c5c1467fc42892d83084bdda76e62862c55b",
+        "revCount": 14,
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/wpp"
+        "url": "https://git-home.5kw.li/foldu/wpp-gtk"
       },
       "original": {
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/wpp"
+        "url": "https://git-home.5kw.li/foldu/wpp-gtk"
       }
     },
     "wrrr": {

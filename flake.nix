@@ -61,9 +61,9 @@
       flake = false;
     };
 
-    wpp = {
+    wpp-gtk = {
       type = "git";
-      url = "https://git-home.5kw.li/foldu/wpp";
+      url = "https://git-home.5kw.li/foldu/wpp-gtk";
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.naersk.follows = "naersk";
@@ -111,7 +111,7 @@
     , blocklistdownloadthing
     , eunzip
     , homeserver-sekret
-    , wpp
+    , wpp-gtk
     , pickwp-gtk
     , neovim-nightly-overlay
     , ble-ws-central
@@ -130,7 +130,7 @@
           pickwp.overlay
           eunzip.overlay
           wrrr.overlay
-          wpp.overlay
+          wpp-gtk.overlay
           huh.overlay
           pickwp-gtk.overlay
           blocklistdownloadthing.overlay
