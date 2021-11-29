@@ -69,14 +69,6 @@
       inputs.naersk.follows = "naersk";
     };
 
-    pickwp-gtk = {
-      type = "git";
-      url = "https://git-home.5kw.li/foldu/pickwp-gtk";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
-    };
-
     neovim-nightly-overlay = {
       url = "github:nix-community/neovim-nightly-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -112,7 +104,6 @@
     , eunzip
     , homeserver-sekret
     , wpp-gtk
-    , pickwp-gtk
     , neovim-nightly-overlay
     , ble-ws-central
     , sops-nix
@@ -132,7 +123,6 @@
           wrrr.overlay
           wpp-gtk.overlay
           huh.overlay
-          pickwp-gtk.overlay
           blocklistdownloadthing.overlay
           ble-ws-central.overlay
           neovim-nightly-overlay.overlay

@@ -132,7 +132,6 @@ in
       pwgen
       dfeet
       gimp
-      pickwp-gtk
       tdesktop
       mpv
       streamlink
