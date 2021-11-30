@@ -320,11 +320,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1638210783,
-        "narHash": "sha256-etao544Y4wEvAXSVByCgq9/Bp51uHGR1iQpRt/3gjMY=",
+        "lastModified": 1638266884,
+        "narHash": "sha256-jGDZT/A1+JTn7ABeAlMviHwE/GbOf6aZwRjbAdaT6us=",
         "ref": "master",
-        "rev": "7d1dcec00eb85cf7c75cbf8a623c027e4884fdce",
-        "revCount": 199,
+        "rev": "1a65cf657a3999a6ef947c1eba255e1fb199b5a5",
+        "revCount": 200,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/pickwp"
       },
