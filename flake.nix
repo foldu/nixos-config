@@ -80,10 +80,6 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    sops-nix = {
-      url = "github:Mic92/sops-nix";
-    };
-
     kitty-themes = {
       url = "github:kovidgoyal/kitty-themes";
       flake = false;
@@ -106,7 +102,6 @@
     , wpp-gtk
     , neovim-nightly-overlay
     , ble-ws-central
-    , sops-nix
     , kitty-themes
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
@@ -147,7 +142,6 @@
                 imports = [
                   ./modules
                   ble-ws-central.nixosModule
-                  sops-nix.nixosModules.sops
                 ];
                 networking.hostName = hostName;
                 # Let 'nixos-version --json' know about the Git revision
@@ -159,12 +153,6 @@
                 environment.systemPackages = with pkgs; [
                   git
                 ];
-
-                sops = {
-                  defaultSopsFile = ./secrets/home.yaml;
-                  age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-                  secrets."ssh_config" = { };
-                };
               }
             )
           ] ++ modules;
