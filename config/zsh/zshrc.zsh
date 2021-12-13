@@ -45,7 +45,6 @@ zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh'
 # example. If you don't plan to use Oh My Zsh, delete this line.
 #z4h install ohmyzsh/ohmyzsh || return
 z4h install hlissner/zsh-autopair || return
-z4h install momo-lab/zsh-abbrev-alias || return
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
 # initialize Zsh. After this point console I/O is unavailable until Zsh
@@ -68,7 +67,6 @@ z4h source ~/.env.zsh
 #z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
 #z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
 z4h load hlissner/zsh-autopair
-z4h source momo-lab/zsh-abbrev-alias/abbrev-alias.plugin.zsh
 
 # Define key bindings.
 z4h bindkey z4h-backward-kill-word  Ctrl+Backspace Ctrl+H
@@ -133,10 +131,8 @@ alias cp="cp -iv"
 alias rm="rm -v"
 alias rsync="rsync -av --info=progress2"
 alias del-result="find . -type l -name result -delete"
-abbrev-alias cdoc='cargo doc --no-deps --open -p'
-abbrev-alias sudo=doas
-abbrev-alias usv=systemctl --user
-abbrev-alias sv=systemctl
+alias cdoc='cargo doc --no-deps --open -p'
+alias sudo=doas
 
 # Add flags to existing aliases.
 #alias ls="${aliases[ls]:-ls} -A"
