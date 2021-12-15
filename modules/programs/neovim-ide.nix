@@ -37,6 +37,7 @@ in
       plantuml
       rust-analyzer
       rustfmt
+      shellcheck
       shfmt
       stylua
       sumneko-lua-language-server
