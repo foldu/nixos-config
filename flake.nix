@@ -193,5 +193,18 @@
           ];
         };
       };
-    };
+    } // (flake-utils.lib.eachDefaultSystem (system:
+    let
+      pkgs = nixpkgs.legacyPackages.${system};
+    in
+    {
+      devShell = pkgs.mkShell {
+        nativeBuildInputs = [
+          (pkgs.python39.withPackages
+            (p: with p; [ ipython toml ]))
+          pkgs.rsync
+        ];
+      };
+    }
+    ));
 }
