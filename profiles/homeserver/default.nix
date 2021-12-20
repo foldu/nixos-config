@@ -11,6 +11,7 @@
     ./drone
     ./secrets.nix
     ./cachecache.nix
+    ./invidious.nix
     "${inputs.homeserver-sekret}"
   ];
 
