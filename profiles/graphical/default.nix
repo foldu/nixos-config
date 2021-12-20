@@ -92,6 +92,7 @@ in
       ./xdg.nix
       ./beets.nix
       ./firefox.nix
+      ./mpv.nix
       inputs.pickwp.homeManagerModule
       inputs.wrrr.homeManagerModule
     ];
@@ -119,7 +120,7 @@ in
       eunzip
       croc
       ffmpeg
-      youtube-dl
+      yt-dlp
       freetube
       pass
       pulsemixer
@@ -133,7 +134,6 @@ in
       dfeet
       gimp
       tdesktop
-      mpv
       streamlink
       wpp
       wl-clipboard
