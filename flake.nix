@@ -201,7 +201,7 @@
       devShell = pkgs.mkShell {
         nativeBuildInputs = [
           (pkgs.python39.withPackages
-            (p: with p; [ ipython toml ]))
+            (p: with p; [ ipython toml plumbum ]))
           pkgs.rsync
         ];
       };

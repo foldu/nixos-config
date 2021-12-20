@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import toml
-from subprocess import run
+from plumbum.cmd import rsync
 import os
 
 
@@ -13,7 +13,7 @@ def main():
     for device in home_network["devices"].keys():
         if hostname != device:
             fqdn = f"{device}.nebula.5kw.li"
-            run(["rsync", "-avP", abs_cwd, f"{fqdn}:nixos-config/"])
+            rsync("-avP", "--exclude", "result", abs_cwd, f"{fqdn}:nixos-config/")
             updated_fqdns.append(fqdn)
 
     # cmd = ["tmux", "new-session"]
