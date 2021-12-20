@@ -13,18 +13,18 @@ def main():
     for device in home_network["devices"].keys():
         if hostname != device:
             fqdn = f"{device}.nebula.5kw.li"
-            print(["rsync", "-avP", abs_cwd, f"{fqdn}:nixos-config/"])
+            run(["rsync", "-avP", abs_cwd, f"{fqdn}:nixos-config/"])
             updated_fqdns.append(fqdn)
 
-    cmd = ["tmux", "new-session"]
-    for fqdn in updated_fqdns:
-        cmd.append(
-            f"ssh {fqdn} doas nixos-rebuild switch --flake /home/barnabas/nixos-config ; read"
-        )
-        cmd += [";", "split-window"]
-    cmd.pop()
-    cmd += ["select-layout", "even-vertical"]
-    run(cmd)
+    # cmd = ["tmux", "new-session"]
+    # for fqdn in updated_fqdns:
+    #    cmd.append(
+    #        f"ssh {fqdn} doas nixos-rebuild switch --flake /home/barnabas/nixos-config ; read"
+    #    )
+    #    cmd += [";", "split-window"]
+    # cmd.pop()
+    # cmd += ["select-layout", "even-vertical"]
+    # run(cmd)
 
 
 if __name__ == "__main__":
