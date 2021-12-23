@@ -35,6 +35,16 @@ in
       nodePackages.typescript-language-server
       nodePackages.yaml-language-server
       plantuml
+      (ruby_3_0.withPackages (p: with p; [
+        pry
+        solargraph
+        sqlite3
+        nokogiri
+        httpclient
+        slop
+        clamp
+        rubocop
+      ]))
       rust-analyzer
       rustfmt
       shellcheck
