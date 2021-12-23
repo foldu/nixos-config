@@ -199,6 +199,22 @@
         "type": "github"
       }
     },
+    "kanagawa-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1640198850,
+        "narHash": "sha256-OgORJpdFoSSwZY4TS9OjpYeV1JJ0V0u0a708p5rz25c=",
+        "owner": "rebelot",
+        "repo": "kanagawa.nvim",
+        "rev": "319bea0cf3a66af89ad4507f3c8dec72845549b8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rebelot",
+        "repo": "kanagawa.nvim",
+        "type": "github"
+      }
+    },
     "kitty-themes": {
       "flake": false,
       "locked": {
@@ -238,10 +254,7 @@
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": [
-          "neovim-nightly-overlay",
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "dir": "contrib",
@@ -300,6 +313,22 @@
       "locked": {
         "lastModified": 1640139330,
         "narHash": "sha256-Nkp3wUOGwtoQ7EH28RLVJ7EqB/e0TU7VcsM7GLy+SdY=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "81cef6b70fb5d5cdba5a0fef3f714c2dadaf0d6d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1640139330,
+        "narHash": "sha256-Nkp3wUOGwtoQ7EH28RLVJ7EqB/e0TU7VcsM7GLy+SdY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "81cef6b70fb5d5cdba5a0fef3f714c2dadaf0d6d",
@@ -342,11 +371,12 @@
         "home-manager": "home-manager",
         "homeserver-sekret": "homeserver-sekret",
         "huh": "huh",
+        "kanagawa-theme": "kanagawa-theme",
         "kitty-themes": "kitty-themes",
         "naersk": "naersk",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "pickwp": "pickwp",
         "wpp-gtk": "wpp-gtk",
         "wrrr": "wrrr"

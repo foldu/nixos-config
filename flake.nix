@@ -84,6 +84,11 @@
       url = "github:kovidgoyal/kitty-themes";
       flake = false;
     };
+
+    kanagawa-theme = {
+      url = "github:rebelot/kanagawa.nvim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -103,6 +108,7 @@
     , neovim-nightly-overlay
     , ble-ws-central
     , kitty-themes
+    , kanagawa-theme
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache

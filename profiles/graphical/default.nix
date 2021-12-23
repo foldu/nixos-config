@@ -180,7 +180,7 @@ in
         linux_display_server = "wayland";
         wayland_titlebar_color = "#222222";
       };
-      extraConfig = lib.readFile "${inputs.kitty-themes}/themes/gruvbox_dark.conf";
+      extraConfig = lib.readFile "${inputs.kanagawa-theme}/extras/kanagawa.conf";
     };
   };
 }
