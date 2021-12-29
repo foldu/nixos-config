@@ -17,7 +17,7 @@
     #)
     rustc
     cargo
-    clippy
+    #clippy
     cargo-deny
     cargo-outdated
     cargo-edit
