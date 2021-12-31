@@ -18,7 +18,6 @@
       type = "git";
       url = "https://git-home.5kw.li/foldu/pickwp";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
     };
 
     nixos-hardware = {
@@ -66,7 +65,6 @@
       url = "https://git-home.5kw.li/foldu/wpp-gtk";
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
     };
 
     neovim-nightly-overlay = {

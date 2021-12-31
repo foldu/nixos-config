@@ -238,11 +238,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1614785451,
-        "narHash": "sha256-TPw8kQvr2UNCuvndtY+EjyXp6Q5GEW2l9UafXXh1XmI=",
+        "lastModified": 1639947939,
+        "narHash": "sha256-pGsM8haJadVP80GFq4xhnSpNitYNQpaXk4cnA796Cso=",
         "owner": "nmattia",
         "repo": "naersk",
-        "rev": "e0fe990b478a66178a58c69cf53daec0478ca6f9",
+        "rev": "2fc8ce9d3c025d59fee349c1f80be9785049d653",
         "type": "github"
       },
       "original": {
@@ -254,10 +254,7 @@
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": [
-          "neovim-nightly-overlay",
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "dir": "contrib",
@@ -316,6 +313,22 @@
       "locked": {
         "lastModified": 1640871638,
         "narHash": "sha256-ty6sGnJUQEkCd43At5U3DRQZD7rPARz5VginSW6hZ3k=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "5b091d4fbe3b7b7493c3b46fe0842e4b30ea24b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1640871638,
+        "narHash": "sha256-ty6sGnJUQEkCd43At5U3DRQZD7rPARz5VginSW6hZ3k=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "5b091d4fbe3b7b7493c3b46fe0842e4b30ea24b3",
@@ -363,7 +376,7 @@
         "naersk": "naersk",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "pickwp": "pickwp",
         "wpp-gtk": "wpp-gtk",
         "wrrr": "wrrr"
@@ -374,19 +387,16 @@
         "flake-utils": [
           "flake-utils"
         ],
-        "naersk": [
-          "naersk"
-        ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1638364823,
-        "narHash": "sha256-pARlSfX3YnSVnzR6KURbo32zcSn3zEhTNHaOsgqx4j4=",
+        "lastModified": 1640947162,
+        "narHash": "sha256-X0Rr7X9RDdUTOB9ZND4hsdj5MdozXREYA3ryT/xVKVM=",
         "ref": "master",
-        "rev": "dfb00d8a5fb8200d341f6aa672f3e57d412ede53",
-        "revCount": 16,
+        "rev": "62fc2e449ee0c0b5071f9148d138f075b3a101a7",
+        "revCount": 17,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/wpp-gtk"
       },
