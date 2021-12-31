@@ -65,7 +65,10 @@
     experimental-features = nix-command flakes
   '';
 
-  home-manager.useGlobalPkgs = true;
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    useGlobalPkgs = true;
+  };
 
   boot.tmpOnTmpfs = true;
 

@@ -59,7 +59,6 @@ in
             "x-systemd.device-timeout=10"
             "idmap=user"
             "user"
-            "allow_other"
             "uid=${uid}"
           ];
         };
