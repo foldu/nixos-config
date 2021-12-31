@@ -87,6 +87,12 @@
       url = "github:rebelot/kanagawa.nvim";
       flake = false;
     };
+
+    random-scripts = {
+      url = "https://git-home.5kw.li/foldu/random-scripts";
+      type = "git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -107,6 +113,7 @@
     , ble-ws-central
     , kitty-themes
     , kanagawa-theme
+    , random-scripts
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
@@ -125,6 +132,7 @@
           blocklistdownloadthing.overlay
           ble-ws-central.overlay
           neovim-nightly-overlay.overlay
+          random-scripts.overlay
           (import ./overlays)
           (import ./overlays/customizations.nix)
         ];

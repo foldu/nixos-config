@@ -119,6 +119,7 @@ in
       gnome-podcasts
       eunzip
       croc
+      foldu-random-scripts
       ffmpeg
       yt-dlp
       freetube

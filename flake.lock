@@ -136,6 +136,21 @@
         "type": "github"
       }
     },
+    "flake-utils_4": {
+      "locked": {
+        "lastModified": 1638122382,
+        "narHash": "sha256-sQzZzAbvKEqN9s0bzWuYmRaA03v40gaJ4+iL1LXjaeI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "74f7e4319258e287b0f9cb95426c9853b282730b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -362,6 +377,27 @@
         "url": "https://git-home.5kw.li/foldu/pickwp"
       }
     },
+    "random-scripts": {
+      "inputs": {
+        "flake-utils": "flake-utils_4",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1640945715,
+        "narHash": "sha256-Y4Zhn9eEbCXtfGCuUoGiWoaYSNRceDPw5Z3yv3JBRIA=",
+        "ref": "master",
+        "rev": "de08f9627c5c02c0d8a7e7ad681560d2a4afcac0",
+        "revCount": 1,
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/random-scripts"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/random-scripts"
+      }
+    },
     "root": {
       "inputs": {
         "ble-ws-central": "ble-ws-central",
@@ -378,6 +414,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_2",
         "pickwp": "pickwp",
+        "random-scripts": "random-scripts",
         "wpp-gtk": "wpp-gtk",
         "wrrr": "wrrr"
       }
