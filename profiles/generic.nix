@@ -1,4 +1,4 @@
-{ pkgs, lib, config, inputs, ... }: {
+{ pkgs, lib, config, inputs, configSettings, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -66,7 +66,7 @@
   '';
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs configSettings; };
     useGlobalPkgs = true;
   };
 
