@@ -7,7 +7,7 @@
     environmentFile = "/var/secrets/drone_server.env";
   };
 
-  services.caddy.config = ''
+  services.caddy.extraConfig = ''
     drone.5kw.li {
       reverse_proxy http://localhost:${toString config.services.drone-server.port}
     }

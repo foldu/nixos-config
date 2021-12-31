@@ -8,7 +8,7 @@
     };
   };
 
-  services.caddy.config = ''
+  services.caddy.extraConfig = ''
     vaultwarden.nebula.5kw.li {
       header {
         # Enable cross-site filter (XSS) and tell browser to block detected attacks

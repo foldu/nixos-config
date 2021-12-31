@@ -11,7 +11,7 @@
     };
   };
 
-  services.caddy.config = ''
+  services.caddy.extraConfig = ''
     torrent.nebula.5kw.li {
       reverse_proxy localhost:${toString config.services.transmission.settings.rpc-port}
     }

@@ -4,7 +4,7 @@
     port = 7777;
   };
 
-  services.caddy.config = ''
+  services.caddy.extraConfig = ''
     reddit.5kw.li {
       reverse_proxy localhost:${toString config.services.libreddit.port}
     }

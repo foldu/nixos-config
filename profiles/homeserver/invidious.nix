@@ -10,7 +10,7 @@
     MemoryMax = "512M";
   };
 
-  services.caddy.config = ''
+  services.caddy.extraConfig = ''
     invidious.nebula.5kw.li {
       reverse_proxy localhost:${toString config.services.invidious.port}
     }

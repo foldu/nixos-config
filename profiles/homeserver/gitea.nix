@@ -17,7 +17,7 @@
   # FIXME:
   networking.firewall.allowedTCPPorts = [ config.services.gitea.httpPort ];
 
-  services.caddy.config = ''
+  services.caddy.extraConfig = ''
     git-home.5kw.li {
       reverse_proxy localhost:${toString config.services.gitea.httpPort}
     }

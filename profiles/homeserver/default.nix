@@ -55,7 +55,7 @@
 
   services.caddy = {
     enable = true;
-    ca = "https://ca.5kw.li:4321/acme/acme/directory";
+    acmeCA = "https://ca.5kw.li:4321/acme/acme/directory";
     email = "webmaster@5kw.li";
   };
 

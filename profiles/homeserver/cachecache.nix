@@ -5,7 +5,7 @@
     port = 4830;
   };
 
-  services.caddy.config = ''
+  services.caddy.extraConfig = ''
     nix-cache-cache.5kw.li {
       reverse_proxy localhost:${toString config.services.binary-cache-cache.port}
     }
