@@ -45,7 +45,7 @@ in
       folders = {
         "/home/barnabas/downloads" = mkSharedShare "downloads";
         "/home/barnabas/uni" = mkSharedShare "uni";
-        "/home/barnabas/org" = mkSharedShare "org";
+        "/home/barnabas/sync" = mkSharedShare "sync";
         "/home/barnabas/.local/share/mpd/playlists" = mkSharedShare "playlists";
       };
     };
