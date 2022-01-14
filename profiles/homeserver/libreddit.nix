@@ -5,7 +5,7 @@
   };
 
   services.caddy.extraConfig = ''
-    reddit.5kw.li {
+    reddit.nebula.5kw.li {
       reverse_proxy localhost:${toString config.services.libreddit.port}
     }
   '';
