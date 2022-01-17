@@ -455,11 +455,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1615818403,
-        "narHash": "sha256-7PETdhzbKiKz3loex0VtEgGW0PJX0OmKioI7YE7cvLY=",
+        "lastModified": 1642433705,
+        "narHash": "sha256-LX7FE02uM5DD1JjI5sqtVV4bcppZJ/X3tn9D56zSYD4=",
         "ref": "master",
-        "rev": "a066fbee260bfbfe7c44ebeaf7b2ea7a5aaf23d3",
-        "revCount": 24,
+        "rev": "479b7579ea53f8cf0dd05038017a4e42068d77e6",
+        "revCount": 30,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/wrrr"
       },
