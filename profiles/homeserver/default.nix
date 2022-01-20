@@ -66,8 +66,5 @@
     443
   ];
 
-  # podman is even buggier than docker
-  # that's quite an accomplishment
-  # TODO: get rid of containers alltogether
-  virtualisation.oci-containers.backend = "docker";
+  virtualisation.oci-containers.backend = "podman";
 }

@@ -18,5 +18,20 @@
 
   networking.interfaces.enp6s0.useDHCP = true;
 
+  virtualisation.podman = {
+    enable = true;
+    extraPackages = [ pkgs.zfs ];
+  };
+
+  virtualisation.containers.storage.settings = {
+    storage = {
+      driver = "zfs";
+      graphroot = "/var/lib/containers/storage";
+      runroot = "/run/containers/storage";
+    };
+  };
+
+  services.postgresql.package = pkgs.postgresql_14;
+
   system.stateVersion = "20.09";
 }
