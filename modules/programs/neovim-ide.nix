@@ -28,12 +28,16 @@ in
       ccls
       lldb
       nixpkgs-fmt
+      # to install prettierd with
+      nodejs
+      yarn
       nodePackages.bash-language-server
       nodePackages.prettier
       nodePackages.pyright
       nodePackages.typescript
       nodePackages.typescript-language-server
       nodePackages.yaml-language-server
+      nodePackages.vscode-langservers-extracted
       plantuml
       (ruby_3_0.withPackages (p: with p; [
         pry
