@@ -7,7 +7,7 @@
   environment.gnome.excludePackages = with pkgs.gnome; [
     cheese
     gedit
-    gnome-photos
+    pkgs.gnome-photos
     gnome-logs
     gnome-contacts
     epiphany
@@ -43,7 +43,7 @@
 
   home-manager.users.barnabas = { lib, config, ... }: {
     home.packages = with pkgs; [
-      gnome.gnome-tweak-tool
+      gnome.gnome-tweaks
       gnome.dconf-editor
       dconf2nix
     ];
