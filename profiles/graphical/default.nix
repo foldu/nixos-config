@@ -41,6 +41,7 @@ in
     ./pipewire.nix
     ./qt5.nix
     ./syncthing.nix
+    ./podman.nix
     ../../terminal-environment.nix
   ];
 
@@ -50,15 +51,6 @@ in
     # FIXME: temporary fix until I figure out why some gtk applications
     # ignore both settings.ini and the thing in dconf
     GTK_THEME = "Yaru-dark";
-  };
-
-  virtualisation.docker = {
-    enable = true;
-    autoPrune = {
-      enable = true;
-      dates = "weekly";
-    };
-    enableOnBoot = false;
   };
 
   documentation = {
