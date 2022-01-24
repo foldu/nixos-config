@@ -25,9 +25,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    wrrr = {
+    atchr = {
       type = "git";
-      url = "https://git-home.5kw.li/foldu/wrrr";
+      url = "https://git-home.5kw.li/foldu/atchr";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.naersk.follows = "naersk";
       inputs.flake-utils.follows = "flake-utils";
@@ -100,7 +100,7 @@
     , nixpkgs
     , nixos-hardware
     , pickwp
-    , wrrr
+    , atchr
     , huh
     , flake-utils
     , home-manager
@@ -126,7 +126,7 @@
         overlays = [
           pickwp.overlay
           eunzip.overlay
-          wrrr.overlay
+          atchr.overlay
           wpp-gtk.overlay
           huh.overlay
           blocklistdownloadthing.overlay

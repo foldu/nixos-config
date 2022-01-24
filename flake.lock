@@ -1,5 +1,31 @@
 {
   "nodes": {
+    "atchr": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "naersk": [
+          "naersk"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1643027879,
+        "narHash": "sha256-y9z7xW3t+800LuQDbHO/j3lBOJD5iZP/W8GW0FqbYYY=",
+        "ref": "master",
+        "rev": "a1fd2befbc085c412996f96946356ef794cb8c14",
+        "revCount": 52,
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/atchr"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/atchr"
+      }
+    },
     "ble-ws-central": {
       "inputs": {
         "flake-utils": [
@@ -400,6 +426,7 @@
     },
     "root": {
       "inputs": {
+        "atchr": "atchr",
         "ble-ws-central": "ble-ws-central",
         "blocklistdownloadthing": "blocklistdownloadthing",
         "eunzip": "eunzip",
@@ -415,8 +442,7 @@
         "nixpkgs": "nixpkgs_2",
         "pickwp": "pickwp",
         "random-scripts": "random-scripts",
-        "wpp-gtk": "wpp-gtk",
-        "wrrr": "wrrr"
+        "wpp-gtk": "wpp-gtk"
       }
     },
     "wpp-gtk": {
@@ -440,32 +466,6 @@
       "original": {
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/wpp-gtk"
-      }
-    },
-    "wrrr": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "naersk": [
-          "naersk"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1643024892,
-        "narHash": "sha256-jcWAVqQTU+BSnfBkucxchwlqho/iiN+BBX69faQ/nyA=",
-        "ref": "master",
-        "rev": "ebb1df6e8e3fc4eb91f109608d9ac74f10501cd1",
-        "revCount": 32,
-        "type": "git",
-        "url": "https://git-home.5kw.li/foldu/wrrr"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git-home.5kw.li/foldu/wrrr"
       }
     }
   },

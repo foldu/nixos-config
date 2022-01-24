@@ -87,7 +87,7 @@ in
       ./mpv.nix
       ./kitty.nix
       inputs.pickwp.homeManagerModule
-      inputs.wrrr.homeManagerModule
+      inputs.atchr.homeManagerModule
     ];
 
     services.gpg-agent = {
