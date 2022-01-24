@@ -25,11 +25,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    crane = {
+      url = "github:ipetkov/crane";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     atchr = {
       type = "git";
       url = "https://git-home.5kw.li/foldu/atchr";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
+      inputs.crane.follows = "crane";
       inputs.flake-utils.follows = "flake-utils";
     };
 
@@ -105,6 +110,7 @@
     , flake-utils
     , home-manager
     , naersk
+    , crane
     , blocklistdownloadthing
     , eunzip
     , homeserver-sekret
