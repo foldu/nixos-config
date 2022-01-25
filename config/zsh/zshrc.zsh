@@ -132,7 +132,6 @@ alias rm="rm -v"
 alias rsync="rsync -av --info=progress2"
 alias del-result="find . -type l -name result -delete"
 alias cdoc='cargo doc --no-deps --open -p'
-alias sudo=doas
 
 # Add flags to existing aliases.
 #alias ls="${aliases[ls]:-ls} -A"

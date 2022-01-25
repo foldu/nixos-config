@@ -36,17 +36,17 @@
     permitRootLogin = "no";
   };
 
-  security.sudo.enable = false;
-  security.doas = {
-    enable = true;
-    extraRules = [
-      {
-        users = [ "barnabas" ];
-        keepEnv = true;
-        persist = true;
-      }
-    ];
-  };
+  security.sudo.enable = true;
+  #security.doas = {
+  #  enable = true;
+  #  extraRules = [
+  #    {
+  #      users = [ "barnabas" ];
+  #      keepEnv = true;
+  #      persist = true;
+  #    }
+  #  ];
+  #};
 
   # TODO: figure out git crypt first
   #users.mutableUsers = false;

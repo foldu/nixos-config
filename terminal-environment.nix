@@ -93,7 +93,6 @@ in
       };
 
       shellAbbrs = {
-        sudo = "doas";
         usv = "systemctl --user";
         sv = "doas systemctl";
         nr = "nixos-rebuild";
