@@ -12,6 +12,7 @@
     ./secrets.nix
     ./cachecache.nix
     ./invidious.nix
+    ./hydra.nix
     "${inputs.homeserver-sekret}"
   ];
 
