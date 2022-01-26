@@ -525,11 +525,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1640947162,
-        "narHash": "sha256-X0Rr7X9RDdUTOB9ZND4hsdj5MdozXREYA3ryT/xVKVM=",
+        "lastModified": 1643217608,
+        "narHash": "sha256-QIpOOTrZugvHmes/24AMYZXcmaoqQsa9PtyAks2kdx0=",
         "ref": "master",
-        "rev": "62fc2e449ee0c0b5071f9148d138f075b3a101a7",
-        "revCount": 17,
+        "rev": "3c954c37c0fc2d7e7dc49b5281582cb2f9477c29",
+        "revCount": 20,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/wpp-gtk"
       },
