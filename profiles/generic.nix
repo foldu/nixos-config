@@ -16,6 +16,7 @@
     EDITOR = "nvim";
     LESS = "-gciMRwX";
     NIX_GCC = "${pkgs.gcc}/bin/gcc";
+    MANPAGER = "nvim +Man!";
   };
 
   # this is set to false in the default config for reasons I forgot so do it here too
