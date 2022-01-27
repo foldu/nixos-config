@@ -13,7 +13,7 @@
       corefonts
       noto-fonts
       dejavu_fonts
-      noto-fonts-cjk
+      #noto-fonts-cjk
       inter
       vistafonts
       etBook

@@ -334,10 +334,7 @@
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_2",
-        "nixpkgs": [
-          "neovim-nightly-overlay",
-          "nixpkgs"
-        ]
+        "nixpkgs": "nixpkgs"
       },
       "locked": {
         "dir": "contrib",
@@ -411,6 +408,22 @@
       "locked": {
         "lastModified": 1643080866,
         "narHash": "sha256-iO3Z6jw0HEiie8UnXVpq1SxphprDYBXrVzubEa5D4eE=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "c07b471b52be8fbc49a7dc194e9b37a6e19ee04d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
+      "locked": {
+        "lastModified": 1643080866,
+        "narHash": "sha256-iO3Z6jw0HEiie8UnXVpq1SxphprDYBXrVzubEa5D4eE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
         "rev": "c07b471b52be8fbc49a7dc194e9b37a6e19ee04d",
@@ -481,7 +494,7 @@
         "naersk": "naersk",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nixos-hardware": "nixos-hardware",
-        "nixpkgs": "nixpkgs",
+        "nixpkgs": "nixpkgs_2",
         "pickwp": "pickwp",
         "random-scripts": "random-scripts",
         "wpp-gtk": "wpp-gtk"
