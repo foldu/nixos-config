@@ -6,6 +6,18 @@ final: prev: {
       '';
     }
   );
+  gnome = prev.gnome // {
+    mutter = prev.gnome.mutter.overrideAttrs (
+      oldAttrs: rec {
+        # wayland windows strobe on 41.3
+        version = "41.2";
+        src = prev.pkgs.fetchurl {
+          url = "mirror://gnome/sources/mutter/${prev.lib.versions.major version}/${oldAttrs.pname}-${version}.tar.xz";
+          sha256 = "AN+oEvHEhtdKK3P0IEWuEYL5JGx3lNZ9dLXlQ+pwBhc=";
+        };
+      }
+    );
+  };
   brave = prev.brave.overrideAttrs (oldAttrs: {
     postFixup =
       let
