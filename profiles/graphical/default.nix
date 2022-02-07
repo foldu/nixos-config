@@ -136,7 +136,8 @@ in
       gdb
       openocd
       clang-tools
-      clang_12
+      # FIXME: currently conflicts with binutils
+      #clang_12
       # gcc
       lld_12
       sqlite-interactive
