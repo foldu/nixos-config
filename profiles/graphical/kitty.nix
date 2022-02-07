@@ -16,7 +16,7 @@
       enable_audio_bell = "no";
       disable_ligatures = "always";
       update_check_interval = 0;
-      linux_display_server = "wayland";
+      linux_display_server = "x11";
       wayland_titlebar_color = "#222222";
     };
     extraConfig = lib.readFile "${inputs.kanagawa-theme}/extras/kanagawa.conf";
