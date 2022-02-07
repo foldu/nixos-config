@@ -26,29 +26,6 @@
         "url": "https://git-home.5kw.li/foldu/atchr"
       }
     },
-    "ble-ws-central": {
-      "inputs": {
-        "flake-utils": [
-          "flake-utils"
-        ],
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1631110712,
-        "narHash": "sha256-ptxcXeVGkU/NXT6XdoW6SmfiytDv+dgNAy0xxyEXWV8=",
-        "owner": "foldu",
-        "repo": "ble-ws-central",
-        "rev": "ae4883425c8677038f48f999ab35a79993cfe5c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "foldu",
-        "repo": "ble-ws-central",
-        "type": "github"
-      }
-    },
     "blocklistdownloadthing": {
       "inputs": {
         "flake-utils": [
@@ -468,7 +445,6 @@
     "root": {
       "inputs": {
         "atchr": "atchr",
-        "ble-ws-central": "ble-ws-central",
         "blocklistdownloadthing": "blocklistdownloadthing",
         "crane": "crane",
         "eunzip": "eunzip",

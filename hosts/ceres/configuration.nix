@@ -32,7 +32,5 @@
     };
   };
 
-  services.ble-ws-central.enable = true;
-
   system.stateVersion = "21.03";
 }

@@ -77,12 +77,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    ble-ws-central = {
-      url = "github:foldu/ble-ws-central";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-
     kitty-themes = {
       url = "github:kovidgoyal/kitty-themes";
       flake = false;
@@ -116,7 +110,6 @@
     , homeserver-sekret
     , wpp-gtk
     , neovim-nightly-overlay
-    , ble-ws-central
     , kitty-themes
     , kanagawa-theme
     , random-scripts
@@ -136,7 +129,6 @@
           wpp-gtk.overlay
           huh.overlay
           blocklistdownloadthing.overlay
-          ble-ws-central.overlay
           neovim-nightly-overlay.overlay
           random-scripts.overlay
           (import ./overlays)
@@ -159,7 +151,6 @@
               { pkgs, ... }: {
                 imports = [
                   ./modules
-                  ble-ws-central.nixosModule
                 ];
                 networking.hostName = hostName;
                 # Let 'nixos-version --json' know about the Git revision
