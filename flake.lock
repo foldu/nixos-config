@@ -13,11 +13,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1643620846,
-        "narHash": "sha256-qlJaaYZufyVORt9fhXXT2N7VbQY0oMLi4LcOY2ZpXAk=",
+        "lastModified": 1644239504,
+        "narHash": "sha256-oo6Rrublu1d7lOhjqH5kixCcDW1y4YmCI8vX0eEvauA=",
         "ref": "master",
-        "rev": "f9cd75afe822f19e5d8df5e7bf60c10af37ed1ea",
-        "revCount": 70,
+        "rev": "791fe437bc9d4d19d6c52ef8d13c2e2ada6a4888",
+        "revCount": 72,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/atchr"
       },
@@ -39,11 +39,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1615902179,
-        "narHash": "sha256-3L2w/SpJfqXxBImEGXAOzrD26OMqbSKJRk5BuuraOV8=",
+        "lastModified": 1644245961,
+        "narHash": "sha256-pCRVrg6ExrMLbl5mUbnH0bP5b7RGky2nYOM9H6I7VZs=",
         "owner": "foldu",
         "repo": "blocklistdownloadthing",
-        "rev": "c80106f55366545106dd329a41fff7b35cfa407e",
+        "rev": "0df3bd2c9ce1a6543902ed12b31735f3fd9151aa",
         "type": "github"
       },
       "original": {
@@ -88,11 +88,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1616001247,
-        "narHash": "sha256-LgYXbat3dclQ33OHCiwPsd+slZ10l4fRufJFQI3/Lwo=",
+        "lastModified": 1644245399,
+        "narHash": "sha256-WtnPFIFNei48SHvA8FP2Kswu8IlCGi1+J8HZCkSYy6c=",
         "owner": "foldu",
         "repo": "eunzip",
-        "rev": "42688eb53c19b3cd2b1a5c79808318e3b329b765",
+        "rev": "4a7efaecb4535f660f21361a2049d9d4f06fdeec",
         "type": "github"
       },
       "original": {
@@ -243,11 +243,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1615997752,
-        "narHash": "sha256-V2oGHg29r6eNaSBDZI4/lumAHEB5uFnhEhikUhCDIJw=",
+        "lastModified": 1644245642,
+        "narHash": "sha256-r/SCZlgUPSM5qyLyYuW1lMPVLXoanbeH9sQZkRlKyj8=",
         "owner": "foldu",
         "repo": "huh",
-        "rev": "4c7cd008799edbc803ec4ba3ff9bf3f105d71e41",
+        "rev": "c01dd3348995dbbc761490ae6568e51fe32d9b22",
         "type": "github"
       },
       "original": {
@@ -408,11 +408,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1643819342,
-        "narHash": "sha256-LPHppWIcfDj4fcQR1MIEDcu98etsYkJtZNX37zjwBGI=",
+        "lastModified": 1644239264,
+        "narHash": "sha256-Ul9OCs2oCLLUOiIypJi3yGknMVTt2uINmf4YEEsIlTg=",
         "ref": "master",
-        "rev": "7e9800d29e7b30b85ccab93e9b05af4e8f7f702e",
-        "revCount": 220,
+        "rev": "90806503b44b1971ef25faf13f286e3a32398f46",
+        "revCount": 221,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/pickwp"
       },
@@ -429,11 +429,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1641295868,
-        "narHash": "sha256-El3nLGxKIWu9Toq4isMzMqYnJNiU7MQ7qzWvbuuxo4A=",
+        "lastModified": 1644246117,
+        "narHash": "sha256-sNfDGDTnzoYPNR4TJDtfLxjjhZ9WY1D3mZnQUHrtbgw=",
         "ref": "master",
-        "rev": "b9f21ac1c2508fcc1325415a7da3c19b552dbf88",
-        "revCount": 2,
+        "rev": "b0ea17750f6d39ec83518a662867894430435eaf",
+        "revCount": 4,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/random-scripts"
       },
@@ -488,11 +488,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1644235894,
-        "narHash": "sha256-+zZIeKhhW0LPZyNTR4DdX6ks9FjZWUldAZZYtdt0T9s=",
+        "lastModified": 1644239230,
+        "narHash": "sha256-nm6KpllI4Ss/ybBg9uFcPu5lU4SSwdD4m/7BwVKj/bk=",
         "ref": "master",
-        "rev": "c4855f790ec5551f94a6daab98ffccc514cc8805",
-        "revCount": 30,
+        "rev": "ed82eca88c3e576cee56e6194a2881f7490e982d",
+        "revCount": 31,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/wpp-gtk"
       },
