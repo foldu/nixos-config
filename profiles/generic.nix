@@ -27,7 +27,7 @@
       automatic = true;
       options = "--delete-older-than 30d";
     };
-    autoOptimiseStore = true;
+    settings.auto-optimise-store = true;
   };
 
   services.openssh = {

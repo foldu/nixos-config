@@ -9,7 +9,7 @@
 
   users.groups.nixosbuilder = { };
 
-  nix.trustedUsers = [
+  nix.settings.trusted-users = [
     "root"
     "nixosbuilder"
   ];
