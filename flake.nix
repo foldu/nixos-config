@@ -122,18 +122,23 @@
       mylib = import ./lib { inherit lib; };
       mkPkgs = system: import nixpkgs {
         inherit system;
-        overlays = [
-          pickwp.overlay
-          eunzip.overlay
-          atchr.overlay
-          wpp-gtk.overlay
-          huh.overlay
-          blocklistdownloadthing.overlay
-          neovim-nightly-overlay.overlay
-          random-scripts.overlay
-          (import ./overlays)
-          (import ./overlays/customizations.nix)
-        ];
+        overlays =
+          let
+            otherPkgs = lib.foldl (acc: x: acc // x.packages.${system}) { } [
+              eunzip
+              blocklistdownloadthing
+              pickwp
+              wpp-gtk
+              huh
+              random-scripts
+            ];
+          in
+          [
+            neovim-nightly-overlay.overlay
+            (final: prev: otherPkgs)
+            (import ./overlays)
+            (import ./overlays/customizations.nix)
+          ];
         config.allowUnfree = true;
       };
       mkHost = { system, hostName, modules }:
