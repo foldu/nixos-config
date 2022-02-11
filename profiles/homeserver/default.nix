@@ -1,18 +1,19 @@
 { config, lib, pkgs, inputs, ... }: {
   imports = [
     ../generic.nix
-    ./vaultwarden.nix
+    ./cachecache.nix
+    ./drone
     ./file-server.nix
     ./gitea.nix
-    ./transmission.nix
-    ./step-ca.nix
+    ./hydra.nix
+    ./invidious.nix
+    ./jellyfin.nix
     ./libreddit.nix
     ./nitter.nix
-    ./drone
     ./secrets.nix
-    ./cachecache.nix
-    ./invidious.nix
-    ./hydra.nix
+    ./step-ca.nix
+    ./transmission.nix
+    ./vaultwarden.nix
     "${inputs.homeserver-sekret}"
   ];
 
