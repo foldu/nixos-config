@@ -2,7 +2,6 @@
   imports = [
     ../generic.nix
     ./cachecache.nix
-    ./drone
     ./file-server.nix
     ./gitea.nix
     ./hydra.nix
