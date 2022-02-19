@@ -75,8 +75,10 @@ in
 
             # some google stuff that hopefully doesn't break too much
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/doubleclickparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/domainsparsed"
-            "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/dnsparsed"
+            # too much usefull things get blocked from this
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/domainsparsed"
+            # blocks www.gstatic.com for some reason
+            #"https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/dnsparsed"
             "https://raw.githubusercontent.com/nickspaargaren/pihole-google/master/categories/analyticsparsed"
 
             # tracking & telemetry https://firebog.net/
