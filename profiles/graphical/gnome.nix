@@ -25,6 +25,7 @@
     gnome-ui-tune
     just-perfection
     pop-os-shell
+    volume-mixer
   ];
 
   # disable laptop melting service
@@ -211,6 +212,17 @@
         show-title = true;
         smart-gaps = true;
         tile-by-default = true;
+      };
+
+      "org/gnome/shell/extensions/shell-volume-mixer" = {
+        always-show-input-streams = true;
+        position = "aggregateMenu";
+        remove-original = false;
+        show-detailed-sliders = false;
+        show-percentage-label = false;
+        show-system-sounds = true;
+        show-virtual-streams = true;
+        use-symbolic-icons = true;
       };
 
       "org/gnome/desktop/peripherals/touchpad" = {
