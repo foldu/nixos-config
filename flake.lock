@@ -13,11 +13,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1644402109,
-        "narHash": "sha256-9mCzvg4F8rYe9y/fw0fbpPPFx5YB77pVeQEalkBlNhs=",
+        "lastModified": 1646310447,
+        "narHash": "sha256-J5FlSwdGfFzUkn/rwnPbTZp689OVYLiVZPifXcK5NkY=",
         "ref": "master",
-        "rev": "fec8274544623cd58135ce92d42087c65ade1004",
-        "revCount": 78,
+        "rev": "6a771f89357d49450688057d750c038e7c42b1b2",
+        "revCount": 80,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/atchr"
       },
