@@ -131,7 +131,7 @@ in
       streamlink
       wpp
       wl-clipboard
-      manpages
+      man-pages
       tokei
       gdb
       openocd
