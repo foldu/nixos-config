@@ -19,12 +19,7 @@ final: prev: {
   #  );
   #};
   brave = prev.brave.overrideAttrs (oldAttrs:
-    let version = "1.35.103"; in
     {
-      src = prev.fetchurl {
-        url = "https://github.com/brave/brave-browser/releases/download/v${version}/brave-browser_${version}_amd64.deb";
-        sha256 = "UgperKruN2quKdFTf/iTa+dd2GB57nt+mu6KBe4VvYk=";
-      };
       postFixup =
         let
           libPath = prev.lib.makeLibraryPath [ prev.libglvnd prev.wayland ];
