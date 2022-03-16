@@ -1,9 +1,19 @@
 final: prev: {
-  kitty = prev.kitty.overrideAttrs (
-    oldAttrs: {
-      postInstallPhase = ''
-        sed -Ei 's/Exec=kitty/\0 --single-instance' $out/share/applications/kitty.desktop
-      '';
+  kitty = prev.kitty.overrideAttrs (oldAttrs: {
+    postInstallPhase = ''
+      sed -Ei 's/Exec=kitty/\0 --single-instance' $out/share/applications/kitty.desktop
+    '';
+  }
+  );
+  fish = prev.fish.overrideAttrs (oldAttrs:
+    rec {
+      pname = "fish";
+      version = "3.4.0";
+      src = prev.fetchurl {
+        url = "https://github.com/fish-shell/fish-shell/releases/download/${version}/${pname}-${version}.tar.xz";
+        sha256 = "sha256-tbSKuEhrGe9xajL39GuIuepTVhVfDpZ+6Z9Ak2RUE8U=";
+      };
+      patches = [ ];
     }
   );
   #gnome = prev.gnome // {
