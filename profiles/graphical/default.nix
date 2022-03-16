@@ -58,7 +58,7 @@ in
     info.enable = false;
   };
 
-  environment.systemPackages = [ lol pkgs.zsh ];
+  environment.systemPackages = [ lol ];
 
   services.flatpak.enable = true;
 

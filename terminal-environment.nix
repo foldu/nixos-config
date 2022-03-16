@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 let
   minimal-neovim = pkgs.neovim.override {
@@ -21,14 +21,6 @@ let
     withPython = false;
     withPython3 = false;
   };
-  base16-fish = pkgs.fetchFromGitHub {
-    owner = "tomyun";
-    repo = "base16-fish";
-    rev = "675d53a0dd1aed0fc5927f26a900f5347d446459";
-    sha256 = "sha256-Mc5Dwo6s8ljhla8cjnWymKqCcy3y0WDx51Ig82DS4VI=";
-  };
-
-  gruvbox-fun = builtins.readFile "${base16-fish}/functions/base16-gruvbox-dark-medium.fish";
 in
 {
   environment.systemPackages = with pkgs; [
@@ -39,6 +31,7 @@ in
     file
     libarchive
     unzip
+    bat
   ] ++ lib.optional (!config.programs.neovim-ide.enable) minimal-neovim;
 
   environment.pathsToLink = [ "/share/zsh" ];
@@ -71,6 +64,7 @@ in
     programs.git = {
       enable = true;
       lfs.enable = true;
+      delta.enable = true;
       userName = "foldu";
       userEmail = "foldu@protonmail.com";
       extraConfig = {
@@ -94,7 +88,7 @@ in
 
       shellAbbrs = {
         usv = "systemctl --user";
-        sv = "doas systemctl";
+        sv = "sudo systemctl";
         nr = "nixos-rebuild";
         nse = "nix search nixpkgs";
         nsh = "nix shell nixpkgs#";
@@ -112,32 +106,47 @@ in
       };
 
       interactiveShellInit = ''
-        ${gruvbox-fun}
-
-        base16-gruvbox-dark-medium
-
         # set features
-        set -U fish_features stderr-nocaret qmark-noglob
+        set -U fish_features stderr-nocaret qmark-noglob ampersand-nobg-in-token
 
-        set -U tide_left_prompt_items context pwd git prompt_char
+        set -U tide_left_prompt_items context pwd git character
         set -U tide_right_prompt_items status cmd_duration jobs time
         set -U tide_time_color white
+        set -U tide_character_icon \$
+
+        fzf_configure_bindings --directory=\ct --history=\cr
 
         bind \cX\cE edit_command_buffer
+
+        ${builtins.readFile "${inputs.kanagawa-theme}/extras/kanagawa.fish"}
       '';
 
-      plugins = [{
-        name = "tide";
-        src = pkgs.fetchFromGitHub {
-          owner = "IlanCosman";
-          repo = "tide";
-          rev = "f9d47a8f4f67a17b64eb07fbebfba0398341f6b0";
-          sha256 = "sha256-LOyE28hUzUU56DK9Y9QLJQW91WvEugooFaimTuL9HlQ=";
-        };
-      }];
+      plugins = [
+        {
+          name = "tide";
+          src = pkgs.fetchFromGitHub {
+            owner = "IlanCosman";
+            repo = "tide";
+            rev = "v5.0.1";
+            sha256 = "sha256-EjEVyWwAtVqPFDEo9QUUAQXlAMlmEmaO0sqmjZSKI5M=";
+          };
+        }
+        {
+          name = "fzf";
+          src = pkgs.fetchFromGitHub {
+            owner = "PatrickF1";
+            repo = "fzf.fish";
+            rev = "4f2fdba27479abe81f5519518bb5045764f114f6";
+            sha256 = "sha256-meTdxqweHzyirXr/j24OkNNlV1Ki+nGYLmW0sXBmyGQ=";
+          };
+        }
+      ];
     };
 
-    programs.fzf.enable = true;
+    programs.fzf = {
+      enable = true;
+      enableFishIntegration = false;
+    };
 
     programs.direnv = {
       enable = true;

@@ -54,7 +54,7 @@
   users.users.barnabas = {
     isNormalUser = true;
     uid = 1000;
-    shell = pkgs.zsh;
+    shell = pkgs.fish;
     extraGroups = [ "wheel" "video" "audio" "dialout" "networkmanager" ];
   };
 
