@@ -10,7 +10,7 @@ from sys import exit
 
 def main():
     parser = ArgumentParser()
-    parser.add_argument("host", default=None, type=str)
+    parser.add_argument("host", default=None, type=str, nargs="?")
     args = parser.parse_args()
 
     with open("home-network.toml") as fh:
