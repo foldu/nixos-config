@@ -34,10 +34,7 @@ in
     bat
   ] ++ lib.optional (!config.programs.neovim-ide.enable) minimal-neovim;
 
-  environment.pathsToLink = [ "/share/zsh" ];
-
   programs.fish.enable = true;
-  programs.zsh.enable = true;
 
   home-manager.users.barnabas = { config, ... }: {
     home.packages = with pkgs; [
@@ -73,11 +70,10 @@ in
       };
     };
 
-    home.file = {
-      ".zshrc".source = ./config/zsh/zshrc.zsh;
-      ".zshenv".source = ./config/zsh/zshenv.zsh;
-      ".p10k.zsh".source = ./config/zsh/p10k.zsh;
-    };
+    # FIXME: use builtins.readDir
+    xdg.configFile."fish/functions/tmp-clone.fish".source = ./config/fish/functions/tmp-clone.fish;
+    # FIXME: wrong format
+    # xdg.configFile."fish/themes/kanagawa.fish".source = "${inputs.kanagawa-theme}/extras/kanagawa.fish";
 
     programs.fish = {
       enable = true;
@@ -92,6 +88,7 @@ in
         nr = "nixos-rebuild";
         nse = "nix search nixpkgs";
         nsh = "nix shell nixpkgs#";
+        cdoc = "cargo doc --no-deps --open -p";
         o = "xdg-open";
       };
 
@@ -99,10 +96,9 @@ in
         rm = "rm -v";
         cp = "cp -iv --reflink=auto";
         mv = "mv -iv";
-        cdoc = "cargo doc --no-deps --open -p";
         wlc = "wl-copy";
         wlp = "wl-paste";
-        rsync = "rsync -v --info=progress2";
+        rsync = "rsync -av --info=progress2";
       };
 
       interactiveShellInit = ''
