@@ -7,6 +7,6 @@
     download = "\$HOME/downloads";
     pictures = "\$HOME/img";
     music = "/run/media/beets-lib";
-    videos = "/run/media/videos";
+    videos = "\$HOME/videos";
   };
 }
