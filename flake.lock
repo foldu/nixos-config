@@ -62,11 +62,11 @@
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1642978336,
-        "narHash": "sha256-Sq7+OK7x8M5avMWPAOM6yqR9g0Ruiu00e63YPlG8V6Q=",
+        "lastModified": 1646176024,
+        "narHash": "sha256-tmLycxj6Acq91XFPJYzlTI3JK4HWX05K8SpMO7kwCdI=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "4a2dd7388cf9ced1b19a8283a90ec1abb5fa5cbd",
+        "rev": "39305b3828b976cac90bcb2cc5bdf5cfbcafce33",
         "type": "github"
       },
       "original": {
@@ -402,17 +402,20 @@
     },
     "pickwp": {
       "inputs": {
+        "crane": [
+          "crane"
+        ],
         "flake-utils": "flake-utils_3",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1644402235,
-        "narHash": "sha256-U3YxGdg3pAHfyLiaxoZalaYoSK7Sdnc83E//F8VpIU4=",
+        "lastModified": 1648724856,
+        "narHash": "sha256-hQrCt+Qe7V/FW51yMyNZ2eUs0WTig0IPnmxsEsb2Mlw=",
         "ref": "master",
-        "rev": "e8e05cbe101e298954dc24b8a7657aa0f938cf66",
-        "revCount": 222,
+        "rev": "763aeb93ffe9dbc6000377d34682929239dfb4b2",
+        "revCount": 226,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/pickwp"
       },
@@ -465,11 +468,11 @@
     },
     "utils": {
       "locked": {
-        "lastModified": 1642700792,
-        "narHash": "sha256-XqHrk7hFb+zBvRg6Ghl+AZDq03ov6OshJLiSWOoX5es=",
+        "lastModified": 1644229661,
+        "narHash": "sha256-1YdnJAsNy69bpcjuoKdOYQX0YxZBiCYZo4Twxerqv7k=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "846b2ae0fc4cc943637d3d1def4454213e203cba",
+        "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
         "type": "github"
       },
       "original": {
