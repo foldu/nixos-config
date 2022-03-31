@@ -49,7 +49,6 @@ in
         clamp
         rubocop
       ]))
-      rust-analyzer
       rustfmt
       shellcheck
       shfmt
