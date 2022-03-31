@@ -1,6 +1,6 @@
 { pkgs, config, ... }: {
   services.hydra = {
-    enable = true;
+    enable = false;
     hydraURL = "https://hydra.nebula.5kw.li"; # externally visible URL
     notificationSender = "hydra@localhost"; # e-mail of hydra service
     # a standalone hydra will require you to unset the buildMachinesFiles list to avoid using a nonexistant /etc/nix/machines
