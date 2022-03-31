@@ -180,7 +180,7 @@
           system = "x86_64-linux";
           modules = [
             nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
-            nixos-hardware.nixosModules.common-pc-laptop-ssd
+            #nixos-hardware.nixosModules.common-pc-laptop-ssd
             ./hosts/mars/configuration.nix
           ];
         };
