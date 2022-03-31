@@ -26,7 +26,8 @@ in
 
       black
       ccls
-      lldb
+      llvmPackages_latest.lldb
+      llvmPackages_latest.bintools
       nixpkgs-fmt
       # to install prettierd with
       nodejs

@@ -136,15 +136,12 @@ in
       gdb
       openocd
       clang-tools
-      # FIXME: currently conflicts with binutils
-      #clang_12
-      # gcc
-      lld_12
+      llvmPackages_latest.lld
+      llvmPackages_latest.clang
       sqlite-interactive
       litecli
       #pgcli
       catclock
-      binutils
       cookiecutter
       lollypop
       element-desktop
