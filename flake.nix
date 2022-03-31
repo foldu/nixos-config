@@ -18,6 +18,7 @@
       type = "git";
       url = "https://git-home.5kw.li/foldu/pickwp";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.crane.follows = "crane";
     };
 
     nixos-hardware = {
