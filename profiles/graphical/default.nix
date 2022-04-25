@@ -134,7 +134,7 @@ in
       man-pages
       tokei
       gdb
-      openocd
+      #openocd
       clang-tools
       llvmPackages_latest.lld
       llvmPackages_latest.clang
