@@ -42,7 +42,7 @@
     huh = {
       url = "github:foldu/huh";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
+      inputs.crane.follows = "crane";
       inputs.flake-utils.follows = "flake-utils";
     };
 
