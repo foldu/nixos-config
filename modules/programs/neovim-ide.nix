@@ -32,6 +32,7 @@ in
       # to install prettierd with
       nodejs
       yarn
+      gnumake
       nodePackages.bash-language-server
       nodePackages.prettier
       nodePackages.pyright
