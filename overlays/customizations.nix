@@ -5,17 +5,6 @@ final: prev: {
     '';
   }
   );
-  fish = prev.fish.overrideAttrs (oldAttrs:
-    rec {
-      pname = "fish";
-      version = "3.4.0";
-      src = prev.fetchurl {
-        url = "https://github.com/fish-shell/fish-shell/releases/download/${version}/${pname}-${version}.tar.xz";
-        sha256 = "sha256-tbSKuEhrGe9xajL39GuIuepTVhVfDpZ+6Z9Ak2RUE8U=";
-      };
-      patches = [ ];
-    }
-  );
   #gnome = prev.gnome // {
   #  mutter = prev.gnome.mutter.overrideAttrs (
   #    oldAttrs: rec {
