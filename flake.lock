@@ -13,11 +13,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1653926505,
-        "narHash": "sha256-boptynBQ1aIV1Iwiz5Ayvm1MTQ3Qqe/Bwx/dUh9GfHk=",
+        "lastModified": 1653993709,
+        "narHash": "sha256-7m312JgTWGvZ3CRF9L5TU6v3qRX4ZmxPkA3KGa3VIfE=",
         "ref": "master",
-        "rev": "c1d4fc7266b03dc0deebf1301711a9ff73ec3e75",
-        "revCount": 84,
+        "rev": "97e5c24d4daf4add095a0e81199c72b2c0689ea8",
+        "revCount": 91,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/atchr"
       },
@@ -491,11 +491,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1647438178,
-        "narHash": "sha256-jETA5WbpPJhtEZ0MHxPa1FyUcwXy2NoJRtq6OtwJfq4=",
+        "lastModified": 1653994263,
+        "narHash": "sha256-/XDmje/bKGc5pr1Qju2HUgoCSV+WSfJk07WMtWLZB+M=",
         "ref": "master",
-        "rev": "fcea7e6fc4f3c78be2a42c6f7761f110e3d56994",
-        "revCount": 35,
+        "rev": "c7faa118698b7c0dcf84f9da765b038c59eb710c",
+        "revCount": 36,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/wpp-gtk"
       },
