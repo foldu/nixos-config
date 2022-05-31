@@ -52,11 +52,11 @@ in
         rubocop
       ]))
       rustfmt
+      taplo-cli
       shellcheck
       shfmt
       stylua
       sumneko-lua-language-server
-      taplo-lsp
       texlab
     ];
   };
