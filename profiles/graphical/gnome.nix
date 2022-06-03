@@ -24,7 +24,7 @@
     blur-my-shell
     gnome-ui-tune
     just-perfection
-    pop-os-shell
+    pop-shell
     volume-mixer
   ];
 
