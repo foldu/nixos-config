@@ -101,6 +101,27 @@
         "type": "github"
       }
     },
+    "ffcut": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "utils": "utils_2"
+      },
+      "locked": {
+        "lastModified": 1654284257,
+        "narHash": "sha256-KgljC5bYV3LSzMp7ul8ors1eVt0vJLZa7hcNVLTgbNU=",
+        "ref": "master",
+        "rev": "c02aae815a99a0eb9ba8bc109b611723e68829ef",
+        "revCount": 2,
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/ffcut"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git-home.5kw.li/foldu/ffcut"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -451,6 +472,7 @@
         "blocklistdownloadthing": "blocklistdownloadthing",
         "crane": "crane",
         "eunzip": "eunzip",
+        "ffcut": "ffcut",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "homeserver-sekret": "homeserver-sekret",
@@ -473,6 +495,21 @@
         "owner": "numtide",
         "repo": "flake-utils",
         "rev": "3cecb5b042f7f209c56ffd8371b2711a290ec797",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "utils_2": {
+      "locked": {
+        "lastModified": 1649676176,
+        "narHash": "sha256-OWKJratjt2RW151VUlJPRALb7OU2S5s+f0vLj4o1bHM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "a4b154ebbdc88c8498a5c7b01589addc9e9cb678",
         "type": "github"
       },
       "original": {

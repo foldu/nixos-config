@@ -93,6 +93,12 @@
       type = "git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    ffcut = {
+      url = "https://git-home.5kw.li/foldu/ffcut";
+      type = "git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -114,6 +120,7 @@
     , kitty-themes
     , kanagawa-theme
     , random-scripts
+    , ffcut
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
@@ -132,6 +139,7 @@
               wpp-gtk
               huh
               random-scripts
+              ffcut
             ];
           in
           [

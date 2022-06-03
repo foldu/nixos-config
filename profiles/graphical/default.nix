@@ -121,6 +121,7 @@ in
       zip
       dua
       imagemagick
+      ffcut
       gnupg
       brave
       chromium
