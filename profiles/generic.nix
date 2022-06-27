@@ -71,6 +71,8 @@
     useGlobalPkgs = true;
   };
 
+  home-manager.users.barnabas.home.stateVersion = "18.09";
+
   boot.tmpOnTmpfs = true;
 
   networking.firewall.enable = true;
