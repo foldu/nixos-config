@@ -15,9 +15,12 @@ in
     group = "piped";
   };
   users.groups.piped = { };
-  #systemd.tmpfiles.rules = [
-  #  "d ${imageDir} 755 1000 danbooru"
-  #];
+
+
+  systemd.tmpfiles.rules = [
+    # terrible hack, user namespaces w/ normal users give me a headache
+    "d ${ytproxySockdir} 777 1000 caddy"
+  ];
 
   services.postgresql = {
     ensureUsers = [
