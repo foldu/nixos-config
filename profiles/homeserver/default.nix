@@ -13,6 +13,7 @@
     ./step-ca.nix
     ./transmission.nix
     ./vaultwarden.nix
+    ./piped
     "${inputs.homeserver-sekret}"
   ];
 
