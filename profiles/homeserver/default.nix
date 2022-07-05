@@ -59,6 +59,13 @@
     enable = true;
     acmeCA = "https://ca.5kw.li:4321/acme/acme/directory";
     email = "webmaster@5kw.li";
+    globalConfig = ''
+      servers :443 {
+          protocol {
+            experimental_http3
+          }
+      }
+    '';
   };
 
   services.nginx.recommendedOptimisation = true;
