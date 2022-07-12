@@ -4,7 +4,7 @@ let
   backendHostname = "pipedapi.nebula.5kw.li";
   frontendHostname = "piped.nebula.5kw.li";
   ytproxyHostname = "ytproxy.nebula.5kw.li";
-  ytproxySockdir = "/var/run/ytproxy";
+  ytproxySockdir = "/run/ytproxy";
   internalIp = "10.88.1.25";
   varnishPort = "4455";
   frontendPort = "4456";
@@ -17,10 +17,24 @@ in
   users.groups.piped = { };
 
 
+  # START_TERRIBLE_HACK
+  # terrible hack, user namespaces w/ normal users give me a headache
   systemd.tmpfiles.rules = [
-    # terrible hack, user namespaces w/ normal users give me a headache
     "d ${ytproxySockdir} 777 1000 caddy"
   ];
+
+  systemd.services.fix-ytproxy-permissions = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.Type = "simple";
+    script = ''
+      while true; do
+        chmod 777 -R ${ytproxySockdir} 
+        ${pkgs.inotify-tools}/bin/inotifywait -r -e create ${ytproxySockdir} || exit 1
+      done
+    '';
+  };
+
+  # END_TERRIBLE_HACK
 
   services.postgresql = {
     ensureUsers = [
