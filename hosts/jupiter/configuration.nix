@@ -4,7 +4,7 @@
     ../../profiles/bluetooth.nix
     ../../profiles/desktop.nix
     ../../profiles/graphical
-    ../../profiles/home.nix
+    ../../profiles/home
     ../../profiles/x86.nix
     ./hardware-configuration.nix
     ../../profiles/builder.nix

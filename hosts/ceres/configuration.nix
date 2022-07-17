@@ -3,7 +3,7 @@
     ./manual-hardware-configuration.nix
     ../../profiles/server.nix
     ../../profiles/home-dns.nix
-    ../../profiles/home.nix
+    ../../profiles/home
   ];
 
   boot = {

@@ -1,6 +1,6 @@
 { config, lib, pkgs, home-network, ... }: {
   imports = [
-    ../../profiles/home.nix
+    ../../profiles/home
     ../../profiles/homeserver
     ../../profiles/server.nix
     ../../profiles/x86.nix

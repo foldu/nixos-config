@@ -1,14 +1,15 @@
 { config, lib, pkgs, ... }:
 
 let
-  home-network = fromTOML (builtins.readFile ../home-network.toml);
+  home-network = fromTOML (builtins.readFile ../../home-network.toml);
 in
 {
   imports = [
     ./nebula-node.nix
+    ./netmaker-node.nix
   ];
   # does it even matter if this thing is not secret
-  security.pki.certificateFiles = [ ../home_ca.crt ];
+  security.pki.certificateFiles = [ ../../home_ca.crt ];
 
   environment.systemPackages = with pkgs; [
     fuse

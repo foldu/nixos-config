@@ -3,7 +3,7 @@
     ../../profiles/amd-gpu.nix
     ../../profiles/bluetooth.nix
     ../../profiles/graphical
-    ../../profiles/home.nix
+    ../../profiles/home
     ../../profiles/laptop.nix
     ../../profiles/x86.nix
     ./manual-hardware-configuration.nix

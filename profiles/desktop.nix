@@ -1,6 +1,6 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    ./nebula-dns.nix
+    ./home/dns.nix
   ];
 
   networking.networkmanager = {
