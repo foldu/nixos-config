@@ -8,7 +8,7 @@
   };
 
   services.caddy.extraConfig = ''
-    nitter.nebula.5kw.li {
+    nitter.home.5kw.li {
       reverse_proxy localhost:${toString config.services.nitter.server.port}
     }
   '';

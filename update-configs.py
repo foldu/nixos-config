@@ -61,7 +61,7 @@ def copy_to(ctx: Context, dest: str):
 
 
 def rsync_to_device(ctx: Context, dest: str) -> str:
-    fqdn = f"{dest}.nebula.5kw.li"
+    fqdn = f"{dest}.home.5kw.li"
     rsync("-avP", "--exclude", "result", ctx.abs_cwd, f"{fqdn}:nixos-config/")
     return fqdn
 

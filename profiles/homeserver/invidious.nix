@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
   services.invidious = {
     enable = true;
-    domain = "invidious.nebula.5kw.li";
+    domain = "invidious.home.5kw.li";
     port = 24325;
   };
 
@@ -11,7 +11,7 @@
   };
 
   services.caddy.extraConfig = ''
-    invidious.nebula.5kw.li {
+    invidious.home.5kw.li {
       reverse_proxy localhost:${toString config.services.invidious.port}
     }
   '';

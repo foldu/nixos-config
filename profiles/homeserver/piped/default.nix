@@ -1,9 +1,9 @@
 { config, lib, pkgs, ... }:
 let
   #internalIp = "10.88.0.42";
-  backendHostname = "pipedapi.nebula.5kw.li";
-  frontendHostname = "piped.nebula.5kw.li";
-  ytproxyHostname = "ytproxy.nebula.5kw.li";
+  backendHostname = "pipedapi.home.5kw.li";
+  frontendHostname = "piped.home.5kw.li";
+  ytproxyHostname = "ytproxy.home.5kw.li";
   ytproxySockdir = "/run/ytproxy";
   internalIp = "10.88.1.25";
   varnishPort = "4455";
