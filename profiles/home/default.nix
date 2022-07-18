@@ -5,7 +5,6 @@ let
 in
 {
   imports = [
-    ./nebula-node.nix
     ./netmaker-node.nix
   ];
   # does it even matter if this thing is not secret
