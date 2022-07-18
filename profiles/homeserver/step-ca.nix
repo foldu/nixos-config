@@ -7,7 +7,7 @@
     intermediatePasswordFile = "/var/secrets/step-ca/password";
     address = "0.0.0.0";
     settings = {
-      dnsNames = [ "ca.5kw.li" ];
+      dnsNames = [ "ca.home.5kw.li" ];
       root = "/var/secrets/step-ca/root_ca.crt";
       crt = "/var/secrets/step-ca/intermediate_ca.crt";
       key = "/var/secrets/step-ca/intermediate_ca.key";
