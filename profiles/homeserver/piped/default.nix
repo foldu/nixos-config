@@ -81,11 +81,13 @@ in
       };
 
       piped-varnish = {
-        inherit extraOptions;
         image = "varnish:7.0-alpine";
         volumes = [
-          "./varnish.vcl:/etc/varnish/default.vcl:ro"
+          "${./varnish.vcl}:/etc/varnish/default.vcl:ro"
         ];
+        environment.VARNISH_SIZE = "1G";
+        cmd = [ "varnishd" "-F" "-a" ":4030" "-b" "127.0.0.1:8181" ];
+        extraOptions = extraOptions ++ [ "--tmpfs" "/var/lib/varnish/varnishd:exec" ];
         dependsOn = [ "piped-backend" ];
       };
     };
@@ -122,7 +124,7 @@ in
     script = ''
       ${config.virtualisation.podman.package}/bin/podman pod exists piped-pott || \
         ${config.virtualisation.podman.package}/bin/podman pod create -n piped-pott \
-        -p '127.0.0.1:${frontendPort}:8080' \
+        -p '127.0.0.1:${frontendPort}:4030' \
         -p '127.0.0.1:${varnishPort}:80' \
         --ip ${internalIp}
     '';
