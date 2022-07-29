@@ -72,6 +72,7 @@ in
 
     # FIXME: use builtins.readDir
     xdg.configFile."fish/functions/tmp-clone.fish".source = ./config/fish/functions/tmp-clone.fish;
+    xdg.configFile."fish/functions/edit-link.fish".source = ./config/fish/functions/edit-link.fish;
     # FIXME: wrong format
     # xdg.configFile."fish/themes/kanagawa.fish".source = "${inputs.kanagawa-theme}/extras/kanagawa.fish";
 
