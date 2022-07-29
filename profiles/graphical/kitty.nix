@@ -12,6 +12,7 @@
       "ctrl+shift+k" = "next_tab";
     };
     settings = {
+      tab_bar_edge = "top";
       tab_bar_style = "powerline";
       enable_audio_bell = "no";
       disable_ligatures = "always";
