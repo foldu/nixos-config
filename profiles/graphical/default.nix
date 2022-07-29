@@ -36,7 +36,7 @@ in
     ./desktop-portal.nix
     ./fancy-login.nix
     ./fonts.nix
-    ./gnome.nix
+    ./gnome
     ./nfs.nix
     ./pipewire.nix
     ./qt5.nix
