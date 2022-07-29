@@ -1,7 +1,7 @@
 function tmp-clone
     if test $(count $argv) = 1 && set match $(string match -r '^(https?://github.com/[^/]+/([^/]+))' $argv[1])
         set url "$match[1]"
-        set repo_name "$match[2]"
+        set repo_name "$match[3]"
         set tmp_dir "/tmp/$repo_name"
         if test -d "$tmp_dir"
             echo "Already cloned"
