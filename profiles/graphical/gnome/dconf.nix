@@ -24,7 +24,7 @@
             name = "Open music player";
           }
           {
-            binding = "<Super>w";
+            binding = "<Super>z";
             command = "floating-term";
             name = "Open floating terminal";
           }
