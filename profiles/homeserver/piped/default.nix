@@ -10,6 +10,10 @@ let
   frontendPort = "4456";
 in
 {
+  imports = [
+    ./subscription_updater.nix
+  ];
+
   users.users.piped = {
     isSystemUser = true;
     group = "piped";
