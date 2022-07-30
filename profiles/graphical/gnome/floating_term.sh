@@ -2,10 +2,20 @@
 set -euo pipefail
 window_class="Floating Term"
 pid_file="/run/user/$UID/floating_term.pid"
+session=$(
+    cat <<EOF
+cd ~/nixos-config/
+launch fish
+new_tab
+cd ~/
+launch fish
+EOF
+)
 
 pid=$(xdotool search --class "$window_class" || true)
 if test -z "$pid"; then
-    exec kitty --class "$window_class"
+    echo "$session" | kitty --class "$window_class" --session -
+    exit 0
 fi
 
 if test -f "$pid_file"; then

@@ -13,7 +13,8 @@
     };
     settings = {
       tab_bar_edge = "top";
-      tab_bar_style = "powerline";
+      confirm_os_window_close = "2";
+      tab_bar_style = "slant";
       enable_audio_bell = "no";
       disable_ligatures = "always";
       update_check_interval = 0;
