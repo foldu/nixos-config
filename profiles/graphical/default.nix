@@ -83,7 +83,6 @@ in
       ./xdg-userdirs.nix
       ./xdg.nix
       ./beets.nix
-      ./firefox.nix
       ./mpv.nix
       ./kitty.nix
       inputs.pickwp.homeManagerModule

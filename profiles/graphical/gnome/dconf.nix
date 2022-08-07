@@ -147,7 +147,6 @@
             "appindicatorsupport@rgcjonas.gmail.com"
             "blur-my-shell@aunetx"
             "drive-menu@gnome-shell-extensions.gcampax.github.com"
-            "gnome-ui-tune@itstime.tech"
             "just-perfection-desktop@just-perfection"
             "pop-shell@system76.com"
             "user-theme@gnome-shell-extensions.gcampax.github.com"
@@ -182,11 +181,6 @@
           hacks-level = 1;
           sigma = 30;
           static-blur = true;
-        };
-
-        "org/gnome/shell/extensions/gnome-ui-tune" = {
-          hide-search = false;
-          increase-thumbnails-size = false;
         };
 
         "org/gnome/shell/extensions/pop-shell" = {

@@ -26,7 +26,6 @@
   environment.systemPackages = with pkgs.gnomeExtensions; [
     appindicator
     blur-my-shell
-    gnome-ui-tune
     just-perfection
     pop-shell
     volume-mixer
