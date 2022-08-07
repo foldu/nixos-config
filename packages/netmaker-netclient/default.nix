@@ -7,7 +7,7 @@
 }:
 
 let
-  version = "0.14.5";
+  version = "0.14.6";
 in
 buildGo118Module {
   pname = "netclient";
@@ -16,7 +16,7 @@ buildGo118Module {
     owner = "gravitl";
     repo = "netmaker";
     rev = "v${version}";
-    sha256 = "sha256-0OQJhHPGSWrY4eOpWI6cLOY4xokGnQKMfiYxm1kxiI0=";
+    sha256 = "sha256-rLIrc8Jm89dEyH/UJzXaHU59tegfQhMGc1E0SWMSPUU=";
   };
   ldflags = [
     "-X"
@@ -31,5 +31,5 @@ buildGo118Module {
       wrapProgram $out/bin/netclient --prefix PATH : "${binPath}"
     '';
   subPackages = [ "netclient" ];
-  vendorSha256 = "sha256-9HxM2gh5btk+cGUnTn+b9HzmrGDZVkPGB0ekMLaKPjc=";
+  vendorSha256 = "sha256-AfD5d0KDnVIEo4glf1IqTT33XvXbnMILhCbyslUdZiQ=";
 }
