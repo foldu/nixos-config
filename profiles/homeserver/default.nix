@@ -34,23 +34,23 @@
           # I DON'T GIVE A SHIT
           BORG_UNKNOWN_UNENCRYPTED_REPO_ACCESS_IS_OK = "1";
         };
-        repo = "ssh://borg@ceres.5kw.li/run/media/ext-ssd/backup";
+        repo = "ssh://borg@ceres.home.5kw.li/var/backup/postgres";
       } // args;
     in
     {
-      # this sucks but hey it works
-      postgresExt =
+      postgres =
         let
           tmpBackup = "/tmp/postgres_backup";
         in
         backupToExtSsd {
           preHook = ''
-            mkdir -p ${tmpBackup}
-            chown postgres:postgres ${tmpBackup}
-            chmod 700 ${tmpBackup}
-            ${pkgs.doas}/bin/doas -u postgres ${pkgs.bash}/bin/bash -c '${config.services.postgresql.package}/bin/pg_dumpall > ${tmpBackup}/database.sql'
+            ${pkgs.sudo}/bin/sudo -u postgres mkdir -p ${tmpBackup} -m 700
+            ${pkgs.sudo}/bin/sudo -u postgres ${config.services.postgresql.package}/bin/pg_dumpall > ${tmpBackup}/database.sql
           '';
-          paths = [ tmpBackup ];
+          postHook = ''
+            rm -rf ${tmpBackup}
+          '';
+          paths = [ "${tmpBackup}/database.sql" ];
           startAt = "daily";
         };
     };
