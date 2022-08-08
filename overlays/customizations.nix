@@ -5,18 +5,19 @@ final: prev: {
     '';
   }
   );
-  #gnome = prev.gnome // {
-  #  mutter = prev.gnome.mutter.overrideAttrs (
-  #    oldAttrs: rec {
-  #      # wayland windows strobe on 41.3
-  #      version = "41.2";
-  #      src = prev.pkgs.fetchurl {
-  #        url = "mirror://gnome/sources/mutter/${prev.lib.versions.major version}/${oldAttrs.pname}-${version}.tar.xz";
-  #        sha256 = "AN+oEvHEhtdKK3P0IEWuEYL5JGx3lNZ9dLXlQ+pwBhc=";
-  #      };
-  #    }
-  #  );
-  #};
+  gnome = prev.gnome // {
+    mutter = prev.gnome.mutter.overrideAttrs (
+      oldAttrs: rec {
+        patches = [
+          # dynamic triple/double buffering https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/1441
+          (prev.fetchpatch {
+            url = "https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2487.patch";
+            sha256 = "sha256-WvzhpUoCvhYncnPEeTpWnoeQWptmXQS6sA5fVcuOfDY=";
+          })
+        ];
+      }
+    );
+  };
   brave = prev.brave.overrideAttrs (oldAttrs:
     {
       postFixup =
