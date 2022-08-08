@@ -169,6 +169,7 @@
           theme = false;
           top-panel-position = 0;
           workspace = true;
+          workspace-switcher-should-show = true;
           workspace-switcher-size = 15;
         };
 
