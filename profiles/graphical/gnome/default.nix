@@ -29,6 +29,7 @@
     just-perfection
     pop-shell
     volume-mixer
+    gnome-ui-tune
   ];
 
   # disable laptop melting service

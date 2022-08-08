@@ -150,6 +150,7 @@
             "just-perfection-desktop@just-perfection"
             "pop-shell@system76.com"
             "user-theme@gnome-shell-extensions.gcampax.github.com"
+            "gnome-ui-tune@itstime.tech"
           ];
           disable-extension-version-validation = true;
         };
@@ -201,6 +202,12 @@
           show-virtual-streams = true;
           use-symbolic-icons = true;
         };
+
+        "org/gnome/shell/extensions/gnome-ui-tune" = {
+          hide-search = false;
+          increase-thumbnails-size = false;
+        };
+
 
         "org/gnome/desktop/peripherals/touchpad" = {
           natural-scroll = false;
