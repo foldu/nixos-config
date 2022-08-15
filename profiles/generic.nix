@@ -82,4 +82,7 @@
     { domain = "*"; item = "nofile"; type = "soft"; value = "65536"; }
     { domain = "*"; item = "nofile"; type = "hard"; value = "65536"; }
   ];
+
+  # disable nixos containers(doesn't work on older stateversions with podman containers)
+  boot.enableContainers = false;
 }
