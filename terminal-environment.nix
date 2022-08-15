@@ -18,7 +18,6 @@ let
     };
     withRuby = false;
     withNodeJs = false;
-    withPython = false;
     withPython3 = false;
   };
 in

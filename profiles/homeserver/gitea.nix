@@ -1,11 +1,13 @@
 { config, lib, pkgs, ... }: {
   services.gitea = {
     enable = true;
-    disableRegistration = true;
     domain = "git-home.5kw.li";
     rootUrl = "https://git-home.5kw.li";
     httpPort = 3032;
     settings = {
+      service = {
+        DISABLE_REGISTRATION = true;
+      };
       picture = {
         DISABLE_GRAVATAR = true;
         ENABLE_FEDERATED_AVATAR = false;
