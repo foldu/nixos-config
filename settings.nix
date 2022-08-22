@@ -65,9 +65,9 @@
       desktopFile = "org.gnome.Nautilus.desktop";
     };
     torrentClient = {
-      pkg = pkgs.transmission-remote-gtk;
-      command = "transmission-remote-gtk";
-      desktopFile = "io.github.TransmissionRemoteGtk.desktop";
+      pkg = pkgs.fragments;
+      command = "fragments";
+      desktopFile = "de.haeckerfelix.Fragments.desktop";
     };
   };
 }
