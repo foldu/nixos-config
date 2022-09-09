@@ -6,17 +6,17 @@ final: prev: {
   }
   );
   gnome = prev.gnome // {
-    mutter = prev.gnome.mutter.overrideAttrs (
-      oldAttrs: rec {
-        patches = [
-          # dynamic triple/double buffering https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/1441
-          (prev.fetchpatch {
-            url = "https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2487.patch";
-            sha256 = "sha256-WvzhpUoCvhYncnPEeTpWnoeQWptmXQS6sA5fVcuOfDY=";
-          })
-        ];
-      }
-    );
+    #mutter = prev.gnome.mutter.overrideAttrs (
+    #  oldAttrs: rec {
+    #    patches = [
+    #      # dynamic triple/double buffering https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/1441
+    #      (prev.fetchpatch {
+    #        url = "https://gitlab.gnome.org/GNOME/mutter/-/merge_requests/2487.patch";
+    #        sha256 = "sha256-WvzhpUoCvhYncnPEeTpWnoeQWptmXQS6sA5fVcuOfDY=";
+    #      })
+    #    ];
+    #  }
+    #);
   };
   brave = prev.brave.overrideAttrs (oldAttrs:
     {
