@@ -122,7 +122,8 @@ in
     	  }
         }
   '';
-  systemd.services.create-piped-pod = {
+
+  systemd.services.podman-piped-create-pod = {
     serviceConfig.Type = "oneshot";
     wantedBy = [ "podman-piped-backend.service" ];
     script = ''
