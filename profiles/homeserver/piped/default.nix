@@ -90,17 +90,17 @@ in
           "${./varnish.vcl}:/etc/varnish/default.vcl:ro"
         ];
         environment.VARNISH_SIZE = "1G";
-        cmd = [ "varnishd" "-F" "-a" ":4030" "-b" "127.0.0.1:8181" ];
+        cmd = [ "varnishd" "-F" "-a" ":4030" "-b" "127.0.0.1:8080" ];
         extraOptions = extraOptions ++ [ "--tmpfs" "/var/lib/varnish/varnishd:exec" ];
         dependsOn = [ "piped-backend" ];
       };
     };
   services.caddy.extraConfig = ''
         ${frontendHostname} {
-          reverse_proxy localhost:${varnishPort}
+          reverse_proxy localhost:${frontendPort}
         }
         ${backendHostname} {
-          reverse_proxy localhost:${frontendPort}
+          reverse_proxy localhost:${varnishPort}
         }
         ${ytproxyHostname} {
             @ytproxy path /videoplayback* /api/v4/* /api/manifest/*
@@ -128,8 +128,8 @@ in
     script = ''
       ${config.virtualisation.podman.package}/bin/podman pod exists piped-pott || \
         ${config.virtualisation.podman.package}/bin/podman pod create -n piped-pott \
-        -p '127.0.0.1:${frontendPort}:4030' \
-        -p '127.0.0.1:${varnishPort}:80' \
+        -p '127.0.0.1:${varnishPort}:4030' \
+        -p '127.0.0.1:${frontendPort}:80' \
         --ip ${internalIp}
     '';
   };
