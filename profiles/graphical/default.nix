@@ -114,7 +114,6 @@ in
       foldu-random-scripts
       ffmpeg
       yt-dlp
-      freetube
       pass
       pulsemixer
       zip
