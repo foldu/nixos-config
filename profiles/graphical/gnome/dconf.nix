@@ -1,9 +1,9 @@
 { pkgs, lib, ... }: {
   environment.systemPackages = [
     (pkgs.writeShellApplication {
-      name = "floating-term";
+      name = "xhide";
       runtimeInputs = with pkgs; [ kitty xdotool ];
-      text = builtins.readFile ./floating_term.sh;
+      text = builtins.readFile ./xhide.sh;
     })
   ];
 
@@ -20,12 +20,29 @@
           }
           {
             binding = "<Super>d";
-            command = "com.github.taiko2k.tauonmb";
+            command = "xhide --cmd com.github.taiko2k.tauonmb --name tauon --windowclass \"Tauon Music Box\"";
             name = "Open music player";
           }
           {
             binding = "<Super>z";
-            command = "floating-term";
+            command =
+              let
+                script = pkgs.writeText "floating-term" ''
+                  #!/bin/sh
+                  session=$(
+                      cat <<EOF
+                  cd ~/nixos-config/
+                  launch fish
+                  new_tab
+                  cd ~/
+                  launch fish
+                  EOF
+                  )
+
+                  echo "$session" | kitty --class "Floating Term" --session -
+                '';
+              in
+              "xhide --cmd \"sh ${script}\" --name floating-term --windowclass \"Floating Term\"";
             name = "Open floating terminal";
           }
         ];
