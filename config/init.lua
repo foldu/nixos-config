@@ -1,17 +1,6 @@
 -- TODO: somehow unify generic settings from config with this
--- FIXME: find keybind package that's in nixpkgs
 -- FIXME: don't just copypaste this from full neovim config
-
-vim.cmd([[
-    nnoremap Q <nop>
-    nnoremap <C-o> <nop>
-    vnoremap < <gv
-    vnoremap > >gv
-    nnoremap Y y$
-]])
-
 local opt = vim.opt
-local fn = vim.fn
 local cmd = vim.cmd
 local g = vim.g
 
@@ -32,8 +21,6 @@ cmd([[
 -- can't decide if split or nosplit is better
 opt.inccommand = "split"
 
--- use system clipboard
-opt.clipboard = "unnamedplus"
 opt.smarttab = true
 opt.tabstop = 8
 opt.shiftround = true
@@ -57,7 +44,7 @@ opt.hlsearch = true
 opt.incsearch = true
 
 -- always keep three lines visible when scrolling
-opt.scrolloff = 3
+opt.scrolloff = 8
 
 -- let nvim change terminal window title
 opt.title = true
@@ -87,7 +74,7 @@ local disabled_builtins = {
 	"zipPlugin",
 	"tar",
 	"tarPlugin",
-	"man",
+	-- "man",
 	"getscript",
 	"getscriptPlugin",
 	"vimball",
@@ -106,7 +93,20 @@ end
 opt.shell = "/bin/sh"
 -- make message as short as possible so I have to mash enter
 -- less often
-opt.shortmess = "atc"
+-- opt.shortmess = "atc"
+
+-- tries to copy the proper indentation
+opt.copyindent = true
+
+-- try to preserve indentation
+opt.preserveindent = true
+
+-- highlights current line
+opt.cursorline = true
+
+opt.cmdheight = 1
+
+vim.o.completeopt = "menu,menuone,noselect"
 
 local function autoqdelete(ft)
 	local au = string.format("autocmd FileType %s nnoremap <buffer> q :bdelete<CR>", ft)
@@ -121,9 +121,6 @@ cmd([[autocmd VimResized * wincmd =]])
 
 -- automatically go into insert mode when committing
 cmd([[autocmd FileType gitcommit startinsert]])
-
--- show line diagnostics on hover
-cmd([[autocmd CursorHold,CursorHoldI * lua vim.lsp.diagnostic.show_line_diagnostics({focusable = false})]])
 
 local function noformat(event)
 	cmd(string.format([[autocmd %s * setlocal formatoptions-=c formatoptions-=r formatoptions-=o]], event))
@@ -142,5 +139,9 @@ cmd([[
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |  exe "normal g`\"" | endif
  ]])
 
-vim.cmd([[autocmd TextYankPost * if v:event.operator is 'y' && v:event.regname is '' | OSCYankReg " | endif]])
-vim.cmd([[colorscheme gruvbox]])
+cmd([[
+    vnoremap <leader>y :OSCYank<CR>
+    nmap <leader>y <Plug>OSCYank
+]])
+
+cmd([[colorscheme gruvbox]])
