@@ -61,9 +61,6 @@
     email = "webmaster@5kw.li";
     globalConfig = ''
       servers :443 {
-          protocol {
-            experimental_http3
-          }
       }
     '';
   };
@@ -71,6 +68,11 @@
   services.nginx.recommendedOptimisation = true;
 
   networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
+
+  networking.firewall.allowedUDPPorts = [
     80
     443
   ];
