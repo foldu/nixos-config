@@ -61,7 +61,6 @@
   # why is this false by default?
   systemd.coredump.enable = true;
 
-  nix.package = pkgs.nixFlakes;
   nix.extraOptions = ''
     experimental-features = nix-command flakes
   '';

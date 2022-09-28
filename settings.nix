@@ -34,7 +34,7 @@
 
     };
     pdfViewer = {
-      pkg = pkgs.gnome3.evince;
+      pkg = pkgs.gnome.evince;
       command = "evince";
       desktopFile = "org.gnome.Evince.desktop";
     };
@@ -44,12 +44,12 @@
       desktopFile = "neovim.desktop";
     };
     imageViewer = {
-      pkg = pkgs.gnome3.eog;
+      pkg = pkgs.gnome.eog;
       command = "eog";
       desktopFile = "org.gnome.eog.desktop";
     };
     videoPlayer = {
-      pkg = pkgs.gnome3.totem;
+      pkg = pkgs.gnome.totem;
       command = "totem";
       desktopFile = "org.gnome.Totem.desktop";
     };
@@ -60,7 +60,7 @@
     };
     # nautilus sucks but dolphin has too many buttons
     fileBrowser = {
-      pkg = pkgs.gnome3.nautilus;
+      pkg = pkgs.gnome.nautilus;
       command = "nautilus";
       desktopFile = "org.gnome.Nautilus.desktop";
     };
