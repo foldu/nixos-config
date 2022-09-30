@@ -23,5 +23,6 @@ in
     gtk-font-name=Inter 11
     gtk-icon-theme-name=${iconTheme}
     gtk-theme-name=${gtkTheme}
+    gtk-hint-font-metrics=1
   '';
 }
