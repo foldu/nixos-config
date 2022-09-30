@@ -1,9 +1,5 @@
 { pkgs, lib, config, inputs, configSettings, ... }:
 let
-  theme = configSettings.theme;
-  systemConfig = config;
-  hostName = config.networking.hostName;
-
   lol = pkgs.stdenv.mkDerivation {
     pname = "ble-ws-central-dbus";
     src = ''
