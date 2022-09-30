@@ -33,6 +33,7 @@ in
       nodejs
       yarn
       gnumake
+      nil
       nodePackages.bash-language-server
       nodePackages.prettier
       nodePackages.pyright
