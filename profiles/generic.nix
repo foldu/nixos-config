@@ -8,7 +8,10 @@
     keyMap = "us";
   };
 
-  i18n.defaultLocale = "en_US.UTF-8";
+  i18n = {
+    defaultLocale = "en_US.UTF-8";
+    supportedLocales = [ "de_DE.UTF-8/UTF-8" ];
+  };
 
   time.timeZone = "Europe/Amsterdam";
 

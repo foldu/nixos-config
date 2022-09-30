@@ -142,7 +142,6 @@ in
       #pgcli
       catclock
       cookiecutter
-      lollypop
       element-desktop
       minicom
     ];

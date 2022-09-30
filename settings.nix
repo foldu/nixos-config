@@ -48,17 +48,21 @@
       command = "eog";
       desktopFile = "org.gnome.eog.desktop";
     };
+    emailClient = {
+      pkg = pkgs.gnome.geary;
+      command = "geary";
+      desktopFile = "x-scheme-handler/mailto=org.gnome.Geary.desktop";
+    };
     videoPlayer = {
-      pkg = pkgs.gnome.totem;
-      command = "totem";
-      desktopFile = "org.gnome.Totem.desktop";
+      pkg = pkgs.celluloid;
+      command = "celluloid";
+      desktopFile = "io.github.celluloid_player.Celluloid.desktop";
     };
     graphicalEditor = {
       pkg = null;
-      command = "emacsclient";
-      desktopFile = "emacsclient.desktop";
+      command = "nvim";
+      desktopFile = "neovim.desktop";
     };
-    # nautilus sucks but dolphin has too many buttons
     fileBrowser = {
       pkg = pkgs.gnome.nautilus;
       command = "nautilus";
