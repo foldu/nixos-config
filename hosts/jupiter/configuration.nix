@@ -22,5 +22,11 @@
     MAKEFLAGS = "-j 32";
   };
 
+  fileSystems."/var/lib/docker" = {
+    device = "/home/docker";
+    fsType = "none";
+    options = [ "defaults" "bind" ];
+  };
+
   system.stateVersion = "20.09";
 }
