@@ -146,7 +146,7 @@ if os.getenv("SSH_TTY") ~= nil then
 	vim.api.nvim_create_autocmd("TextYankPost", {
 		callback = function()
 			if vim.v.event.operator == "y" and vim.v.event.regname == "+" then
-				vim.cmd([[:OSCYank<CR>]])
+				vim.cmd([[OSCYankReg +]])
 			end
 		end,
 	})
