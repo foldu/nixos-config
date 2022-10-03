@@ -139,9 +139,17 @@ cmd([[
     au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |  exe "normal g`\"" | endif
  ]])
 
-cmd([[
-    vnoremap <leader>y :OSCYank<CR>
-    nmap <leader>y <Plug>OSCYank
-]])
+vim.keymap.set("n", "+", '"+')
+vim.keymap.set("x", "+", '"+')
+
+if os.getenv("SSH_TTY") ~= nil then
+	vim.api.nvim_create_autocmd("TextYankPost", {
+		callback = function()
+			if vim.v.event.operator == "y" and vim.v.event.regname == "+" then
+				vim.cmd([[:OSCYank<CR>]])
+			end
+		end,
+	})
+end
 
 cmd([[colorscheme gruvbox]])
