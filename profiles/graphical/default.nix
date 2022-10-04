@@ -115,7 +115,8 @@ in
       zip
       dua
       imagemagick
-      ffcut
+      # FIXME: poetry broken
+      #ffcut
       gnupg
       brave
       chromium
