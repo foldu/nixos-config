@@ -27,7 +27,7 @@ buildGo118Module {
   nativeBuildInputs = [ makeWrapper ];
   postInstall =
     let
-      binPath = lib.strings.makeBinPath [ wireguard-tools sysctl iptables ];
+      binPath = lib.strings.makeBinPath [ wireguard-tools sysctl iptables iproute2 ];
     in
     ''
       wrapProgram $out/bin/netclient --prefix PATH : "${binPath}"
