@@ -4,10 +4,11 @@
 , makeWrapper
 , wireguard-tools
 , sysctl
+, iptables
 }:
 
 let
-  version = "0.14.6";
+  version = "0.16.0";
 in
 buildGo118Module {
   pname = "netclient";
@@ -16,7 +17,7 @@ buildGo118Module {
     owner = "gravitl";
     repo = "netmaker";
     rev = "v${version}";
-    sha256 = "sha256-rLIrc8Jm89dEyH/UJzXaHU59tegfQhMGc1E0SWMSPUU=";
+    sha256 = "sha256-kXFPXEVZyLMtzkJz1i2iA0XXICaet0X8f9B9MF3en+4=";
   };
   ldflags = [
     "-X"
@@ -25,11 +26,11 @@ buildGo118Module {
   nativeBuildInputs = [ makeWrapper ];
   postInstall =
     let
-      binPath = lib.strings.makeBinPath [ wireguard-tools sysctl ];
+      binPath = lib.strings.makeBinPath [ wireguard-tools sysctl iptables ];
     in
     ''
       wrapProgram $out/bin/netclient --prefix PATH : "${binPath}"
     '';
   subPackages = [ "netclient" ];
-  vendorSha256 = "sha256-AfD5d0KDnVIEo4glf1IqTT33XvXbnMILhCbyslUdZiQ=";
+  vendorSha256 = "sha256-3FO5UWFVZnux9zxdAKyvAgxXi6M3uL6oehhJUvrztiI=";
 }
