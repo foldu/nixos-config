@@ -5,6 +5,7 @@
 , wireguard-tools
 , sysctl
 , iptables
+, iproute2
 }:
 
 let
