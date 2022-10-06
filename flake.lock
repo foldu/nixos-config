@@ -215,11 +215,11 @@
     },
     "flake-utils_5": {
       "locked": {
-        "lastModified": 1638122382,
-        "narHash": "sha256-sQzZzAbvKEqN9s0bzWuYmRaA03v40gaJ4+iL1LXjaeI=",
+        "lastModified": 1659877975,
+        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "74f7e4319258e287b0f9cb95426c9853b282730b",
+        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
         "type": "github"
       },
       "original": {
@@ -447,17 +447,20 @@
     },
     "random-scripts": {
       "inputs": {
+        "crane": [
+          "crane"
+        ],
         "flake-utils": "flake-utils_5",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1644246117,
-        "narHash": "sha256-sNfDGDTnzoYPNR4TJDtfLxjjhZ9WY1D3mZnQUHrtbgw=",
-        "ref": "master",
-        "rev": "b0ea17750f6d39ec83518a662867894430435eaf",
-        "revCount": 4,
+        "lastModified": 1665079774,
+        "narHash": "sha256-mtX46E8inmILamVCx3LzNh+8kiFpq5MlbGucfRuaLq4=",
+        "ref": "refs/heads/master",
+        "rev": "d55ddcaf4581c532a80a42a06c34fec65e5a8d09",
+        "revCount": 11,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/random-scripts"
       },
