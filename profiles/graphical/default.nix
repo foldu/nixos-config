@@ -43,6 +43,15 @@ in
 
   programs.neovim-ide.enable = true;
 
+  services.printing = {
+    enable = true;
+
+    clientConf = ''
+      ServerName ceres.home.5kw.li
+      Encryption Never
+    '';
+  };
+
   environment.sessionVariables = {
     # FIXME: temporary fix until I figure out why some gtk applications
     # ignore both settings.ini and the thing in dconf
