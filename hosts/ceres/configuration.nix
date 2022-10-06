@@ -32,6 +32,8 @@
     startWhenNeeded = false;
   };
 
+  networking.firewall.allowedTCPPorts = [ 631 ];
+
   networking.interfaces.eth0.useDHCP = true;
 
   services.borgbackup.repos = {
