@@ -456,11 +456,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1665083790,
-        "narHash": "sha256-l0uxz3CEEHC83vi5pRNSXwyZI+zwv3ntJWM6mT3vAE0=",
+        "lastModified": 1665127977,
+        "narHash": "sha256-Lvbz8VCF/q6eYTGxL1Rm+tG5Ou/anrRJQe6/vwZiHW4=",
         "ref": "refs/heads/master",
-        "rev": "20a6249da685ebafe9226d5799536bc0d91c6dcd",
-        "revCount": 16,
+        "rev": "b4b33d2adc59d407e450431e68e36bafe1e990ef",
+        "revCount": 20,
         "type": "git",
         "url": "https://git-home.5kw.li/foldu/random-scripts"
       },
