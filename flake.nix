@@ -91,6 +91,7 @@
       url = "https://git-home.5kw.li/foldu/random-scripts";
       type = "git";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.crane.follows = "crane";
     };
 
     ffcut = {
