@@ -6,8 +6,8 @@
       size = 12;
     };
     devMonospace = {
-      pkg = pkgs.ubuntu_font_family;
-      name = "Ubuntu Mono";
+      pkg = pkgs.iosevka;
+      name = "Iosevka";
       size = 12;
     };
     documents = {

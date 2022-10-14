@@ -23,6 +23,7 @@
       ubuntu_font_family
       ibm-plex
       fira-mono
+      iosevka
       (nerdfonts.override {
         fonts = [
           "3270"
