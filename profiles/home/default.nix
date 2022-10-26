@@ -29,9 +29,13 @@ in
     mandatoryFeatures = [ ];
   }];
 
-  nix.extraOptions = ''
-    substituters = https://nix-cache-cache.5kw.li
-  '';
+  nix.settings = {
+    substituters = [
+      "http://nix-cache.home.5kw.li:5000"
+      "https://nix-cache-cache.5kw.li"
+    ];
+    trusted-public-keys = [ "nix-cache.home.5kw.li:QexhkxGRd2H38Nl12jeZmUNZJk+4272/xYmMcFraunk=" ];
+  };
 
   users.users.barnabas = {
     openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ+TsvKvdWG+9KLVeg5N4y1Ce1jr/fP3ELTHVWLxZOR" ];

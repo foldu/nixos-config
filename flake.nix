@@ -99,6 +99,10 @@
       type = "git";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-serve-ng = {
+      url = "github:aristanetworks/nix-serve-ng";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -121,6 +125,7 @@
     , kanagawa-theme
     , random-scripts
     , ffcut
+    , nix-serve-ng
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
@@ -147,7 +152,7 @@
             (final: prev: otherPkgs)
             (import ./overlays)
             (import ./overlays/customizations.nix)
-          ];
+          ] ++ nix-serve-ng.overlays.override;
         config.allowUnfree = true;
       };
       mkHost = { system, hostName, modules }:

@@ -28,5 +28,12 @@
     options = [ "defaults" "bind" ];
   };
 
+  services.nix-serve = {
+    enable = true;
+    secretKeyFile = "/var/secrets/cache-priv-key.pem";
+  };
+
+  networking.firewall.allowedTCPPorts = [ 5000 ];
+
   system.stateVersion = "20.09";
 }
