@@ -32,6 +32,7 @@
   };
 
   services.postgresql.package = pkgs.postgresql_14;
+  boot.kernel.sysctl."net.core.rmem_max" = 2500000;
 
   system.stateVersion = "20.09";
 }

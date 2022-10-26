@@ -42,14 +42,14 @@
       User = "step-ca";
       Group = "step-ca";
       DynamicUser = lib.mkForce false;
-      SystemCallArchitectures = "native";
-      SystemCallFilter = [
-        "@system-service"
-        "~@privileged"
-        "~@chown"
-        "~@aio"
-        "~@resources"
-      ];
+      #SystemCallArchitectures = "native";
+      #SystemCallFilter = [
+      #  "@system-service"
+      #  "~@privileged"
+      #  "~@chown"
+      #  "~@aio"
+      #  "~@resources"
+      #];
     };
   };
 }
