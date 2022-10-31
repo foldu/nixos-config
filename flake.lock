@@ -39,11 +39,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1644245961,
-        "narHash": "sha256-pCRVrg6ExrMLbl5mUbnH0bP5b7RGky2nYOM9H6I7VZs=",
+        "lastModified": 1667208952,
+        "narHash": "sha256-s2nfEr7K6B241V/rC1NZhLo2ZJELPwFRKpwfqb7QLrw=",
         "owner": "foldu",
         "repo": "blocklistdownloadthing",
-        "rev": "0df3bd2c9ce1a6543902ed12b31735f3fd9151aa",
+        "rev": "1ac41583b55f7d31c6057c75fbf121cdbee339c1",
         "type": "github"
       },
       "original": {
@@ -296,11 +296,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1651488557,
-        "narHash": "sha256-RO3mxLKhd5LP4wXVcjs7xa6h5dduR++mGYlvIT5HiZ8=",
+        "lastModified": 1667209839,
+        "narHash": "sha256-qSTHSJLMje3mbQXzjNAapgRC1WdDEcIlySPNbQVuv8Q=",
         "owner": "foldu",
         "repo": "huh",
-        "rev": "4ee2a9370e8fb2665d94b581e612a8c1fe479473",
+        "rev": "1aee8d791d76b28038cea098a9f648f945eb9297",
         "type": "github"
       },
       "original": {
