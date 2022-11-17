@@ -14,6 +14,7 @@
     ./transmission.nix
     ./vaultwarden.nix
     ./piped
+    ./unifi.nix
     "${inputs.homeserver-sekret}"
   ];
 

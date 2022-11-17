@@ -52,12 +52,6 @@ in
     '';
   };
 
-  environment.sessionVariables = {
-    # FIXME: temporary fix until I figure out why some gtk applications
-    # ignore both settings.ini and the thing in dconf
-    GTK_THEME = "Yaru-dark";
-  };
-
   documentation = {
     dev.enable = true;
     info.enable = false;
