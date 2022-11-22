@@ -119,10 +119,6 @@
           automatic-timezone = true;
         };
 
-        "org/gnome/shell/extensions/user-theme" = {
-          name = "Yaru-dark";
-        };
-
         "org/gnome/desktop/wm/keybindings" = {
           # remove unused bindings so they don't conflict
           switch-to-workspace-up = "@as []";
@@ -166,7 +162,6 @@
             "drive-menu@gnome-shell-extensions.gcampax.github.com"
             "just-perfection-desktop@just-perfection"
             "pop-shell@system76.com"
-            "user-theme@gnome-shell-extensions.gcampax.github.com"
             "gnome-ui-tune@itstime.tech"
           ];
           disable-extension-version-validation = true;
