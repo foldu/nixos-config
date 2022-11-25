@@ -37,7 +37,7 @@ in
     substituters = [
       "https://nix-cache.home.5kw.li"
       "https://cache.nixos.org"
-      "https://nix-cache-cache.5kw.li"
+      #"https://nix-cache-cache.5kw.li"
     ];
     trusted-public-keys = [ "nix-cache.home.5kw.li:QexhkxGRd2H38Nl12jeZmUNZJk+4272/xYmMcFraunk=" ];
   };
