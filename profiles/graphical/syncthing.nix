@@ -20,13 +20,11 @@ in
       syncthingDevices = {
         jupiter = {
           id = "O7RPI7X-O7EEEJO-TH55KF5-64PE6MS-RPFJZ5B-LIA2ZEW-GJVBCHS-76W54AP";
-          # FIXME: use vpn
-          addresses = [ "tcp://${devices.jupiter.ip}:${toString syncthingPort}" ];
+          addresses = [ "tcp://${devices.jupiter.vip}:${toString syncthingPort}" ];
         };
         mars = {
           id = "SS573IT-UI75K4S-RLJYSXJ-5AEAYD6-QMFURGD-J75C5E5-O7DWS4G-35KOXAN";
-          # FIXME: use vpn
-          addresses = [ "tcp://${devices.mars.ip}:${toString syncthingPort}" ];
+          addresses = [ "tcp://${devices.mars.vip}:${toString syncthingPort}" ];
         };
       };
       otherDevices = lib.filterAttrs (k: _: k != config.networking.hostName) syncthingDevices;
