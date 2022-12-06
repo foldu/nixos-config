@@ -16,7 +16,7 @@
 
     pickwp = {
       type = "git";
-      url = "https://git-home.5kw.li/foldu/pickwp";
+      url = "https://git.home.5kw.li/foldu/pickwp";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.crane.follows = "crane";
     };
@@ -32,7 +32,7 @@
 
     atchr = {
       type = "git";
-      url = "https://git-home.5kw.li/foldu/atchr";
+      url = "https://git.home.5kw.li/foldu/atchr";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.crane.follows = "crane";
       inputs.flake-utils.follows = "flake-utils";
@@ -61,13 +61,13 @@
 
     homeserver-sekret = {
       type = "git";
-      url = "https://git-home.5kw.li/foldu/sekret";
+      url = "https://git.home.5kw.li/foldu/sekret";
       flake = false;
     };
 
     wpp-gtk = {
       type = "git";
-      url = "https://git-home.5kw.li/foldu/wpp-gtk";
+      url = "https://git.home.5kw.li/foldu/wpp-gtk";
       inputs.flake-utils.follows = "flake-utils";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -88,17 +88,12 @@
     };
 
     random-scripts = {
-      url = "https://git-home.5kw.li/foldu/random-scripts";
+      url = "https://git.home.5kw.li/foldu/random-scripts";
       type = "git";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.crane.follows = "crane";
     };
 
-    ffcut = {
-      url = "https://git-home.5kw.li/foldu/ffcut";
-      type = "git";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     nix-serve-ng = {
       url = "github:aristanetworks/nix-serve-ng";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -124,7 +119,6 @@
     , kitty-themes
     , kanagawa-theme
     , random-scripts
-    , ffcut
     , nix-serve-ng
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
@@ -144,7 +138,6 @@
               wpp-gtk
               huh
               random-scripts
-              ffcut
             ];
           in
           [

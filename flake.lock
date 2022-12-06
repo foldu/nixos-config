@@ -13,17 +13,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1661267788,
-        "narHash": "sha256-/O+3gf9v9jgsJ4Of7Xv8+Ggn/enbIQr9X1IJdfgnbV8=",
+        "lastModified": 1670351052,
+        "narHash": "sha256-kXJ8zU/zCqMVnOgIRN59f37C9otm887KBeEqoKgYD6c=",
         "ref": "refs/heads/master",
-        "rev": "471e5301915511207cd2bf8191c8f172bce59d02",
-        "revCount": 94,
+        "rev": "a91d043d7474ea23bfdf2c83c0a547ec51a0805c",
+        "revCount": 100,
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/atchr"
+        "url": "https://git.home.5kw.li/foldu/atchr"
       },
       "original": {
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/atchr"
+        "url": "https://git.home.5kw.li/foldu/atchr"
       }
     },
     "blocklistdownloadthing": {
@@ -99,27 +99,6 @@
         "owner": "foldu",
         "repo": "eunzip",
         "type": "github"
-      }
-    },
-    "ffcut": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ],
-        "utils": "utils"
-      },
-      "locked": {
-        "lastModified": 1654284257,
-        "narHash": "sha256-KgljC5bYV3LSzMp7ul8ors1eVt0vJLZa7hcNVLTgbNU=",
-        "ref": "master",
-        "rev": "c02aae815a99a0eb9ba8bc109b611723e68829ef",
-        "revCount": 2,
-        "type": "git",
-        "url": "https://git-home.5kw.li/foldu/ffcut"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git-home.5kw.li/foldu/ffcut"
       }
     },
     "flake-compat": {
@@ -250,7 +229,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_2"
+        "utils": "utils"
       },
       "locked": {
         "lastModified": 1670280307,
@@ -270,17 +249,17 @@
     "homeserver-sekret": {
       "flake": false,
       "locked": {
-        "lastModified": 1666032465,
-        "narHash": "sha256-9zd4QD2zjdiKAr+0YFzA+1G5a9esDtysNQ8b2I1qYGE=",
+        "lastModified": 1669588081,
+        "narHash": "sha256-lABWaAj3CpAygKqckG1TbaHxomOkv61K6L48Ad+sha4=",
         "ref": "refs/heads/master",
-        "rev": "d31a55b484cdf43f24516f9427d87ff212a16648",
-        "revCount": 75,
+        "rev": "16782290dbc6c2e917efa6dbf81255da4d23c984",
+        "revCount": 76,
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/sekret"
+        "url": "https://git.home.5kw.li/foldu/sekret"
       },
       "original": {
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/sekret"
+        "url": "https://git.home.5kw.li/foldu/sekret"
       }
     },
     "huh": {
@@ -413,7 +392,7 @@
         "nixpkgs": [
           "nixpkgs"
         ],
-        "utils": "utils_3"
+        "utils": "utils_2"
       },
       "locked": {
         "lastModified": 1663971844,
@@ -471,17 +450,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1667143566,
-        "narHash": "sha256-f+gVhdU4Jyo+fG0KPW4Cl5ypBvDjynvOxhOzkbz9ZZo=",
+        "lastModified": 1670350725,
+        "narHash": "sha256-QtI9xsNzn/dVRjaxe3yPzHSAe8TZ11mTX7lmzb/u/oM=",
         "ref": "refs/heads/master",
-        "rev": "3584e688beeae5604590b615929aa64c5d85fc0e",
-        "revCount": 234,
+        "rev": "db85ed25bfdb3a74896644d903c1820dc7b3f951",
+        "revCount": 235,
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/pickwp"
+        "url": "https://git.home.5kw.li/foldu/pickwp"
       },
       "original": {
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/pickwp"
+        "url": "https://git.home.5kw.li/foldu/pickwp"
       }
     },
     "random-scripts": {
@@ -495,17 +474,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1667062737,
-        "narHash": "sha256-odUOYMg5yg4QSYlWFUtO4NZrQgPgUFai0M3KcDgJlMU=",
+        "lastModified": 1670351110,
+        "narHash": "sha256-Aqlfbc9/cac+ophJwDMWHnEKcy8vjQo+gGFFzxc6CCQ=",
         "ref": "refs/heads/master",
-        "rev": "9bf2a8116fba06eb51ce3eaa522b801e12b0ad99",
-        "revCount": 28,
+        "rev": "556b93efcd34f15c1df290d5a9e4e5b541f528c7",
+        "revCount": 29,
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/random-scripts"
+        "url": "https://git.home.5kw.li/foldu/random-scripts"
       },
       "original": {
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/random-scripts"
+        "url": "https://git.home.5kw.li/foldu/random-scripts"
       }
     },
     "root": {
@@ -514,7 +493,6 @@
         "blocklistdownloadthing": "blocklistdownloadthing",
         "crane": "crane",
         "eunzip": "eunzip",
-        "ffcut": "ffcut",
         "flake-utils": "flake-utils_2",
         "home-manager": "home-manager",
         "homeserver-sekret": "homeserver-sekret",
@@ -558,21 +536,6 @@
     },
     "utils": {
       "locked": {
-        "lastModified": 1649676176,
-        "narHash": "sha256-OWKJratjt2RW151VUlJPRALb7OU2S5s+f0vLj4o1bHM=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "a4b154ebbdc88c8498a5c7b01589addc9e9cb678",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "utils_2": {
-      "locked": {
         "lastModified": 1667395993,
         "narHash": "sha256-nuEHfE/LcWyuSWnS8t12N1wc105Qtau+/OdUAjtQ0rA=",
         "owner": "numtide",
@@ -586,7 +549,7 @@
         "type": "github"
       }
     },
-    "utils_3": {
+    "utils_2": {
       "locked": {
         "lastModified": 1659877975,
         "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
@@ -617,11 +580,11 @@
         "rev": "998ca764f1c213fd0f82e94e1506ac632a3998c0",
         "revCount": 44,
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/wpp-gtk"
+        "url": "https://git.home.5kw.li/foldu/wpp-gtk"
       },
       "original": {
         "type": "git",
-        "url": "https://git-home.5kw.li/foldu/wpp-gtk"
+        "url": "https://git.home.5kw.li/foldu/wpp-gtk"
       }
     }
   },
