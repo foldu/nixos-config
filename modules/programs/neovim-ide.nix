@@ -39,19 +39,10 @@ in
       nodePackages.pyright
       nodePackages.typescript
       nodePackages.typescript-language-server
+      nodePackages.eslint
       nodePackages.yaml-language-server
       nodePackages.vscode-langservers-extracted
       plantuml
-      (ruby_3_0.withPackages (p: with p; [
-        pry
-        solargraph
-        sqlite3
-        nokogiri
-        httpclient
-        slop
-        clamp
-        rubocop
-      ]))
       rustfmt
       taplo-cli
       shellcheck
