@@ -6,8 +6,8 @@
       size = 12;
     };
     devMonospace = {
-      pkg = pkgs.iosevka;
-      name = "Iosevka";
+      pkg = pkgs.fira-mono;
+      name = "Fira Mono";
       size = 12;
     };
     documents = {
