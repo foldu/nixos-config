@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 
 {
-  hardware.opengl.extraPackages = with pkgs; [
+  hardware.opengl.extraPackages = with pkgs; lib.mkForce [
     #rocm-opencl-icd
   ];
 
