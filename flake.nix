@@ -98,6 +98,11 @@
       url = "github:aristanetworks/nix-serve-ng";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    peerix = {
+      url = "github:cid-chan/peerix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -120,6 +125,7 @@
     , kanagawa-theme
     , random-scripts
     , nix-serve-ng
+    , peerix
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
@@ -138,6 +144,7 @@
               wpp-gtk
               huh
               random-scripts
+              peerix
             ];
           in
           [
