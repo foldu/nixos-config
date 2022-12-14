@@ -9,7 +9,6 @@
     ./jellyfin.nix
     ./libreddit.nix
     ./nitter.nix
-    ./secrets.nix
     ./step-ca.nix
     ./transmission.nix
     ./vaultwarden.nix

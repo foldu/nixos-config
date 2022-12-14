@@ -7,6 +7,7 @@ in
   imports = [
     ./netmaker-node.nix
     ./peerix.nix
+    ./secrets.nix
   ];
   # does it even matter if this thing is not secret
   security.pki.certificateFiles = [ ../../home_ca.crt ];
