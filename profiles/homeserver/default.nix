@@ -5,7 +5,6 @@
     ./file-server.nix
     ./gitea.nix
     ./hydra.nix
-    ./invidious.nix
     ./jellyfin.nix
     ./libreddit.nix
     ./nitter.nix
