@@ -18,7 +18,7 @@ in
   services.peerix = {
     enable = true;
     privateKeyFile = privateKey;
-    publicKey = "peerix-mars:jPOXX3+AykMdjmAabOPlkm3Mh54ETKV38caHNaTmt3E= peerix-saturn:CuK1LG2ACIXAhCxG1e1V3p6wXcebOUltcI9Wo6MIvFg=";
+    publicKey = "peerix-mars:jPOXX3+AykMdjmAabOPlkm3Mh54ETKV38caHNaTmt3E= peerix-saturn:CuK1LG2ACIXAhCxG1e1V3p6wXcebOUltcI9Wo6MIvFg= peerix-jupiter:XkzYiGV5m7D4t8jKQJxmF0FGp9igpSSvfxBRi2a4HbI= peerix-ceres:Xx1DvgjuKT+W6MQD5RjbgS7Z3W0ABrbW0AtPXgX7Jq0=";
     openFirewall = true;
     extraArguments = "--timeout 500";
   };
