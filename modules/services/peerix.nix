@@ -23,11 +23,11 @@ in
         '';
       };
 
-      publicKey = lib.mkOption {
-        type = types.nullOr types.str;
-        default = null;
+      publicKeys = lib.mkOption {
+        type = types.listOf types.str;
+        default = [ ];
         description = ''
-          The public key to sign the derivations with.
+          Public keys expected in peerix network
         '';
       };
 
@@ -93,7 +93,8 @@ in
         PrivateIPC = true;
         PrivateUsers = true;
 
-        SystemCallFilters = [
+        SystemCallFilter = [
+          "@system-service"
           "@aio"
           "@basic-io"
           "@file-system"
@@ -102,7 +103,6 @@ in
           "@network-io"
           "@timer"
           "@signal"
-          "@alarm"
         ];
         SystemCallErrorNumber = "EPERM";
 
@@ -144,9 +144,7 @@ in
         substituters = [
           "http://127.0.0.1:12304/"
         ];
-        trusted-public-keys = [
-          (lib.mkIf (cfg.publicKey != null) cfg.publicKey)
-        ];
+        trusted-public-keys = cfg.publicKeys;
       };
       extraOptions = lib.mkIf (cfg.globalCacheTTL != null) ''
         narinfo-cache-negative-ttl = ${toString cfg.globalCacheTTL}
