@@ -1,6 +1,6 @@
-{ config, pkgs, lib, ... }: {
+{ config, pkgs, lib, inputs, ... }: {
   imports = [
-    ../../profiles/amd-gpu.nix
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
     ../../profiles/bluetooth.nix
     ../../profiles/graphical
     ../../profiles/home

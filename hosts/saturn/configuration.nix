@@ -1,5 +1,7 @@
-{ config, lib, pkgs, home-network, ... }: {
+{ config, lib, pkgs, home-network, inputs, ... }: {
   imports = [
+    inputs.nixos-hardware.nixosModules.common-cpu-amd
+    inputs.nixos-hardware.nixosModules.common-gpu-amd
     ../../profiles/home
     ../../profiles/homeserver
     ../../profiles/server.nix

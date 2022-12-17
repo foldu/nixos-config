@@ -202,7 +202,6 @@
         mars = {
           system = "x86_64-linux";
           modules = [
-            nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
             ./hosts/mars/configuration.nix
           ];
         };
@@ -210,9 +209,6 @@
         jupiter = {
           system = "x86_64-linux";
           modules = [
-            nixos-hardware.nixosModules.common-cpu-amd
-            nixos-hardware.nixosModules.common-gpu-amd
-            nixos-hardware.nixosModules.common-pc-ssd
             ./hosts/jupiter/configuration.nix
           ];
         };
@@ -227,8 +223,6 @@
         saturn = {
           system = "x86_64-linux";
           modules = [
-            nixos-hardware.nixosModules.common-cpu-amd
-            nixos-hardware.nixosModules.common-gpu-amd
             ./hosts/saturn/configuration.nix
           ];
         };
