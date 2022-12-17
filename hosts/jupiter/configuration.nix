@@ -10,6 +10,7 @@
     ../../profiles/x86.nix
     ./manual-hardware-configuration.nix
     ../../profiles/builder.nix
+    ../../profiles/butter.nix
   ];
 
   boot.loader = {
@@ -28,8 +29,6 @@
   environment.sessionVariables = {
     MAKEFLAGS = "-j 32";
   };
-
-  virtualisation.docker.storageDriver = "btrfs";
 
   system.stateVersion = "23.05"; # Did you read the comment?
   # no

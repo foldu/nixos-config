@@ -6,6 +6,7 @@
     ../../profiles/home
     ../../profiles/laptop.nix
     ../../profiles/x86.nix
+    ../../profiles/butter.nix
     ./manual-hardware-configuration.nix
   ];
 
@@ -25,18 +26,10 @@
     };
   };
 
-
-  services.btrfs.autoScrub = {
-    enable = true;
-    fileSystems = [ "/" ];
-  };
-
   environment.sessionVariables = {
     MAKEFLAGS = "-j 16";
   };
 
-
-  virtualisation.docker.storageDriver = "btrfs";
 
   system.stateVersion = "20.09";
 }
