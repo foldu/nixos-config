@@ -35,5 +35,8 @@
     MAKEFLAGS = "-j 16";
   };
 
+
+  virtualisation.docker.storageDriver = "btrfs";
+
   system.stateVersion = "20.09";
 }

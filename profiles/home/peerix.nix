@@ -18,6 +18,7 @@ in
   services.peerix = {
     enable = true;
     user = "peerix";
+    group = "peerix";
     privateKeyFile = privateKey;
     publicKeys = [
       "peerix-mars:jPOXX3+AykMdjmAabOPlkm3Mh54ETKV38caHNaTmt3E="
