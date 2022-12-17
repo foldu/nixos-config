@@ -30,6 +30,7 @@
     MAKEFLAGS = "-j 16";
   };
 
+  zramSwap.enable = true;
 
   system.stateVersion = "20.09";
 }
