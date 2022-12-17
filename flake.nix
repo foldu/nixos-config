@@ -103,6 +103,11 @@
       url = "github:cid-chan/peerix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-stuff = {
+      url = "github:foldu/nix-stuff";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -126,6 +131,7 @@
     , random-scripts
     , nix-serve-ng
     , peerix
+    , nix-stuff
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
     # different NixOS hosts in the same flake or you'll get a headache
@@ -138,6 +144,7 @@
         overlays =
           let
             otherPkgs = lib.foldl (acc: x: acc // x.packages.${system}) { } [
+              nix-stuff
               eunzip
               blocklistdownloadthing
               pickwp
@@ -165,25 +172,27 @@
         lib.nixosSystem {
           inherit system pkgs;
           specialArgs = { inherit inputs home-network configSettings mylib; };
-          modules = [
-            (
-              { pkgs, ... }: {
-                imports = [
-                  ./modules
-                ];
-                networking.hostName = hostName;
-                # Let 'nixos-version --json' know about the Git revision
-                # of this flake.
-                system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-                nix.registry = {
-                  nixpkgs.flake = nixpkgs;
-                };
-                environment.systemPackages = with pkgs; [
-                  git
-                ];
-              }
-            )
-          ] ++ modules;
+          modules =
+            [
+              (
+                { pkgs, ... }: {
+                  imports = [
+                    ./modules
+                    nix-stuff.nixosModules.netclient
+                  ];
+                  networking.hostName = hostName;
+                  # Let 'nixos-version --json' know about the Git revision
+                  # of this flake.
+                  system.configurationRevision = lib.mkIf (self ? rev) self.rev;
+                  nix.registry = {
+                    nixpkgs.flake = nixpkgs;
+                  };
+                  environment.systemPackages = with pkgs; [
+                    git
+                  ];
+                }
+              )
+            ] ++ modules;
         };
 
       mkHosts = lib.attrsets.mapAttrs (name: value: mkHost (lib.recursiveUpdate { hostName = name; } value));
