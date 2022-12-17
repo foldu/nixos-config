@@ -1,32 +1,33 @@
 { config, lib, pkgs, ... }: {
   imports = [
-    ../../profiles/amd-gpu.nix
     ../../profiles/bluetooth.nix
     ../../profiles/desktop.nix
     ../../profiles/graphical
     ../../profiles/home
     ../../profiles/x86.nix
-    ./hardware-configuration.nix
+    ./manual-hardware-configuration.nix
     ../../profiles/builder.nix
   ];
 
   boot.loader = {
-    systemd-boot = {
-      enable = true;
-      editor = false;
+    efi = {
+      #canTouchEfiVariables = true;
+      efiSysMountPoint = "/efi";
     };
-    efi.canTouchEfiVariables = true;
+    grub = {
+      enable = true;
+      device = "nodev";
+      efiInstallAsRemovable = true;
+      efiSupport = true;
+    };
   };
 
   environment.sessionVariables = {
     MAKEFLAGS = "-j 32";
   };
 
-  fileSystems."/var/lib/docker" = {
-    device = "/home/docker";
-    fsType = "none";
-    options = [ "defaults" "bind" ];
-  };
+  virtualisation.docker.storageDriver = "btrfs";
 
-  system.stateVersion = "20.09";
+  system.stateVersion = "23.05"; # Did you read the comment?
+  # no
 }
