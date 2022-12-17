@@ -123,8 +123,8 @@ in
           src = pkgs.fetchFromGitHub {
             owner = "IlanCosman";
             repo = "tide";
-            rev = "v5.0.1";
-            sha256 = "sha256-EjEVyWwAtVqPFDEo9QUUAQXlAMlmEmaO0sqmjZSKI5M=";
+            rev = "v5.5.1";
+            sha256 = "sha256-vi4sYoI366FkIonXDlf/eE2Pyjq7E/kOKBrQS+LtE+M=";
           };
         }
         {
@@ -132,8 +132,8 @@ in
           src = pkgs.fetchFromGitHub {
             owner = "PatrickF1";
             repo = "fzf.fish";
-            rev = "4f2fdba27479abe81f5519518bb5045764f114f6";
-            sha256 = "sha256-meTdxqweHzyirXr/j24OkNNlV1Ki+nGYLmW0sXBmyGQ=";
+            rev = "v9.5";
+            sha256 = "sha256-ZdHfIZNCtY36IppnufEIyHr+eqlvsIUOs0kY5I9Df6A=";
           };
         }
       ];
