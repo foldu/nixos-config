@@ -4,7 +4,8 @@ let
     device = "${home-network.devices.saturn.vip}:${mountpoint}";
     fsType = "nfs";
     options = [
-      # NOTE: soft corruption: 🖕 I don't give a fuck 🖕
+      # NOTE: soft mounts can cause corruption but I'd rather have a 
+      # single corrupted file than nfs hanging
       "soft"
       "retrans=3"
 

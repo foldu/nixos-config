@@ -41,7 +41,7 @@
     statdPort = 2200;
     lockdPort = 2201;
     mountdPort = 2202;
-    # NOTE: async corruption: 🖕 I don't give a fuck 🖕
+    # NOTE: async doesn't commit on every client write but massively speeds up write perf
     exports = ''
       /srv/media/aux/downloads ${home-network.virtual-network}(rw,async,all_squash,anonuid=${toString config.users.users.transmission.uid})
       /srv/media/main/vid ${home-network.virtual-network}(rw,async)
