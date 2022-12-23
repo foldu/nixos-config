@@ -13,6 +13,7 @@
     ./vaultwarden.nix
     ./piped
     ./unifi.nix
+    ./miniflux.nix
     "${inputs.homeserver-sekret}"
   ];
 
