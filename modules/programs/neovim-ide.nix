@@ -4,12 +4,12 @@ with lib;
 
 let
   cfg = config.programs.neovim-ide;
-  cleaned-neovim = pkgs.neovim-nightly.overrideAttrs (oldAttrs: {
-    # the default colorthemes kind of suck so just kill them
-    postInstall = ''
-      find $out/share/nvim/runtime/colors -not -name 'default.vim' -type f -delete
-    '';
-  });
+  #cleaned-neovim = pkgs.neovim-nightly.overrideAttrs (oldAttrs: {
+  #  # the default colorthemes kind of suck so just kill them
+  #  postInstall = ''
+  #    find $out/share/nvim/runtime/colors -not -name 'default.vim' -type f -delete
+  #  '';
+  #});
 in
 {
   # TODO: clone config from flake
@@ -20,7 +20,9 @@ in
   };
   config = mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      cleaned-neovim
+      arduino-cli
+      neovim-nightly
+      xsel
       # for rocks functionality in packer
       luajitPackages.luarocks
 
@@ -43,6 +45,7 @@ in
       nodePackages.yaml-language-server
       nodePackages.vscode-langservers-extracted
       plantuml
+      tree-sitter
       rustfmt
       taplo-cli
       shellcheck

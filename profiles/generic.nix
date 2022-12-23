@@ -19,6 +19,7 @@
     EDITOR = "nvim";
     LESS = "-gciMRwX";
     NIX_GCC = "${pkgs.gcc}/bin/gcc";
+    NIX_SQLITE = "${pkgs.sqlite.out}/lib/libsqlite3.so";
     MANPAGER = "nvim +Man!";
   };
 
@@ -57,7 +58,7 @@
   users.users.barnabas = {
     isNormalUser = true;
     uid = 1000;
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
     extraGroups = [ "wheel" "video" "audio" "dialout" "networkmanager" ];
   };
 

@@ -22,11 +22,11 @@
       jetbrains-mono
       ubuntu_font_family
       ibm-plex
-      fira-mono
       iosevka
       (nerdfonts.override {
         fonts = [
           "3270"
+          "FiraMono"
         ];
       })
     ] ++ lib.mapAttrsToList (_: f: f.pkg) configSettings.font;
