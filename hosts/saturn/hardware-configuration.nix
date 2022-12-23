@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "sd_mod" ];
@@ -14,57 +15,66 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "rpool/system/root";
+    {
+      device = "rpool/system/root";
       fsType = "zfs";
     };
 
   fileSystems."/nix" =
-    { device = "rpool/local/nix";
+    {
+      device = "rpool/local/nix";
       fsType = "zfs";
     };
 
   fileSystems."/var" =
-    { device = "rpool/system/var";
+    {
+      device = "rpool/system/var";
       fsType = "zfs";
     };
 
   fileSystems."/var/postgres" =
-    { device = "rpool/system/postgres";
+    {
+      device = "rpool/system/postgres";
       fsType = "zfs";
     };
 
   fileSystems."/home" =
-    { device = "rpool/user";
+    {
+      device = "rpool/user";
       fsType = "zfs";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2664640c-30c5-48c2-8610-dda048ace8bd";
+    {
+      device = "/dev/disk/by-uuid/2664640c-30c5-48c2-8610-dda048ace8bd";
       fsType = "ext4";
     };
 
   fileSystems."/srv/media/main" =
-    { device = "main";
+    {
+      device = "main";
       fsType = "zfs";
     };
 
   fileSystems."/srv/media/cia/data" =
-    { device = "cia/data";
+    {
+      device = "cia/data";
       fsType = "zfs";
     };
 
   fileSystems."/srv/media/cia/cache" =
-    { device = "cia/cache";
+    {
+      device = "cia/cache";
       fsType = "zfs";
     };
 
   fileSystems."/srv/media/aux" =
-    { device = "Hietzing";
+    {
+      device = "Hietzing";
       fsType = "zfs";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/6963baa8-8979-4cd1-b740-7a06900a7b03"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/6963baa8-8979-4cd1-b740-7a06900a7b03"; }];
 
 }

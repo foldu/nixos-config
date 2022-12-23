@@ -10,7 +10,8 @@ let
 in
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "uas" "usbhid" "sd_mod" ];
@@ -37,7 +38,8 @@ in
   fileSystems."/home/barnabas/.cache" = subvol "home/barnabas/.cache";
 
   fileSystems."/efi" =
-    { device = "/dev/disk/by-uuid/DA01-5928";
+    {
+      device = "/dev/disk/by-uuid/DA01-5928";
       fsType = "vfat";
     };
 

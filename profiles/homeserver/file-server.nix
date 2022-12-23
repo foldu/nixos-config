@@ -41,22 +41,23 @@
     "z /srv/nfs 755 barnabas users"
   ];
 
-  fileSystems = 
-  let bind = mount: {
+  fileSystems =
+    let
+      bind = mount: {
         device = mount;
         fsType = "none";
-        options = ["bind" "defaults" "nofail" "x-systemd.requires=zfs-mount.service"];
-  };
-  in
-  {
-    "/srv/nfs/torrents" = bind "/srv/media/aux/downloads";
-    "/srv/nfs/videos" = bind "/srv/media/main/vid";
-    "/srv/nfs/cache" = bind "/srv/media/cia/cache";
-    "/srv/nfs/img" = bind "/srv/media/cia/data/img";
-    "/srv/nfs/music" = bind "/srv/media/cia/data/beets-lib";
-    "/srv/nfs/smb"= bind "/srv/media/main/smb";
-    "/srv/nfs/other" = bind "/srv/media/main/other";
-  };
+        options = [ "bind" "defaults" "nofail" "x-systemd.requires=zfs-mount.service" ];
+      };
+    in
+    {
+      "/srv/nfs/torrents" = bind "/srv/media/aux/downloads";
+      "/srv/nfs/videos" = bind "/srv/media/main/vid";
+      "/srv/nfs/cache" = bind "/srv/media/cia/cache";
+      "/srv/nfs/img" = bind "/srv/media/cia/data/img";
+      "/srv/nfs/music" = bind "/srv/media/cia/data/beets-lib";
+      "/srv/nfs/smb" = bind "/srv/media/main/smb";
+      "/srv/nfs/other" = bind "/srv/media/main/other";
+    };
 
   services.nfs.server = {
     enable = true;
