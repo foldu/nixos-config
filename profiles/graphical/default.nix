@@ -108,7 +108,7 @@ in
         )
       )
       kooha
-      vscode
+      #vscode
       gnome-podcasts
       eunzip
       croc
@@ -131,7 +131,6 @@ in
       tdesktop
       streamlink
       wpp
-      wl-clipboard
       man-pages
       tokei
       gdb
@@ -149,9 +148,10 @@ in
       minicom
       # temporarily needed until https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/merge_requests/97
       thunderbird
+      newsflash
     ];
 
-    services.pickwp.enable = true;
+    services.pickwp.enable = false;
 
     services.wrrr.enable = true;
   };
