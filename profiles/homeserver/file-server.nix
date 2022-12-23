@@ -36,6 +36,28 @@
     };
   };
 
+  systemd.tmpfiles.rules = [
+    "d /srv/nfs 755 barnabas users"
+    "z /srv/nfs 755 barnabas users"
+  ];
+
+  fileSystems = 
+  let bind = mount: {
+        device = mount;
+        fsType = "none";
+        options = ["bind" "defaults" "nofail" "x-systemd.requires=zfs-mount.service"];
+  };
+  in
+  {
+    "/srv/nfs/torrents" = bind "/srv/media/aux/downloads";
+    "/srv/nfs/videos" = bind "/srv/media/main/vid";
+    "/srv/nfs/cache" = bind "/srv/media/cia/cache";
+    "/srv/nfs/img" = bind "/srv/media/cia/data/img";
+    "/srv/nfs/music" = bind "/srv/media/cia/data/beets-lib";
+    "/srv/nfs/smb"= bind "/srv/media/main/smb";
+    "/srv/nfs/other" = bind "/srv/media/main/other";
+  };
+
   services.nfs.server = {
     enable = true;
     statdPort = 2200;
@@ -43,14 +65,14 @@
     mountdPort = 2202;
     # NOTE: async doesn't commit on every client write but massively speeds up write perf
     exports = ''
-      /srv/media/aux/downloads ${home-network.virtual-network}(rw,async,all_squash,anonuid=${toString config.users.users.transmission.uid})
-      /srv/media/main/vid ${home-network.virtual-network}(rw,async)
-      /srv/media/cia/cache ${home-network.virtual-network}(rw,async)
-      /srv/media/cia/data/img ${home-network.virtual-network}(rw,async)
-      /srv/media/cia/data/music ${home-network.virtual-network}(rw,async)
-      /srv/media/cia/data/beets-lib ${home-network.virtual-network}(rw,async)
-      /srv/media/main/smb ${home-network.virtual-network}(rw,async)
-      /srv/media/main/other ${home-network.virtual-network}(rw,async)
+      /srv/nfs ${home-network.virtual-network}(rw,async,crossmnt,fsid=0)
+      /srv/nfs/torrents ${home-network.virtual-network}(rw,async,all_squash,anonuid=${toString config.users.users.transmission.uid})
+      /srv/nfs/videos ${home-network.virtual-network}(rw,async)
+      /srv/nfs/cache ${home-network.virtual-network}(rw,async)
+      /srv/nfs/img ${home-network.virtual-network}(rw,async)
+      /srv/nfs/music ${home-network.virtual-network}(rw,async)
+      /srv/nfs/smb ${home-network.virtual-network}(rw,async)
+      /srv/nfs/other ${home-network.virtual-network}(rw,async)
     '';
   };
 

@@ -21,13 +21,14 @@ let
 in
 {
   fileSystems = {
-    "/run/media/torrents" = nfsMount "/srv/media/aux/downloads";
-    "/run/media/img" = nfsMount "/srv/media/cia/data/img";
-    "/run/media/music" = nfsMount "/srv/media/cia/data/music";
-    "/run/media/beets-lib" = nfsMount "/srv/media/cia/data/beets-lib";
-    "/run/media/videos" = nfsMount "/srv/media/main/vid";
-    "/run/media/cache" = nfsMount "/srv/media/cia/cache";
-    "/run/media/samba" = nfsMount "/srv/media/main/smb";
-    "/run/media/other" = nfsMount "/srv/media/main/other";
+    "/run/media/torrents" = nfsMount "/srv/nfs/torrents";
+    "/run/media/img" = nfsMount "/srv/nfs/img";
+    # TODO: check applications using absolute paths and change
+    # path from beets-lib to music
+    "/run/media/beets-lib" = nfsMount "/srv/nfs/music";
+    "/run/media/videos" = nfsMount "/srv/nfs/videos";
+    "/run/media/cache" = nfsMount "/srv/nfs/cache";
+    "/run/media/samba" = nfsMount "/srv/nfs/smb";
+    "/run/media/other" = nfsMount "/srv/nfs/other";
   };
 }
