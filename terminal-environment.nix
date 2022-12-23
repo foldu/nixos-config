@@ -25,8 +25,10 @@ in
   environment.systemPackages = with pkgs; [
     wget
     curl
+    jq
     fd
     ripgrep
+    carapace
     file
     libarchive
     unzip
@@ -137,6 +139,15 @@ in
           };
         }
       ];
+    };
+
+    programs.nushell = {
+      enable = true;
+    };
+
+    xdg.configFile."nushell" = {
+      source = ./config/nushell;
+      recursive = true;
     };
 
     programs.fzf = {
