@@ -3,13 +3,14 @@
   services.samba = {
     enable = true;
 
+    openFirewall = true;
+
     extraConfig = ''
       # allow only local subnet
-      hosts allow = 192.168.88.0/24 localhost
+      hosts allow = 10.20.30.0/24 192.168.1.0/24 localhost
       hosts deny = 0.0.0.0/0
 
-      min protocol = SMB2
-      max protocol = SMB3
+      min protocol = SMB3
 
       guest account = nobody
       map to guest = bad user
@@ -40,25 +41,22 @@
     statdPort = 2200;
     lockdPort = 2201;
     mountdPort = 2202;
+    # NOTE: async corruption: 🖕 I don't give a fuck 🖕
     exports = ''
-      /srv/media/aux/downloads ${home-network.virtual-network}(rw,all_squash,anonuid=${toString config.users.users.transmission.uid})
-      /srv/media/main/vid ${home-network.virtual-network}(rw)
-      /srv/media/cia/cache ${home-network.virtual-network}(rw)
-      /srv/media/cia/data/img ${home-network.virtual-network}(rw)
-      /srv/media/cia/data/music ${home-network.virtual-network}(rw)
-      /srv/media/cia/data/beets-lib ${home-network.virtual-network}(rw)
-      /srv/media/main/smb ${home-network.virtual-network}(rw)
-      /srv/media/main/other ${home-network.virtual-network}(rw)
+      /srv/media/aux/downloads ${home-network.virtual-network}(rw,async,all_squash,anonuid=${toString config.users.users.transmission.uid})
+      /srv/media/main/vid ${home-network.virtual-network}(rw,async)
+      /srv/media/cia/cache ${home-network.virtual-network}(rw,async)
+      /srv/media/cia/data/img ${home-network.virtual-network}(rw,async)
+      /srv/media/cia/data/music ${home-network.virtual-network}(rw,async)
+      /srv/media/cia/data/beets-lib ${home-network.virtual-network}(rw,async)
+      /srv/media/main/smb ${home-network.virtual-network}(rw,async)
+      /srv/media/main/other ${home-network.virtual-network}(rw,async)
     '';
   };
 
   # TODO: only allow nfs on nebula interface
   networking.firewall = {
     allowedTCPPorts = [
-      # samba
-      445
-      139
-
       # nfs
       config.services.nfs.server.statdPort
       config.services.nfs.server.lockdPort
@@ -67,10 +65,6 @@
       111
     ];
     allowedUDPPorts = [
-      # samba
-      137
-      138
-
       # nfs
       config.services.nfs.server.statdPort
       config.services.nfs.server.lockdPort

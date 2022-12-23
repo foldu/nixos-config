@@ -4,13 +4,17 @@ let
     device = "${home-network.devices.saturn.vip}:${mountpoint}";
     fsType = "nfs";
     options = [
+      # NOTE: soft corruption: 🖕 I don't give a fuck 🖕
+      "soft"
+      "retrans=3"
+
       "noauto"
-      "relatime"
+      "noatime"
       "x-systemd.automount"
       "x-systemd.mount-timeout=10"
       "timeo=14"
-      # unmount after share unused for 5minutes
-      "x-systemd.idle-timeout=5min"
+      "x-systemd.idle-timeout=1min"
+      "_netdev"
     ];
   };
 in
