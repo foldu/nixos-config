@@ -32,10 +32,10 @@
                   session=$(
                       cat <<EOF
                   cd ~/nixos-config/
-                  launch fish
+                  launch nu
                   new_tab
                   cd ~/
-                  launch fish
+                  launch nu
                   EOF
                   )
 
