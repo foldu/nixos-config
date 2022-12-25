@@ -9,6 +9,7 @@ let
       "soft"
       "retrans=3"
 
+      "vers=4.2"
       "noauto"
       "noatime"
       "x-systemd.automount"
@@ -21,14 +22,14 @@ let
 in
 {
   fileSystems = {
-    "/run/media/torrents" = nfsMount "/srv/nfs/torrents";
-    "/run/media/img" = nfsMount "/srv/nfs/img";
+    "/run/media/torrents" = nfsMount "/torrents";
+    "/run/media/img" = nfsMount "/img";
     # TODO: check applications using absolute paths and change
     # path from beets-lib to music
-    "/run/media/beets-lib" = nfsMount "/srv/nfs/music";
-    "/run/media/videos" = nfsMount "/srv/nfs/videos";
-    "/run/media/cache" = nfsMount "/srv/nfs/cache";
-    "/run/media/samba" = nfsMount "/srv/nfs/smb";
-    "/run/media/other" = nfsMount "/srv/nfs/other";
+    "/run/media/beets-lib" = nfsMount "/music";
+    "/run/media/videos" = nfsMount "/videos";
+    "/run/media/cache" = nfsMount "/cache";
+    "/run/media/samba" = nfsMount "/smb";
+    "/run/media/other" = nfsMount "/other";
   };
 }
