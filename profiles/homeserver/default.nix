@@ -1,7 +1,6 @@
 { config, lib, pkgs, inputs, ... }: {
   imports = [
     ../generic.nix
-    ./cachecache.nix
     ./file-server.nix
     ./gitea.nix
     ./hydra.nix
@@ -60,8 +59,6 @@
     acmeCA = "https://ca.home.5kw.li:4321/acme/acme/directory";
     email = "webmaster@5kw.li";
   };
-
-  services.nginx.recommendedOptimisation = true;
 
   networking.firewall.interfaces."nm-home".allowedTCPPorts = [
     80
