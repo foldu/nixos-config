@@ -14,7 +14,7 @@ let
       "noatime"
       "x-systemd.automount"
       "x-systemd.mount-timeout=10"
-      "timeo=14"
+      "timeo=5"
       "x-systemd.idle-timeout=1min"
       "_netdev"
     ];
