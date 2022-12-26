@@ -73,15 +73,9 @@
       /srv/nfs/other ${home-network.virtual-network}(rw,no_subtree_check,async)
     '';
     extraNfsdConfig = ''
-        vers3=no
+      vers3=no
     '';
   };
 
-  # TODO: only allow nfs on nebula interface
-  networking.firewall = {
-    allowedTCPPorts = [
-      # nfs
-      2049
-    ];
-  };
+  networking.firewall.interfaces."nm-home".allowedTCPPorts = [ 2049 ];
 }

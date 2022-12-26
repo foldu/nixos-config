@@ -59,20 +59,16 @@
     enable = true;
     acmeCA = "https://ca.home.5kw.li:4321/acme/acme/directory";
     email = "webmaster@5kw.li";
-    globalConfig = ''
-      servers :443 {
-      }
-    '';
   };
 
   services.nginx.recommendedOptimisation = true;
 
-  networking.firewall.allowedTCPPorts = [
+  networking.firewall.interfaces."nm-home".allowedTCPPorts = [
     80
     443
   ];
 
-  networking.firewall.allowedUDPPorts = [
+  networking.firewall.interfaces."nm-home".allowedUDPPorts = [
     80
     443
   ];
