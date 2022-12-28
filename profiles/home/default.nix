@@ -9,6 +9,8 @@ in
     ./secrets.nix
   ];
 
+  services.fwupd.enable = true;
+
   services.netclient.enable = true;
 
   # does it even matter if this thing is not secret
