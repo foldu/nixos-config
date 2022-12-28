@@ -1,8 +1,8 @@
 # Nushell Environment Config File
 
 def create_left_prompt [] {
-    let path_segment = ($env.PWD | str replace $"^($env.HOME)" "~" | (ansi cyan) + $in)
     # should probably escape $env.HOME
+    let path_segment = ($env.PWD | str replace $"^($env.HOME)" "~" | (ansi cyan) + $in)
     if (env | any name == SSH_CONNECTION) {
         $"(ansi yellow)($env.USER)@(hostname) ($path_segment)"
     } else {
@@ -11,7 +11,13 @@ def create_left_prompt [] {
 }
 
 def create_right_prompt [] {
-    date now | date format "%Y-%m-%d %H:%M:%S"
+    let date_segment = (date now | date format "%Y-%m-%d %H:%M:%S")
+
+    if $env.LAST_EXIT_CODE != 0 {
+        $"(ansi red)[($env.LAST_EXIT_CODE)] (ansi purple)($date_segment)"
+    } else {
+        $date_segment
+    }
 }
 
 # Use nushell functions to define your right and left prompt
@@ -20,9 +26,12 @@ let-env PROMPT_COMMAND_RIGHT = { create_right_prompt }
 
 # The prompt indicators are environmental variables that represent
 # the state of the prompt
-let-env PROMPT_INDICATOR = { $" (ansi light_green)$ " }
-let-env PROMPT_INDICATOR_VI_INSERT = { ": " }
-let-env PROMPT_INDICATOR_VI_NORMAL = { "〉" }
+let-env PROMPT_INDICATOR = {
+    let color = if $env.LAST_EXIT_CODE == 0 { ansi light_green } else { ansi red }
+    $" ($color)$ "
+}
+let-env PROMPT_INDICATOR_VI_INSERT = { " : " }
+let-env PROMPT_INDICATOR_VI_NORMAL = { " 〉" }
 let-env PROMPT_MULTILINE_INDICATOR = { "::: " }
 
 # Specifies how environment variables are:
