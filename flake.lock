@@ -28,22 +28,22 @@
     },
     "blocklistdownloadthing": {
       "inputs": {
+        "crane": [
+          "crane"
+        ],
         "flake-utils": [
           "flake-utils"
-        ],
-        "naersk": [
-          "naersk"
         ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1667208952,
-        "narHash": "sha256-s2nfEr7K6B241V/rC1NZhLo2ZJELPwFRKpwfqb7QLrw=",
+        "lastModified": 1672671632,
+        "narHash": "sha256-2fapQpDMp4zjHrYFEmOB6f8ugo6EGPnqQ8aJn89plio=",
         "owner": "foldu",
         "repo": "blocklistdownloadthing",
-        "rev": "1ac41583b55f7d31c6057c75fbf121cdbee339c1",
+        "rev": "881317918efad1ffd14a5de3f762c7a585466477",
         "type": "github"
       },
       "original": {
@@ -366,26 +366,6 @@
         "type": "github"
       }
     },
-    "naersk": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1671096816,
-        "narHash": "sha256-ezQCsNgmpUHdZANDCILm3RvtO1xH8uujk/+EqNvzIOg=",
-        "owner": "nmattia",
-        "repo": "naersk",
-        "rev": "d998160d6a076cfe8f9741e56aeec7e267e3e114",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nmattia",
-        "repo": "naersk",
-        "type": "github"
-      }
-    },
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -588,7 +568,6 @@
         "huh": "huh",
         "kanagawa-theme": "kanagawa-theme",
         "kitty-themes": "kitty-themes",
-        "naersk": "naersk",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-serve-ng": "nix-serve-ng",
         "nix-stuff": "nix-stuff",

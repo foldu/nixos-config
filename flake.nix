@@ -9,11 +9,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    naersk = {
-      url = "github:nmattia/naersk";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     pickwp = {
       type = "git";
       url = "https://git.home.5kw.li/foldu/pickwp";
@@ -55,7 +50,7 @@
     blocklistdownloadthing = {
       url = "github:foldu/blocklistdownloadthing";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
+      inputs.crane.follows = "crane";
       inputs.flake-utils.follows = "flake-utils";
     };
 
@@ -119,7 +114,6 @@
     , huh
     , flake-utils
     , home-manager
-    , naersk
     , crane
     , blocklistdownloadthing
     , eunzip
