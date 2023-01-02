@@ -63,16 +63,29 @@ export def "nixos copy-configs" [
 }
 
 def copy-configs [network: path, device?: string] {
-    let meta = (open $network | get devices)
-    if $device == null {
+    let me = (hostname)
+
+    if $me == $device {
+        error make { msg: "Refusing to copy config to myself" }
+    }
+
+    let meta = (open $network | get "devices" | transpose "name" "meta" | where "name" != $me)
+    let to_update = (if $device == null {
         $meta
-        | transpose name ips 
-        | each {|dev|
-            copy-config $dev.name $dev.ips.vip
-        }
     } else {
-        let device_meta = (try { $meta | get $device } catch { error make { msg: $"Unknown device ($device)" }})
-        copy-config $device_meta.name $device_meta.ips.vip
+        let device_meta = (try {
+            $meta
+            | where "name" == $device
+            | first
+        } catch {
+            error make { msg: $"Unknown device ($device)" }
+        })
+
+        [$device_meta]
+    })
+
+    for dev in $to_update {
+        copy-config $dev.name $dev.meta.dns
     }
 }
 
