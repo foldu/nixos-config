@@ -59,7 +59,7 @@ def "nu-complete nixos copy-configs" [] {
 export def "nixos copy-configs" [
     device?: string@"nu-complete nixos copy-configs"
 ] {
-    copy-configs "./home-network.toml" device
+    copy-configs "./home-network.toml" $device
 }
 
 def copy-configs [network: path, device?: string] {
@@ -67,14 +67,12 @@ def copy-configs [network: path, device?: string] {
     if $device == null {
         $meta
         | transpose name ips 
-        | each {
-            echo $"Updating ($in.name)"
-            ^rsync -azvP ./ $"($in.ips.vip):nixos-config/"
+        | each {|dev|
+            copy-config $dev.name $dev.ips.vip
         }
     } else {
         let device_meta = (try { $meta | get $device } catch { error make { msg: $"Unknown device ($device)" }})
-        echo $"Updating ($in.name)"
-        ^rsync -azvP ./ $"($in.ips.vip):nixos-config/"
+        copy-config $device_meta.name $device_meta.ips.vip
     }
 }
 
