@@ -48,7 +48,7 @@
     eunzip = {
       url = "github:foldu/eunzip";
       inputs.nixpkgs.follows = "nixpkgs";
-      inputs.naersk.follows = "naersk";
+      inputs.crane.follows = "crane";
       inputs.flake-utils.follows = "flake-utils";
     };
 

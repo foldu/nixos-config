@@ -77,22 +77,22 @@
     },
     "eunzip": {
       "inputs": {
+        "crane": [
+          "crane"
+        ],
         "flake-utils": [
           "flake-utils"
-        ],
-        "naersk": [
-          "naersk"
         ],
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1644245399,
-        "narHash": "sha256-WtnPFIFNei48SHvA8FP2Kswu8IlCGi1+J8HZCkSYy6c=",
+        "lastModified": 1672670695,
+        "narHash": "sha256-ki9h/wTuf286ie9fDMZOmJU+LsWbjyHxyExt1mATaGU=",
         "owner": "foldu",
         "repo": "eunzip",
-        "rev": "4a7efaecb4535f660f21361a2049d9d4f06fdeec",
+        "rev": "5048ff2c0e477c86c5a307bc68c8306ef8c1ab5e",
         "type": "github"
       },
       "original": {
