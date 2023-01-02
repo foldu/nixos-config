@@ -151,7 +151,7 @@ in
       newsflash
     ];
 
-    services.pickwp.enable = false;
+    services.pickwp.enable = true;
 
     services.wrrr.enable = true;
   };

@@ -22,13 +22,12 @@ export def edit-link [
 }
 
 def "nu-complete nixos" [] {
-    [switch test build]
+    [switch test build copy-configs gc]
 }
 
 export def nixos [
     --flake (-f): path = "."        # Path to used flake
     cmd: string@"nu-complete nixos" # Command to run
-    ...extra_args: string           # Extra args passed to nixos-rebuild
 ] {
     let valid_cmds = (nu-complete nixos)
     if $cmd in $valid_cmds {
@@ -44,6 +43,50 @@ export def nixos [
             }
         }
     }
+}
+
+def "nu-complete nixos copy-configs" [] {
+    try {
+        open "./home-network.toml"
+        | get devices
+        | transpose device
+        | get device
+    } catch {
+        []
+    }
+}
+
+export def "nixos copy-configs" [
+    device?: string@"nu-complete nixos copy-configs"
+] {
+    copy-configs "./home-network.toml" device
+}
+
+def copy-configs [network: path, device?: string] {
+    let meta = (open $network | get devices)
+    if $device == null {
+        $meta
+        | transpose name ips 
+        | each {
+            echo $"Updating ($in.name)"
+            ^rsync -azvP ./ $"($in.ips.vip):nixos-config/"
+        }
+    } else {
+        let device_meta = (try { $meta | get $device } catch { error make { msg: $"Unknown device ($device)" }})
+        echo $"Updating ($in.name)"
+        ^rsync -azvP ./ $"($in.ips.vip):nixos-config/"
+    }
+}
+
+def copy-config [name: string, ip: string] {
+    echo $"Updating ($name)"
+    ^rsync -azvP ./ $"($ip):nixos-config/"
+}
+
+export def "nixos gc" [
+    timeframe: string = "7d" # Garbage collect everything older than this (see man nix-collect-garbage for format)
+] {
+    ^sudo nix-collect-garbage --older-than $timeframe
 }
 
 export def tmp-clone [
