@@ -18,7 +18,7 @@
 
   networking.hostId = "964725e9";
 
-  networking.interfaces.enp6s0.useDHCP = true;
+  networking.interfaces.enp5s0.useDHCP = true;
 
   virtualisation.podman = {
     enable = true;
