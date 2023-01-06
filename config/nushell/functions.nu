@@ -122,3 +122,23 @@ export def tmp-clone [
         }
     }
 }
+
+def "nu-complete flake-update" [] {
+    ^nix flake metadata --json
+    | from json
+    | get locks.nodes.root.inputs
+    | columns
+}
+
+export def flake-update [
+    --no-commit (-n): bool = false               # Don't commit the new lockfile
+    ...inputs: string@"nu-complete flake-update" # Flake inputs you want to update
+] {
+    let args = (
+        $inputs 
+        | reduce -f [] {|it, acc| $acc ++ ["--update-input" $it] } 
+        | (if $no_commit { $in } else { $in | prepend "--commit-lock-file" })
+    )
+
+    ^nix flake lock $args
+}
