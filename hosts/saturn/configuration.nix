@@ -22,7 +22,7 @@
 
   virtualisation.podman = {
     enable = true;
-    extraPackages = [ pkgs.zfs ];
+    extraPackages = [ pkgs.zfs pkgs.netavark ];
   };
 
   services.postgresql.package = pkgs.postgresql_14;
