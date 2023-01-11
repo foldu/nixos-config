@@ -91,11 +91,6 @@
       inputs.crane.follows = "crane";
     };
 
-    nix-serve-ng = {
-      url = "github:aristanetworks/nix-serve-ng";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     peerix = {
       url = "github:cid-chan/peerix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -125,7 +120,6 @@
     , kitty-themes
     , kanagawa-theme
     , random-scripts
-    , nix-serve-ng
     , peerix
     , nix-stuff
     }@inputs:
@@ -155,7 +149,7 @@
             (final: prev: otherPkgs)
             (import ./overlays)
             (import ./overlays/customizations.nix)
-          ] ++ nix-serve-ng.overlays.override;
+          ];
         config.allowUnfree = true;
       };
       mkHost = { system, hostName, modules }:
