@@ -7,6 +7,7 @@ in
   imports = [
     ./peerix.nix
     ./secrets.nix
+    ./cachix
   ];
 
   services.fwupd.enable = true;
