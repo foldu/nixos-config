@@ -25,14 +25,6 @@
     extraPackages = [ pkgs.zfs ];
   };
 
-  virtualisation.containers.storage.settings = {
-    storage = {
-      driver = "zfs";
-      graphroot = "/var/lib/containers/storage";
-      runroot = "/run/containers/storage";
-    };
-  };
-
   services.postgresql.package = pkgs.postgresql_14;
   boot.kernel.sysctl."net.core.rmem_max" = 2500000;
 
