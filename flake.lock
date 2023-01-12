@@ -402,11 +402,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1673540922,
-        "narHash": "sha256-WkGDi8OzFszs8FYkQq3JNw9zfSk555FxntgZ2PNiHsU=",
+        "lastModified": 1673542015,
+        "narHash": "sha256-Uc9upNWzIDl29yceeQp4ePy4CzUTPYn3JXgeSItZJsg=",
         "owner": "foldu",
         "repo": "nix-stuff",
-        "rev": "5afebcc2c4beb31ba921211cec6cab75f95f21e9",
+        "rev": "74eb98cf79c9ce34f0ce7d7a25346ac7bf73cbf2",
         "type": "github"
       },
       "original": {
