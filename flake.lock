@@ -279,11 +279,11 @@
     "homeserver-sekret": {
       "flake": false,
       "locked": {
-        "lastModified": 1673544953,
-        "narHash": "sha256-dU9lfQ5TjIVm9pUIpxTqhjaRKzo+Yw6CzPYITKnoOmM=",
+        "lastModified": 1673545038,
+        "narHash": "sha256-+C33pf5OfwmnEm1vFIcu9O1UkeJX4LXXg0StyeNAxHM=",
         "ref": "refs/heads/master",
-        "rev": "f91ea470d8518bc2ded2f000b433395a0b2a26d4",
-        "revCount": 97,
+        "rev": "6ed3e713e0fb0c36b6bd006d7646d51b66dd3e50",
+        "revCount": 98,
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/sekret"
       },
