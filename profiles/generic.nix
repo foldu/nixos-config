@@ -36,9 +36,11 @@
 
   services.openssh = {
     enable = true;
-    passwordAuthentication = false;
+    settings = {
+      PasswordAuthentication = false;
+      PermitRootLogin = "no";
+    };
     forwardX11 = false;
-    permitRootLogin = "no";
   };
 
   security.sudo.enable = true;

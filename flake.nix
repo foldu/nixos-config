@@ -222,13 +222,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      devShell = pkgs.mkShell {
-        nativeBuildInputs = [
-          (pkgs.python39.withPackages
-            (p: with p; [ ipython toml plumbum ]))
-          pkgs.rsync
-        ];
-      };
+      devShell = pkgs.mkShell { };
     }
     ));
 }

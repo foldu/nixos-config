@@ -120,8 +120,6 @@ in
       zip
       dua
       imagemagick
-      # FIXME: poetry broken
-      #ffcut
       gnupg
       brave
       chromium
@@ -139,7 +137,8 @@ in
       llvmPackages_latest.lld
       llvmPackages_latest.clang
       sqlite-interactive
-      litecli
+      # broken
+      #litecli
       #pgcli
       catclock
       cookiecutter

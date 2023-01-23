@@ -18,6 +18,9 @@ final: prev: {
     #  }
     #);
   };
+  python39Packages = prev.python39Packages // prev.python39Packages.uvloop.overrideAttrs {
+    checkPhase = "";
+  };
   brave = prev.brave.overrideAttrs (oldAttrs: {
     postFixup =
       let
