@@ -10,5 +10,6 @@
 
   # systemd.services.bluetooth-mesh.aliases = [ "dbus-org.bluez.mesh.service" ];
   systemd.services.bluetooth.serviceConfig.ExecStart = [ "" "${pkgs.bluez}/libexec/bluetooth/bluetoothd -f /etc/bluetooth/main.conf" ];
-  systemd.services.bluetooth-mesh.serviceConfig.ExecStart = [ "" "${pkgs.bluez}/libexec/bluetooth/bluetooth-meshd -d --io=hci0" ];
+  systemd.services.bluetooth-mesh.serviceConfig.ExecStart = [ "" "${pkgs.bluez}/libexec/bluetooth/bluetooth-meshd -d " ];
+  # --io=hci0
 }

@@ -67,7 +67,7 @@ in
 
   hardware.opengl.enable = true;
 
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxKernel.packages.linux_6_0;
 
   services.udev.extraRules = ''
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", \
@@ -149,6 +149,7 @@ in
       # temporarily needed until https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/merge_requests/97
       thunderbird
       newsflash
+      pandoc
     ];
 
     services.pickwp.enable = true;
