@@ -120,7 +120,6 @@
     , kitty-themes
     , kanagawa-theme
     , random-scripts
-    , peerix
     , nix-stuff
     }@inputs:
     # NOTE: don't try to use two different nixpkgs for
@@ -141,7 +140,6 @@
               wpp-gtk
               huh
               random-scripts
-              peerix
             ];
           in
           [

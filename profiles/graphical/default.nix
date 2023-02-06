@@ -67,7 +67,7 @@ in
 
   hardware.opengl.enable = true;
 
-  boot.kernelPackages = lib.mkDefault pkgs.linuxKernel.packages.linux_6_0;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   services.udev.extraRules = ''
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", \
