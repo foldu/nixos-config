@@ -91,10 +91,10 @@
       inputs.crane.follows = "crane";
     };
 
-    peerix = {
-      url = "github:cid-chan/peerix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # peerix = {
+    #   url = "github:cid-chan/peerix";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     nix-stuff = {
       url = "github:foldu/nix-stuff";
