@@ -39,8 +39,8 @@
     settings = {
       PasswordAuthentication = false;
       PermitRootLogin = "no";
+      X11Forwarding = false;
     };
-    forwardX11 = false;
   };
 
   security.sudo.enable = true;
