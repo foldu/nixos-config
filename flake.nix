@@ -64,6 +64,7 @@
       type = "git";
       url = "https://git.home.5kw.li/foldu/wpp-gtk";
       inputs.flake-utils.follows = "flake-utils";
+      inputs.crane.follows = "crane";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
