@@ -73,11 +73,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    kitty-themes = {
-      url = "github:kovidgoyal/kitty-themes";
-      flake = false;
-    };
-
     kanagawa-theme = {
       url = "github:rebelot/kanagawa.nvim";
       flake = false;
@@ -116,7 +111,6 @@
     , homeserver-sekret
     , wpp-gtk
     , neovim-nightly-overlay
-    , kitty-themes
     , kanagawa-theme
     , random-scripts
     , nix-stuff

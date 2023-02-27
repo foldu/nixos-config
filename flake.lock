@@ -303,22 +303,6 @@
         "type": "github"
       }
     },
-    "kitty-themes": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1676775915,
-        "narHash": "sha256-2OleF/ROoeCb2xkr2IZoUvp4i8SkT0pMGMIYtON0MC8=",
-        "owner": "kovidgoyal",
-        "repo": "kitty-themes",
-        "rev": "0f224087587b1b9ce8ef6a5f68ce8004efbce66a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "kovidgoyal",
-        "repo": "kitty-themes",
-        "type": "github"
-      }
-    },
     "neovim-flake": {
       "inputs": {
         "flake-utils": "flake-utils_3",
@@ -476,7 +460,6 @@
         "homeserver-sekret": "homeserver-sekret",
         "huh": "huh",
         "kanagawa-theme": "kanagawa-theme",
-        "kitty-themes": "kitty-themes",
         "neovim-nightly-overlay": "neovim-nightly-overlay",
         "nix-stuff": "nix-stuff",
         "nixos-hardware": "nixos-hardware",
