@@ -83,7 +83,7 @@ in
       ./xdg.nix
       ./beets.nix
       ./mpv.nix
-      ./kitty.nix
+      ./kitty
       inputs.pickwp.homeManagerModule
       inputs.atchr.homeManagerModule
     ];

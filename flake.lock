@@ -210,11 +210,11 @@
     },
     "flake-utils_6": {
       "locked": {
-        "lastModified": 1659877975,
-        "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
+        "lastModified": 1676283394,
+        "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "c0e246b9b83f637f4681389ecabcb2681b4f3af0",
+        "rev": "3db36a8b464d0c4532ba1c7dda728f4576d6d073",
         "type": "github"
       },
       "original": {
@@ -357,11 +357,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1677454059,
-        "narHash": "sha256-YdtG/MY6PY1woRnbhOOVVsxhzPwd9X2QleFWxKqc4RQ=",
+        "lastModified": 1677489368,
+        "narHash": "sha256-5nMbLxZBUTjAa+SbDdE/6fKRBMXOGNAoDUGYpU1rOH4=",
         "owner": "foldu",
         "repo": "nix-stuff",
-        "rev": "3c3c6031bfc5766ee06d6a73ef72e83f97039471",
+        "rev": "604dbd5a86787fdb737119e2948e18b3f75d7515",
         "type": "github"
       },
       "original": {
@@ -436,11 +436,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1670351110,
-        "narHash": "sha256-Aqlfbc9/cac+ophJwDMWHnEKcy8vjQo+gGFFzxc6CCQ=",
+        "lastModified": 1677487722,
+        "narHash": "sha256-HJ5cCPmvr4hUv2KNavuJYioJer1diWCrEINqjPfrM0A=",
         "ref": "refs/heads/master",
-        "rev": "556b93efcd34f15c1df290d5a9e4e5b541f528c7",
-        "revCount": 29,
+        "rev": "3ae7c52bcb90a93c29a0f5df9d420db6fe2528eb",
+        "revCount": 31,
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/random-scripts"
       },
