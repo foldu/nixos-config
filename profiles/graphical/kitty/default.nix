@@ -22,9 +22,11 @@
       # shouldn't these be a part of the colorscheme?
       active_border_color = "#FFA066";
       inactive_border_color = "#15161E";
-
       window_border_width = "1pt";
       window_padding_width = "1";
+
+      show_hyperlink_targets = "yes";
+
       enabled_layouts = "tall,stack";
       tab_bar_style = "custom";
       enable_audio_bell = "no";

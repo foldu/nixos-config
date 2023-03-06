@@ -31,7 +31,7 @@ def save_cursor(screen: Screen):
         screen.cursor.italic = italic
 
 
-def get_current_layout():
+def get_current_layout() -> str:
     layout_name = "?"
     tm = get_boss().active_tab_manager
     if tm is not None:
@@ -41,7 +41,7 @@ def get_current_layout():
     return layout_name
 
 
-def get_cwd():
+def get_cwd() -> str:
     cwd = "?"
     tab_manager = get_boss().active_tab_manager
     if tab_manager is not None:
@@ -64,7 +64,7 @@ def rgb(color):
     return as_rgb(color_as_int(color))
 
 
-def draw_left_prompt(screen: Screen, index: int):
+def draw_left_prompt(screen: Screen, index: int) -> int:
     opts = get_options()
     if index != 1:
         return screen.cursor.x
@@ -81,6 +81,19 @@ def draw_left_prompt(screen: Screen, index: int):
 
 
 def draw_right_prompt(screen: Screen, is_last: bool) -> int:
+    if not is_last:
+        return screen.cursor.x
+
+    cell = " " + get_cwd()
+
+    thing = screen.columns - screen.cursor.x - len(cell)
+    if thing < len(cell):
+        return screen.cursor.x
+
+    # screen.draw(" " * thing)
+    screen.cursor.x = screen.columns - len(cell)
+    screen.draw(cell)
+
     return screen.cursor.x
 
 
@@ -91,7 +104,7 @@ def draw_tabs(
     before: int,
     max_tab_length: int,
     index: int,
-):
+) -> int:
     orig_fg = screen.cursor.fg
     left_sep, right_sep = ("", "") if draw_data.tab_bar_edge == "top" else ("", "")
     tab_bg = screen.cursor.bg
@@ -146,4 +159,5 @@ def draw_tab(
 ) -> int:
     draw_left_prompt(screen, index)
     draw_tabs(draw_data, screen, tab, before, max_tab_length, index)
+    draw_right_prompt(screen, is_last)
     return screen.cursor.x
