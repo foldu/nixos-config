@@ -27,9 +27,8 @@
     appindicator
     blur-my-shell
     just-perfection
-    pop-shell
-    volume-mixer
     gnome-ui-tune
+    pano
   ];
 
   # disable laptop melting service

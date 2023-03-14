@@ -103,7 +103,6 @@ in
         )
       )
       kooha
-      #vscode
       gnome-podcasts
       eunzip
       croc
@@ -115,6 +114,7 @@ in
       zip
       dua
       imagemagick
+      bitwarden
       gnupg
       brave
       chromium

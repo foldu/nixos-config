@@ -161,7 +161,6 @@
             "blur-my-shell@aunetx"
             "drive-menu@gnome-shell-extensions.gcampax.github.com"
             "just-perfection-desktop@just-perfection"
-            "pop-shell@system76.com"
             "gnome-ui-tune@itstime.tech"
           ];
           disable-extension-version-validation = true;
@@ -195,14 +194,6 @@
           hacks-level = 1;
           sigma = 30;
           static-blur = true;
-        };
-
-        "org/gnome/shell/extensions/pop-shell" = {
-          hint-color-rgba = "rgba(223, 74, 22, 1)";
-          active-hint = true;
-          show-title = true;
-          smart-gaps = true;
-          tile-by-default = true;
         };
 
         "org/gnome/shell/extensions/shell-volume-mixer" = {
