@@ -88,11 +88,6 @@ in
       inputs.atchr.homeManagerModule
     ];
 
-    services.gpg-agent = {
-      enable = true;
-      pinentryFlavor = "curses";
-    };
-
     #home.file.".ssh/config".source = ../../secrets/ssh-config;
 
     # TODO: sort this wall of crap
