@@ -53,6 +53,16 @@ def get_cwd() -> str:
     return cwd.replace(getenv("HOME") or "", "~")
 
 
+def n_windows() -> int:
+    nwindows = 0
+    tab_manager = get_boss().active_tab_manager
+    if tab_manager is not None:
+        active_tab = tab_manager.active_tab
+        if active_tab is not None:
+            nwindows = len(active_tab.windows)
+    return nwindows
+
+
 # I miss u dwm :^(
 LAYOUT_TABLE = {
     "tall": "[]=",
@@ -73,7 +83,13 @@ def draw_left_prompt(screen: Screen, index: int) -> int:
         cursor.bold = True
         cursor.fg = rgb(opts.active_tab_foreground)
         cursor.bg = rgb(opts.active_tab_background)
+
+        def draw_sep():
+            screen.draw(" | ")
+
         screen.draw(LAYOUT_TABLE.get(layout, "[?]"))
+        draw_sep()
+        screen.draw(f"w:{n_windows()}")
 
     screen.cursor.x += 1
 
