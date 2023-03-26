@@ -427,7 +427,7 @@ let-env config = {
 
 use ~/.config/nushell/functions.nu *
 
-alias rm = rm --verbose
-alias cp = cp --verbose
-alias mv = mv --verbose
+old-alias rm = rm --verbose
+old-alias cp = cp --progress
+old-alias mv = mv --verbose
 alias cat = bat

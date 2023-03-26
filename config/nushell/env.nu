@@ -3,7 +3,7 @@
 def create_left_prompt [] {
     # should probably escape $env.HOME
     let path_segment = ($env.PWD | str replace $"^($env.HOME)" "~" | (ansi cyan) + $in)
-    if (env | any { $in.name == "SSH_CONNECTION" }) {
+    if ($env | columns | any { $in == "SSH_CONNECTION" }) {
         $"(ansi yellow)($env.USER)@(hostname) ($path_segment)"
     } else {
         $path_segment
