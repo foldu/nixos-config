@@ -120,20 +120,19 @@
         };
 
         "org/gnome/desktop/wm/keybindings" = {
-          # remove unused bindings so they don't conflict
-          switch-to-workspace-up = "@as []";
-          switch-to-workspace-down = "@as []";
-          move-to-workspace-up = "@as []";
-          move-to-workspace-down = "@as []";
-
           close = [ "<Super>q" ];
           minimize = [ ];
-          move-to-monitor-left = "@as []";
-          move-to-monitor-right = "@as []";
-          move-to-workspace-left = [ "<Shift><Super>j" ];
-          move-to-workspace-right = [ "<Shift><Super>k" ];
-          switch-to-workspace-left = [ "<Primary><Super>j" ];
-          switch-to-workspace-right = [ "<Primary><Super>k" ];
+          maximize = "<Super>m";
+
+          move-to-monitor-left = "<Super><Shift>h";
+          move-to-monitor-right = "<Super><Shift>l";
+          switch-to-monitor-left = "<Super>h";
+          switch-to-monitor-right = "<Super>l";
+
+          move-to-workspace-left = [ "<Super><Shift>j" ];
+          move-to-workspace-right = [ "<Super><Shift>k" ];
+          switch-to-workspace-left = [ "<Super>j" ];
+          switch-to-workspace-right = [ "<Super>k" ];
         };
 
         "org/gnome/shell/keybindings" = {
@@ -182,6 +181,10 @@
           workspace = true;
           workspace-switcher-should-show = true;
           workspace-switcher-size = 15;
+        };
+
+        "org/gnome/shell/app-switcher" = {
+          current-workspace-only = true;
         };
 
         "org/gnome/shell/extensions/blur-my-shell" = {
