@@ -233,6 +233,10 @@
           statusbar = true;
         };
 
+        "org/gnome/nautilus/preferences" = {
+          show-delete-permanently = true;
+        };
+
         "org/gnome/mutter" = {
           center-new-windows = true;
           dynamic-workspaces = true;
