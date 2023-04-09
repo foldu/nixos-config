@@ -77,5 +77,5 @@
     '';
   };
 
-  networking.firewall.interfaces."nm-home".allowedTCPPorts = [ 2049 ];
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 2049 ];
 }

@@ -60,12 +60,12 @@
     email = "webmaster@5kw.li";
   };
 
-  networking.firewall.interfaces."nm-home".allowedTCPPorts = [
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [
     80
     443
   ];
 
-  networking.firewall.interfaces."nm-home".allowedUDPPorts = [
+  networking.firewall.interfaces."tailscale0".allowedUDPPorts = [
     80
     443
   ];

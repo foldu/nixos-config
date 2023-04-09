@@ -5,14 +5,13 @@ let
 in
 {
   imports = [
-    ./peerix.nix
     ./secrets.nix
     ./cachix
   ];
 
   services.fwupd.enable = true;
 
-  services.netclient.enable = true;
+  services.tailscale.enable = true;
 
   # does it even matter if this thing is not secret
   security.pki.certificateFiles = [ ../../home_ca.crt ];

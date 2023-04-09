@@ -159,7 +159,6 @@
                 { pkgs, ... }: {
                   imports = [
                     ./modules
-                    nix-stuff.nixosModules.netclient
                   ];
                   networking.hostName = hostName;
                   # Let 'nixos-version --json' know about the Git revision

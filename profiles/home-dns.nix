@@ -140,11 +140,6 @@ in
         cache
       }
 
-      nebula.5kw.li:53 {
-        import global
-        forward . 192.168.100.1
-      }
-
       home.5kw.li:53 {
         import global
         forward . 10.20.30.3
