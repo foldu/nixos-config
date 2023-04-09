@@ -2,13 +2,13 @@
 
 stdenv.mkDerivation rec {
   pname = "gnome-ui-tune";
-  version = "v1.6.3";
+  version = "v1.7.1";
 
   src = fetchFromGitHub {
     owner = "axxapy";
     repo = "gnome-ui-tune";
     rev = version;
-    sha256 = "sha256-8H59ZvvrH0Fjlw2+SpPkNCGaUqH351VifSUkkGn0/Ic=";
+    sha256 = "sha256-zWQSGqdLypCxXY0wwBL7tgrZQEEZsZrN20XZEypqdSY=";
   };
 
   nativeBuildInputs = [ glib ];
