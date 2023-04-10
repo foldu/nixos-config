@@ -16,7 +16,6 @@
     gnome-contacts
     epiphany
     gnome-music
-    file-roller
     gnome-software
   ];
 
