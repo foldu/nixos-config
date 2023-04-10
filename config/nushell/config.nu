@@ -470,7 +470,7 @@ let-env config = {
       mode: emacs
       event: {
         send: executehostcommand
-        cmd: "commandline (history | get command | where $it !~ (char nl) | reverse | str join (char nl) | fzf --layout=reverse --height=40% -q (commandline) | decode utf-8 | str trim)"
+        cmd: "commandline (history | uniq-by command | get command | where $it !~ (char nl) | reverse | str join (char nl) | fzf --layout=reverse --height=40% -q (commandline) | decode utf-8 | str trim)"
       }
     }
     {
