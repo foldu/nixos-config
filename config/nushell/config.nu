@@ -29,19 +29,19 @@ let dark_theme = {
     duration: white
     date: {|| (date now) - $in |
       if $in < 1hr {
-        'red3b'
+        'red'
       } else if $in < 6hr {
-        'orange3'
+        'orange'
       } else if $in < 1day {
-        'yellow3b'
+        'yellow'
       } else if $in < 3day {
-        'chartreuse2b'
+        'light_green'
       } else if $in < 1wk {
-        'green3b'
+        'green'
       } else if $in < 6wk {
-        'darkturquoise'
+        'light_cyan'
       } else if $in < 52wk {
-        'deepskyblue3b'
+        'blue'
       } else { 'dark_gray' }
     }    
     range: white
