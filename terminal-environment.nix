@@ -41,7 +41,6 @@ in
     home.packages = with pkgs; [
       neofetch
       rename
-      huh
     ];
 
     programs.tmux = {

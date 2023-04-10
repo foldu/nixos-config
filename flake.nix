@@ -33,27 +33,6 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    huh = {
-      url = "github:foldu/huh";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-
-    eunzip = {
-      url = "github:foldu/eunzip";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-
-    blocklistdownloadthing = {
-      url = "github:foldu/blocklistdownloadthing";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-
     homeserver-sekret = {
       type = "git";
       url = "https://git.home.5kw.li/foldu/sekret";
@@ -85,14 +64,12 @@
       inputs.crane.follows = "crane";
     };
 
-    # peerix = {
-    #   url = "github:cid-chan/peerix";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-
     nix-stuff = {
       url = "github:foldu/nix-stuff";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs = {
+        nixpkgs.follows = "nixpkgs";
+        crane.follows = "crane";
+      };
     };
   };
 
@@ -102,12 +79,9 @@
     , nixos-hardware
     , pickwp
     , atchr
-    , huh
     , flake-utils
     , home-manager
     , crane
-    , blocklistdownloadthing
-    , eunzip
     , homeserver-sekret
     , wpp-gtk
     , neovim-nightly-overlay
@@ -127,11 +101,8 @@
           let
             otherPkgs = lib.foldl (acc: x: acc // x.packages.${system}) { } [
               nix-stuff
-              eunzip
-              blocklistdownloadthing
               pickwp
               wpp-gtk
-              huh
               random-scripts
             ];
           in
