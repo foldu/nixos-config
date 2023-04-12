@@ -91,7 +91,7 @@ def copy-configs [network: path, device?: string] {
 
 def copy-config [name: string, ip: string] {
     echo $"Updating ($name)"
-    ^rsync -azvP ./ $"($ip):nixos-config/"
+    ^rsync -azvP --exclude .direnv ./ $"($ip):nixos-config/"
 }
 
 export def "nixos gc" [
@@ -141,4 +141,12 @@ export def flake-update [
     )
 
     ^nix flake lock $args
+}
+
+export def unix-seconds-to-date [] {
+    $in * 10e8 | into date
+}
+
+export def date-to-unix-seconds [] {
+    $in / 10e8 | math floor | into int
 }

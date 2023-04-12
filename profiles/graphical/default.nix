@@ -92,8 +92,9 @@ in
 
     # TODO: sort this wall of crap
     home.packages = with pkgs; [
+      steam-run
       (
-        python39.withPackages (
+        python311.withPackages (
           p: with p; [
             sh
             requests
