@@ -144,7 +144,7 @@ export def flake-update [
 }
 
 export def unix-seconds-to-date [] {
-    $in * 10e8 | into date
+    $in * 10e8 | into datetime
 }
 
 export def date-to-unix-seconds [] {
