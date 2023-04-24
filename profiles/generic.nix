@@ -1,4 +1,4 @@
-{ pkgs, lib, config, inputs, configSettings, ... }: {
+{ pkgs, inputs, configSettings, ... }: {
   imports = [
     inputs.home-manager.nixosModules.home-manager
   ];
@@ -44,18 +44,7 @@
   };
 
   security.sudo.enable = true;
-  #security.doas = {
-  #  enable = true;
-  #  extraRules = [
-  #    {
-  #      users = [ "barnabas" ];
-  #      keepEnv = true;
-  #      persist = true;
-  #    }
-  #  ];
-  #};
 
-  # TODO: figure out git crypt first
   #users.mutableUsers = false;
   users.users.barnabas = {
     isNormalUser = true;
@@ -78,7 +67,7 @@
 
   home-manager.users.barnabas.home.stateVersion = "18.09";
 
-  boot.tmpOnTmpfs = true;
+  boot.tmp.useTmpfs = true;
 
   networking.firewall.enable = true;
 
