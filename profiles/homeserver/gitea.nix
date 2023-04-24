@@ -1,10 +1,12 @@
-{ config, lib, pkgs, ... }: {
+{ config, ... }: {
   services.gitea = {
     enable = true;
-    domain = "git.home.5kw.li";
-    rootUrl = "https://git.home.5kw.li";
-    httpPort = 3032;
     settings = {
+      server = {
+        ROOT_URL = "https://git.home.5kw.li";
+        HTTP_PORT = 3032;
+        DOMAIN = "git.home.5kw.li";
+      };
       service = {
         DISABLE_REGISTRATION = true;
       };
@@ -17,11 +19,11 @@
   };
 
   # FIXME:
-  networking.firewall.allowedTCPPorts = [ config.services.gitea.httpPort ];
+  networking.firewall.allowedTCPPorts = [ config.services.gitea.settings.server.HTTP_PORT ];
 
   services.caddy.extraConfig = ''
     git.home.5kw.li {
-      reverse_proxy localhost:${toString config.services.gitea.httpPort}
+      reverse_proxy localhost:${toString config.services.gitea.settings.server.HTTP_PORT}
     }
   '';
 }
