@@ -21,7 +21,7 @@
     enable = true;
     drivers = [
       # currently broken
-      # pkgs.foo2zjs
+      pkgs.foo2zjs
     ];
     defaultShared = true;
     allowFrom = [
