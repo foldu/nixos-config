@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+pkgs: {
   font = {
     monospace = {
       pkg = pkgs.fira-mono;

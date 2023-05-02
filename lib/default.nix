@@ -1,4 +1,4 @@
-{ lib }: {
+{ lib, ... }: {
   btrfsSubvolOn = device: mountOptions: name: {
     inherit device;
     fsType = "btrfs";

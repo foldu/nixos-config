@@ -76,114 +76,31 @@
   outputs =
     { self
     , nixpkgs
-    , nixos-hardware
-    , pickwp
-    , atchr
-    , flake-utils
     , home-manager
-    , crane
-    , homeserver-sekret
-    , wpp-gtk
-    , neovim-nightly-overlay
-    , kanagawa-theme
-    , random-scripts
-    , nix-stuff
+    , ...
     }@inputs:
-    # NOTE: don't try to use two different nixpkgs for
-    # different NixOS hosts in the same flake or you'll get a headache
     let
-      lib = nixpkgs.lib;
+      inherit (self) outputs;
       home-network = fromTOML (builtins.readFile ./home-network.toml);
-      mylib = import ./lib { inherit lib; };
-      mkPkgs = system: import nixpkgs {
-        inherit system;
-        overlays =
-          let
-            otherPkgs = lib.foldl (acc: x: acc // x.packages.${system}) { } [
-              nix-stuff
-              pickwp
-              wpp-gtk
-              random-scripts
-            ];
-          in
-          [
-            neovim-nightly-overlay.overlay
-            (final: prev: otherPkgs)
-            (import ./overlays)
-            (import ./overlays/customizations.nix)
-          ];
-        config.allowUnfree = true;
-      };
-      mkHost = { system, hostName, modules }:
-        let
-          pkgs = mkPkgs system;
-          configSettings = import ./settings.nix {
-            inherit pkgs;
-          };
-        in
-        lib.nixosSystem {
-          inherit system pkgs;
-          specialArgs = { inherit inputs home-network configSettings mylib; };
-          modules =
-            [
-              (
-                { pkgs, ... }: {
-                  imports = [
-                    ./modules
-                  ];
-                  networking.hostName = hostName;
-                  # Let 'nixos-version --json' know about the Git revision
-                  # of this flake.
-                  system.configurationRevision = lib.mkIf (self ? rev) self.rev;
-                  nix.registry = {
-                    nixpkgs.flake = nixpkgs;
-                  };
-                  environment.systemPackages = with pkgs; [
-                    git
-                  ];
-                }
-              )
-            ] ++ modules;
+      getSettings = import ./settings.nix;
+      mkHome = modules: pkgs:
+        home-manager.lib.homeManagerConfiguration {
+          inherit modules pkgs;
+          extraSpecialArgs = { inherit inputs outputs home-network getSettings; };
         };
-
-      mkHosts = lib.attrsets.mapAttrs (name: value: mkHost (lib.recursiveUpdate { hostName = name; } value));
+      mkNixos = modules: nixpkgs.lib.nixosSystem {
+        inherit modules;
+        specialArgs = { inherit inputs outputs home-network getSettings; };
+      };
     in
     {
-      nixosConfigurations = mkHosts {
-        mars = {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/mars/configuration.nix
-          ];
-        };
-
-        jupiter = {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/jupiter/configuration.nix
-          ];
-        };
-
-        ceres = {
-          system = "aarch64-linux";
-          modules = [
-            ./hosts/ceres/configuration.nix
-          ];
-        };
-
-        saturn = {
-          system = "x86_64-linux";
-          modules = [
-            ./hosts/saturn/configuration.nix
-          ];
-        };
+      homeConfigurations = {
+        "barnabas@mars" = mkHome [ ./home/mars ] nixpkgs.legacyPackages."x86_64-linux";
       };
-    } // (flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = nixpkgs.legacyPackages.${system};
-    in
-    {
-      devShell = pkgs.mkShell { };
-    }
-    ));
+      nixosConfigurations = {
+        "mars" = mkNixos [ ./nixos/mars ];
+      };
+      overlays = import ./overlays { inherit inputs; };
+      lib = import ./lib { inherit (nixpkgs) lib; };
+    };
 }
