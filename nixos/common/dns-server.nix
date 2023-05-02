@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
   blocklistDir = "/var/lib/blocklistdownloadthing";
   blocklistPath = "${blocklistDir}/hosts.blocklist";
+  blocklistdownloadthing = "${inputs.nix-stuff.packages."${pkgs.system}".blocklistdownloadthing}/bin/blocklistdownloadthing";
 in
 {
   networking.firewall.allowedUDPPorts = [ 53 ];
@@ -109,7 +110,7 @@ in
           Type = "oneshot";
         };
         script = ''
-          ${pkgs.blocklistdownloadthing}/bin/blocklistdownloadthing \
+          ${blocklistdownloadthing} \
               -o ${blocklistPath} \
               --cache "${cacheDir}" \
               --format hosts \

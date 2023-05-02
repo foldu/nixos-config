@@ -62,5 +62,7 @@
 
   virtualisation.oci-containers.backend = "podman";
 
+  boot.enableContainers = false;
+
   system.stateVersion = "20.09";
 }

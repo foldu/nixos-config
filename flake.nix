@@ -95,10 +95,16 @@
     in
     {
       homeConfigurations = {
+        "barnabas@ceres" = mkHome [ ./home/ceres ] nixpkgs.legacyPackages."aarch64-linux";
+        "barnabas@jupiter" = mkHome [ ./home/jupiter ] nixpkgs.legacyPackages."x86_64-linux";
         "barnabas@mars" = mkHome [ ./home/mars ] nixpkgs.legacyPackages."x86_64-linux";
+        "barnabas@saturn" = mkHome [ ./home/saturn ] nixpkgs.legacyPackages."x86_64-linux";
       };
       nixosConfigurations = {
+        "ceres" = mkNixos [ ./nixos/ceres ];
+        "jupiter" = mkNixos [ ./nixos/jupiter ];
         "mars" = mkNixos [ ./nixos/mars ];
+        "saturn" = mkNixos [ ./nixos/saturn ];
       };
       overlays = import ./overlays { inherit inputs; };
       lib = import ./lib { inherit (nixpkgs) lib; };
