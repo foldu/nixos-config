@@ -1,4 +1,4 @@
-{ inputs, ... }: {
+{ inputs, pkgs, ... }: {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
@@ -12,6 +12,7 @@
 
     ./manual-hardware-configuration.nix
   ];
+  environment.systemPackages = [ pkgs.deploy-rs ];
 
   networking.hostName = "jupiter";
 
