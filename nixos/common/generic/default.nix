@@ -5,6 +5,12 @@
     ./ssh.nix
   ];
 
+  # FIXME: should be in home-manager, but it currently doesn't support wayland sessions
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+    NIX_GCC = "${pkgs.gcc}/bin/gcc";
+  };
+
   environment.systemPackages = with pkgs; [
     inputs.home-manager.packages.${pkgs.system}.home-manager
     wget
@@ -43,6 +49,9 @@
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
       auto-optimise-store = true;
+      trusted-public-keys = [
+        "jupiter:2laywrj8EfgDWW8GnDkIPuONvzMyrIirdAPWkvSIU0g="
+      ];
     };
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake

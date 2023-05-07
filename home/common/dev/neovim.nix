@@ -1,4 +1,8 @@
 { pkgs, inputs, ... }: {
+  systemd.user.sessionVariables = {
+    EDITOR = "nvim";
+    NIX_GCC = "${pkgs.gcc}/bin/gcc";
+  };
   home.packages = with pkgs; [
     inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim
 

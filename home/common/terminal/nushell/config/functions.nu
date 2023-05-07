@@ -22,7 +22,7 @@ export def edit-link [
 }
 
 def "nu-complete nixos" [] {
-    [switch test build copy-configs gc]
+    [switch test build copy-configs gc deploy]
 }
 
 export def nixos [
@@ -45,15 +45,46 @@ export def nixos [
     }
 }
 
+def get-home-network [] {
+    try {
+        let root = (git rev-parse --show-toplevel)
+        open $"$(root)/home-network.nix"
+    } catch {
+        open "./home-network.toml"
+    }
+}
+
 def "nu-complete nixos copy-configs" [] {
     try {
-        open "./home-network.toml"
+        get-home-network
         | get devices
         | transpose device
         | get device
     } catch {
         []
     }
+}
+
+export def "nixos deploy" [
+    device: string@"nu-complete nixos copy-configs"
+] {
+    let host = (try { 
+        get-home-network
+        | get devices
+        | get $device
+        | get dns
+    } catch {
+        let span = (metadata $device).spawn
+        error make {
+            msg: "Device not found in ./home-network"
+            label: {
+                text: "This device argument"
+                start: $span.start
+                end: $span.end
+            }
+        }
+    })
+    nixos-rebuild switch --target-host $host --flake $".#($device)" --use-remote-sudo
 }
 
 export def "nixos copy-configs" [

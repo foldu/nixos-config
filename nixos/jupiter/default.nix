@@ -32,7 +32,11 @@
     MAKEFLAGS = "-j 32";
   };
 
+  nix.settings.secret-key-files = [ "/var/secrets/jupiter.priv" ];
+
   zramSwap.enable = true;
+
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   system.stateVersion = "23.05"; # Did you read the comment?
   # no
