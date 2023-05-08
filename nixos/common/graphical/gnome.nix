@@ -1,4 +1,8 @@
-{ lib, pkgs, ... }: {
+{
+  lib,
+  pkgs,
+  ...
+}: {
   services.xserver.desktopManager = {
     gnome.enable = true;
     xterm.enable = lib.mkForce false;
@@ -23,6 +27,7 @@
     just-perfection
     gnome-ui-tune
     pano
+    vertical-workspaces
   ];
 
   # disable laptop melting service
