@@ -1,7 +1,8 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   imports = [
     ./rust.nix
     ./neovim.nix
+    ./helix.nix
   ];
 
   home.packages = with pkgs; [
