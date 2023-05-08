@@ -1,7 +1,6 @@
-{
-  pkgs,
-  lib,
-  ...
+{ pkgs
+, lib
+, ...
 }: {
   home.packages = with pkgs; [
     gnome.gnome-tweaks
@@ -9,58 +8,61 @@
     dconf2nix
     (pkgs.writeShellApplication {
       name = "xhide";
-      runtimeInputs = with pkgs; [kitty xdotool];
+      runtimeInputs = with pkgs; [ kitty xdotool ];
       text = builtins.readFile ./xhide.sh;
     })
   ];
 
   dconf.enable = true;
-  dconf.settings = let
-    customKeybinds = [
-      {
-        binding = "<Super>t";
-        command = "kitty --single-instance";
-        name = "Open terminal";
-      }
-      {
-        binding = "<Super>d";
-        command = "xhide --cmd com.github.taiko2k.tauonmb --name tauon --windowclass \"Tauon Music Box\"";
-        name = "Open music player";
-      }
-      {
-        binding = "<Super>z";
-        command = let
-          script = pkgs.writeText "floating-term" ''
-            #!/bin/sh
-            session=$(
-                cat <<EOF
-            cd ~/nixos-config/
-            launch nu
-            new_tab
-            cd ~/
-            launch nu
-            EOF
-            )
+  dconf.settings =
+    let
+      customKeybinds = [
+        {
+          binding = "<Super>t";
+          command = "kitty --single-instance";
+          name = "Open terminal";
+        }
+        {
+          binding = "<Super>d";
+          command = "xhide --cmd com.github.taiko2k.tauonmb --name tauon --windowclass \"Tauon Music Box\"";
+          name = "Open music player";
+        }
+        {
+          binding = "<Super>z";
+          command =
+            let
+              script = pkgs.writeText "floating-term" ''
+                #!/bin/sh
+                session=$(
+                    cat <<EOF
+                cd ~/nixos-config/
+                launch nu
+                new_tab
+                cd ~/
+                launch nu
+                EOF
+                )
 
-            echo "$session" | kitty --class "Floating Term" --session -
-          '';
-        in "xhide --cmd \"sh ${script}\" --name floating-term --windowclass \"Floating Term\"";
-        name = "Open floating terminal";
-      }
-    ];
-    keybindRange = lib.lists.range 0 (lib.lists.length customKeybinds);
-    dconfKeybinds =
-      builtins.listToAttrs
-      (lib.flip map (lib.lists.zipLists keybindRange customKeybinds) ({
-        fst,
-        snd,
-      }: {
-        name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString fst}";
-        value = snd;
-      }));
-    # NOTE: yes they're different, note the prefixed and suffixed "/"
-    dconfKeybindPaths = lib.flip map keybindRange (n: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString n}/");
-  in
+                echo "$session" | kitty --class "Floating Term" --session -
+              '';
+            in
+            "xhide --cmd \"sh ${script}\" --name floating-term --windowclass \"Floating Term\"";
+          name = "Open floating terminal";
+        }
+      ];
+      keybindRange = lib.lists.range 0 (lib.lists.length customKeybinds);
+      dconfKeybinds =
+        builtins.listToAttrs
+          (lib.flip map (lib.lists.zipLists keybindRange customKeybinds) ({ fst
+                                                                          , snd
+                                                                          ,
+                                                                          }: {
+            name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString fst}";
+            value = snd;
+          }));
+      # NOTE: yes they're different, note the prefixed and suffixed "/"
+      dconfKeybindPaths = lib.flip map keybindRange (n: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString n}/");
+    in
     {
       "org/gnome/desktop/interface" = {
         document-font-name = "Roboto Slab 11";
@@ -87,12 +89,14 @@
         repeat-interval = 25;
       };
 
-      "org/gnome/desktop/input-sources" = let
-        mkTuple = lib.hm.gvariant.mkTuple;
-      in {
-        sources = [(mkTuple ["xkb" "us"]) (mkTuple ["xkb" "us+intl"])];
-        xkb-options = ["caps:escape"];
-      };
+      "org/gnome/desktop/input-sources" =
+        let
+          mkTuple = lib.hm.gvariant.mkTuple;
+        in
+        {
+          sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "us+intl" ]) ];
+          xkb-options = [ "caps:escape" ];
+        };
 
       "org/gnome/settings-daemon/plugins/color" = {
         active = true;
@@ -124,8 +128,8 @@
       };
 
       "org/gnome/desktop/wm/keybindings" = {
-        close = ["<Super>q"];
-        minimize = [];
+        close = [ "<Super>q" ];
+        minimize = [ ];
         maximize = "<Super>m";
 
         move-to-monitor-left = "<Super><Shift>h";
@@ -133,10 +137,10 @@
         switch-to-monitor-left = "<Super>h";
         switch-to-monitor-right = "<Super>l";
 
-        move-to-workspace-left = ["<Super><Shift>j"];
-        move-to-workspace-right = ["<Super><Shift>k"];
-        switch-to-workspace-left = ["<Super>j"];
-        switch-to-workspace-right = ["<Super>k"];
+        move-to-workspace-left = [ "<Super><Shift>j" ];
+        move-to-workspace-right = [ "<Super><Shift>k" ];
+        switch-to-workspace-left = [ "<Super>j" ];
+        switch-to-workspace-right = [ "<Super>k" ];
       };
 
       "org/gnome/shell/keybindings" = {
@@ -145,11 +149,11 @@
 
       "org/gnome/settings-daemon/plugins/media-keys" = {
         custom-keybindings = dconfKeybindPaths;
-        email = ["<Super>e"];
-        home = ["<Super>f"];
+        email = [ "<Super>e" ];
+        home = [ "<Super>f" ];
         rotate-video-lock-static = "@as []";
-        screensaver = ["<Super>Escape"];
-        www = ["<Super>b"];
+        screensaver = [ "<Super>Escape" ];
+        www = [ "<Super>b" ];
       };
 
       "org/gnome/shell" = {
@@ -211,7 +215,7 @@
       };
 
       "org/gnome/eog/plugins" = {
-        active-plugins = ["fullscreen"];
+        active-plugins = [ "fullscreen" ];
       };
 
       "org/gnome/eog/ui" = {

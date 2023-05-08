@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   programs.helix = {
     enable = true;
     settings = {
@@ -16,8 +16,8 @@
         name = "nix";
         auto-format = true;
         formatter = {
-          command = "${pkgs.alejandra}/bin/alejandra";
-          args = ["-q"];
+          command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+          args = [ ];
         };
       }
     ];
