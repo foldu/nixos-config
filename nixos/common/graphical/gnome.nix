@@ -2,12 +2,16 @@
 , pkgs
 , ...
 }: {
-  services.xserver.desktopManager = {
-    gnome.enable = true;
-    xterm.enable = lib.mkForce false;
+  services.xserver = {
+    excludePackages = [ pkgs.xterm ];
+    desktopManager = {
+      gnome.enable = true;
+      xterm.enable = lib.mkForce false;
+    };
   };
 
   environment.gnome.excludePackages = with pkgs.gnome; [
+    epiphany
     cheese
     gedit
     pkgs.gnome-photos
