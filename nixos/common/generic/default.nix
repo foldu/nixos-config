@@ -19,6 +19,7 @@
     fd
     ripgrep
     file
+    helix
     # gets overriden by home-manager on systems where I need an IDE
     (neovim.override {
       configure = {
