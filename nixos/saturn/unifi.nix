@@ -26,18 +26,27 @@ in
     volumes = [
       "${unifiDir}:/config"
     ];
-    ports = [
-      "8443:8443"
-      "3478:3478/udp"
-      "10001:10001/udp"
-      "8080:8080"
-      # "1900:1900/udp"
-      "8843:8843"
-      "8880:8880"
-      "6789:6789"
-      "5514:5514/udp"
+    extraOptions = [
+      "--memory=1g"
+      "--label=io.containers.autoupdate=registry"
+      "--network=host"
     ];
-    extraOptions = [ "--memory=1g" ];
+  };
+
+
+
+  networking.firewall = {
+    # https://help.ubnt.com/hc/en-us/articles/218506997
+    allowedTCPPorts = [
+      8080 # Port for UAP to inform controller.
+      8880 # Port for HTTP portal redirect, if guest portal is enabled.
+      8843 # Port for HTTPS portal redirect, ditto.
+      6789 # Port for UniFi mobile speed test.
+    ];
+    allowedUDPPorts = [
+      3478 # UDP port used for STUN.
+      10001 # UDP port used for device discovery.
+    ];
   };
 
   services.caddy.extraConfig = ''

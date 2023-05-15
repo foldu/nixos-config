@@ -54,12 +54,14 @@ in
 
   virtualisation.oci-containers.containers =
     let
-      extraOptions = [ "--pod=piped-pott" ];
-      user = "piped";
+      extraOptions = [
+        "--pod=piped-pott"
+        "--label=io.containers.autoupdate=registry"
+      ];
     in
     {
       piped-frontend = {
-        image = "1337kavin/piped-frontend:latest";
+        image = "docker.io/1337kavin/piped-frontend:latest";
         inherit extraOptions;
         cmd = [ "ash" "-c" "sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g 'daemon off;'" ];
         #''
@@ -70,7 +72,7 @@ in
 
       piped-ytproxy = {
         inherit extraOptions;
-        image = "1337kavin/ytproxy:latest";
+        image = "docker.io/1337kavin/ytproxy:latest";
         volumes = [
           "${ytproxySockdir}:/app/socket"
         ];
@@ -78,14 +80,14 @@ in
 
       piped-backend = {
         inherit extraOptions;
-        image = "1337kavin/piped:latest";
+        image = "docker.io/1337kavin/piped:latest";
         volumes = [
           "${./piped.properties}:/app/config.properties:ro"
         ];
       };
 
       piped-varnish = {
-        image = "varnish:7.0-alpine";
+        image = "docker.io/varnish:alpine";
         volumes = [
           "${./varnish.vcl}:/etc/varnish/default.vcl:ro"
         ];
