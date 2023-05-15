@@ -1,10 +1,10 @@
 { pkgs, config, ... }: {
-  services.unifi = {
-    enable = true;
-    openFirewall = true;
-    maximumJavaHeapSize = 1024;
-    unifiPackage = pkgs.unifi;
-  };
+  # services.unifi = {
+  #   enable = true;
+  #   openFirewall = true;
+  #   maximumJavaHeapSize = 1024;
+  #   unifiPackage = pkgs.unifi;
+  # };
 
   services.caddy.extraConfig = ''
     unifi.home.5kw.li {
