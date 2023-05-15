@@ -28,7 +28,6 @@ in
     ];
     extraOptions = [
       "--memory=1g"
-      "--label=io.containers.autoupdate=registry"
       "--network=host"
     ];
   };
