@@ -96,31 +96,31 @@ in
       };
     };
   services.caddy.extraConfig = ''
-        ${frontendHostname} {
-          reverse_proxy localhost:${frontendPort}
-        }
-        ${backendHostname} {
-          reverse_proxy localhost:${varnishPort}
-        }
-        ${ytproxyHostname} {
-            @ytproxy path /videoplayback* /api/v4/* /api/manifest/*
-            route {
-    		header @ytproxy {
-    			Cache-Control private always
-    		}
+    ${frontendHostname} {
+      reverse_proxy localhost:${frontendPort}
+    }
+    ${backendHostname} {
+      reverse_proxy localhost:${varnishPort}
+    }
+    ${ytproxyHostname} {
+      @ytproxy path /videoplayback* /api/v4/* /api/manifest/*
+        route {
+          header @ytproxy {
+            Cache-Control private always
+          }
 
-    		header / {
-    			Cache-Control "public, max-age=604800"
-    		}
+          header / {
+            Cache-Control "public, max-age=604800"
+          }
 
-    		reverse_proxy unix/${ytproxySockdir}/http-proxy.sock {
-    			header_up -CF-Connecting-IP
-    			header_up -X-Forwarded-For
-    			header_down -etag
-    			header_down -alt-svc
-    		}
-    	  }
+          reverse_proxy unix/${ytproxySockdir}/http-proxy.sock {
+          header_up -CF-Connecting-IP
+          header_up -X-Forwarded-For
+          header_down -etag
+          header_down -alt-svc
         }
+      }
+    }
   '';
 
   systemd.services.podman-piped-create-pod = {
