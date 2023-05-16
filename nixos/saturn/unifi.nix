@@ -28,11 +28,10 @@ in
     ];
     extraOptions = [
       "--memory=1g"
+      "--label=io.containers.autoupdate=registry"
       "--network=host"
     ];
   };
-
-
 
   networking.firewall = {
     # https://help.ubnt.com/hc/en-us/articles/218506997

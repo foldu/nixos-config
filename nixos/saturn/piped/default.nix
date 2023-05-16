@@ -56,6 +56,7 @@ in
     let
       extraOptions = [
         "--pod=piped-pott"
+        "--label=io.containers.autoupdate=registry"
       ];
     in
     {
