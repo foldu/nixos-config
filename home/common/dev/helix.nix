@@ -35,23 +35,33 @@
         };
       };
     };
-    languages = [
-      {
-        name = "nix";
-        auto-format = true;
-        formatter = {
-          command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
-        };
-      }
-      {
-        name = "rust";
-        language-server = {
-          command = "rustup";
-          args = [ "run" "nightly" "rust-analyzer" ];
-        };
-      }
-    ];
+    # languages = [
+    #   {
+    #     name = "nix";
+    #     auto-format = true;
+    #     formatter = {
+    #       command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
+    #     };
+    #   }
+    #   {
+    #     name = "rust";
+    #     language-server = {
+    #       command = "rustup";
+    #       args = [ "run" "nightly" "rust-analyzer" ];
+    #     };
+    #   }
+    # ];
   };
+
+  xdg.configFile."helix/languages.toml".text = ''
+    [language-server.rust-analyzer]
+    command = "rustup"
+    args = ["run", "nightly", "rust-analyzer"]
+    [[languages]]
+    name = "nix"
+    auto-format = true
+    formatter = { command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" }
+  '';
 
   programs.gitui = {
     enable = true;
