@@ -71,9 +71,14 @@
         crane.follows = "crane";
       };
     };
+
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    helix = {
+      url = "github:helix-editor/helix";
     };
   };
 
