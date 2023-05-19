@@ -6,6 +6,7 @@
       editor = {
         # faster autocompletions in 100ms, default is 400ms
         idle-timeout = 100;
+        color-modes = true;
         statusline = {
           # this is the default
           # left = [ "mode" "spinner" "filename" "file-modification-indicator" ];

@@ -41,6 +41,10 @@
   virtualisation.podman = {
     enable = true;
     extraPackages = [ pkgs.zfs pkgs.netavark ];
+    autoPrune = {
+      enable = true;
+      dates = "weekly";
+    };
   };
 
   services.caddy = {
@@ -63,20 +67,7 @@
 
   boot.enableContainers = false;
 
-  # systemd.services.podman-auto-update = {
-  #   serviceConfig.Type = "oneshot";
-  #   path = with pkgs; [ podman zfs ];
-  #   script = ''
-  #     podman auto-update
-  #   '';
-  # };
-
-  # systemd.timers.podman-auto-update = {
-  #   wantedBy = [ "timers.target" ];
-  #   partOf = [ "podman-auto-update.service" ];
-  #   timerConfig.OnCalendar = "03:00";
-  # };
-
+  # FIXME: doesn't work
   systemd.timers.podman-auto-update = {
     timerConfig.OnCalendar = "03:00";
     wantedBy = [ "timers.target" ];

@@ -57,6 +57,7 @@ in
       extraOptions = [
         "--pod=piped-pott"
         "--label=io.containers.autoupdate=registry"
+        "--pull=newer"
       ];
     in
     {
