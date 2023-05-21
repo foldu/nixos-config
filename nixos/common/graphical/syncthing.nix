@@ -1,4 +1,4 @@
-{ pkgs, config, lib, home-network, ... }:
+{ config, lib, home-network, ... }:
 let
   syncthingPort = 22000;
   devices = home-network.devices;
@@ -39,12 +39,14 @@ in
       user = "barnabas";
       group = "users";
       configDir = "/home/barnabas/.config/syncthing";
-      devices = syncthingDevices;
-      folders = {
-        "/home/barnabas/downloads" = mkSharedShare "downloads";
-        "/home/barnabas/uni" = mkSharedShare "uni";
-        "/home/barnabas/sync" = mkSharedShare "sync";
-        "/home/barnabas/.local/share/mpd/playlists" = mkSharedShare "playlists";
+      settings = {
+        devices = syncthingDevices;
+        folders = {
+          "/home/barnabas/downloads" = mkSharedShare "downloads";
+          "/home/barnabas/uni" = mkSharedShare "uni";
+          "/home/barnabas/sync" = mkSharedShare "sync";
+          "/home/barnabas/.local/share/mpd/playlists" = mkSharedShare "playlists";
+        };
       };
     };
 }
