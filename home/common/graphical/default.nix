@@ -20,7 +20,8 @@
     yt-dlp
     pass
     imagemagick
-    bitwarden
+    # uses node 16
+    # bitwarden
     gnupg
     brave
     chromium
