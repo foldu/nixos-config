@@ -40,8 +40,8 @@ pkgs: {
     };
     consoleEditor = {
       pkg = null;
-      command = "nvim";
-      desktopFile = "neovim.desktop";
+      command = "hx";
+      desktopFile = "Helix.desktop";
     };
     imageViewer = {
       pkg = pkgs.gnome.eog;
@@ -60,8 +60,8 @@ pkgs: {
     };
     graphicalEditor = {
       pkg = null;
-      command = "nvim";
-      desktopFile = "neovim.desktop";
+      command = "hx";
+      desktopFile = "Helix.desktop";
     };
     fileBrowser = {
       pkg = pkgs.gnome.nautilus;
