@@ -7,7 +7,7 @@
 
   # FIXME: should be in home-manager, but it currently doesn't support wayland sessions
   environment.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = "hx";
     NIX_GCC = "${pkgs.gcc}/bin/gcc";
   };
 

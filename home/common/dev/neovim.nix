@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }: {
   systemd.user.sessionVariables = {
-    EDITOR = "nvim";
+    EDITOR = "hx";
     NIX_GCC = "${pkgs.gcc}/bin/gcc";
   };
   home.packages = with pkgs; [
