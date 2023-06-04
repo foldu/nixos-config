@@ -25,6 +25,7 @@
   services.power-profiles-daemon.enable = false;
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
+    forge
     appindicator
     blur-my-shell
     just-perfection

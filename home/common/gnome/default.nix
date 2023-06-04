@@ -28,7 +28,7 @@
           name = "Open music player";
         }
         {
-          binding = "<Super>z";
+          binding = "<Super>e";
           command =
             let
               script = pkgs.writeText "floating-term" ''
@@ -130,17 +130,17 @@
       "org/gnome/desktop/wm/keybindings" = {
         close = [ "<Super>q" ];
         minimize = [ ];
-        maximize = "<Super>m";
+        # maximize = "<Super>m";
 
-        move-to-monitor-left = "<Super><Shift>h";
-        move-to-monitor-right = "<Super><Shift>l";
-        switch-to-monitor-left = "<Super>h";
-        switch-to-monitor-right = "<Super>l";
+        # move-to-monitor-left = "<Super><Shift>h";
+        # move-to-monitor-right = "<Super><Shift>l";
+        # switch-to-monitor-left = "<Super>h";
+        # switch-to-monitor-right = "<Super>l";
 
-        move-to-workspace-left = [ "<Super><Shift>j" ];
-        move-to-workspace-right = [ "<Super><Shift>k" ];
-        switch-to-workspace-left = [ "<Super>j" ];
-        switch-to-workspace-right = [ "<Super>k" ];
+        move-to-workspace-left = [ "<Super><Shift>bracketleft" ];
+        move-to-workspace-right = [ "<Super><Shift>bracketright" ];
+        switch-to-workspace-left = [ "<Super>bracketleft" ];
+        switch-to-workspace-right = [ "<Super>bracketright" ];
       };
 
       "org/gnome/shell/keybindings" = {
@@ -149,11 +149,11 @@
 
       "org/gnome/settings-daemon/plugins/media-keys" = {
         custom-keybindings = dconfKeybindPaths;
-        email = [ "<Super>e" ];
-        home = [ "<Super>f" ];
-        rotate-video-lock-static = "@as []";
-        screensaver = [ "<Super>Escape" ];
-        www = [ "<Super>b" ];
+        # email = [ "<Super>e" ];
+        # home = [ "<Super>f" ];
+        # rotate-video-lock-static = "@as []";
+        # screensaver = [ "<Super>Escape" ];
+        # www = [ "<Super>b" ];
       };
 
       "org/gnome/shell" = {
@@ -166,6 +166,7 @@
           "appindicatorsupport@rgcjonas.gmail.com"
           "drive-menu@gnome-shell-extensions.gcampax.github.com"
           "vertical-workspaces@G-dH.github.com"
+          "forge@jmmaranan.com"
         ];
         disable-extension-version-validation = true;
       };
