@@ -1,10 +1,11 @@
-{ pkgs, config, ... }: {
+{ config, ... }: {
   services.nitter = {
     enable = true;
     server = {
       hostname = "nitter.5kw.li";
       port = 3456;
     };
+    config.proxy = "";
   };
 
   services.caddy.extraConfig = ''
