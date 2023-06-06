@@ -18,6 +18,11 @@
     let
       customKeybinds = [
         {
+          binding = "<Shift><Super>Return";
+          command = "kitty --single-instance";
+          name = "Open terminal";
+        }
+        {
           binding = "<Super>t";
           command = "kitty --single-instance";
           name = "Open terminal";
@@ -185,6 +190,10 @@
         show-wst-labels-on-hover = false;
         startup-state = 0;
         ws-thumbnails-position = 5;
+      };
+
+      "org/gnome/shell/extensions/forge" = {
+        window-gap-hidden-on-single = true;
       };
 
       # "org/gnome/shell/extensions/just-perfection" = {
