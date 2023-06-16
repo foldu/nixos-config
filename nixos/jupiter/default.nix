@@ -12,7 +12,9 @@
 
     ./manual-hardware-configuration.nix
   ];
-  environment.systemPackages = [ pkgs.deploy-rs ];
+  environment.systemPackages = [
+    inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
+  ];
 
   networking.hostName = "jupiter";
 
