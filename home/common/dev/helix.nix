@@ -8,6 +8,7 @@
         # faster autocompletions in 100ms, default is 400ms
         idle-timeout = 100;
         color-modes = true;
+        true-color = true;
         statusline = {
           # this is the default
           # left = [ "mode" "spinner" "filename" "file-modification-indicator" ];
@@ -44,8 +45,31 @@
             check.command = "clippy";
           };
         };
+        pyright = {
+          command = "${pkgs.pyright}/bin/pyright-langserver";
+          args = [ "--stdio" ];
+          config = { };
+        };
       };
       language = [
+        {
+          name = "python";
+          language-servers = [ "pyright" ];
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.black}/bin/black";
+            args = [ "-" "--quiet" ];
+          };
+        }
+        {
+          name = "bash";
+          indent = { tab-width = 4; unit = "    "; };
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.shfmt}/bin/shfmt";
+            args = [ "-i" "4" ];
+          };
+        }
         {
           name = "nix";
           auto-format = true;
