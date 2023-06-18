@@ -47,11 +47,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    neovim-nightly-overlay = {
-      url = "github:nix-community/neovim-nightly-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     kanagawa-theme = {
       url = "github:rebelot/kanagawa.nvim";
       flake = false;

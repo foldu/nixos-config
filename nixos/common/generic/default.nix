@@ -20,26 +20,6 @@
     ripgrep
     file
     helix
-    # gets overriden by home-manager on systems where I need an IDE
-    (neovim.override {
-      configure = {
-        packages.myPlugins = with pkgs.vimPlugins; {
-          start = [
-            vim-nix
-            vim-surround
-            gruvbox-nvim
-            vim-oscyank
-          ];
-          opt = [ ];
-        };
-        customRC = ''
-          " FIXME
-        '';
-      };
-      withRuby = false;
-      withNodeJs = false;
-      withPython3 = false;
-    })
   ];
 
   nix = {

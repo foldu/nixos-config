@@ -17,11 +17,6 @@
     neofetch
     rename
     man-pages
-    # (pkgs.neovim.override {
-    #   withRuby = false;
-    #   withNodeJs = false;
-    #   withPython3 = false;
-    # })
   ];
 
   programs.htop = {
