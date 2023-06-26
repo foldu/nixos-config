@@ -56,6 +56,10 @@
       };
       language = [
         {
+          name = "toml";
+          auto-format = true;
+        }
+        {
           name = "python";
           language-servers = [ "pyright" "ruff-lsp" ];
           auto-format = true;
