@@ -28,6 +28,7 @@
       device = "nodev";
       efiInstallAsRemovable = true;
       efiSupport = true;
+      useOSProber = true;
     };
   };
 
