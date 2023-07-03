@@ -51,7 +51,7 @@
           config = { };
         };
         ruff-lsp = {
-          command = "${pkgs.python311Packages.ruff-lsp}/bin/ruff-lsp";
+          command = "${pkgs.ruff-lsp}/bin/ruff-lsp";
         };
       };
       language = [
@@ -61,7 +61,10 @@
         }
         {
           name = "python";
-          language-servers = [ "pyright" "ruff-lsp" ];
+          language-servers = [
+            "pyright"
+            "ruff-lsp"
+          ];
           auto-format = true;
           formatter = {
             command = "${pkgs.black}/bin/black";
