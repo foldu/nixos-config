@@ -31,7 +31,7 @@ export def nixos [
 ] {
     let valid_cmds = (nu-complete nixos)
     if $cmd in $valid_cmds {
-        ^sudo nixos-rebuild --flake $flake $cmd
+        ^sudo nixos-rebuild --flake $flake $cmd --print-build-logs
     } else {
         let span = (metadata $cmd).span
         error make {
