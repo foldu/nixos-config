@@ -31,7 +31,7 @@
 
   boot.loader.grub = {
     enable = true;
-    device = "/dev/sdc";
+    device = "/dev/disk/by-id/ata-Crucial_CT250MX200SSD1_153610838381";
   };
 
   networking.hostId = "964725e9";
