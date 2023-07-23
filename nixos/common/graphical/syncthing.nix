@@ -35,16 +35,18 @@ in
       };
     in
     {
-      enable = true;
+      # FIXME: service currently broken
+      enable = false;
       user = "barnabas";
       group = "users";
       configDir = "/home/barnabas/.config/syncthing";
-      devices = syncthingDevices;
-      folders = {
-        "/home/barnabas/downloads" = mkSharedShare "downloads";
-        "/home/barnabas/uni" = mkSharedShare "uni";
-        "/home/barnabas/sync" = mkSharedShare "sync";
-        "/home/barnabas/.local/share/mpd/playlists" = mkSharedShare "playlists";
+      settings = {
+        devices = syncthingDevices;
+        folders = {
+          "/home/barnabas/downloads" = mkSharedShare "downloads";
+          "/home/barnabas/uni" = mkSharedShare "uni";
+          "/home/barnabas/sync" = mkSharedShare "sync";
+        };
       };
     };
 }
