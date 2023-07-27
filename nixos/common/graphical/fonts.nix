@@ -11,7 +11,7 @@ in
       monospace = [ configSettings.font.monospace.name ];
     };
     fontconfig.hinting.enable = true;
-    fonts = with pkgs; [
+    packages = with pkgs; [
       corefonts
       noto-fonts
       dejavu_fonts
