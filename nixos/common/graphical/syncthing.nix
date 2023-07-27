@@ -35,8 +35,7 @@ in
       };
     in
     {
-      # FIXME: service currently broken
-      enable = false;
+      enable = true;
       user = "barnabas";
       group = "users";
       configDir = "/home/barnabas/.config/syncthing";
