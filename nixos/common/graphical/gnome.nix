@@ -25,13 +25,13 @@
   services.power-profiles-daemon.enable = false;
 
   environment.systemPackages = with pkgs.gnomeExtensions; [
-    forge
+    vitals
+    paperwm
     appindicator
-    blur-my-shell
     just-perfection
-    gnome-ui-tune
     pano
     vertical-workspaces
+    gsconnect
   ];
 
   # disable laptop melting service

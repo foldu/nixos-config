@@ -22,38 +22,28 @@
           command = "kitty --single-instance";
           name = "Open terminal";
         }
-        {
-          binding = "<Super>t";
-          command = "kitty --single-instance";
-          name = "Open terminal";
-        }
-        {
-          binding = "<Super>d";
-          command = "xhide --cmd com.github.taiko2k.tauonmb --name tauon --windowclass \"Tauon Music Box\"";
-          name = "Open music player";
-        }
-        {
-          binding = "<Super>e";
-          command =
-            let
-              script = pkgs.writeText "floating-term" ''
-                #!/bin/sh
-                session=$(
-                    cat <<EOF
-                cd ~/nixos-config/
-                launch nu
-                new_tab
-                cd ~/
-                launch nu
-                EOF
-                )
+        # {
+        #   binding = "<Super>e";
+        #   command =
+        #     let
+        #       script = pkgs.writeText "floating-term" ''
+        #         #!/bin/sh
+        #         session=$(
+        #             cat <<EOF
+        #         cd ~/nixos-config/
+        #         launch nu
+        #         new_tab
+        #         cd ~/
+        #         launch nu
+        #         EOF
+        #         )
 
-                echo "$session" | kitty --class "Floating Term" --session -
-              '';
-            in
-            "xhide --cmd \"sh ${script}\" --name floating-term --windowclass \"Floating Term\"";
-          name = "Open floating terminal";
-        }
+        #         echo "$session" | kitty --class "Floating Term" --session -
+        #       '';
+        #     in
+        #     "xhide --cmd \"sh ${script}\" --name floating-term --windowclass \"Floating Term\"";
+        #   name = "Open floating terminal";
+        # }
       ];
       keybindRange = lib.lists.range 0 (lib.lists.length customKeybinds);
       dconfKeybinds =
@@ -171,7 +161,7 @@
           "appindicatorsupport@rgcjonas.gmail.com"
           "drive-menu@gnome-shell-extensions.gcampax.github.com"
           "vertical-workspaces@G-dH.github.com"
-          "forge@jmmaranan.com"
+          "paperwm@hedning:matrix.org"
         ];
         disable-extension-version-validation = true;
       };
@@ -192,9 +182,28 @@
         ws-thumbnails-position = 5;
       };
 
-      "org/gnome/shell/extensions/forge" = {
-        window-gap-hidden-on-single = true;
+      # "org/gnome/shell/extensions/forge" = {
+      #   window-gap-hidden-on-single = true;
+      # };
+
+      "org/gnome/shell/extensions/paperwm" = {
+        horizontal-margin = 5;
+        override-hot-corner = false;
+        use-default-background = true;
+        vertical-margin = 5;
+        vertical-margin-bottom = 5;
+        window-gap = 5;
       };
+
+      "org/gnome/shell/extensions/paperwm/keybindings" = {
+        # move-down = [ "<Control><Super>Down" "<Control><Super>j" ];
+        # move-up = [ "<Control><Super>Up" "<Control><Super>k" ];
+        # switch-down = [ "<Super>Down" "<Super>j" ];
+        # switch-left = [ "<Super>Left" "<Super>h" ];
+        # switch-right = [ "<Super>Right" "<Super>l" ];
+        # switch-up = [ "<Super>Up" "<Super>k" ];
+      };
+
 
       # "org/gnome/shell/extensions/just-perfection" = {
       #   animation = 4;
@@ -238,11 +247,11 @@
         show-delete-permanently = true;
       };
 
-      "org/gnome/mutter" = {
-        center-new-windows = true;
-        dynamic-workspaces = true;
-        workspaces-only-on-primary = true;
-      };
+      # "org/gnome/mutter" = {
+      #   center-new-windows = true;
+      #   dynamic-workspaces = true;
+      #   workspaces-only-on-primary = true;
+      # };
     }
     // dconfKeybinds;
 }
