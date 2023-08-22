@@ -4,7 +4,7 @@
       {
         urls = [ "https://torrent.home.5kw.li/transmission/web" ];
         # it's transmission, will try to set some header which you're supposed to send back
-        http_response_code = 409;
+        response_status_code = 409;
         tags.host = "saturn";
       }
       {
