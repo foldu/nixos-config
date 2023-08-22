@@ -27,6 +27,23 @@
         response_string_match = "https://ytproxy.home.5kw.li";
         tags.host = "saturn";
       }
+      {
+        urls = [ "https://vaultwarden.home.5kw.li/alive" ];
+        response_status_code = 200;
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://miniflux.home.5kw.li" ];
+        follow_redirects = true;
+        response_string_match = "Miniflux";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://unifi.home.5kw.li" ];
+        follow_redirects = true;
+        response_string_match = "UniFi";
+        tags.host = "saturn";
+      }
     ];
   };
 }
