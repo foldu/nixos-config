@@ -43,8 +43,7 @@
   # };
 
   filesystem_full_80percent = {
-    # btrfs file system usage is wrong, so ignore it
-    condition = ''disk_used_percent{mode!="ro",fstype!="btrfs"} >= 80'';
+    condition = ''disk_used_percent{mode!="ro"} >= 80'';
     time = "10m";
     description = "{{$labels.instance}} device {{$labels.device}} on {{$labels.path}} got less than 20% space left on its filesystem";
   };
