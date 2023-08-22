@@ -1,6 +1,7 @@
 { pkgs, lib, config, ... }: {
   imports = [
     ./alertmanager.nix
+    ./telegraf-inputs/saturn.nix
   ];
 
   services.prometheus = {
