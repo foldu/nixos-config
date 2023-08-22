@@ -1,6 +1,6 @@
 { config, ... }:
 let
-  torrentDir = "/srv/media/cia/data/torrents";
+  torrentDir = "/srv/media/nvme1/data/torrents";
   incompleteDir = "${torrentDir}/.incomplete";
 in
 {

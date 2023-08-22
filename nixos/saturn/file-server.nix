@@ -50,7 +50,7 @@
       };
     in
     {
-      "/srv/nfs/torrents" = bind "/srv/media/cia/data/torrents";
+      "/srv/nfs/torrents" = bind "/srv/media/nvme1/data/torrents";
       "/srv/nfs/videos" = bind "/srv/media/main/vid";
       "/srv/nfs/cache" = bind "/srv/media/cia/cache";
       "/srv/nfs/img" = bind "/srv/media/cia/data/img";

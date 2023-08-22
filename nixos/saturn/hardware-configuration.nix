@@ -74,6 +74,12 @@
       fsType = "zfs";
     };
 
+  fileSystems."/srv/media/nvme1/data" =
+    {
+      device = "nvme1/data";
+      fsType = "zfs";
+    };
+
   swapDevices =
     [{ device = "/dev/disk/by-uuid/6963baa8-8979-4cd1-b740-7a06900a7b03"; }];
 
