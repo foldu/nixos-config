@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 let
   #internalIp = "10.88.0.42";
   backendHostname = "pipedapi.home.5kw.li";
@@ -6,8 +6,9 @@ let
   ytproxyHostname = "ytproxy.home.5kw.li";
   ytproxySockdir = "/run/ytproxy";
   internalIp = "10.88.1.25";
-  varnishPort = "4455";
   frontendPort = "4456";
+  varnishPort = "4099";
+  backendPort = "4455";
 in
 {
   imports = [
@@ -56,7 +57,6 @@ in
     let
       extraOptions = [
         "--pod=piped-pott"
-        "--label=io.containers.autoupdate=registry"
         "--pull=newer"
       ];
     in
@@ -86,18 +86,20 @@ in
           "${./piped.properties}:/app/config.properties:ro"
         ];
       };
-
-      piped-varnish = {
-        image = "docker.io/varnish:alpine";
-        volumes = [
-          "${./varnish.vcl}:/etc/varnish/default.vcl:ro"
-        ];
-        environment.VARNISH_SIZE = "1G";
-        cmd = [ "varnishd" "-F" "-a" ":4030" "-b" "127.0.0.1:8080" ];
-        extraOptions = extraOptions ++ [ "--tmpfs" "/var/lib/varnish/varnishd:exec" ];
-        dependsOn = [ "piped-backend" ];
-      };
     };
+
+  services.varnish = {
+    enable = true;
+    config = ''
+      vcl 4.0;
+
+      backend default {
+        .host = "localhost:${backendPort}";
+      }
+    '';
+    http_address = "127.0.0.1:${varnishPort}";
+  };
+
   services.caddy.extraConfig = ''
     ${frontendHostname} {
       reverse_proxy localhost:${frontendPort}
@@ -132,7 +134,7 @@ in
     script = ''
       ${config.virtualisation.podman.package}/bin/podman pod exists piped-pott || \
         ${config.virtualisation.podman.package}/bin/podman pod create -n piped-pott \
-        -p '127.0.0.1:${varnishPort}:4030' \
+        -p '127.0.0.1:${backendPort}:8080' \
         -p '127.0.0.1:${frontendPort}:80' \
         --ip ${internalIp}
     '';

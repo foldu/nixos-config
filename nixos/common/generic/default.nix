@@ -3,6 +3,7 @@
     ./cachix
     ./secrets.nix
     ./ssh.nix
+    ./telegraf.nix
   ];
 
   # FIXME: should be in home-manager, but it currently doesn't support wayland sessions

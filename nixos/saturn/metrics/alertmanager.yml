@@ -1,0 +1,15 @@
+route:
+  receiver: "default"
+  routes:
+    - group_by: ["host"]
+      group_wait: "30s"
+      group_interval: "2m"
+      repeat_interval: "2h"
+      receiver: "me"
+
+receivers:
+  - name: "me"
+    telegram_configs:
+      - bot_token: "$TELEGRAM_BOT_TOKEN"
+        chat_id: $TELEGRAM_CHAT_ID
+  - name: "default"

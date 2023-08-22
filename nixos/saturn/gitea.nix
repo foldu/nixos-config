@@ -10,6 +10,7 @@
       service = {
         DISABLE_REGISTRATION = true;
       };
+      metrics.ENABLED = true;
       picture = {
         DISABLE_GRAVATAR = true;
         ENABLE_FEDERATED_AVATAR = false;

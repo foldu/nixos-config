@@ -23,6 +23,7 @@
     ./unifi.nix
     ./miniflux.nix
     ./postgresql.nix
+    ./metrics
     "${inputs.homeserver-sekret}"
 
   ];
