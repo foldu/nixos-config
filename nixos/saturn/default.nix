@@ -68,10 +68,10 @@
 
   boot.enableContainers = false;
 
-  # FIXME: doesn't work
-  # systemd.timers.podman-auto-update = {
-  #   timerConfig.OnCalendar = "03:00";
-  #   wantedBy = [ "timers.target" ];
-  # };
+  systemd.timers.podman-auto-update = {
+    enable = false;
+    # timerConfig.OnCalendar = "03:00";
+    # wantedBy = [ "timers.target" ];
+  };
   system.stateVersion = "20.09";
 }
