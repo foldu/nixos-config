@@ -37,6 +37,13 @@
             ];
             labels.type = "pc";
           }
+          {
+            targets = [
+              # TODO: give hostname
+              "100.64.0.6:9273"
+            ];
+            labels.type = "server";
+          }
         ];
       }
       # {
