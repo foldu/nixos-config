@@ -10,6 +10,8 @@
 
   virtualisation.docker.storageDriver = "btrfs";
 
+  virtualisation.podman.extraPackages = [ pkgs.btrfs-progs ];
+
   virtualisation.containers.storage.settings = {
     storage = {
       driver = "btrfs";

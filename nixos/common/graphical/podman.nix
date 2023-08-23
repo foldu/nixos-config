@@ -1,9 +1,10 @@
-{ pkgs, ... }: {
-  virtualisation.docker = {
+{ ... }: {
+  virtualisation.podman = {
     # this first world shithole does not have internet
     # and concurrent downloads cause docker to timeout
-    extraOptions = "--max-concurrent-downloads 1";
+    # extraOptions = "--max-concurrent-downloads 1";
     enable = true;
+    dockerCompat = true;
   };
-  environment.systemPackages = [ pkgs.docker-compose ];
+  boot.enableContainers = false;
 }

@@ -41,7 +41,7 @@
 
   virtualisation.podman = {
     enable = true;
-    extraPackages = [ pkgs.zfs pkgs.netavark ];
+    extraPackages = [ pkgs.netavark ];
     autoPrune = {
       enable = true;
       dates = "weekly";
