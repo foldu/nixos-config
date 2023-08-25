@@ -1,4 +1,4 @@
-{ lib }: (import ./mkrules.nix { inherit lib; }) ({
+{ lib }: ({
   prometheus_too_many_restarts = {
     condition = ''changes(process_start_time_seconds{job=~"prometheus|pushgateway|alertmanager|telegraf"}[15m]) > 2'';
     description = "Prometheus has restarted more than twice in the last 15 minutes. It might be crashlooping";

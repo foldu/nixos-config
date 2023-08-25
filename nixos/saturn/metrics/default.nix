@@ -1,6 +1,6 @@
-{ pkgs, lib, config, ... }: {
+{ pkgs, lib, config, outputs, ... }: {
   imports = [
-    ./alertmanager.nix
+    ../../common/alertmanager
     ./telegraf-inputs/saturn.nix
   ];
 
@@ -12,7 +12,7 @@
         groups = [
           {
             name = "generic-alerts";
-            rules = import ./alerts/generic.nix { inherit lib; };
+            rules = outputs.lib.mkPrometheusRules (import ./alerts/generic.nix { inherit lib; });
           }
         ];
       }))
@@ -83,9 +83,15 @@
     ];
   };
 
+  services.prometheus.alertmanager.webExternalUrl = "https://alertmanager.home.5kw.li";
+
   services.caddy.extraConfig = ''
     prometheus.home.5kw.li {
         reverse_proxy localhost:${toString config.services.prometheus.port}
+    }
+    
+    alertmanager.home.5kw.li {
+        reverse_proxy localhost:${toString config.services.prometheus.alertmanager.port}
     }
   '';
 }

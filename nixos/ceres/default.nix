@@ -1,10 +1,12 @@
 { lib, inputs, pkgs, ... }: {
   imports = [
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
-
     ../common/profiles/server.nix
 
     ../common/dns-server.nix
+
+    ./metrics
+    ./printing.nix
 
     ./manual-hardware-configuration.nix
   ];
@@ -22,24 +24,22 @@
     };
   };
 
-  services.printing = {
+  services.caddy = {
     enable = true;
-    drivers = [
-      pkgs.foo2zjs
-    ];
-    defaultShared = true;
-    allowFrom = [
-      "localhost"
-      "print.home.5kw.li"
-    ];
-    listenAddresses = [
-      "localhost:631"
-      "print.home.5kw.li:631"
-    ];
-    startWhenNeeded = false;
+    acmeCA = "https://ca.home.5kw.li:4321/acme/acme/directory";
+    email = "webmaster@5kw.li";
   };
 
-  networking.firewall.allowedTCPPorts = [ 631 ];
+  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [
+    80
+    443
+  ];
+
+  networking.firewall.interfaces."tailscale0".allowedUDPPorts = [
+    80
+    443
+  ];
+
 
   networking.interfaces.eth0.useDHCP = true;
 
