@@ -13,7 +13,7 @@ def create_left_prompt [] {
     }
 
     let dir = ([
-        ($env.PWD | str substring 0..($home | str length) | str replace -s $home "~"),
+        ($env.PWD | str substring 0..($home | str length) | str replace $home "~"),
         ($env.PWD | str substring ($home | str length)..)
     ] | str join)
 
@@ -32,7 +32,7 @@ def create_left_prompt [] {
 }
 
 def create_right_prompt [] {
-    let date_segment = (date now | date format "%Y-%m-%d %H:%M:%S")
+    let date_segment = (date now | format date "%Y-%m-%d %H:%M:%S")
 
     if $env.LAST_EXIT_CODE != 0 {
         $"(ansi red)[($env.LAST_EXIT_CODE)] (ansi purple)($date_segment)"
