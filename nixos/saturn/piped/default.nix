@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 let
   #internalIp = "10.88.0.42";
   backendHostname = "pipedapi.home.5kw.li";
@@ -9,12 +9,9 @@ let
   frontendPort = "4456";
   varnishPort = "4099";
   backendPort = "4455";
+  writeNuScript = inputs.nix-stuff.packages.${pkgs.system}.writeNuScript;
 in
 {
-  imports = [
-    ./subscription_updater.nix
-  ];
-
   users.users.piped = {
     isSystemUser = true;
     group = "piped";
@@ -145,5 +142,25 @@ in
       host piped piped ${internalIp}/32 md5
     '';
     enableTCPIP = true;
+  };
+
+
+  systemd.services.piped-subscription-updater = {
+    after = [ "network.target" ];
+    environment.BASE = "https://${backendHostname}";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = writeNuScript {
+        name = "piped-subscription-updater";
+        file = ./piped-subscription-updater.nu;
+      };
+      RestartSec = "1minute";
+      EnvironmentFile = "/var/secrets/piped-updater.env";
+    };
+  };
+
+  systemd.timers.piped-subscription-updater = {
+    wantedBy = [ "timers.target" ];
+    timerConfig.OnCalendar = "hourly";
   };
 }
