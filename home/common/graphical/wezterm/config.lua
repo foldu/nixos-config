@@ -158,4 +158,9 @@ end)
 
 config.font = wezterm.font("Fira Mono")
 
+config.mux_env_remove = {
+    "SSH_AUTH_SOCK",
+    "SSH_CLIENT",
+}
+
 return config
