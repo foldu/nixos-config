@@ -1,5 +1,7 @@
 -- Pull in the wezterm API
 local wezterm = require("wezterm")
+local io = require("io")
+local os = require("os")
 
 -- This table will hold the configuration.
 local config = {}
@@ -26,6 +28,11 @@ config.keys = {
         key = "j",
         mods = "CTRL|SHIFT",
         action = wezterm.action.ActivatePaneDirection("Next"),
+    },
+    {
+        key = "g",
+        mods = "CTRL|SHIFT",
+        action = wezterm.action.EmitEvent("last-output-pager"),
     },
     -- {
     --     key = "t",
@@ -101,6 +108,41 @@ table.insert(config.hyperlink_rules, {
     regex = [[[^\n \t]+:\d+:\d+]],
     format = build_line_scheme .. "$0",
 })
+
+wezterm.on("last-output-pager", function(window, pane)
+    local output_zones = pane:get_semantic_zones("Output")
+    if #output_zones == 0 then
+        return
+    end
+
+    local last_output_zone = output_zones[#output_zones - 1]
+    local output = pane:get_text_from_semantic_zone(last_output_zone)
+
+    local name = os.tmpname()
+    local f = io.open(name, "w+")
+    if f == nil then
+        return
+    end
+    f:write(output)
+    f:flush()
+    f:close()
+
+    window:perform_action(
+        wezterm.action.SpawnCommandInNewWindow({
+            args = { "less", name },
+        }),
+        pane
+    )
+
+    -- Wait "enough" time for less to read the file before we remove it.
+    -- The window creation and process spawn are asynchronous wrt. running
+    -- this script and are not awaitable, so we just pick a number.
+    --
+    -- Note: We don't strictly need to remove this file, but it is nice
+    -- to avoid cluttering up the temporary directory.
+    wezterm.sleep_ms(10000)
+    os.remove(name)
+end)
 
 -- config.unix_domains = {
 --     {
