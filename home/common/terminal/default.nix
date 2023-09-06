@@ -17,6 +17,7 @@
     neofetch
     rename
     man-pages
+    wezterm
   ];
 
   programs.htop = {

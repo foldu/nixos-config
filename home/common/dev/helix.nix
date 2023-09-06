@@ -1,4 +1,6 @@
 { pkgs, inputs, ... }: {
+  # https://quantonganh.com/2023/08/19/turn-helix-into-ide
+
   programs.helix = {
     enable = true;
     package = inputs.helix.packages.${pkgs.system}.helix;
@@ -32,6 +34,18 @@
           space = {
             F = "file_picker_in_current_buffer_directory";
             H = ":toggle lsp.display-inlay-hints";
+            t = ":sh wezterm cli split-pane --bottom --percent 30 > /dev/null";
+            v = ":sh wezterm cli split-pane --right --percent 80 gitui > /dev/null";
+            e =
+              let
+                helixOpener = inputs.nix-stuff.packages.${pkgs.system}.writeNuScript {
+                  name = "helix-opener";
+                  file = ./nnn-opener.nu;
+                  path = [ pkgs.wezterm ];
+                };
+              in
+              # TODO: use current filepath as nnn argument when https://github.com/helix-editor/helix/pull/6820 gets merged
+              ":sh NNN_OPENER=${helixOpener}/bin/helix-opener wezterm cli split-pane --left --percent 20 nnn > /dev/null";
           };
         };
       };
@@ -55,6 +69,12 @@
         };
       };
       language = [
+        {
+          name = "lua";
+          indent = { tab-width = 4; unit = "    "; };
+          auto-format = true;
+          formatter = { command = "${pkgs.stylua}/bin/stylua"; args = [ "-" ]; };
+        }
         {
           name = "toml";
           auto-format = true;
