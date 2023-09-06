@@ -9,7 +9,6 @@
   };
 
   home.packages = with pkgs; [
-    (nnn.override { withNerdIcons = true; })
     tokei
     minicom
     gdb

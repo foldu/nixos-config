@@ -1,5 +1,27 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, config, inputs, ... }:
+let
+  brootConfigPath = "broot/helix-tree.hjson";
+  helixOpener = inputs.nix-stuff.packages.${pkgs.system}.writeNuScript {
+    name = "helix-opener";
+    file = ./helix-opener.nu;
+    path = [ pkgs.wezterm ];
+  };
+in
+{
   # https://quantonganh.com/2023/08/19/turn-helix-into-ide
+
+  xdg.configFile.${brootConfigPath} = {
+    text = builtins.toJSON (config.programs.broot.settings // {
+      modal = true;
+      verbs = [
+        {
+          invocation = "edit";
+          key = "enter";
+          execution = "${helixOpener}/bin/helix-opener {file}";
+        }
+      ];
+    });
+  };
 
   programs.helix = {
     enable = true;
@@ -38,14 +60,10 @@
             v = ":sh wezterm cli split-pane --right --percent 80 gitui > /dev/null";
             e =
               let
-                helixOpener = inputs.nix-stuff.packages.${pkgs.system}.writeNuScript {
-                  name = "helix-opener";
-                  file = ./nnn-opener.nu;
-                  path = [ pkgs.wezterm ];
-                };
+                brootConf = "${config.xdg.configHome}/${brootConfigPath}";
               in
-              # TODO: use current filepath as nnn argument when https://github.com/helix-editor/helix/pull/6820 gets merged
-              ":sh NNN_OPENER=${helixOpener}/bin/helix-opener wezterm cli split-pane --left --percent 20 nnn > /dev/null";
+              # TODO: use current filepath as argument when https://github.com/helix-editor/helix/pull/6820 gets merged
+              ":sh wezterm cli split-pane --left --percent 20 broot --conf ${brootConf} > /dev/null";
           };
         };
       };

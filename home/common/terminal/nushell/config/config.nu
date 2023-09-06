@@ -556,3 +556,5 @@ alias rm = rm --verbose
 alias cp = cp --progress
 alias mv = mv --verbose
 alias cat = bat
+
+use ~/.config/nushell/br.nu *

@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ pkgs, inputs, ... }: {
   imports = [
     ./nushell
   ];
@@ -19,6 +19,13 @@
     man-pages
     wezterm
   ];
+
+  programs.broot = {
+    enable = true;
+    settings = {
+      skin = (builtins.fromTOML (builtins.readFile "${inputs.kanagawa-theme}/extras/broot_kanagawa.toml")).skin;
+    };
+  };
 
   programs.htop = {
     enable = true;
