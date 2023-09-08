@@ -104,10 +104,10 @@
   #   description = "{{$labels.instance}}: gitea instances error rate went up: {{$value}} errors in 5 minutes";
   # };
 
-  swap_using_30percent = {
-    condition = ''mem_swap_total - (mem_swap_cached + mem_swap_free) > mem_swap_total * 0.3'';
+  swap_using_50percent = {
+    condition = ''mem_swap_total - (mem_swap_cached + mem_swap_free) > mem_swap_total * 0.5'';
     time = "30m";
-    description = "{{$labels.host}} is using 30% of its swap space for at least 30 minutes";
+    description = "{{$labels.host}} is using 50% of its swap space for at least 30 minutes";
   };
 
   # user@$uid.service and similar sometimes fail, we don't care about those services.
