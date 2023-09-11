@@ -1,6 +1,7 @@
 { pkgs, inputs, ... }: {
   imports = [
     ./nushell
+    ./wezterm
   ];
 
   home.packages = with pkgs; [
@@ -17,7 +18,6 @@
     neofetch
     rename
     man-pages
-    wezterm
   ];
 
   programs.broot = {

@@ -2,7 +2,6 @@
   imports = [
     ./gtk.nix
     ./kitty
-    ./wezterm
     ./mpv.nix
     ./xdg-userdirs.nix
     ./xdg.nix
