@@ -20,6 +20,11 @@ config.color_scheme = "Kanagawa (Gogh)"
 config.enable_wayland = false
 config.keys = {
     {
+        key = "Enter",
+        mods = "ALT",
+        action = wezterm.action.DisableDefaultAssignment,
+    },
+    {
         key = "k",
         mods = "CTRL|SHIFT",
         action = wezterm.action.ActivatePaneDirection("Prev"),
