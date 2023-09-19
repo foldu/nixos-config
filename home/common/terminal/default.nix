@@ -2,6 +2,7 @@
   imports = [
     ./nushell
     ./wezterm
+    ./yazi
   ];
 
   home.packages = with pkgs; [

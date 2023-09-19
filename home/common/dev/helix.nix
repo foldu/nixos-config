@@ -59,11 +59,8 @@ in
             t = ":sh wezterm cli split-pane --bottom --percent 30 > /dev/null";
             v = ":sh wezterm cli split-pane --right --percent 80 gitui > /dev/null";
             e =
-              let
-                brootConf = "${config.xdg.configHome}/${brootConfigPath}";
-              in
               # TODO: use current filepath as argument when https://github.com/helix-editor/helix/pull/6820 gets merged
-              ":sh wezterm cli split-pane --left --percent 20 broot --conf ${brootConf} > /dev/null";
+              ":sh wezterm cli split-pane --bottom --percent 50 yazi > /dev/null";
           };
         };
       };
