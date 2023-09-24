@@ -75,6 +75,11 @@
     helix = {
       url = "github:helix-editor/helix";
     };
+
+    yazi = {
+      url = "github:sxyazi/yazi";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
