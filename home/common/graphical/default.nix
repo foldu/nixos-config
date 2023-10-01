@@ -11,6 +11,11 @@
   ];
 
   home.packages = with pkgs; [
+    (inputs.nix-stuff.packages.${pkgs.system}.writeNuScriptBin {
+      name = "src-manage";
+      path = [ pkgs.git ];
+      file = ./src-manage.nu;
+    })
     steam-run
     kooha
     inputs.nix-stuff.packages.${pkgs.system}.eunzip
