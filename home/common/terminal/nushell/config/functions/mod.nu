@@ -1,3 +1,6 @@
+use src-manage.nu *
+use nixos.nu *
+
 export def edit-link [
     path: path # Link to edit
 ] {
@@ -20,7 +23,6 @@ export def edit-link [
         }
     }
 }
-
 
 export def tmp-clone [
     url: string # Link to git thing

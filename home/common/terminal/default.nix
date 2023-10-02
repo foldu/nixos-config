@@ -5,6 +5,11 @@
     ./yazi
   ];
 
+  xdg.configFile."src-manage/config.json".text = builtins.toJSON {
+    config.src_dir = "~/barnabas/src";
+    hosts."git.home.5kw.li".flatten = true;
+  };
+
   home.packages = with pkgs; [
     dua
     wget

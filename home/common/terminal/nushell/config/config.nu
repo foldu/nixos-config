@@ -550,7 +550,7 @@ $env.config = {
   ]
 }
 
-use ~/.config/nushell/functions.nu *
+use ~/.config/nushell/functions/ *
 
 alias rm = rm --verbose
 alias cp = cp --progress
