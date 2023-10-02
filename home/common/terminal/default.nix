@@ -6,7 +6,7 @@
   ];
 
   xdg.configFile."src-manage/config.json".text = builtins.toJSON {
-    config.src_dir = "~/barnabas/src";
+    config.src_dir = "~/src";
     hosts."git.home.5kw.li".flatten = true;
   };
 
