@@ -1,15 +1,17 @@
 #!/usr/bin/env nu
 
 export def import [path: path] {
+  mut err = null
   if $path == "." {
     print "Can't import CWD"
-    exit 1
+    # FIXME: use errors instead
+    return
   }
 
   let type = ($path | path type)
   if $type != "dir" {
     print "Can only import directories"
-    exit 1
+    return
   }
 
   let config = (config-parse)
@@ -19,7 +21,7 @@ export def import [path: path] {
 
   if ($target_path | path exists) {
     print $"Already imported or duplicate of ($target_path)"
-    exit 1
+    return
   }
 
   create-parent-if-not-exists $target_path
