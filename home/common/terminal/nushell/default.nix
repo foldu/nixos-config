@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   home.packages = [
     pkgs.carapace
+    pkgs.zoxide
   ];
 
   programs.nushell.enable = true;
