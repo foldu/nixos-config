@@ -161,7 +161,7 @@
           "appindicatorsupport@rgcjonas.gmail.com"
           "drive-menu@gnome-shell-extensions.gcampax.github.com"
           "vertical-workspaces@G-dH.github.com"
-          "paperwm@hedning:matrix.org"
+          "paperwm@paperwm.github.com"
         ];
         disable-extension-version-validation = true;
       };
