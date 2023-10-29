@@ -21,6 +21,7 @@
     #litecli
     #pgcli
 
+    android-studio
     arduino-cli
     black
     ccls
