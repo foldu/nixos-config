@@ -28,7 +28,6 @@
     pwgen
     dfeet
     gimp
-    tdesktop
     streamlink
     inputs.wpp-gtk.packages.${pkgs.system}.wpp
     element-desktop
