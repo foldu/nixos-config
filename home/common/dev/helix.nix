@@ -102,8 +102,8 @@ in
           ];
           auto-format = true;
           formatter = {
-            command = "${pkgs.black}/bin/black";
-            args = [ "-" "--quiet" ];
+            command = "${pkgs.ruff}/bin/ruff";
+            args = [ "format" "-" ];
           };
         }
         {
