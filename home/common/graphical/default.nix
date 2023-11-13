@@ -20,8 +20,6 @@
     yt-dlp
     pass
     imagemagick
-    # uses node 16
-    # bitwarden
     gnupg
     brave
     chromium
@@ -35,6 +33,8 @@
     thunderbird
     newsflash
     wl-clipboard
+    unrar
+    _7zz
   ];
 
   services.pickwp.enable = true;
