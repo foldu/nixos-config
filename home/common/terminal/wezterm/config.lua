@@ -163,7 +163,7 @@ end)
 
 config.font = wezterm.font({
     family = "Monaspace Neon",
-    harfbuzz_features = {},
+    harfbuzz_features = { "calt=1", "zero" },
 })
 
 config.mux_env_remove = {
