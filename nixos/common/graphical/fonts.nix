@@ -20,6 +20,7 @@ in
       vistafonts
       etBook
       eb-garamond
+      monaspace
       domitian
       jetbrains-mono
       ubuntu_font_family

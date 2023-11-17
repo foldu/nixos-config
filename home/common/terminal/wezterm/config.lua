@@ -161,7 +161,10 @@ end)
 -- -- If you prefer to connect manually, leave out this line.
 -- config.default_gui_startup_args = { "connect", "unix" }
 
-config.font = wezterm.font("Fira Mono")
+config.font = wezterm.font({
+    family = "Monaspace Neon",
+    harfbuzz_features = {},
+})
 
 config.mux_env_remove = {
     "SSH_AUTH_SOCK",
