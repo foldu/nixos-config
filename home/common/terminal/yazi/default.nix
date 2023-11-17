@@ -7,17 +7,17 @@
         image = [
           {
             exec = ''xdg-open "$@"'';
-            display_name = "Open";
+            desc = "Open";
           }
           {
             exec = ''gimp "$@"'';
-            display_name = "Edit";
+            desc = "Edit";
           }
         ];
         archive = [
           {
             exec = ''unar "$1"'';
-            display_name = "Extract here";
+            desc = "Extract here";
           }
         ];
         text = [
@@ -45,20 +45,20 @@
         video = [
           {
             exec = ''celluloid "$@"'';
-            display_name = "Play";
+            desc = "Play";
           }
         ];
         audio = [
           {
             exec = ''celluloid "$@"'';
-            display_name = "Play";
+            desc = "Play";
           }
         ];
 
         fallback = [
           {
             exec = ''xdg-open "$@"'';
-            display_name = "Open";
+            desc = "Open";
           }
         ];
       };
