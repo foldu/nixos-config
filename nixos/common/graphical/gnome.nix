@@ -29,7 +29,7 @@
     paperwm
     appindicator
     just-perfection
-    pano
+    # pano
     vertical-workspaces
     gsconnect
   ];
