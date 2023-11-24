@@ -44,9 +44,9 @@ pkgs: {
       desktopFile = "Helix.desktop";
     };
     imageViewer = {
-      pkg = pkgs.gnome.eog;
-      command = "eog";
-      desktopFile = "org.gnome.eog.desktop";
+      pkg = pkgs.loupe;
+      command = "loupe";
+      desktopFile = "org.gnome.Loupe.desktop";
     };
     emailClient = {
       pkg = pkgs.gnome.geary;
