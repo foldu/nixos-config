@@ -62,6 +62,7 @@ in
         image = "docker.io/1337kavin/piped-frontend:latest";
         inherit extraOptions;
         cmd = [ "ash" "-c" "sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g 'daemon off;'" ];
+        environment.BACKEND_HOSTNAME = backendHostname;
         #''
         #  ash -c 'sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g "daemon off;"'
         #'';

@@ -1,6 +1,8 @@
 { config, ... }:
 let
   unifiDir = "/var/lib/unifi";
+  mongoDir = "/var/lib/mongo/4.4";
+  mongoPort = "27017";
 in
 {
   users.users.unifi = {
@@ -12,26 +14,44 @@ in
   systemd.tmpfiles.rules = [
     "d ${unifiDir} 700 unifi unifi"
     "z ${unifiDir} 700 unifi unifi"
+    "d ${mongoDir} 700 root root"
+    "z ${mongoDir} 700 root root"
   ];
 
-  virtualisation.oci-containers.containers.unifi = {
-    image = "lscr.io/linuxserver/unifi-controller:latest";
-    environment = {
-      PUID = toString config.users.users.unifi.uid;
-      PGID = toString config.users.groups.unifi.gid;
-      MEM_LIMIT = "1024";
-      MEM_STARTUP = "1024";
-      TZ = "Etc/Utc";
+  virtualisation.oci-containers.containers = {
+    unifi-mongo = {
+      image = "docker.io/mongo:4.4";
+      volumes = [
+        "${mongoDir}:/data/db"
+        "/var/secrets/mongo-unifi-init.js:/docker-entrypoint-initdb.d/init-mongo.js:ro"
+      ];
+      ports = [ "${mongoPort}:${mongoPort}" ];
+      extraOptions = [ "--memory=512m" ];
     };
-    volumes = [
-      "${unifiDir}:/config"
-    ];
-    extraOptions = [
-      "--memory=1g"
-      "--label=io.containers.autoupdate=registry"
-      "--network=host"
-      "--pull=newer"
-    ];
+    unifi-controller = {
+      image = "lscr.io/linuxserver/unifi-network-application:latest";
+      environment = {
+        PUID = toString config.users.users.unifi.uid;
+        PGID = toString config.users.groups.unifi.gid;
+        MEM_LIMIT = "512";
+        MEM_STARTUP = "512";
+        TZ = "Etc/Utc";
+        MONGO_PORT = mongoPort;
+        MONGO_HOST = "localhost";
+        MONGO_DBNAME = "unifi";
+        MONGO_USER = "unifi";
+      };
+      volumes = [
+        "${unifiDir}:/config"
+      ];
+      extraOptions = [
+        "--env-file=/var/secrets/unifi.env"
+        "--memory=512m"
+        "--label=io.containers.autoupdate=registry"
+        "--network=host"
+        "--pull=newer"
+      ];
+    };
   };
 
   networking.firewall = {
