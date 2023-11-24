@@ -38,7 +38,7 @@ in
       enable = true;
       user = "barnabas";
       group = "users";
-      configDir = "/home/barnabas/.config/syncthing";
+      dataDir = "/home/barnabas";
       settings = {
         devices = syncthingDevices;
         folders = {
