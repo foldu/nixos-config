@@ -554,5 +554,4 @@ alias cp = cp --progress
 alias mv = mv --verbose
 alias cat = bat
 
-source ~/.config/nushell/br.nu
 source ~/.config/nushell/zoxide.nu
