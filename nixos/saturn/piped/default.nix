@@ -12,6 +12,9 @@ let
   writeNuScript = inputs.nix-stuff.packages.${pkgs.system}.writeNuScript;
 in
 {
+  imports = [
+    inputs.nix-stuff.nixosModules.podman-pods
+  ];
   users.users.piped = {
     isSystemUser = true;
     group = "piped";
@@ -49,42 +52,6 @@ in
     ];
     ensureDatabases = [ "piped" ];
   };
-
-  virtualisation.oci-containers.containers =
-    let
-      extraOptions = [
-        "--pod=piped-pott"
-        "--pull=newer"
-      ];
-    in
-    {
-      piped-frontend = {
-        image = "docker.io/1337kavin/piped-frontend:latest";
-        inherit extraOptions;
-        cmd = [ "ash" "-c" "sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g 'daemon off;'" ];
-        environment.BACKEND_HOSTNAME = backendHostname;
-        #''
-        #  ash -c 'sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g "daemon off;"'
-        #'';
-        dependsOn = [ "piped-backend" ];
-      };
-
-      piped-ytproxy = {
-        inherit extraOptions;
-        image = "docker.io/1337kavin/ytproxy:latest";
-        volumes = [
-          "${ytproxySockdir}:/app/socket"
-        ];
-      };
-
-      piped-backend = {
-        inherit extraOptions;
-        image = "docker.io/1337kavin/piped:latest";
-        volumes = [
-          "${./piped.properties}:/app/config.properties:ro"
-        ];
-      };
-    };
 
   services.varnish = {
     enable = true;
@@ -126,16 +93,36 @@ in
     }
   '';
 
-  systemd.services.podman-piped-create-pod = {
-    serviceConfig.Type = "oneshot";
-    wantedBy = [ "podman-piped-backend.service" ];
-    script = ''
-      ${config.virtualisation.podman.package}/bin/podman pod exists piped-pott || \
-        ${config.virtualisation.podman.package}/bin/podman pod create -n piped-pott \
-        -p '127.0.0.1:${backendPort}:8080' \
-        -p '127.0.0.1:${frontendPort}:80' \
-        --ip ${internalIp}
-    '';
+  podman-pods.pods.piped = {
+    ip = internalIp;
+    ports = [
+      "${backendPort}:8080"
+      "${frontendPort}:80"
+    ];
+    containers = {
+      frontend = {
+        image = "docker.io/1337kavin/piped-frontend:latest";
+        cmd = [ "ash" "-c" "sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g 'daemon off;'" ];
+        environment.BACKEND_HOSTNAME = backendHostname;
+        #''
+        #  ash -c 'sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g "daemon off;"'
+        #'';
+      };
+
+      ytproxy = {
+        image = "docker.io/1337kavin/ytproxy:latest";
+        volumes = [
+          "${ytproxySockdir}:/app/socket"
+        ];
+      };
+
+      backend = {
+        image = "docker.io/1337kavin/piped:latest";
+        volumes = [
+          "${./piped.properties}:/app/config.properties:ro"
+        ];
+      };
+    };
   };
 
   services.postgresql = {
