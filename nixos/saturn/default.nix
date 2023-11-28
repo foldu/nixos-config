@@ -24,6 +24,7 @@
     ./miniflux.nix
     ./postgresql.nix
     ./metrics
+    ./podman
     "${inputs.homeserver-sekret}"
 
   ];
