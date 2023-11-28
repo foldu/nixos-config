@@ -49,7 +49,6 @@ in
         "--memory=512m"
         "--label=io.containers.autoupdate=registry"
         "--network=host"
-        "--pull=newer"
       ];
     };
   };
