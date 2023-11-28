@@ -39,15 +39,6 @@
 
   networking.interfaces.enp5s0.useDHCP = true;
 
-  virtualisation.podman = {
-    enable = true;
-    extraPackages = [ pkgs.netavark ];
-    autoPrune = {
-      enable = true;
-      dates = "weekly";
-    };
-  };
-
   services.caddy = {
     enable = true;
     acmeCA = "https://ca.home.5kw.li:4321/acme/acme/directory";
@@ -64,14 +55,7 @@
     443
   ];
 
-  virtualisation.oci-containers.backend = "podman";
-
   boot.enableContainers = false;
 
-  systemd.timers.podman-auto-update = {
-    enable = false;
-    # timerConfig.OnCalendar = "03:00";
-    # wantedBy = [ "timers.target" ];
-  };
   system.stateVersion = "20.09";
 }
