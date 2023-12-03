@@ -45,9 +45,7 @@ in
     ensureUsers = [
       {
         name = "piped";
-        ensurePermissions = {
-          "DATABASE piped" = "ALL PRIVILEGES";
-        };
+        ensureDBOwnership = true;
       }
     ];
     ensureDatabases = [ "piped" ];
