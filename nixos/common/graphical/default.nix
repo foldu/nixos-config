@@ -39,6 +39,8 @@ in
     ./podman.nix
   ];
 
+  programs.kdeconnect.enable = true;
+
   services.printing = {
     enable = true;
 

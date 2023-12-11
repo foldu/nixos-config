@@ -162,6 +162,7 @@
           "drive-menu@gnome-shell-extensions.gcampax.github.com"
           "vertical-workspaces@G-dH.github.com"
           "paperwm@paperwm.github.com"
+          "gsconnect@andyholmes.github.io"
         ];
         disable-extension-version-validation = true;
       };

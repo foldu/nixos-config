@@ -10,6 +10,8 @@
     };
   };
 
+  programs.kdeconnect.package = pkgs.gnomeExtensions.gsconnect;
+
   environment.gnome.excludePackages = with pkgs.gnome; [
     epiphany
     cheese
