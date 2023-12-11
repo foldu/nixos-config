@@ -1,3 +1,27 @@
+def "nu-complete nixos" [] {
+    [switch test build copy-configs gc deploy]
+}
+
+export def main [
+    --flake (-f): path = "."        # Path to used flake
+    cmd: string@"nu-complete nixos" # Command to run
+] {
+    let valid_cmds = (nu-complete nixos)
+    if $cmd in $valid_cmds {
+        ^sudo nixos-rebuild --flake $flake $cmd --print-build-logs
+    } else {
+        let span = (metadata $cmd).span
+        error make {
+            msg: ("Invalid cmd, must be one of " + ($valid_cmds | str join ', '))
+            label: {
+                text: "This command argument"
+                start: $span.start
+                end: $span.end
+            }
+        }
+    }
+}
+
 def get-home-network [] {
     try {
         let root = (git rev-parse --show-toplevel)
