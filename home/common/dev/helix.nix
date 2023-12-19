@@ -53,6 +53,8 @@ in
       };
       keys = {
         normal = {
+          x = [ "goto_line_start" "select_mode" "goto_line_end_newline" ];
+          X = [ "goto_line_start" "select_mode" "goto_line_end_newline" ];
           space = {
             F = "file_picker_in_current_buffer_directory";
             H = ":toggle lsp.display-inlay-hints";
