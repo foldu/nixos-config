@@ -15,7 +15,7 @@
   environment.gnome.excludePackages = with pkgs.gnome; [
     epiphany
     cheese
-    gedit
+    pkgs.gedit
     pkgs.gnome-photos
     gnome-logs
     gnome-contacts
