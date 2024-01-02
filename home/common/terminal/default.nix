@@ -10,6 +10,13 @@
     hosts."git.home.5kw.li".flatten = true;
   };
 
+  programs.neovim = {
+    enable = true;
+    withRuby = false;
+    withNodeJs = false;
+    withPython3 = false;
+  };
+
   home.packages = with pkgs; [
     dua
     wget
