@@ -13,11 +13,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1703448617,
-        "narHash": "sha256-D+Wn7kvS8eW43IpuU5xVPpuIR7M9/Fn7VADlbQ321VA=",
+        "lastModified": 1704182935,
+        "narHash": "sha256-ycWIVXhB4f97M5x2DVJrDDiCrGCaDydK9Byu8X6M294=",
         "ref": "refs/heads/master",
-        "rev": "a6a6f3beb692c28aadcaeecdfdf1b87a0eeee4e0",
-        "revCount": 143,
+        "rev": "2ca7e021e92ae92dabb52b10cf677aea870e469c",
+        "revCount": 144,
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/atchr"
       },
@@ -306,11 +306,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1703658494,
-        "narHash": "sha256-LtgoH4FYERyaN2yiZmxbSs9DMaKYZQimvjYVznwO+9w=",
+        "lastModified": 1703879161,
+        "narHash": "sha256-TNEsdsaCG1+PvGINrV/zw7emzwpfWiml4b77l2n5UEI=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "783ff27b1ba901e30dbf9897f4faaeb123bebb12",
+        "rev": "85fce2f5b6c9f35ab9d3361f3933288a28db83d4",
         "type": "github"
       },
       "original": {
@@ -326,11 +326,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1703838268,
-        "narHash": "sha256-SRg5nXcdPnrsQR2MTAp7en0NyJnQ2wB1ivmsgEbvN+o=",
+        "lastModified": 1704100519,
+        "narHash": "sha256-SgZC3cxquvwTN07vrYYT9ZkfvuhS5Y1k1F4+AMsuflc=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "2aff324cf65f5f98f89d878c056b779466b17db8",
+        "rev": "6e91c5df192395753d8e6d55a0352109cb559790",
         "type": "github"
       },
       "original": {
@@ -385,11 +385,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1703665002,
-        "narHash": "sha256-/R/bUYceXDd3ni6M9Mtr7AJqhACqVqMnndhPBF3fhNg=",
+        "lastModified": 1704183446,
+        "narHash": "sha256-8GtV0uKCy0Q+47u5Tbr27iP9wprsF0pDA4/JMC9VQM0=",
         "owner": "foldu",
         "repo": "nix-stuff",
-        "rev": "0a0410e044427e111db3711268929d4fb8721d6f",
+        "rev": "eefa950e4c2b4be2b85696a04b36479778cb93ac",
         "type": "github"
       },
       "original": {
@@ -400,11 +400,11 @@
     },
     "nixos-hardware": {
       "locked": {
-        "lastModified": 1703855975,
-        "narHash": "sha256-9s/q/Rt06D17+s70zVs0IhRO8iWf/Xk6T5oLQrnRtWg=",
+        "lastModified": 1704124233,
+        "narHash": "sha256-lBHs/yUtkcGgapHRS31oOb5NqvnVrikvktGOW8rK+sE=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "9c3a41257898f632792a6f948d43a6123ae9a5f2",
+        "rev": "f752581d6723a10da7dfe843e917a3b5e4d8115a",
         "type": "github"
       },
       "original": {
@@ -431,11 +431,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1703438236,
-        "narHash": "sha256-aqVBq1u09yFhL7bj1/xyUeJjzr92fXVvQSSEx6AdB1M=",
+        "lastModified": 1703961334,
+        "narHash": "sha256-M1mV/Cq+pgjk0rt6VxoyyD+O8cOUiai8t9Q6Yyq4noY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "5f64a12a728902226210bf01d25ec6cbb9d9265b",
+        "rev": "b0d36bd0a420ecee3bc916c91886caca87c894e9",
         "type": "github"
       },
       "original": {
@@ -456,11 +456,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699871884,
-        "narHash": "sha256-7Z9cqZzCSqRSmz4Gxti0rcVpbJx0y61NjWfB1fCNjgQ=",
+        "lastModified": 1704189543,
+        "narHash": "sha256-HQ2r9roMazFUVHQZXJMVkk/NTSi148XYBRswqE725Zw=",
         "ref": "refs/heads/master",
-        "rev": "916552623f14cb67cd9c2cf0cb0cc11b94011092",
-        "revCount": 252,
+        "rev": "1e9584e00760716a57ca9e0807036b4faee21b66",
+        "revCount": 253,
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/pickwp"
       },
@@ -713,11 +713,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1699876042,
-        "narHash": "sha256-3aovrbRUznKvuXKeh3NGDgPl5CtFMy/tD0R8vXrnGgU=",
+        "lastModified": 1704189600,
+        "narHash": "sha256-dZjAuiPqtugdQP7Q1Amo0phgwDL1wELAMCulR1QcnYY=",
         "ref": "refs/heads/master",
-        "rev": "ee6c3f8137d314348d653b35fb194bffddfcd2f6",
-        "revCount": 54,
+        "rev": "70f0064f9291570dec21fe5bb986b8cecd155daf",
+        "revCount": 56,
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/wpp-gtk"
       },
@@ -735,11 +735,11 @@
         "rust-overlay": "rust-overlay_2"
       },
       "locked": {
-        "lastModified": 1703860663,
-        "narHash": "sha256-5xWc4EMWKiG2A3V529RGOtFfgbd0GLOkGRLqnKBT7dU=",
+        "lastModified": 1704155906,
+        "narHash": "sha256-UF2MKBKJ16xCGlicBk+5suY78OzJ0xDtdr1EYW33irM=",
         "owner": "sxyazi",
         "repo": "yazi",
-        "rev": "32aa1909cfba61ef0aeb9d2f9380126191974ff1",
+        "rev": "5c62cf2c65a49a9b395bd02a0cbfa676e0e0d31e",
         "type": "github"
       },
       "original": {
