@@ -28,6 +28,10 @@
     # llvmPackages_latest.lldb
     # llvmPackages_latest.bintools
     nixpkgs-fmt
+    typst
+    typst-fmt
+    typst-lsp
+    typst-live
     yarn
     gnumake
     nil

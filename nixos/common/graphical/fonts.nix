@@ -17,6 +17,7 @@ in
       dejavu_fonts
       #noto-fonts-cjk
       inter
+      source-code-pro
       vistafonts
       etBook
       eb-garamond
