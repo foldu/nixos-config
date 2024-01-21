@@ -53,7 +53,7 @@ def "nu-complete flake-update" [] {
 }
 
 export def flake-update [
-    --no-commit (-n): bool = false               # Don't commit the new lockfile
+    --no-commit (-n) = false               # Don't commit the new lockfile
     ...inputs: string@"nu-complete flake-update" # Flake inputs you want to update
 ] {
     let args = (
