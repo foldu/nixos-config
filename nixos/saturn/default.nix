@@ -15,7 +15,7 @@
     ./hydra.nix
     ./jellyfin.nix
     ./libreddit.nix
-    ./nitter.nix
+    ./nitter
     ./step-ca.nix
     ./transmission.nix
     ./vaultwarden.nix
