@@ -138,25 +138,25 @@
 #     -L: string # Ask man ssh
 # ]
 
-def "nu-complete systemd service" [] {
-    ^systemctl list-units --output json --type service --type socket --type target --type mount
-    | from json 
-    | get unit 
-}
-
-# carapace doesn't filter out the obnoxiously long service /sys/devices
-export extern "systemctl start" [
-    service: string@"nu-complete systemd service" # Service to start
-]
-
-export extern "systemctl stop" [
-    service: string@"nu-complete systemd service" # Service to start
-]
-
-export extern "systemctl restart" [
-    service: string@"nu-complete systemd service" # Service to start
-]
-
-export extern "systemctl status" [
-    service: string@"nu-complete systemd service" # Service to start
-]
+#def "nu-complete systemd service" [] {
+#    ^systemctl list-units --output json --type service --type socket --type target --type mount
+#    | from json
+#    | get unit
+#}
+#
+## carapace doesn't filter out the obnoxiously long service /sys/devices
+#export extern "systemctl start" [
+#    service: string@"nu-complete systemd service" # Service to start
+#]
+#
+#export extern "systemctl stop" [
+#    service: string@"nu-complete systemd service" # Service to start
+#]
+#
+#export extern "systemctl restart" [
+#    service: string@"nu-complete systemd service" # Service to start
+#]
+#
+#export extern "systemctl status" [
+#    service: string@"nu-complete systemd service" # Service to start
+#]
