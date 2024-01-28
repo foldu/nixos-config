@@ -11,6 +11,7 @@
   };
 
   programs.neovim = {
+    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
     enable = true;
     withRuby = false;
     withNodeJs = false;
