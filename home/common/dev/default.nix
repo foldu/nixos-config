@@ -51,5 +51,6 @@
     stylua
     sumneko-lua-language-server
     texlab
+    ruff-lsp
   ];
 }
