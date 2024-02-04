@@ -13,11 +13,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1704182935,
-        "narHash": "sha256-ycWIVXhB4f97M5x2DVJrDDiCrGCaDydK9Byu8X6M294=",
+        "lastModified": 1707064525,
+        "narHash": "sha256-aQdoAVAe4XegjXHblPkmW8S4F0YsTt3I7w5gHflNy1o=",
         "ref": "refs/heads/master",
-        "rev": "2ca7e021e92ae92dabb52b10cf677aea870e469c",
-        "revCount": 144,
+        "rev": "df44ac4650eb32e6de4ea925932982d1f30ca444",
+        "revCount": 146,
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/atchr"
       },
@@ -591,11 +591,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1706732774,
-        "narHash": "sha256-hqJlyJk4MRpcItGYMF+3uHe8HvxNETWvlGtLuVpqLU0=",
+        "lastModified": 1706913249,
+        "narHash": "sha256-x3M7iV++CsvRXI1fpyFPduGELUckZEhSv0XWnUopAG8=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b8b232ae7b8b144397fdb12d20f592e5e7c1a64d",
+        "rev": "e92b6015881907e698782c77641aa49298330223",
         "type": "github"
       },
       "original": {
