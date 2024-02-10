@@ -37,6 +37,7 @@ in
     ./qt5.nix
     ./syncthing.nix
     ./podman.nix
+    ./game-devices.nix
   ];
 
   programs.kdeconnect.enable = true;
