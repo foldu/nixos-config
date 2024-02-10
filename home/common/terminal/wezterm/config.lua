@@ -58,16 +58,16 @@ config.keys = {
         mods = "ALT",
         action = wezterm.action.DisableDefaultAssignment,
     },
-    {
-        key = "k",
-        mods = "CTRL|SHIFT",
-        action = wezterm.action.ActivatePaneDirection("Prev"),
-    },
-    {
-        key = "j",
-        mods = "CTRL|SHIFT",
-        action = wezterm.action.ActivatePaneDirection("Next"),
-    },
+    -- {
+    --     key = "k",
+    --     mods = "CTRL|SHIFT",
+    --     action = wezterm.action.ActivatePaneDirection("Prev"),
+    -- },
+    -- {
+    --     key = "j",
+    --     mods = "CTRL|SHIFT",
+    --     action = wezterm.action.ActivatePaneDirection("Next"),
+    -- },
     {
         key = "g",
         mods = "CTRL|SHIFT",
@@ -164,12 +164,8 @@ wezterm.on("last-output-pager", function(window, pane)
     f:flush()
     f:close()
 
-    window:perform_action(
-        wezterm.action.SpawnCommandInNewWindow({
-            args = { "less", name },
-        }),
-        pane
-    )
+    local action = wezterm.action.SendString(string.format("less %s\r\n", name))
+    window:perform_action(action, pane)
 
     -- Wait "enough" time for less to read the file before we remove it.
     -- The window creation and process spawn are asynchronous wrt. running
