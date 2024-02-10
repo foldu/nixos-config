@@ -12,6 +12,40 @@ if wezterm.config_builder then
     config = wezterm.config_builder()
 end
 
+-- if you are *NOT* lazy-loading smart-splits.nvim (recommended)
+local function is_vim(pane)
+    -- this is set by the plugin, and unset on ExitPre in Neovim
+    return pane:get_user_vars().IS_NVIM == "true"
+end
+
+local direction_keys = {
+    h = "Left",
+    j = "Down",
+    k = "Up",
+    l = "Right",
+}
+
+local function split_nav(resize_or_move, key)
+    return {
+        key = key,
+        mods = resize_or_move == "resize" and "META" or "CTRL",
+        action = wezterm.action_callback(function(win, pane)
+            if is_vim(pane) then
+                -- pass the keys through to vim/nvim
+                win:perform_action({
+                    SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },
+                }, pane)
+            else
+                if resize_or_move == "resize" then
+                    win:perform_action({ AdjustPaneSize = { direction_keys[key], 3 } }, pane)
+                else
+                    win:perform_action({ ActivatePaneDirection = direction_keys[key] }, pane)
+                end
+            end
+        end),
+    }
+end
+
 -- This is where you actually apply your config choices
 
 -- For example, changing the color scheme:
@@ -39,23 +73,16 @@ config.keys = {
         mods = "CTRL|SHIFT",
         action = wezterm.action.EmitEvent("last-output-pager"),
     },
-    -- {
-    --     key = "t",
-    --     mods = "CTRL|SHIFT",
-    --     action = wezterm.action.SplitPane({
-    --         direction = "Down",
-    --         size = { Percent = 30 },
-    --     }),
-    -- },
-    -- {
-    --     key = "g",
-    --     mods = "CTRL|SHIFT",
-    --     action = wezterm.action.SplitPane({
-    --         direction = "Right",
-    --         size = { Percent = 70 },
-    --         command = { args = { "gitui" } },
-    --     }),
-    -- },
+    -- move between split panes
+    split_nav("move", "h"),
+    split_nav("move", "j"),
+    split_nav("move", "k"),
+    split_nav("move", "l"),
+    -- resize panes
+    split_nav("resize", "h"),
+    split_nav("resize", "j"),
+    split_nav("resize", "k"),
+    split_nav("resize", "l"),
 }
 
 local function starts_with(s, prefix)
@@ -80,26 +107,31 @@ wezterm.on("open-uri", function(window, pane, uri)
     local file_path = remove_prefix(uri, build_line_scheme)
     if file_path ~= nil then
         local tab = pane:tab()
-        local hx_pane = nil
+        local editor_pane = nil
         for _, apane in ipairs(tab:panes()) do
             -- TODO: use get_title instead, if helix can ever set the window title
-            if ends_with(apane:get_foreground_process_name(), "/bin/hx") then
-                hx_pane = apane
+            if is_vim(apane) then
+                editor_pane = pane
                 break
             end
         end
 
-        if hx_pane == nil then
+        if editor_pane == nil then
             local action = wezterm.action({
                 SplitPane = {
                     direction = "Up",
-                    command = { args = { "hx", file_path } },
+                    command = { args = { "nvim", file_path } },
                 },
             })
             window:perform_action(action, pane)
         else
-            local action = wezterm.action.SendString(":open " .. file_path .. "\r\n")
-            window:perform_action(action, hx_pane)
+            local action = wezterm.action.multiple({
+                wezterm.action.SendKey({
+                    key = "Escape",
+                }),
+                wezterm.action.SendString(":e " .. file_path .. "\r\n"),
+            })
+            window:perform_action(action, editor_pane)
         end
 
         -- don't jump into normal uri handler
