@@ -3,7 +3,6 @@
     rustup
     cargo-deny
     cargo-outdated
-    cargo-edit
     cargo-flamegraph
     cargo-bloat
   ];
