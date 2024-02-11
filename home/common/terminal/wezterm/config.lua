@@ -18,22 +18,23 @@ local function is_vim(pane)
     return pane:get_user_vars().IS_NVIM == "true"
 end
 
-local direction_keys = {
-    h = "Left",
-    j = "Down",
-    k = "Up",
-    l = "Right",
-}
-
 local function split_nav(resize_or_move, key)
+    local modifier = resize_or_move == "resize" and "META|SHIFT" or "META"
+    local direction_keys = {
+        h = "Left",
+        j = "Down",
+        k = "Up",
+        l = "Right",
+    }
+
     return {
         key = key,
-        mods = resize_or_move == "resize" and "META" or "CTRL",
+        mods = modifier,
         action = wezterm.action_callback(function(win, pane)
             if is_vim(pane) then
                 -- pass the keys through to vim/nvim
                 win:perform_action({
-                    SendKey = { key = key, mods = resize_or_move == "resize" and "META" or "CTRL" },
+                    SendKey = { key = key, mods = modifier },
                 }, pane)
             else
                 if resize_or_move == "resize" then
