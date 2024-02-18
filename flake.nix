@@ -108,7 +108,7 @@
         hostname = home-network.devices.${name}.dns;
         fastConnection = true;
         magicRollback = false;
-        sshOpts = [ "-t" ];
+        interactiveSudo = true;
         profilesOrder = [ "system" "home" ];
         profiles = {
           system = {
