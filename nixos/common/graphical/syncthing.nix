@@ -1,4 +1,9 @@
-{ config, lib, home-network, ... }:
+{
+  config,
+  lib,
+  home-network,
+  ...
+}:
 let
   syncthingPort = 22000;
   devices = home-network.devices;

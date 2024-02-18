@@ -1,5 +1,1 @@
-{
-  imports = [
-    ./peerix.nix
-  ];
-}
+{ imports = [ ./peerix.nix ]; }

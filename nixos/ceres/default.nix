@@ -1,4 +1,10 @@
-{ lib, inputs, pkgs, ... }: {
+{
+  lib,
+  inputs,
+  pkgs,
+  ...
+}:
+{
   imports = [
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ../common/profiles/server.nix
@@ -15,9 +21,7 @@
 
   boot = {
     kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4;
-    kernelParams = [
-      "usb-storage.quirks=152d:0578:u"
-    ];
+    kernelParams = [ "usb-storage.quirks=152d:0578:u" ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
@@ -40,13 +44,14 @@
     443
   ];
 
-
   networking.interfaces.eth0.useDHCP = true;
 
   services.borgbackup.repos = {
     backup-ssd = {
       allowSubRepos = true;
-      authorizedKeys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEj/BMq4VOAyu8QPsJhpmwlz/VNImsKLrkS2ZYYAJRb8" ];
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEj/BMq4VOAyu8QPsJhpmwlz/VNImsKLrkS2ZYYAJRb8"
+      ];
       path = "/var/backup";
     };
   };

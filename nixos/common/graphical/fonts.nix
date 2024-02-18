@@ -1,4 +1,9 @@
-{ lib, pkgs, getSettings, ... }:
+{
+  lib,
+  pkgs,
+  getSettings,
+  ...
+}:
 let
   configSettings = getSettings pkgs;
 in
@@ -11,28 +16,31 @@ in
       monospace = [ configSettings.font.monospace.name ];
     };
     fontconfig.hinting.enable = true;
-    packages = with pkgs; [
-      corefonts
-      noto-fonts
-      dejavu_fonts
-      #noto-fonts-cjk
-      inter
-      source-code-pro
-      vistafonts
-      etBook
-      eb-garamond
-      monaspace
-      domitian
-      jetbrains-mono
-      ubuntu_font_family
-      ibm-plex
-      iosevka
-      (nerdfonts.override {
-        fonts = [
-          "3270"
-          "FiraMono"
-        ];
-      })
-    ] ++ lib.mapAttrsToList (_: f: f.pkg) configSettings.font;
+    packages =
+      with pkgs;
+      [
+        corefonts
+        noto-fonts
+        dejavu_fonts
+        #noto-fonts-cjk
+        inter
+        source-code-pro
+        vistafonts
+        etBook
+        eb-garamond
+        monaspace
+        domitian
+        jetbrains-mono
+        ubuntu_font_family
+        ibm-plex
+        iosevka
+        (nerdfonts.override {
+          fonts = [
+            "3270"
+            "FiraMono"
+          ];
+        })
+      ]
+      ++ lib.mapAttrsToList (_: f: f.pkg) configSettings.font;
   };
 }

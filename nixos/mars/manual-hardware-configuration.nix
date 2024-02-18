@@ -1,5 +1,10 @@
 # modify this file!
-{ lib, modulesPath, outputs, ... }:
+{
+  lib,
+  modulesPath,
+  outputs,
+  ...
+}:
 
 let
   subvol = outputs.lib.btrfsSubvolOn "/dev/disk/by-uuid/eec24fdd-613a-45f5-8749-0057b3b89ffc" [
@@ -9,11 +14,14 @@ let
   ];
 in
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "ehci_pci" "xhci_pci" "rtsx_pci_sdmmc" ];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "ehci_pci"
+    "xhci_pci"
+    "rtsx_pci_sdmmc"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
@@ -31,9 +39,7 @@ in
     };
   };
 
-  swapDevices = [
-    { device = "/dev/disk/by-uuid/254ea229-e97c-46e4-9cdf-ba56f1d98ad6"; }
-  ];
+  swapDevices = [ { device = "/dev/disk/by-uuid/254ea229-e97c-46e4-9cdf-ba56f1d98ad6"; } ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

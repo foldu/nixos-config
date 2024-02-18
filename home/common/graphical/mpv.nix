@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.mpv = {
     enable = true;
     config = {
@@ -8,9 +9,7 @@
     };
   };
 
-  home.packages = [
-    pkgs.celluloid
-  ];
+  home.packages = [ pkgs.celluloid ];
 
   dconf.settings."io/github/celluloid-player/celluloid" = {
     mpv-config-enable = true;

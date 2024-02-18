@@ -1,4 +1,9 @@
-{ config, inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 let
   #internalIp = "10.88.0.42";
   backendHostname = "pipedapi.home.5kw.li";
@@ -12,21 +17,16 @@ let
   writeNuScript = inputs.nix-stuff.packages.${pkgs.system}.writeNuScript;
 in
 {
-  imports = [
-    inputs.nix-stuff.nixosModules.podman-pods
-  ];
+  imports = [ inputs.nix-stuff.nixosModules.podman-pods ];
   users.users.piped = {
     isSystemUser = true;
     group = "piped";
   };
   users.groups.piped = { };
 
-
   # START_TERRIBLE_HACK
   # terrible hack, user namespaces w/ normal users give me a headache
-  systemd.tmpfiles.rules = [
-    "d ${ytproxySockdir} 777 1000 caddy"
-  ];
+  systemd.tmpfiles.rules = [ "d ${ytproxySockdir} 777 1000 caddy" ];
 
   systemd.services.fix-ytproxy-permissions = {
     wantedBy = [ "multi-user.target" ];
@@ -100,7 +100,11 @@ in
     containers = {
       frontend = {
         image = "docker.io/1337kavin/piped-frontend:latest";
-        cmd = [ "ash" "-c" "sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g 'daemon off;'" ];
+        cmd = [
+          "ash"
+          "-c"
+          "sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g 'daemon off;'"
+        ];
         environment.BACKEND_HOSTNAME = backendHostname;
         #''
         #  ash -c 'sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g "daemon off;"'
@@ -109,16 +113,12 @@ in
 
       ytproxy = {
         image = "docker.io/1337kavin/ytproxy:latest";
-        volumes = [
-          "${ytproxySockdir}:/app/socket"
-        ];
+        volumes = [ "${ytproxySockdir}:/app/socket" ];
       };
 
       backend = {
         image = "docker.io/1337kavin/piped:latest";
-        volumes = [
-          "${./piped.properties}:/app/config.properties:ro"
-        ];
+        volumes = [ "${./piped.properties}:/app/config.properties:ro" ];
       };
     };
   };
@@ -129,7 +129,6 @@ in
     '';
     enableTCPIP = true;
   };
-
 
   systemd.services.piped-subscription-updater = {
     after = [ "network.target" ];

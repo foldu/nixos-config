@@ -1,14 +1,15 @@
-{ pkgs
-, lib
-, ...
-}: {
+{ pkgs, lib, ... }:
+{
   home.packages = with pkgs; [
     gnome.gnome-tweaks
     gnome.dconf-editor
     dconf2nix
     (pkgs.writeShellApplication {
       name = "xhide";
-      runtimeInputs = with pkgs; [ kitty xdotool ];
+      runtimeInputs = with pkgs; [
+        kitty
+        xdotool
+      ];
       text = builtins.readFile ./xhide.sh;
     })
   ];
@@ -46,17 +47,19 @@
         # }
       ];
       keybindRange = lib.lists.range 0 (lib.lists.length customKeybinds);
-      dconfKeybinds =
-        builtins.listToAttrs
-          (lib.flip map (lib.lists.zipLists keybindRange customKeybinds) ({ fst
-                                                                          , snd
-                                                                          ,
-                                                                          }: {
+      dconfKeybinds = builtins.listToAttrs (
+        lib.flip map (lib.lists.zipLists keybindRange customKeybinds) (
+          { fst, snd }:
+          {
             name = "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString fst}";
             value = snd;
-          }));
+          }
+        )
+      );
       # NOTE: yes they're different, note the prefixed and suffixed "/"
-      dconfKeybindPaths = lib.flip map keybindRange (n: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString n}/");
+      dconfKeybindPaths = lib.flip map keybindRange (
+        n: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${toString n}/"
+      );
     in
     {
       "org/gnome/desktop/interface" = {
@@ -89,7 +92,16 @@
           mkTuple = lib.hm.gvariant.mkTuple;
         in
         {
-          sources = [ (mkTuple [ "xkb" "us" ]) (mkTuple [ "xkb" "us+intl" ]) ];
+          sources = [
+            (mkTuple [
+              "xkb"
+              "us"
+            ])
+            (mkTuple [
+              "xkb"
+              "us+intl"
+            ])
+          ];
           xkb-options = [ "caps:escape" ];
         };
 
@@ -204,7 +216,6 @@
         # switch-right = [ "<Super>Right" "<Super>l" ];
         # switch-up = [ "<Super>Up" "<Super>k" ];
       };
-
 
       # "org/gnome/shell/extensions/just-perfection" = {
       #   animation = 4;

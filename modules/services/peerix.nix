@@ -1,4 +1,9 @@
-{ lib, config, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 let
   cfg = config.services.peerix;
 in
@@ -32,7 +37,12 @@ in
       };
 
       user = lib.mkOption {
-        type = with types; oneOf [ str int ];
+        type =
+          with types;
+          oneOf [
+            str
+            int
+          ];
         default = "nobody";
         description = ''
           The user the service will use.
@@ -40,7 +50,12 @@ in
       };
 
       group = lib.mkOption {
-        type = with types; oneOf [ str int ];
+        type =
+          with types;
+          oneOf [
+            str
+            int
+          ];
         default = "nobody";
         description = ''
           The user the service will use.
@@ -123,16 +138,10 @@ in
             "/nix/store"
           ])
 
-          (lib.mkIf (cfg.privateKeyFile != null) [
-            cfg.privateKeyFile
-          ])
+          (lib.mkIf (cfg.privateKeyFile != null) [ cfg.privateKeyFile ])
         ];
-        ExecPaths = [
-          "/nix/store"
-        ];
-        Environment = lib.mkIf (cfg.privateKeyFile != null) [
-          "NIX_SECRET_KEY_FILE=${cfg.privateKeyFile}"
-        ];
+        ExecPaths = [ "/nix/store" ];
+        Environment = lib.mkIf (cfg.privateKeyFile != null) [ "NIX_SECRET_KEY_FILE=${cfg.privateKeyFile}" ];
       };
       script = ''
         exec ${cfg.package}/bin/peerix ${cfg.extraArguments}
@@ -141,9 +150,7 @@ in
 
     nix = {
       settings = {
-        substituters = [
-          "http://127.0.0.1:12304/"
-        ];
+        substituters = [ "http://127.0.0.1:12304/" ];
         trusted-public-keys = cfg.publicKeys;
       };
       extraOptions = lib.mkIf (cfg.globalCacheTTL != null) ''

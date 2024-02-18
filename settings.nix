@@ -31,7 +31,6 @@ pkgs: {
       pkg = null;
       command = "brave";
       desktopFile = "brave-browser.desktop";
-
     };
     pdfViewer = {
       pkg = pkgs.gnome.evince;

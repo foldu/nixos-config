@@ -85,36 +85,56 @@
   };
 
   outputs =
-    { self
-    , nixpkgs
-    , home-manager
-    , deploy-rs
-    , ...
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      deploy-rs,
+      ...
     }@inputs:
     let
       inherit (self) outputs;
       home-network = fromTOML (builtins.readFile ./home-network.toml);
       getSettings = import ./settings.nix;
-      mkHome = modules: pkgs:
+      mkHome =
+        modules: pkgs:
         home-manager.lib.homeManagerConfiguration {
           inherit modules pkgs;
-          extraSpecialArgs = { inherit inputs outputs home-network getSettings; };
+          extraSpecialArgs = {
+            inherit
+              inputs
+              outputs
+              home-network
+              getSettings
+              ;
+          };
         };
-      mkNixos = modules: nixpkgs.lib.nixosSystem {
-        inherit modules;
-        specialArgs = { inherit inputs outputs home-network getSettings; };
-      };
+      mkNixos =
+        modules:
+        nixpkgs.lib.nixosSystem {
+          inherit modules;
+          specialArgs = {
+            inherit
+              inputs
+              outputs
+              home-network
+              getSettings
+              ;
+          };
+        };
       mkNode = arch: name: {
         hostname = home-network.devices.${name}.dns;
         fastConnection = true;
         magicRollback = false;
         interactiveSudo = true;
-        profilesOrder = [ "system" "home" ];
+        profilesOrder = [
+          "system"
+          "home"
+        ];
         profiles = {
           system = {
             sshUser = "barnabas";
-            path =
-              deploy-rs.lib.${arch}.activate.nixos self.nixosConfigurations.${name};
+            path = deploy-rs.lib.${arch}.activate.nixos self.nixosConfigurations.${name};
             user = "root";
           };
           home = {

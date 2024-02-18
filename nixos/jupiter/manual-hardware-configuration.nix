@@ -1,5 +1,11 @@
 # modify this file!
-{ config, lib, outputs, modulesPath, ... }:
+{
+  config,
+  lib,
+  outputs,
+  modulesPath,
+  ...
+}:
 
 let
   subvol = outputs.lib.btrfsSubvolOn "/dev/disk/by-uuid/b02cb89c-f1e8-4ae7-95a5-5735046e98c7" [
@@ -9,12 +15,17 @@ let
   ];
 in
 {
-  imports =
-    [
-      (modulesPath + "/installer/scan/not-detected.nix")
-    ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usb_storage" "uas" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    "nvme"
+    "xhci_pci"
+    "ahci"
+    "usb_storage"
+    "uas"
+    "usbhid"
+    "sd_mod"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
@@ -37,14 +48,16 @@ in
 
   fileSystems."/home/barnabas/.cache" = subvol "home/barnabas/.cache";
 
-  fileSystems."/efi" =
-    {
-      device = "/dev/disk/by-uuid/DA01-5928";
-      fsType = "vfat";
-    };
+  fileSystems."/efi" = {
+    device = "/dev/disk/by-uuid/DA01-5928";
+    fsType = "vfat";
+  };
 
   swapDevices = [
-    { device = "/swap/swapfile"; size = 16 * 1024; }
+    {
+      device = "/swap/swapfile";
+      size = 16 * 1024;
+    }
   ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking

@@ -1,12 +1,16 @@
-{ pkgs, lib, getSettings, ... }:
+{
+  pkgs,
+  lib,
+  getSettings,
+  ...
+}:
 let
   settings = getSettings pkgs;
 in
 {
   home.packages =
     let
-      pkgs =
-        builtins.map (lib.attrByPath [ "pkg" ] null) (lib.attrValues settings.apps);
+      pkgs = builtins.map (lib.attrByPath [ "pkg" ] null) (lib.attrValues settings.apps);
     in
     builtins.filter (pkg: pkg != null) pkgs;
   xdg = {

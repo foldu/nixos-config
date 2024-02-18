@@ -1,5 +1,4 @@
-{ ... }: {
-  imports = [
-    ../generic
-  ];
+{ ... }:
+{
+  imports = [ ../generic ];
 }

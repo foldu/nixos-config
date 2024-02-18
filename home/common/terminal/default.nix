@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   imports = [
     ./nushell
     ./wezterm
@@ -37,7 +38,8 @@
   programs.broot = {
     enable = true;
     settings = {
-      skin = (builtins.fromTOML (builtins.readFile "${inputs.kanagawa-theme}/extras/broot_kanagawa.toml")).skin;
+      skin =
+        (builtins.fromTOML (builtins.readFile "${inputs.kanagawa-theme}/extras/broot_kanagawa.toml")).skin;
     };
   };
 
@@ -46,8 +48,17 @@
     settings = {
       vimMode = true;
       # need to configure this because too many cores
-      left_meters = [ "LeftCPUs2" "Memory" "Swap" ];
-      right_meters = [ "RightCPUs2" "Tasks" "LoadAverage" "Uptime" ];
+      left_meters = [
+        "LeftCPUs2"
+        "Memory"
+        "Swap"
+      ];
+      right_meters = [
+        "RightCPUs2"
+        "Tasks"
+        "LoadAverage"
+        "Uptime"
+      ];
     };
   };
 

@@ -1,4 +1,12 @@
-{ pkgs, lib, inputs, config, outputs, ... }: {
+{
+  pkgs,
+  lib,
+  inputs,
+  config,
+  outputs,
+  ...
+}:
+{
   imports = [
     ./cachix
     ./secrets.nix
@@ -30,11 +38,12 @@
       options = "--delete-older-than 30d";
     };
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      auto-optimise-store = true;
-      trusted-public-keys = [
-        "jupiter:2laywrj8EfgDWW8GnDkIPuONvzMyrIirdAPWkvSIU0g="
+      experimental-features = [
+        "nix-command"
+        "flakes"
       ];
+      auto-optimise-store = true;
+      trusted-public-keys = [ "jupiter:2laywrj8EfgDWW8GnDkIPuONvzMyrIirdAPWkvSIU0g=" ];
     };
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
@@ -54,7 +63,10 @@
 
   i18n = {
     defaultLocale = "en_US.UTF-8";
-    supportedLocales = [ "de_DE.UTF-8/UTF-8" "en_US.UTF-8/UTF-8" ];
+    supportedLocales = [
+      "de_DE.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
+    ];
   };
 
   time.timeZone = "Europe/Amsterdam";
@@ -63,9 +75,17 @@
     isNormalUser = true;
     uid = 1000;
     shell = pkgs.nushell;
-    extraGroups = [ "wheel" "video" "audio" "dialout" "networkmanager" ];
+    extraGroups = [
+      "wheel"
+      "video"
+      "audio"
+      "dialout"
+      "networkmanager"
+    ];
     # FIXME: too lazy
-    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ+TsvKvdWG+9KLVeg5N4y1Ce1jr/fP3ELTHVWLxZOR" ];
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ+TsvKvdWG+9KLVeg5N4y1Ce1jr/fP3ELTHVWLxZOR"
+    ];
   };
 
   boot.tmp.useTmpfs = true;
@@ -74,8 +94,18 @@
 
   # increase fd limits because they're way too low
   security.pam.loginLimits = [
-    { domain = "*"; item = "nofile"; type = "soft"; value = "65536"; }
-    { domain = "*"; item = "nofile"; type = "hard"; value = "65536"; }
+    {
+      domain = "*";
+      item = "nofile";
+      type = "soft";
+      value = "65536";
+    }
+    {
+      domain = "*";
+      item = "nofile";
+      type = "hard";
+      value = "65536";
+    }
   ];
 
   security.pki.certificateFiles = [ ../../../home_ca.crt ];

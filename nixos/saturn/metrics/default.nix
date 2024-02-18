@@ -1,4 +1,11 @@
-{ pkgs, lib, config, outputs, ... }: {
+{
+  pkgs,
+  lib,
+  config,
+  outputs,
+  ...
+}:
+{
   imports = [
     ../../common/alertmanager
     ./telegraf-inputs/saturn.nix
@@ -8,14 +15,16 @@
     enable = true;
     webExternalUrl = "https://prometheus.home.5kw.li";
     ruleFiles = [
-      (pkgs.writeText "prometheus-rules.yml" (builtins.toJSON {
-        groups = [
-          {
-            name = "generic-alerts";
-            rules = outputs.lib.mkPrometheusRules (import ./alerts/generic.nix { inherit lib; });
-          }
-        ];
-      }))
+      (pkgs.writeText "prometheus-rules.yml" (
+        builtins.toJSON {
+          groups = [
+            {
+              name = "generic-alerts";
+              rules = outputs.lib.mkPrometheusRules (import ./alerts/generic.nix { inherit lib; });
+            }
+          ];
+        }
+      ))
     ];
     scrapeConfigs = [
       {
@@ -63,24 +72,10 @@
         scrape_interval = "60s";
         metrics_path = "/metrics";
         scheme = "https";
-        static_configs = [
-          {
-            targets = [
-              "git.home.5kw.li:443"
-            ];
-          }
-        ];
+        static_configs = [ { targets = [ "git.home.5kw.li:443" ]; } ];
       }
     ];
-    alertmanagers = [
-      {
-        static_configs = [
-          {
-            targets = [ "localhost:9093" ];
-          }
-        ];
-      }
-    ];
+    alertmanagers = [ { static_configs = [ { targets = [ "localhost:9093" ]; } ]; } ];
   };
 
   services.prometheus.alertmanager.webExternalUrl = "https://alertmanager.home.5kw.li";
@@ -89,7 +84,7 @@
     prometheus.home.5kw.li {
         reverse_proxy localhost:${toString config.services.prometheus.port}
     }
-    
+
     alertmanager.home.5kw.li {
         reverse_proxy localhost:${toString config.services.prometheus.alertmanager.port}
     }

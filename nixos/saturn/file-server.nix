@@ -1,4 +1,11 @@
-{ config, lib, pkgs, home-network, ... }: {
+{
+  config,
+  lib,
+  pkgs,
+  home-network,
+  ...
+}:
+{
   users.users.wangblows.isNormalUser = true;
   services.samba = {
     enable = true;
@@ -46,7 +53,12 @@
       bind = mount: {
         device = mount;
         fsType = "none";
-        options = [ "bind" "defaults" "nofail" "x-systemd.requires=zfs-mount.service" ];
+        options = [
+          "bind"
+          "defaults"
+          "nofail"
+          "x-systemd.requires=zfs-mount.service"
+        ];
       };
     in
     {

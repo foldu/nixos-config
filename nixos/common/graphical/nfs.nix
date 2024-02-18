@@ -1,4 +1,10 @@
-{ config, lib, pkgs, home-network, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  home-network,
+  ...
+}:
 let
   nfsMount = mountpoint: {
     device = "${home-network.devices.saturn.vip}:${mountpoint}";

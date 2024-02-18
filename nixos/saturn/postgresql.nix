@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_14;
@@ -6,5 +7,4 @@
   };
 
   boot.kernel.sysctl."net.core.rmem_max" = 2500000;
-
 }

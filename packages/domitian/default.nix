@@ -1,4 +1,8 @@
-{ fetchzip, stdenv, lib }:
+{
+  fetchzip,
+  stdenv,
+  lib,
+}:
 fetchzip {
   name = "domitian-1.0";
   url = "http://mirrors.ctan.org/fonts/domitian.zip";

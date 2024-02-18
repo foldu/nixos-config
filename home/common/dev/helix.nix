@@ -1,4 +1,9 @@
-{ pkgs, config, inputs, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 let
   brootConfigPath = "broot/helix-tree.hjson";
   helixOpener = inputs.nix-stuff.packages.${pkgs.system}.writeNuScript {
@@ -11,16 +16,19 @@ in
   # https://quantonganh.com/2023/08/19/turn-helix-into-ide
 
   xdg.configFile.${brootConfigPath} = {
-    text = builtins.toJSON (config.programs.broot.settings // {
-      modal = true;
-      verbs = [
-        {
-          invocation = "edit";
-          key = "enter";
-          execution = "${helixOpener}/bin/helix-opener {file}";
-        }
-      ];
-    });
+    text = builtins.toJSON (
+      config.programs.broot.settings
+      // {
+        modal = true;
+        verbs = [
+          {
+            invocation = "edit";
+            key = "enter";
+            execution = "${helixOpener}/bin/helix-opener {file}";
+          }
+        ];
+      }
+    );
   };
 
   programs.helix = {
@@ -36,7 +44,12 @@ in
         statusline = {
           # this is the default
           # left = [ "mode" "spinner" "filename" "file-modification-indicator" ];
-          right = [ "diagnostics" "selections" "position" "position-percentage" ];
+          right = [
+            "diagnostics"
+            "selections"
+            "position"
+            "position-percentage"
+          ];
           mode = {
             normal = "NORMAL";
             insert = "INSERT";
@@ -53,8 +66,16 @@ in
       };
       keys = {
         normal = {
-          x = [ "goto_line_start" "select_mode" "goto_line_end_newline" ];
-          X = [ "goto_line_start" "select_mode" "goto_line_end_newline" ];
+          x = [
+            "goto_line_start"
+            "select_mode"
+            "goto_line_end_newline"
+          ];
+          X = [
+            "goto_line_start"
+            "select_mode"
+            "goto_line_end_newline"
+          ];
           space = {
             F = "file_picker_in_current_buffer_directory";
             H = ":toggle lsp.display-inlay-hints";
@@ -71,7 +92,11 @@ in
       language-server = {
         rust-analyzer = {
           command = "rustup";
-          args = [ "run" "nightly" "rust-analyzer" ];
+          args = [
+            "run"
+            "nightly"
+            "rust-analyzer"
+          ];
           config = {
             check.command = "clippy";
           };
@@ -88,9 +113,15 @@ in
       language = [
         {
           name = "lua";
-          indent = { tab-width = 4; unit = "    "; };
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
           auto-format = true;
-          formatter = { command = "${pkgs.stylua}/bin/stylua"; args = [ "-" ]; };
+          formatter = {
+            command = "${pkgs.stylua}/bin/stylua";
+            args = [ "-" ];
+          };
         }
         {
           name = "toml";
@@ -105,16 +136,25 @@ in
           auto-format = true;
           formatter = {
             command = "${pkgs.ruff}/bin/ruff";
-            args = [ "format" "-" ];
+            args = [
+              "format"
+              "-"
+            ];
           };
         }
         {
           name = "bash";
-          indent = { tab-width = 4; unit = "    "; };
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
           auto-format = true;
           formatter = {
             command = "${pkgs.shfmt}/bin/shfmt";
-            args = [ "-i" "4" ];
+            args = [
+              "-i"
+              "4"
+            ];
           };
         }
         {
@@ -124,7 +164,6 @@ in
             command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt";
           };
         }
-
       ];
     };
   };
@@ -153,7 +192,7 @@ in
           move_right: Some(( code: Char('l'), modifiers: ( bits: 0,),)),
           move_up: Some(( code: Char('k'), modifiers: ( bits: 0,),)),
           move_down: Some(( code: Char('j'), modifiers: ( bits: 0,),)),
-    
+
           popup_up: Some(( code: Char('p'), modifiers: ( bits: 2,),)),
           popup_down: Some(( code: Char('n'), modifiers: ( bits: 2,),)),
           page_up: Some(( code: Char('b'), modifiers: ( bits: 2,),)),

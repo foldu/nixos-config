@@ -1,17 +1,23 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   guestAccountDir = "/var/lib/nitter-guest";
   guestAccountPath = "${guestAccountDir}/guest_accounts.jsonl";
   update-nitter-guest-accounts = pkgs.writeShellApplication {
     name = "update-nitter-guest-accounts";
-    runtimeInputs = [ pkgs.jq pkgs.curl ];
+    runtimeInputs = [
+      pkgs.jq
+      pkgs.curl
+    ];
     text = builtins.readFile ./update_guest_account.sh;
   };
 in
 {
-  systemd.tmpfiles.rules = [
-    "d ${guestAccountDir} 755 root root"
-  ];
+  systemd.tmpfiles.rules = [ "d ${guestAccountDir} 755 root root" ];
 
   systemd.services.nitter-refresh-guest-accounts = {
     serviceConfig = {

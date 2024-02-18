@@ -1,4 +1,5 @@
-{ pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }:
+{
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
@@ -26,7 +27,6 @@
     ./metrics
     ./podman
     "${inputs.homeserver-sekret}"
-
   ];
 
   networking.hostName = "saturn";

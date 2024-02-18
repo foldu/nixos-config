@@ -1,4 +1,10 @@
-{ inputs, lib, pkgs, ... }: {
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
@@ -15,9 +21,7 @@
 
   nix.gc.automatic = lib.mkForce false;
 
-  environment.systemPackages = [
-    inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
-  ];
+  environment.systemPackages = [ inputs.deploy-rs.packages.${pkgs.system}.deploy-rs ];
 
   networking.hostName = "jupiter";
 

@@ -41,9 +41,7 @@ in
         MONGO_DBNAME = "unifi";
         MONGO_USER = "unifi";
       };
-      volumes = [
-        "${unifiDir}:/config"
-      ];
+      volumes = [ "${unifiDir}:/config" ];
       extraOptions = [
         "--env-file=/var/secrets/unifi.env"
         "--memory=512m"

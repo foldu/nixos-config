@@ -1,4 +1,9 @@
-{ pkgs, lib, inputs, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 let
   lol = pkgs.stdenv.mkDerivation {
     pname = "ble-ws-central-dbus";

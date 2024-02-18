@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   virtualisation.podman = {
     # this first world shithole does not have internet
     # and concurrent downloads cause docker to timeout

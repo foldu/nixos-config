@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   services.prometheus.alertmanager = {
     enable = true;
     environmentFile = "/var/secrets/alertmanager.env";

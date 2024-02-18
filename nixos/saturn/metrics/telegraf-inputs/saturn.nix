@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   services.telegraf.extraConfig.inputs = {
     http_response = [
       {

@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
   services.libreddit = {
     enable = true;
     port = 7777;

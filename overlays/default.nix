@@ -1,4 +1,5 @@
-{ inputs, ... }: {
+{ inputs, ... }:
+{
   customizations = import ./customizations.nix;
   extra = import ./extra.nix;
   # extern = inputs.flake-utils.lib.eachDefaultSystem (system: {

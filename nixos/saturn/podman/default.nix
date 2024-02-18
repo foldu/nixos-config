@@ -1,4 +1,10 @@
-{ pkgs, inputs, config, ... }: {
+{
+  pkgs,
+  inputs,
+  config,
+  ...
+}:
+{
   virtualisation.podman = {
     enable = true;
     extraPackages = [ pkgs.netavark ];

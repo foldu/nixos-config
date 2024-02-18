@@ -1,9 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   services.printing = {
     enable = true;
-    drivers = [
-      pkgs.foo2zjs
-    ];
+    drivers = [ pkgs.foo2zjs ];
     defaultShared = true;
     allowFrom = [
       "localhost"

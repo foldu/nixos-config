@@ -1,4 +1,9 @@
-{ stdenv, lib, fetchFromGitHub, glib }:
+{
+  stdenv,
+  lib,
+  fetchFromGitHub,
+  glib,
+}:
 
 stdenv.mkDerivation rec {
   pname = "gnome-ui-tune";

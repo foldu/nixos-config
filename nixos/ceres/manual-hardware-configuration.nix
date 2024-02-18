@@ -1,4 +1,9 @@
-{ lib, outputs, modulesPath, ... }:
+{
+  lib,
+  outputs,
+  modulesPath,
+  ...
+}:
 
 let
   subvol = outputs.lib.btrfsSubvolOn "/dev/disk/by-uuid/87f4ba11-cdc1-4e4c-9c71-a797448f4de4" [
@@ -8,11 +13,12 @@ let
   ];
 in
 {
-  imports = [
-    (modulesPath + "/installer/scan/not-detected.nix")
-  ];
+  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
-  boot.initrd.availableKernelModules = [ "xhci_pci" "usb_storage" ];
+  boot.initrd.availableKernelModules = [
+    "xhci_pci"
+    "usb_storage"
+  ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ ];
   boot.extraModulePackages = [ ];

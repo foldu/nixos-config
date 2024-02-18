@@ -1,4 +1,5 @@
-{ pkgs, config, ... }: {
+{ pkgs, config, ... }:
+{
   services.hydra = {
     enable = false;
     hydraURL = "https://hydra.home.5kw.li"; # externally visible URL

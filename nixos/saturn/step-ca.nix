@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 {
   services.step-ca = {
     enable = true;
@@ -16,10 +21,12 @@
         dataSource = "/var/lib/step-ca/db";
       };
 
-      authority.provisioners = [{
-        type = "ACME";
-        name = "acme";
-      }];
+      authority.provisioners = [
+        {
+          type = "ACME";
+          name = "acme";
+        }
+      ];
     };
   };
 

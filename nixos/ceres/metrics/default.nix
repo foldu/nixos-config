@@ -1,20 +1,28 @@
-{ pkgs, home-network, lib, config, outputs, ... }: {
-  imports = [
-    ../../common/alertmanager
-  ];
+{
+  pkgs,
+  home-network,
+  lib,
+  config,
+  outputs,
+  ...
+}:
+{
+  imports = [ ../../common/alertmanager ];
 
   services.prometheus = {
     enable = true;
     webExternalUrl = "https://prometheus-backup.home.5kw.li";
     ruleFiles = [
-      (pkgs.writeText "prometheus-rules.yml" (builtins.toJSON {
-        groups = [
-          {
-            name = "ceres-alerts";
-            rules = outputs.lib.mkPrometheusRules (import ./alerts.nix { inherit lib; });
-          }
-        ];
-      }))
+      (pkgs.writeText "prometheus-rules.yml" (
+        builtins.toJSON {
+          groups = [
+            {
+              name = "ceres-alerts";
+              rules = outputs.lib.mkPrometheusRules (import ./alerts.nix { inherit lib; });
+            }
+          ];
+        }
+      ))
     ];
     scrapeConfigs = [
       {
@@ -32,15 +40,7 @@
         ];
       }
     ];
-    alertmanagers = [
-      {
-        static_configs = [
-          {
-            targets = [ "localhost:9093" ];
-          }
-        ];
-      }
-    ];
+    alertmanagers = [ { static_configs = [ { targets = [ "localhost:9093" ]; } ]; } ];
   };
 
   services.telegraf.extraConfig.inputs.net_response = [
