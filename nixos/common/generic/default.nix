@@ -8,7 +8,7 @@
 
   # FIXME: should be in home-manager, but it currently doesn't support wayland sessions
   environment.sessionVariables = {
-    EDITOR = "hx";
+    EDITOR = "nvim";
     NIX_GCC = "${pkgs.gcc}/bin/gcc";
   };
 
@@ -21,6 +21,7 @@
     ripgrep
     file
     helix
+    inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim
   ];
 
   nix = {
