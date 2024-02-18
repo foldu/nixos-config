@@ -28,7 +28,7 @@
     ccls
     # llvmPackages_latest.lldb
     # llvmPackages_latest.bintools
-    nixpkgs-fmt
+    nixfmt-rfc-style
     typst
     typst-fmt
     typst-lsp
