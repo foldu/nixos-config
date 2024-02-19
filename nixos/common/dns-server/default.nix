@@ -1,12 +1,14 @@
 { pkgs, inputs, ... }:
 let
-  blocklistDir = "/var/lib/blocklistdownloadthing";
+  blocklistDir = (import ./shared.nix).blocklistDir;
   blocklistPath = "${blocklistDir}/hosts.blocklist";
   blocklistdownloadthing = "${
     inputs.nix-stuff.packages."${pkgs.system}".blocklistdownloadthing
   }/bin/blocklistdownloadthing";
 in
 {
+  imports = [ ./sync.nix ];
+
   networking.firewall.allowedUDPPorts = [ 53 ];
   networking.firewall.allowedTCPPorts = [ 53 ];
 
@@ -145,7 +147,7 @@ in
 
       home.5kw.li:53 {
         import global
-        forward . 10.20.30.3
+        hosts ${blocklistDir}/shared/hosts
       }
 
       .:53 {
