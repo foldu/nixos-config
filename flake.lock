@@ -382,11 +382,11 @@
         "rust-overlay": "rust-overlay"
       },
       "locked": {
-        "lastModified": 1708790351,
-        "narHash": "sha256-sIulGqVSTOsV4tbX2Ph72106sjkpHOnxFNQrgYj3SLs=",
+        "lastModified": 1708857474,
+        "narHash": "sha256-AxCceFDROUfS4JW09JfTHZzyEKffIKqo2t1iz8uDBSw=",
         "owner": "helix-editor",
         "repo": "helix",
-        "rev": "6db666fce1fb4627c06d147554b8e1eb9970619e",
+        "rev": "dfa5382c51978c6a582d4586c65aa0f677be2ee8",
         "type": "github"
       },
       "original": {
@@ -441,11 +441,11 @@
     "homeserver-sekret": {
       "flake": false,
       "locked": {
-        "lastModified": 1704619858,
-        "narHash": "sha256-xdD7/3f6NXPQokWGOaWonj9tEwpOe96wpix+VkxHnUA=",
+        "lastModified": 1708863448,
+        "narHash": "sha256-8kFJUWQd9k7eZpMOLI3gjOI8Pryhdlatr4i4vo1ECAI=",
         "ref": "refs/heads/master",
-        "rev": "2bb4c7db302ae686291c2d9c09b5466abe3b08a2",
-        "revCount": 126,
+        "rev": "9c4bffb49e122b1451bc40204f9b791002fca5b0",
+        "revCount": 128,
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/sekret"
       },
