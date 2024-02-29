@@ -26,6 +26,7 @@
     ./postgresql.nix
     ./metrics
     ./podman
+    ./invidious.nix
     "${inputs.homeserver-sekret}"
   ];
 
