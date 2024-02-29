@@ -15,6 +15,7 @@ in
       };
       https_only = true;
       external_port = 443;
+      address = "127.0.0.1";
     };
   };
 
