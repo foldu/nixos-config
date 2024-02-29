@@ -8,9 +8,13 @@ in
     enable = true;
     inherit domain;
     port = 4299;
-    settings.db = {
-      user = "invidious";
-      dbname = "invidious";
+    settings = {
+      db = {
+        user = "invidious";
+        dbname = "invidious";
+      };
+      https_only = true;
+      external_port = 443;
     };
   };
 
