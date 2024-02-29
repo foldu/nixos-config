@@ -72,16 +72,16 @@ in
     }
     ${ytproxyHostname} {
       @ytproxy path /videoplayback* /api/v4/* /api/manifest/*
-        route {
-          header @ytproxy {
-            Cache-Control private always
-          }
+      route {
+        header @ytproxy {
+          Cache-Control private always
+        }
 
-          header / {
-            Cache-Control "public, max-age=604800"
-          }
+        header / {
+          Cache-Control "public, max-age=604800"
+        }
 
-          reverse_proxy unix/${ytproxySockdir}/http-proxy.sock {
+        reverse_proxy unix/${ytproxySockdir}/http-proxy.sock {
           header_up -CF-Connecting-IP
           header_up -X-Forwarded-For
           header_down -etag
