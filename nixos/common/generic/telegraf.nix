@@ -19,8 +19,14 @@ let
     ${pkgs.iproute2}/bin/ip --json addr | \
     ${pkgs.jq}/bin/jq -r 'map(.addr_info) | flatten(1) | map(select(.dadfailed == true)) | map(.local) | @text "ipv6_dad_failures count=\(length)i"'
   '';
+  supportsFs =
+    fs:
+    if builtins.isAttrs config.boot.supportedFilesystems then
+      config.boot.supportedFilesystems.${fs} or false
+    else # FIXME: When nixos 24.05 is released, supportedFilesystems will be always an attrset
+      lib.any (fs2: fs2 == fs) config.boot.supportedFilesystems;
 
-  zfsChecks = lib.optional (lib.any (fs: fs == "zfs") config.boot.supportedFilesystems) (
+  zfsChecks = lib.optional (supportsFs "zfs") (
     pkgs.writeScript "zpool-health" ''
       #!${pkgs.gawk}/bin/awk -f
       BEGIN {
@@ -111,7 +117,7 @@ in
               files = [ "/var/log/telegraf/*" ];
             }
           ]
-          ++ lib.optional (lib.any (fs: fs == "ext4") config.boot.supportedFilesystems) {
+          ++ lib.optional (supportsFs "ext4") {
             name_override = "ext4_errors";
             files = [ "/sys/fs/ext4/*/errors_count" ];
             data_format = "value";
