@@ -25,7 +25,7 @@
     brave
     chromium
     pwgen
-    dfeet
+    d-spy
     gimp
     streamlink
     inputs.wpp-gtk.packages.${pkgs.system}.wpp
