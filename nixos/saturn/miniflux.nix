@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 let
   port = 9324;
   addr = "miniflux.home.5kw.li";

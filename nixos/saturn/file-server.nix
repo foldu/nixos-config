@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  home-network,
-  ...
-}:
+{ config, home-network, ... }:
 {
   users.users.wangblows.isNormalUser = true;
   services.samba = {
