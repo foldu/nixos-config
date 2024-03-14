@@ -1,9 +1,4 @@
-{
-  config,
-  inputs,
-  pkgs,
-  ...
-}:
+{ inputs, pkgs, ... }:
 let
   #internalIp = "10.88.0.42";
   backendHostname = "pipedapi.home.5kw.li";
@@ -81,7 +76,7 @@ in
           Cache-Control "public, max-age=604800"
         }
 
-        reverse_proxy unix/${ytproxySockdir}/http-proxy.sock {
+        reverse_proxy unix/${ytproxySockdir}/actix.sock {
           header_up -CF-Connecting-IP
           header_up -X-Forwarded-For
           header_down -etag
@@ -106,13 +101,11 @@ in
           "sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g 'daemon off;'"
         ];
         environment.BACKEND_HOSTNAME = backendHostname;
-        #''
-        #  ash -c 'sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g "daemon off;"'
-        #'';
       };
 
       ytproxy = {
-        image = "docker.io/1337kavin/ytproxy:latest";
+        image = "docker.io/1337kavin/piped-proxy:latest";
+        environment.UDS = "1";
         volumes = [ "${ytproxySockdir}:/app/socket" ];
       };
 
