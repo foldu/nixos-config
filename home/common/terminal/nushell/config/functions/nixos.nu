@@ -103,7 +103,8 @@ def copy-config [name: string, ip: string] {
 }
 
 export def gc [
-    timeframe: string = "7d" # Garbage collect everything older than this (see man nix-collect-garbage for format)
+    timeframe: string = "30d" # Garbage collect everything older than this (see man nix-collect-garbage for format)
 ] {
-    ^sudo nix-collect-garbage --older-than $timeframe
+    ^home-manager expire-generations $"-($timeframe)ays"
+    ^sudo nix-collect-garbage --delete-older-than $timeframe
 }
