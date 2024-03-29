@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 let
   torrentDir = "/srv/media/nvme1/data/torrents";
   incompleteDir = "${torrentDir}/.incomplete";
@@ -6,6 +6,7 @@ in
 {
   services.transmission = {
     enable = true;
+    package = pkgs.transmission_4;
     settings = {
       download-dir = torrentDir;
       incomplete-dir = incompleteDir;
