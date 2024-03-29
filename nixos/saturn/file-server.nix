@@ -11,6 +11,9 @@
       hosts allow = 10.20.30.0/24 192.168.1.0/24 localhost
       hosts deny = 0.0.0.0/0
 
+      # allow executing files even without +x perm
+      acl allow execute always = yes
+
       min protocol = SMB3
 
       guest account = nobody
