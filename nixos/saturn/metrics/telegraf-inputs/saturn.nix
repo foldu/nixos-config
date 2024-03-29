@@ -5,7 +5,8 @@
       {
         urls = [ "https://torrent.home.5kw.li/transmission/web" ];
         # it's transmission, will try to set some header which you're supposed to send back
-        response_status_code = 409;
+        # it sends a 301 now huh
+        response_status_code = 301;
         tags.host = "saturn";
       }
       {
