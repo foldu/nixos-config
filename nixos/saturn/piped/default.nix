@@ -66,6 +66,9 @@ in
       reverse_proxy localhost:${varnishPort}
     }
     ${ytproxyHostname} {
+      # https://github.com/TeamPiped/Piped/issues/2915#issuecomment-1973844585
+      uri replace "&ump=1" ""
+
       @ytproxy path /videoplayback* /api/v4/* /api/manifest/*
       route {
         header @ytproxy {
