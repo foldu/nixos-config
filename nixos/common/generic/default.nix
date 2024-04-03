@@ -110,7 +110,5 @@
 
   security.pki.certificateFiles = [ ../../../home_ca.crt ];
 
-  services.fwupd.enable = true;
-
   services.tailscale.enable = true;
 }
