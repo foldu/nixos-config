@@ -81,9 +81,9 @@
       /srv/nfs/smb ${home-network.virtual-network}(rw,no_subtree_check,async)
       /srv/nfs/other ${home-network.virtual-network}(rw,no_subtree_check,async)
     '';
-    extraNfsdConfig = ''
-      vers3=no
-    '';
+    settings = {
+      vers3 = "no";
+    };
   };
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 2049 ];
