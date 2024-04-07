@@ -52,6 +52,22 @@
         "type": "github"
       }
     },
+    "clowntooth": {
+      "locked": {
+        "lastModified": 1688240132,
+        "narHash": "sha256-FwJGY+29j1jn6D8/+3YskoM/gLkdeU84mkkVxBLdUnM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "77c75090b69fbc7e628b5d5c5d56e95171c1976d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "77c75090b69fbc7e628b5d5c5d56e95171c1976d",
+        "type": "github"
+      }
+    },
     "crane": {
       "inputs": {
         "nixpkgs": [
@@ -656,6 +672,7 @@
     "root": {
       "inputs": {
         "atchr": "atchr",
+        "clowntooth": "clowntooth",
         "crane": "crane",
         "deploy-rs": "deploy-rs",
         "flake-utils": "flake-utils",

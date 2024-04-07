@@ -200,4 +200,6 @@ config.mux_env_remove = {
     "SSH_CLIENT",
 }
 
+config.hide_mouse_cursor_when_typing = false
+
 return config
