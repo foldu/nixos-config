@@ -20,7 +20,7 @@
       customKeybinds = [
         {
           binding = "<Shift><Super>Return";
-          command = "wezterm";
+          command = "kitty";
           name = "Open terminal";
         }
         # {
