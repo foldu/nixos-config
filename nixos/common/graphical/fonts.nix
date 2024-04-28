@@ -34,12 +34,8 @@ in
         ubuntu_font_family
         ibm-plex
         iosevka
-        (nerdfonts.override {
-          fonts = [
-            "3270"
-            "FiraMono"
-          ];
-        })
+        fira-mono
+        (nerdfonts.override { fonts = [ "3270" ]; })
       ]
       ++ lib.mapAttrsToList (_: f: f.pkg) configSettings.font;
   };
