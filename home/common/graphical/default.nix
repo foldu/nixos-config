@@ -6,6 +6,7 @@
     ./mpv.nix
     ./xdg-userdirs.nix
     ./xdg.nix
+    ./yazi
 
     inputs.pickwp.homeManagerModule
     inputs.atchr.homeManagerModule

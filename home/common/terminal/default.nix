@@ -3,7 +3,6 @@
   imports = [
     ./nushell
     ./wezterm
-    ./yazi
   ];
 
   xdg.configFile."src-manage/config.json".text = builtins.toJSON {
