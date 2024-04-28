@@ -2,12 +2,12 @@ pkgs: {
   font = {
     monospace = {
       pkg = pkgs.monaspace;
-      name = "Monaspace Neon";
+      name = "Fira Mono";
       size = 12;
     };
     devMonospace = {
       pkg = pkgs.monaspace;
-      name = "Monaspace Neon";
+      name = "Fira Mono";
       size = 12;
     };
     documents = {
