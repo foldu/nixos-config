@@ -84,7 +84,7 @@
       '';
     };
     settings = {
-      vers3 = "no";
+      nfsd.vers3 = false;
     };
   };
 
