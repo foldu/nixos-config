@@ -68,19 +68,21 @@
       "/srv/nfs/other" = bind "/srv/media/main/other";
     };
 
-  services.nfs.server = {
-    enable = true;
-    # NOTE: async doesn't commit on every client write but massively speeds up write perf
-    exports = ''
-      /srv/nfs ${home-network.virtual-network}(rw,no_subtree_check,async,crossmnt,fsid=0)
-      /srv/nfs/torrents ${home-network.virtual-network}(rw,no_subtree_check,async,all_squash,anonuid=${toString config.users.users.transmission.uid})
-      /srv/nfs/videos ${home-network.virtual-network}(rw,no_subtree_check,async)
-      /srv/nfs/cache ${home-network.virtual-network}(rw,no_subtree_check,async)
-      /srv/nfs/img ${home-network.virtual-network}(rw,no_subtree_check,async)
-      /srv/nfs/music ${home-network.virtual-network}(rw,no_subtree_check,async)
-      /srv/nfs/smb ${home-network.virtual-network}(rw,no_subtree_check,async)
-      /srv/nfs/other ${home-network.virtual-network}(rw,no_subtree_check,async)
-    '';
+  services.nfs = {
+    server = {
+      enable = true;
+      # NOTE: async doesn't commit on every client write but massively speeds up write perf
+      exports = ''
+        /srv/nfs ${home-network.virtual-network}(rw,no_subtree_check,async,crossmnt,fsid=0)
+        /srv/nfs/torrents ${home-network.virtual-network}(rw,no_subtree_check,async,all_squash,anonuid=${toString config.users.users.transmission.uid})
+        /srv/nfs/videos ${home-network.virtual-network}(rw,no_subtree_check,async)
+        /srv/nfs/cache ${home-network.virtual-network}(rw,no_subtree_check,async)
+        /srv/nfs/img ${home-network.virtual-network}(rw,no_subtree_check,async)
+        /srv/nfs/music ${home-network.virtual-network}(rw,no_subtree_check,async)
+        /srv/nfs/smb ${home-network.virtual-network}(rw,no_subtree_check,async)
+        /srv/nfs/other ${home-network.virtual-network}(rw,no_subtree_check,async)
+      '';
+    };
     settings = {
       vers3 = "no";
     };
