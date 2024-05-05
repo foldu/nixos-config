@@ -19,11 +19,8 @@
 
   services.upower.enable = true;
 
-  services.tlp = {
-    enable = true;
-    settings = {
-      START_CHARGE_THRESH_BAT0 = 70;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-    };
-  };
+  systemd.tmpfiles.rules = [
+    "w /sys/class/power_supply/BAT0/charge_start_threshold - - - - 70"
+    "w /sys/class/power_supply/BAT0/charge_stop_threshold - - - - 80"
+  ];
 }

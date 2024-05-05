@@ -21,9 +21,6 @@
     gnome-software
   ];
 
-  # conflicts with tlp
-  services.power-profiles-daemon.enable = false;
-
   environment.systemPackages = with pkgs.gnomeExtensions; [
     vitals
     paperwm
