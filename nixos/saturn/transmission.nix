@@ -1,20 +1,37 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 let
   torrentDir = "/srv/media/nvme1/data/torrents";
+  configDir = "/var/lib/transmission/config";
   incompleteDir = "${torrentDir}/.incomplete";
+  rpcPort = "9091";
 in
 {
-  services.transmission = {
-    enable = true;
-    package = pkgs.transmission_4;
-    settings = {
-      download-dir = torrentDir;
-      incomplete-dir = incompleteDir;
-      incomplete-dir-enabled = true;
-      rpc-host-whitelist = "torrent.home.5kw.li";
-      rpc-whitelist = "127.0.0.1,192.168.1.*,192.168.100.*,10.20.30.*";
-      rpc-port = 9091;
+  users.users.transmission = {
+    isSystemUser = true;
+    group = "transmission";
+  };
+  users.groups.transmission = { };
+
+  virtualisation.oci-containers.containers.transmission = {
+    image = "docker.io/haugene/transmission-openvpn";
+    environment = {
+      PUID = toString config.users.users.transmission.uid;
+      PGID = toString config.users.groups.transmission.gid;
+      TRANSMISSION_RPC_USERNAME = "barnabas";
+      TRANSMISSION_DOWNLOAD_DIR = "/data";
+      TRANSMISSION_INCOMPLETE_DIR = "/data/.incomplete";
+      TRANSMISSION_RPC_PORT = rpcPort;
     };
+    ports = [ "${rpcPort}:${rpcPort}" ];
+    volumes = [
+      "${configDir}:/config"
+      "${torrentDir}:/data"
+    ];
+    extraOptions = [
+      "--privileged"
+      "--cap-add=NET_ADMIN"
+      "--env-file=/var/secrets/transmission.env"
+    ];
   };
 
   users.users.barnabas.extraGroups = [ "transmission" ];
@@ -24,11 +41,12 @@ in
     "d ${incompleteDir} 755 ${config.services.transmission.user} ${config.services.transmission.group}"
     "z ${torrentDir} 755 ${config.services.transmission.user} ${config.services.transmission.group}"
     "z ${incompleteDir} 755 ${config.services.transmission.user} ${config.services.transmission.group}"
+    "d ${configDir} 700 transmission transmission"
   ];
 
   services.caddy.extraConfig = ''
     torrent.home.5kw.li {
-      reverse_proxy localhost:${toString config.services.transmission.settings.rpc-port}
+      reverse_proxy localhost:${rpcPort}
     }
   '';
 }
