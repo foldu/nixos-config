@@ -3,6 +3,7 @@
   imports = [
     ./gtk.nix
     ./kitty
+    ./librewolf.nix
     ./mpv.nix
     ./xdg-userdirs.nix
     ./xdg.nix
@@ -12,32 +13,35 @@
     inputs.atchr.homeManagerModule
   ];
 
-  home.packages = with pkgs; [
-    steam-run
-    kooha
-    inputs.nix-stuff.packages.${pkgs.system}.eunzip
-    croc
-    inputs.random-scripts.packages.${pkgs.system}.foldu-random-scripts
-    ffmpeg
-    yt-dlp
-    pass
-    imagemagick
-    gnupg
-    brave
-    chromium
-    pwgen
-    d-spy
-    gimp
-    #streamlink
-    inputs.wpp-gtk.packages.${pkgs.system}.wpp
-    element-desktop
-    # temporarily needed until https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/merge_requests/97
-    thunderbird
-    newsflash
-    wl-clipboard
-    unrar
-    _7zz
-  ];
+  home.packages =
+    [
+      inputs.random-scripts.packages.${pkgs.system}.foldu-random-scripts
+      inputs.nix-stuff.packages.${pkgs.system}.eunzip
+      inputs.wpp-gtk.packages.${pkgs.system}.wpp
+    ]
+    ++ (with pkgs; [
+      steam-run
+      kooha
+      croc
+      ffmpeg
+      yt-dlp
+      pass
+      imagemagick
+      gnupg
+      brave
+      chromium
+      pwgen
+      d-spy
+      gimp
+      #streamlink
+      element-desktop
+      # temporarily needed until https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/merge_requests/97
+      thunderbird
+      newsflash
+      wl-clipboard
+      unrar
+      _7zz
+    ]);
 
   services.pickwp.enable = true;
 
