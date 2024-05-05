@@ -28,7 +28,7 @@
     pwgen
     d-spy
     gimp
-    streamlink
+    #streamlink
     inputs.wpp-gtk.packages.${pkgs.system}.wpp
     element-desktop
     # temporarily needed until https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/merge_requests/97
