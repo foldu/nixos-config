@@ -20,17 +20,21 @@
     NIX_GCC = "${pkgs.gcc}/bin/gcc";
   };
 
-  environment.systemPackages = with pkgs; [
-    inputs.home-manager.packages.${pkgs.system}.home-manager
-    wget
-    curl
-    jq
-    fd
-    ripgrep
-    file
-    helix
-    inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim
-  ];
+  environment.systemPackages =
+    [
+      inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim
+      inputs.home-manager.packages.${pkgs.system}.home-manager
+    ]
+    ++ (with pkgs; [
+      vopono
+      wget
+      curl
+      jq
+      fd
+      ripgrep
+      file
+      helix
+    ]);
 
   nix = {
     gc = {
@@ -111,4 +115,6 @@
   security.pki.certificateFiles = [ ../../../home_ca.crt ];
 
   services.tailscale.enable = true;
+
+  networking.wireguard.enable = true;
 }

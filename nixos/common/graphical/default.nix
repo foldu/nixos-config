@@ -73,6 +73,11 @@ in
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
+
   services.udev.extraRules = ''
     SUBSYSTEMS=="usb", ATTRS{idVendor}=="0483", ATTRS{idProduct}=="3748", \
     MODE:="0666", \
