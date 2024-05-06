@@ -6,7 +6,7 @@
 
     ../common/profiles/server.nix
 
-    ../common/dns-server
+    ../common/dns-server.nix
     ../common/zfs.nix
 
     ./hardware-configuration.nix

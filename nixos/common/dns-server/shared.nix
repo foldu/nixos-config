@@ -1,1 +1,0 @@
-{ blocklistDir = "/var/lib/blocklistdownloadthing"; }
