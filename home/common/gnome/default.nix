@@ -180,8 +180,14 @@
       };
 
       "org/gnome/shell/extensions/vertical-workspaces" = {
+        center-dash-to-ws = false;
+        dash-bg-color = 0;
+        dash-bg-gs3-style = false;
         dash-position = 2;
+        dash-position-adjust = 0;
+        hot-corner-position = 0;
         layout-module = true;
+        notification-position = 1;
         overview-mode = 0;
         panel-position = 0;
         profile-name-1 = "GNOME 3";
@@ -190,9 +196,11 @@
         profile-name-4 = "Dock Overview - Bottom Hot Edge";
         search-fuzzy = false;
         show-ws-preview-bg = false;
-        show-wst-labels-on-hover = false;
+        show-ws-switcher-bg = true;
+        show-wst-labels-on-hover = true;
         startup-state = 0;
-        ws-thumbnails-position = 5;
+        ws-thumbnails-position = 1;
+        wst-position-adjust = 0;
       };
 
       # "org/gnome/shell/extensions/forge" = {
