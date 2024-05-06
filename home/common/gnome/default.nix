@@ -206,6 +206,20 @@
         vertical-margin = 5;
         vertical-margin-bottom = 5;
         window-gap = 5;
+        winprops = [
+          ''
+            {"wm_class":"org.telegram.desktop","scratch_layer":true}
+          ''
+          ''
+            {"wm_class":"Signal","scratch_layer":true}
+          ''
+          ''
+            {"wm_class":"TelegramDesktop","scratch_layer":true}
+          ''
+          ''
+            {"wm_class":"Mullvad VPN","scratch_layer":true}
+          ''
+        ];
       };
 
       "org/gnome/shell/extensions/paperwm/keybindings" = {
