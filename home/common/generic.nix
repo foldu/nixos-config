@@ -1,4 +1,4 @@
-{ outputs, ... }:
+{ outputs, pkgs, ... }:
 {
   home.stateVersion = "22.11";
   systemd.user.startServices = "sd-switch";
@@ -17,6 +17,8 @@
     username = "barnabas";
     homeDirectory = "/home/barnabas";
   };
+
+  home.packages = [ pkgs.nh ];
 
   programs.home-manager.enable = true;
 }
