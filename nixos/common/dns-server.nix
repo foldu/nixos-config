@@ -37,6 +37,7 @@ in
           };
         };
       };
+      queryLog.type = "none";
       blocking = {
         loading.downloads = {
           timeout = "30s";
