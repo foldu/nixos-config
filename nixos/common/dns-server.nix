@@ -19,7 +19,7 @@ in
   services.blocky = {
     enable = true;
     settings = {
-      upstream.default = [
+      upstreams.groups.default = [
         "tcp-tls:1.1.1.1:853"
         "tcp-tls:1.0.0.1:853"
       ];
@@ -28,9 +28,19 @@ in
           "${bootstrapHosts}"
           "https://git.home.5kw.li/foldu/hosts/raw/branch/master/tailscale.txt"
         ];
-        refreshPeriod = "5m";
+        loading = {
+          refreshPeriod = "5m";
+          downloads = {
+            timeout = "10s";
+            attempts = 50;
+            cooldown = "10s";
+          };
+        };
       };
       blocking = {
+        loading.downloads = {
+          timeout = "30s";
+        };
         blackLists = {
           telemetry_and_tracking = [
             "https://git.home.5kw.li/foldu/hosts/raw/branch/master/telemetry.txt"
