@@ -6,6 +6,4 @@
   };
 
   boot.supportedFilesystems = [ "zfs" ];
-
-  virtualisation.docker.storageDriver = "zfs";
 }
