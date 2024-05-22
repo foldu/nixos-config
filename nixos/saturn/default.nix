@@ -27,6 +27,7 @@
     ./metrics
     ./podman
     ./invidious.nix
+    ./ffsync.nix
     "${inputs.homeserver-sekret}"
   ];
 
