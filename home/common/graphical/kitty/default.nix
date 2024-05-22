@@ -12,8 +12,6 @@ in
     keybindings = {
       #"ctrl+c" = "copy_or_interrupt";
       #"ctrl+v" = "paste_from_clipboard";
-      "ctrl+shift+[" = "previous_tab";
-      "ctrl+shift+]" = "next_tab";
       "ctrl+shift+k" = "previous_window";
       "ctrl+shift+j" = "next_window";
       "ctrl+shift+t" = "new_tab_with_cwd";
@@ -31,7 +29,11 @@ in
 
       show_hyperlink_targets = "yes";
 
-      enabled_layouts = "tall,stack";
+      allow_remote_control = "yes";
+
+      notify_on_cmd_finish = "unfocused";
+
+      enabled_layouts = "tall,stack,splits";
       tab_bar_style = "custom";
       enable_audio_bell = "no";
       disable_ligatures = "always";
@@ -41,6 +43,7 @@ in
       input_delay = 0;
       repaint_delay = 2;
       sync_to_monitor = 0;
+      scrollback_fill_enlarged_window = "yes";
       #wayland_titlebar_color = "#222222";
     };
     extraConfig = ''

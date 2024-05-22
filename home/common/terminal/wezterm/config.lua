@@ -52,7 +52,7 @@ end
 -- For example, changing the color scheme:
 config.color_scheme = "Kanagawa (Gogh)"
 
-config.enable_wayland = true
+config.enable_wayland = false
 config.keys = {
     {
         key = "Enter",
@@ -191,8 +191,7 @@ end)
 -- config.default_gui_startup_args = { "connect", "unix" }
 
 config.font = wezterm.font({
-    family = "Monaspace Neon",
-    harfbuzz_features = { "calt=1", "zero" },
+    family = "Fira Mono",
 })
 
 config.mux_env_remove = {
@@ -201,5 +200,9 @@ config.mux_env_remove = {
 }
 
 config.hide_mouse_cursor_when_typing = false
+
+config.front_end = "WebGpu"
+
+config.freetype_load_flags = "NO_HINTING"
 
 return config

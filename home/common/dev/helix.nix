@@ -4,32 +4,8 @@
   inputs,
   ...
 }:
-let
-  brootConfigPath = "broot/helix-tree.hjson";
-  helixOpener = inputs.nix-stuff.packages.${pkgs.system}.writeNuScript {
-    name = "helix-opener";
-    file = ./helix-opener.nu;
-    path = [ pkgs.wezterm ];
-  };
-in
 {
   # https://quantonganh.com/2023/08/19/turn-helix-into-ide
-
-  xdg.configFile.${brootConfigPath} = {
-    text = builtins.toJSON (
-      config.programs.broot.settings
-      // {
-        modal = true;
-        verbs = [
-          {
-            invocation = "edit";
-            key = "enter";
-            execution = "${helixOpener}/bin/helix-opener {file}";
-          }
-        ];
-      }
-    );
-  };
 
   programs.helix = {
     enable = true;
@@ -101,13 +77,19 @@ in
             check.command = "clippy";
           };
         };
+        nixd = {
+          command = "nixd";
+          args = [ ];
+          config = { };
+        };
         pyright = {
-          command = "${pkgs.pyright}/bin/pyright-langserver";
+          # based on what?
+          command = "basedpyright";
           args = [ "--stdio" ];
           config = { };
         };
         ruff-lsp = {
-          command = "${pkgs.ruff-lsp}/bin/ruff-lsp";
+          command = "ruff-lsp";
         };
       };
       language = [
@@ -140,6 +122,19 @@ in
               "format"
               "-"
             ];
+          };
+        }
+        {
+          name = "nix";
+          language-servers = [ "nixd" ];
+          indent = {
+            tab-width = 4;
+            unit = "    ";
+          };
+          auto-format = true;
+          formatter = {
+            command = "${pkgs.nixfmt-rfc-style}/bin/nixfmt";
+            args = [ "-" ];
           };
         }
         {
