@@ -12,7 +12,7 @@
         discovery_refresh_time = "1m";
       };
       priority_config = {
-        "0".timeout = "100ms";
+        "0".timeout = "500ms";
       };
     };
     openFirewall = true;
