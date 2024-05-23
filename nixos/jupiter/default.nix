@@ -15,6 +15,7 @@
     ../common/bluetooth.nix
     ../common/butter.nix
     ../common/graphical
+    ../common/cashewnix-cache.nix
 
     ./manual-hardware-configuration.nix
   ];

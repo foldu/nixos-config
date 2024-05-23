@@ -82,6 +82,8 @@
     };
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
+
+    cashewnix.url = "github:foldu/cashewnix";
   };
 
   outputs =
@@ -90,6 +92,7 @@
       nixpkgs,
       home-manager,
       deploy-rs,
+      cashewnix,
       ...
     }@inputs:
     let
@@ -112,7 +115,7 @@
       mkNixos =
         modules:
         nixpkgs.lib.nixosSystem {
-          inherit modules;
+          modules = modules ++ [ cashewnix.nixosModules.cashewnix ];
           specialArgs = {
             inherit
               inputs

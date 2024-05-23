@@ -8,6 +8,7 @@
 
     ../common/dns-server.nix
     ../common/zfs.nix
+    ../common/cashewnix.nix
 
     ./hardware-configuration.nix
     ./backups.nix

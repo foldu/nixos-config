@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
 {
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t14-amd-gen1
@@ -8,6 +8,7 @@
     ../common/bluetooth.nix
     ../common/graphical
     ../common/butter.nix
+    ../common/cashewnix-cache.nix
 
     ./manual-hardware-configuration.nix
   ];

@@ -10,6 +10,7 @@
     ../common/profiles/server.nix
 
     ../common/dns-server.nix
+    ../common/cashewnix.nix
 
     ./metrics
     ./printing.nix
