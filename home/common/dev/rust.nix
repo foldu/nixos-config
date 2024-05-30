@@ -8,11 +8,9 @@
     cargo-bloat
   ];
 
-  # use a linker that doesn't suck
   home.file.".cargo/config.toml".text = ''
     [target.x86_64-unknown-linux-gnu]
-    rustflags = [
-        "-C", "link-arg=-fuse-ld=lld",
-    ]
+    linker = "clang"
+    rustflags = ["-C", "link-arg=-fuse-ld=${pkgs.mold}/bin/mold"]
   '';
 }
