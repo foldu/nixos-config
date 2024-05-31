@@ -83,7 +83,6 @@
           config = { };
         };
         pyright = {
-          # based on what?
           command = "basedpyright";
           args = [ "--stdio" ];
           config = { };

@@ -13,21 +13,15 @@
     tokei
     minicom
     gdb
-    #openocd
     clang-tools
     llvmPackages_latest.lld
     llvmPackages_latest.clang
     sqlite-interactive
-    # broken
-    #litecli
-    #pgcli
 
     android-studio
     arduino-cli
     black
     ccls
-    # llvmPackages_latest.lldb
-    # llvmPackages_latest.bintools
     nixfmt-rfc-style
     typst
     typst-fmt
@@ -39,7 +33,6 @@
     nixd
     nodePackages.bash-language-server
     nodePackages.prettier
-    nodePackages.pyright
     nodePackages.typescript
     nodePackages.typescript-language-server
     nodePackages.eslint
@@ -54,5 +47,7 @@
     sumneko-lua-language-server
     texlab
     ruff-lsp
+    # based on what?
+    basedpyright
   ];
 }
