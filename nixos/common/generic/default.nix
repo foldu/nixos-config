@@ -117,4 +117,11 @@
   services.tailscale.enable = true;
 
   networking.wireguard.enable = true;
+
+  services.udev.extraRules = ''
+    # set scheduler for non-rotating disks
+    ACTION=="add|change", KERNEL=="sd[a-z]|mmcblk[0-9]*|nvme[0-9]*", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="kyber"
+    # set scheduler for rotating disks
+    ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
+  '';
 }

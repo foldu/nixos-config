@@ -32,7 +32,6 @@ let
 in
 {
   imports = [
-    ./bfq.nix
     ./desktop-portal.nix
     ./fancy-login.nix
     ./fonts.nix
