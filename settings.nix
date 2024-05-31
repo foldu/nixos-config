@@ -1,12 +1,12 @@
 pkgs: {
   font = {
     monospace = {
-      pkg = pkgs.monaspace;
+      pkg = pkgs.fira-mono;
       name = "Fira Mono";
       size = 12;
     };
     devMonospace = {
-      pkg = pkgs.monaspace;
+      pkg = pkgs.fira-mono;
       name = "Fira Mono";
       size = 12;
     };
@@ -29,8 +29,8 @@ pkgs: {
   apps = {
     browser = {
       pkg = null;
-      command = "brave";
-      desktopFile = "brave-browser.desktop";
+      command = "librewolf";
+      desktopFile = "librewolf.desktop";
     };
     pdfViewer = {
       pkg = pkgs.gnome.evince;
@@ -39,8 +39,8 @@ pkgs: {
     };
     consoleEditor = {
       pkg = null;
-      command = "hx";
-      desktopFile = "Helix.desktop";
+      command = "nvim";
+      desktopFile = "neovim.desktop";
     };
     imageViewer = {
       pkg = pkgs.loupe;
@@ -48,9 +48,9 @@ pkgs: {
       desktopFile = "org.gnome.Loupe.desktop";
     };
     emailClient = {
-      pkg = pkgs.gnome.geary;
-      command = "geary";
-      desktopFile = "x-scheme-handler/mailto=org.gnome.Geary.desktop";
+      pkg = pkgs.thunderbird;
+      command = "thunderbird";
+      desktopFile = "thunderbird";
     };
     videoPlayer = {
       pkg = pkgs.celluloid;
@@ -58,9 +58,9 @@ pkgs: {
       desktopFile = "io.github.celluloid_player.Celluloid.desktop";
     };
     graphicalEditor = {
-      pkg = null;
-      command = "hx";
-      desktopFile = "Helix.desktop";
+      pkg = pkgs.neovide;
+      command = "neovide";
+      desktopFile = "neovide.desktop";
     };
     fileBrowser = {
       pkg = pkgs.gnome.nautilus;

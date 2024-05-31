@@ -20,6 +20,7 @@ in
       with pkgs;
       [
         corefonts
+        liberation_ttf
         noto-fonts
         dejavu_fonts
         #noto-fonts-cjk
