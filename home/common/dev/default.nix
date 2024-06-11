@@ -18,6 +18,7 @@
     llvmPackages_latest.clang
     sqlite-interactive
 
+    ast-grep
     android-studio
     arduino-cli
     black
