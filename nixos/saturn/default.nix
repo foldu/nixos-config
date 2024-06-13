@@ -19,7 +19,7 @@
     ./libreddit.nix
     ./nitter
     ./step-ca.nix
-    ./transmission.nix
+    ./transmission
     ./vaultwarden.nix
     ./piped
     ./unifi.nix
