@@ -20,6 +20,8 @@
 
     ast-grep
     android-studio
+    go
+    gopls
     arduino-cli
     black
     ccls

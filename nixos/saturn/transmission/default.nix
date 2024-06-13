@@ -10,7 +10,11 @@ let
   incompleteDir = "${torrentDir}/.incomplete";
   rpcPort = "9091";
   domain = "torrent.home.5kw.li";
-  url = "https://${domain}";
+  start-stop-torrents = pkgs.buildGoModule {
+    name = "start-stop-torrents";
+    src = ./start-stop-torrents;
+    vendorHash = "sha256-jnSdAsXlzQBpZer5eCdFjWp3CR8wmOd8Nv2XNdPvlXo=";
+  };
 in
 {
   users.users.transmission = {
@@ -53,14 +57,12 @@ in
 
   systemd.services =
     let
-      python = pkgs.python3.withPackages (ps: [ ps.transmission-rpc ]);
       defaultArgs = {
         serviceConfig = {
-          ExecStart = "${python}/bin/python3 ${./start_stop_torrents.py}";
+          ExecStart = "${start-stop-torrents}/bin/start-stop-torrents";
         };
         environment = {
-          TRANSMISSION_URL = url;
-          SSL_CERT_FILE = "/etc/ssl/certs/ca-bundle.crt";
+          TRANSMISSION_URL = "https://${domain}/transmission/rpc";
         };
       };
     in
