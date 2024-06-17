@@ -18,7 +18,5 @@
     homeDirectory = "/home/barnabas";
   };
 
-  home.packages = [ pkgs.nh ];
-
   programs.home-manager.enable = true;
 }

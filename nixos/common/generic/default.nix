@@ -36,11 +36,14 @@
       helix
     ]);
 
+  programs.nh = {
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 14d";
+    flake = "/home/barnabas/src/github.com/foldu/nixos-config";
+  };
+
   nix = {
-    gc = {
-      automatic = true;
-      options = "--delete-older-than 30d";
-    };
     settings = {
       experimental-features = [
         "nix-command"
