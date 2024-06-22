@@ -1,6 +1,6 @@
-{ outputs, pkgs, ... }:
+{ outputs, lib, ... }:
 {
-  home.stateVersion = "22.11";
+  home.stateVersion = lib.mkDefault "22.11";
   systemd.user.startServices = "sd-switch";
 
   nixpkgs = {

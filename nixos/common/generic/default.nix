@@ -14,6 +14,8 @@
     ./telegraf.nix
   ];
 
+  hardware.enableRedistributableFirmware = true;
+
   # FIXME: should be in home-manager, but it currently doesn't support wayland sessions
   environment.sessionVariables = {
     EDITOR = "nvim";
