@@ -14,7 +14,7 @@ def create_left_prompt [] {
 
     let dir = ([
         ($env.PWD | str substring 0..($home | str length) | str replace $home "~"),
-        ($env.PWD | str substring ($home | str length)..)
+        ($env.PWD | str substring (($home | str length) + 1)..)
     ] | str join)
 
     let path_segment = if (is-admin) {
