@@ -113,7 +113,7 @@
       domain = "*";
       item = "nofile";
       type = "hard";
-      value = "65536";
+      value = "524288";
     }
   ];
 
