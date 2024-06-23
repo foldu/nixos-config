@@ -1,6 +1,7 @@
 { pkgs, lib, ... }:
 {
   imports = [
+    ./corectrl.nix
     ./desktop-portal.nix
     ./fancy-login.nix
     ./fonts.nix
