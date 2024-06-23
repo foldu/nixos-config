@@ -36,7 +36,7 @@
 
   programs.dconf.enable = true;
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
 
   boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
