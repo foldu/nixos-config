@@ -18,6 +18,7 @@
     ../common/cashewnix-cache.nix
 
     ./manual-hardware-configuration.nix
+    ./docker.nix
   ];
 
   nix.gc.automatic = lib.mkForce false;

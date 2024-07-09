@@ -10,7 +10,6 @@
     ./pipewire.nix
     ./qt5.nix
     ./syncthing.nix
-    ./podman.nix
     ./game-devices.nix
   ];
 
