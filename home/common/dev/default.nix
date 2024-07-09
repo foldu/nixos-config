@@ -32,7 +32,6 @@
     typst-live
     yarn
     gnumake
-    nil
     nixd
     nodePackages.bash-language-server
     nodePackages.prettier
