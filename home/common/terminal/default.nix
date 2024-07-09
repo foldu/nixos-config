@@ -30,7 +30,7 @@
     libarchive
     unzip
     bat
-    neofetch
+    #neofetch
     rename
     man-pages
   ];
