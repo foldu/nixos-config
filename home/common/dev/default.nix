@@ -18,6 +18,7 @@
     llvmPackages_latest.clang
     sqlite-interactive
 
+    zed
     ast-grep
     android-studio
     go

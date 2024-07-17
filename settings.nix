@@ -33,7 +33,7 @@ pkgs: {
       desktopFile = "librewolf.desktop";
     };
     pdfViewer = {
-      pkg = pkgs.gnome.evince;
+      pkg = pkgs.evince;
       command = "evince";
       desktopFile = "org.gnome.Evince.desktop";
     };
@@ -63,7 +63,7 @@ pkgs: {
       desktopFile = "neovide.desktop";
     };
     fileBrowser = {
-      pkg = pkgs.gnome.nautilus;
+      pkg = pkgs.nautilus;
       command = "nautilus";
       desktopFile = "org.gnome.Nautilus.desktop";
     };

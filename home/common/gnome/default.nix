@@ -1,8 +1,8 @@
 { pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
-    gnome.gnome-tweaks
-    gnome.dconf-editor
+    gnome-tweaks
+    dconf-editor
     dconf2nix
     (pkgs.writeShellApplication {
       name = "xhide";
