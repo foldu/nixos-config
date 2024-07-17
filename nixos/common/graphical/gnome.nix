@@ -11,13 +11,13 @@
   programs.kdeconnect.package = pkgs.gnomeExtensions.gsconnect;
 
   environment.gnome.excludePackages =
-    [
-      pkgs.gedit
-      pkgs.gnome-photos
-    ]
-    ++ (with pkgs.gnome; [
+    (with pkgs; [
+      gedit
+      gnome-photos
       epiphany
       cheese
+    ])
+    ++ (with pkgs.gnome; [
       gnome-logs
       gnome-contacts
       gnome-music
