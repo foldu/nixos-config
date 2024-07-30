@@ -21,8 +21,12 @@
   networking.hostName = "ceres";
 
   boot = {
-    kernelPackages = lib.mkForce pkgs.linuxPackages_rpi4;
-    kernelParams = [ "usb-storage.quirks=152d:0578:u" ];
+    kernelPackages = lib.mkForce pkgs.linuxKernel.packages.linux_rpi4;
+    initrd.availableKernelModules = [
+      "xhci_pci"
+      "usbhid"
+      "usb_storage"
+    ];
     loader = {
       grub.enable = false;
       generic-extlinux-compatible.enable = true;
