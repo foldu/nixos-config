@@ -52,5 +52,8 @@
     ruff-lsp
     # based on what?
     basedpyright
+    markdownlint-cli2
+    zig_0_12
+    zls
   ];
 }
