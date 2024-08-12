@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 {
   programs.yazi = {
-    enable = false;
+    enable = true;
     package = inputs.yazi.packages.${pkgs.system}.yazi;
     settings = {
       opener = {
