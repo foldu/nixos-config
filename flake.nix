@@ -84,6 +84,10 @@
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     cashewnix.url = "github:foldu/cashewnix";
+
+    nixos-cosmic = {
+      url = "github:lilyinstarlight/nixos-cosmic";
+    };
   };
 
   outputs =

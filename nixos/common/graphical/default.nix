@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  inputs,
+  ...
+}:
 {
   imports = [
     ./corectrl.nix
@@ -11,7 +16,10 @@
     ./qt5.nix
     ./syncthing.nix
     ./game-devices.nix
+    inputs.nixos-cosmic.nixosModules.default
   ];
+
+  services.desktopManager.cosmic.enable = true;
 
   programs.kdeconnect.enable = true;
 
