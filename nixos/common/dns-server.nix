@@ -1,5 +1,10 @@
 { pkgs, ... }:
 let
+  hosts = ''
+    100.64.0.3 git.home.5kw.li
+    100.64.0.3 ca.home.5kw.li
+    100.64.0.3 prometheus.home.5kw.li
+  '';
   bootstrapHosts = pkgs.writeTextFile {
     name = "bootstraphosts.txt";
     text = ''
@@ -16,6 +21,8 @@ in
 
   services.resolved.enable = false;
 
+  networking.extraHosts = hosts;
+
   services.blocky = {
     enable = true;
     settings = {
@@ -23,6 +30,8 @@ in
         "tcp-tls:1.1.1.1:853"
         "tcp-tls:1.0.0.1:853"
       ];
+      bootstrapDns = [ { upstream = "tcp-tls:1.1.1.1:853"; } ];
+
       hostsFile = {
         sources = [
           "${bootstrapHosts}"
@@ -32,7 +41,7 @@ in
           refreshPeriod = "5m";
           downloads = {
             timeout = "10s";
-            attempts = 50;
+            attempts = 2;
             cooldown = "10s";
           };
         };
