@@ -159,12 +159,14 @@
         "barnabas@jupiter" = mkHome [ ./home/jupiter ] nixpkgs.legacyPackages."x86_64-linux";
         "barnabas@mars" = mkHome [ ./home/mars ] nixpkgs.legacyPackages."x86_64-linux";
         "barnabas@saturn" = mkHome [ ./home/saturn ] nixpkgs.legacyPackages."x86_64-linux";
+        "barnabas@moehre" = mkHome [ ./home/moehre ] nixpkgs.legacyPackages."x86_64-linux";
       };
       nixosConfigurations = {
         "ceres" = mkNixos [ ./nixos/ceres ];
         "jupiter" = mkNixos [ ./nixos/jupiter ];
         "mars" = mkNixos [ ./nixos/mars ];
         "saturn" = mkNixos [ ./nixos/saturn ];
+        "moehre" = mkNixos [ ./nixos/moehre ];
       };
       overlays = import ./overlays { inherit inputs; };
       lib = import ./lib { inherit (nixpkgs) lib; };
