@@ -90,12 +90,10 @@
       # # TODO: rename
       # "borgbackup-matchbox"
     ]
-    (
-      name: {
-        condition = ''absent_over_time(task_last_run{name="${name}"}[1d])'';
-        description = "status of ${name} is unknown: no data for a day";
-      }
-    )
+    (name: {
+      condition = ''absent_over_time(task_last_run{name="${name}"}[1d])'';
+      description = "status of ${name} is unknown: no data for a day";
+    })
   )
   // {
     nixpkgs_out_of_date = {

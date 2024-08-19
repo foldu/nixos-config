@@ -9,9 +9,9 @@
 # Example prometheus alert rules:
 # - https://github.com/Mic92/dotfiles/blob/master/nixos/eva/modules/prometheus/alert-rules.nix
 let
-  isVM =
-    lib.any (mod: mod == "xen-blkfront" || mod == "virtio_console")
-      config.boot.initrd.kernelModules;
+  isVM = lib.any (
+    mod: mod == "xen-blkfront" || mod == "virtio_console"
+  ) config.boot.initrd.kernelModules;
   # potentially wrong if the nvme is not used at boot...
   hasNvme = lib.any (m: m == "nvme") config.boot.initrd.availableKernelModules;
 
@@ -23,7 +23,8 @@ let
     fs:
     if builtins.isAttrs config.boot.supportedFilesystems then
       config.boot.supportedFilesystems.${fs} or false
-    else # FIXME: When nixos 24.05 is released, supportedFilesystems will be always an attrset
+    # FIXME: When nixos 24.05 is released, supportedFilesystems will be always an attrset
+    else
       lib.any (fs2: fs2 == fs) config.boot.supportedFilesystems;
 
   zfsChecks = lib.optional (supportsFs "zfs") (

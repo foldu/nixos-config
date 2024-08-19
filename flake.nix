@@ -188,6 +188,8 @@
       {
         devShell = pkgs.mkShell {
           packages = [
+            pkgs.nixfmt-rfc-style
+            pkgs.treefmt
             (pkgs.python3.withPackages (ps: [
               ps.transmission-rpc
               ps.ipython

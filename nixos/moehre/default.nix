@@ -49,9 +49,6 @@
   # Enable the X11 windowing system.
   # services.xserver.enable = true;
 
-
-  
-
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -72,17 +69,17 @@
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.barnabas = {
-  isNormalUser = true;
-  extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-   environment.systemPackages = with pkgs; [
-git
-neovim
-     wget
-   ];
+  environment.systemPackages = with pkgs; [
+    git
+    neovim
+    wget
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
