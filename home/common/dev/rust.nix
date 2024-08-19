@@ -3,7 +3,6 @@
   home.packages = with pkgs; [
     rustup
     cargo-deny
-    cargo-outdated
     cargo-flamegraph
     cargo-bloat
   ];

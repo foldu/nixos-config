@@ -29,7 +29,8 @@
     nixfmt-rfc-style
     typst
     typst-fmt
-    typst-lsp
+    # https://github.com/nvarner/typst-lsp/pull/515
+    # typst-lsp
     typst-live
     yarn
     gnumake
@@ -40,7 +41,8 @@
     nodePackages.typescript-language-server
     nodePackages.eslint
     nodePackages.yaml-language-server
-    nodePackages.vscode-langservers-extracted
+    # https://github.com/NixOS/nixpkgs/pull/335559
+    # nodePackages.vscode-langservers-extracted
     plantuml
     tree-sitter
     taplo-cli

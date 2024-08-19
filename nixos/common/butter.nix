@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  environment.systemPackages = [ pkgs.compsize ];
+  # environment.systemPackages = [ pkgs.compsize ];
 
   services.btrfs.autoScrub = {
     enable = true;
