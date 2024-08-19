@@ -9,6 +9,7 @@
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     inputs.nixos-hardware.nixosModules.common-gpu-intel
     inputs.nixos-hardware.nixosModules.common-pc-ssd
+    inputs.nixos-cosmic.nixosModules.default
 
     ../common/profiles/laptop.nix
 
@@ -17,6 +18,9 @@
 
     ./hardware-configuration.nix
   ];
+
+  services.desktopManager.cosmic.enable = true;
+  services.displayManager.cosmic-greeter.enable = true;
 
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;

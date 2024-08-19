@@ -22,3 +22,8 @@ vip = "100.64.0.5"
 dns = "mars.home.5kw.li"
 ip = "192.168.1.10"
 vip = "100.64.0.1"
+
+[devices.moehre]
+dns = "moehre.home.5kw.li"
+ip = "192.168.1.79"
+vip = "100.64.0.8"
