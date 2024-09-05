@@ -23,14 +23,14 @@
 
   programs.kdeconnect.enable = true;
 
-  services.printing = {
-    enable = true;
-
-    clientConf = ''
-      ServerName ceres.home.5kw.li
-      Encryption Never
-    '';
-  };
+  # services.printing = {
+  #   enable = true;
+  #
+  #   clientConf = ''
+  #     ServerName ceres.home.5kw.li
+  #     Encryption Never
+  #   '';
+  # };
 
   documentation = {
     dev.enable = true;

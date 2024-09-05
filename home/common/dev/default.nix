@@ -57,5 +57,7 @@
     markdownlint-cli2
     zig
     zls
+    just
+    cookiecutter
   ];
 }
