@@ -26,32 +26,6 @@
         "url": "https://git.home.5kw.li/foldu/atchr"
       }
     },
-    "blocklistdownloadthing": {
-      "inputs": {
-        "crane": [
-          "nix-stuff",
-          "crane"
-        ],
-        "flake-utils": "flake-utils_4",
-        "nixpkgs": [
-          "nix-stuff",
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1704192072,
-        "narHash": "sha256-jDVCGCqhI0i4vD4hanrFZ7C8qCBcbdGksibnLsrP87s=",
-        "owner": "foldu",
-        "repo": "blocklistdownloadthing",
-        "rev": "985d9201916ce5a8d8e72484aa450b597cff58f3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "foldu",
-        "repo": "blocklistdownloadthing",
-        "type": "github"
-      }
-    },
     "cashewnix": {
       "inputs": {
         "crane": "crane",
@@ -157,18 +131,18 @@
           "nix-stuff",
           "crane"
         ],
-        "flake-utils": "flake-utils_5",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "nix-stuff",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1704190926,
-        "narHash": "sha256-fxKcY/hyR1TSNfYvTY7RXp7Upfn+jU1J6o5F7zO/bzM=",
+        "lastModified": 1725563598,
+        "narHash": "sha256-pYlX4X8xPGalcXeN7/DhrcWFw7Xh7NCYb1v51tDL1Oc=",
         "owner": "foldu",
         "repo": "eunzip",
-        "rev": "73c0f2a47744953fcd509ad1858fe31252735c90",
+        "rev": "bcdfc8dcff733665cce619eb1397b4e408afe7d4",
         "type": "github"
       },
       "original": {
@@ -364,11 +338,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1701680307,
-        "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "4022d587cbbfd70fe950c1e2083a02621806a725",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
         "type": "github"
       },
       "original": {
@@ -382,11 +356,11 @@
         "systems": "systems_6"
       },
       "locked": {
-        "lastModified": 1701680307,
-        "narHash": "sha256-kAuep2h5ajznlPMD9rnQyffWG8EM/C73lejGofXvdM8=",
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "4022d587cbbfd70fe950c1e2083a02621806a725",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
         "type": "github"
       },
       "original": {
@@ -416,39 +390,6 @@
     "flake-utils_7": {
       "inputs": {
         "systems": "systems_8"
-      },
-      "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_8": {
-      "locked": {
-        "lastModified": 1676283394,
-        "narHash": "sha256-XX2f9c3iySLCw54rJ/CZs+ZK6IQy7GXNY4nSOyu2QG4=",
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "rev": "3db36a8b464d0c4532ba1c7dda728f4576d6d073",
-        "type": "github"
-      },
-      "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
-      }
-    },
-    "flake-utils_9": {
-      "inputs": {
-        "systems": "systems_9"
       },
       "locked": {
         "lastModified": 1710146030,
@@ -650,22 +591,21 @@
     },
     "nix-stuff": {
       "inputs": {
-        "blocklistdownloadthing": "blocklistdownloadthing",
         "crane": [
           "crane"
         ],
         "eunzip": "eunzip",
-        "flake-utils": "flake-utils_6",
+        "flake-utils": "flake-utils_5",
         "nixpkgs": [
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1725437984,
-        "narHash": "sha256-kWwrYjCcMnXTrdd7Oyo3PC5XK/jLS90LSP7nD85piaU=",
+        "lastModified": 1725564320,
+        "narHash": "sha256-hHYyvgza+/Yo4NsiF2YWxML3xzt25yrLf8qO5RvxP2A=",
         "owner": "foldu",
         "repo": "nix-stuff",
-        "rev": "743d0b23de97ad27039e1be2feae7eb1392795fa",
+        "rev": "86125f19af552270b3684ae7b96e8c443120458d",
         "type": "github"
       },
       "original": {
@@ -835,7 +775,7 @@
         "crane": [
           "crane"
         ],
-        "flake-utils": "flake-utils_7",
+        "flake-utils": "flake-utils_6",
         "nixpkgs": [
           "nixpkgs"
         ]
@@ -852,30 +792,6 @@
       "original": {
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/pickwp"
-      }
-    },
-    "random-scripts": {
-      "inputs": {
-        "crane": [
-          "crane"
-        ],
-        "flake-utils": "flake-utils_8",
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1677487722,
-        "narHash": "sha256-HJ5cCPmvr4hUv2KNavuJYioJer1diWCrEINqjPfrM0A=",
-        "ref": "refs/heads/master",
-        "rev": "3ae7c52bcb90a93c29a0f5df9d420db6fe2528eb",
-        "revCount": 31,
-        "type": "git",
-        "url": "https://git.home.5kw.li/foldu/random-scripts"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://git.home.5kw.li/foldu/random-scripts"
       }
     },
     "root": {
@@ -895,7 +811,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_5",
         "pickwp": "pickwp",
-        "random-scripts": "random-scripts",
         "wpp-gtk": "wpp-gtk",
         "yazi": "yazi"
       }
@@ -1088,21 +1003,6 @@
         "type": "github"
       }
     },
-    "systems_9": {
-      "locked": {
-        "lastModified": 1681028828,
-        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
-        "owner": "nix-systems",
-        "repo": "default",
-        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nix-systems",
-        "repo": "default",
-        "type": "github"
-      }
-    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -1171,7 +1071,7 @@
     },
     "yazi": {
       "inputs": {
-        "flake-utils": "flake-utils_9",
+        "flake-utils": "flake-utils_7",
         "nixpkgs": [
           "nixpkgs"
         ],

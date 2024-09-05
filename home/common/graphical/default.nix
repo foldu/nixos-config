@@ -15,7 +15,6 @@
 
   home.packages =
     [
-      inputs.random-scripts.packages.${pkgs.system}.foldu-random-scripts
       inputs.nix-stuff.packages.${pkgs.system}.eunzip
       inputs.wpp-gtk.packages.${pkgs.system}.wpp
     ]

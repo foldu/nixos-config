@@ -39,7 +39,7 @@
     nodePackages.prettier
     nodePackages.typescript
     nodePackages.typescript-language-server
-    nodePackages.eslint
+    # nodePackages.eslint
     nodePackages.yaml-language-server
     # https://github.com/NixOS/nixpkgs/pull/335559
     # nodePackages.vscode-langservers-extracted

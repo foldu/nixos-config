@@ -51,13 +51,6 @@
       flake = false;
     };
 
-    random-scripts = {
-      url = "https://git.home.5kw.li/foldu/random-scripts";
-      type = "git";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
-    };
-
     nix-stuff = {
       url = "github:foldu/nix-stuff";
       inputs = {
