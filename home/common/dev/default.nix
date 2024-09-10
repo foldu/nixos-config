@@ -41,8 +41,7 @@
     nodePackages.typescript-language-server
     # nodePackages.eslint
     nodePackages.yaml-language-server
-    # https://github.com/NixOS/nixpkgs/pull/335559
-    # nodePackages.vscode-langservers-extracted
+    nodePackages.vscode-langservers-extracted
     plantuml
     tree-sitter
     taplo-cli
@@ -55,6 +54,8 @@
     # based on what?
     basedpyright
     markdownlint-cli2
+    jdt-language-server
+    jdk21
     zig
     zls
     just
