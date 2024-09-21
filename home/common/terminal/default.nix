@@ -68,6 +68,12 @@
     delta.enable = true;
     userName = "foldu";
     userEmail = "foldu@protonmail.com";
+    includes = [
+      {
+        condition = "gitdir:~/uni/";
+        path = "/home/barnabas/.config/git/uni";
+      }
+    ];
     extraConfig = {
       init.defaultBranch = "master";
       pull.rebase = true;
