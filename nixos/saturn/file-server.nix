@@ -6,29 +6,55 @@
 
     openFirewall = true;
 
-    extraConfig = ''
-      # allow only local subnet
-      hosts allow = 10.20.30.0/24 192.168.1.0/24 localhost
-      hosts deny = 0.0.0.0/0
+    settings = {
+      global = {
 
-      # allow executing files even without +x perm
-      acl allow execute always = yes
+        # allow only local subnet
+        "hosts allow" = "10.20.30.0/24 192.168.1.0/24 localhost";
+        "hosts deny" = "0.0.0.0/0";
 
-      min protocol = SMB3
+        # allow executing files even without +x perm
+        "acl allow execute always" = "yes";
 
-      guest account = nobody
-      map to guest = bad user
+        "min protocol" = "SMB3";
 
-      # enable encryption
-      smb encrypt = desired
+        "guest account" = "nobody";
+        "map to guest" = "bad user";
 
-      # disable printer sharing so samba doesn't spam journald
-      load printers = no
-      printing = bsd
-      printcap name = /dev/null
-      disable spoolss = yes
-      show add printer wizard = no
-    '';
+        # enable encryption
+        "smb encrypt" = "desired";
+
+        # disable printer sharing so samba doesn't spam journald
+        "load printers" = "no";
+        "printing" = "bsd";
+        "printcap name" = "/dev/null";
+        "disable spoolss" = "yes";
+        "show add printer wizard" = "no";
+      };
+    };
+    # extraConfig = ''
+    #   # allow only local subnet
+    #   hosts allow = 10.20.30.0/24 192.168.1.0/24 localhost
+    #   hosts deny = 0.0.0.0/0
+    #
+    #   # allow executing files even without +x perm
+    #   acl allow execute always = yes
+    #
+    #   min protocol = SMB3
+    #
+    #   guest account = nobody
+    #   map to guest = bad user
+    #
+    #   # enable encryption
+    #   smb encrypt = desired
+    #
+    #   # disable printer sharing so samba doesn't spam journald
+    #   load printers = no
+    #   printing = bsd
+    #   printcap name = /dev/null
+    #   disable spoolss = yes
+    #   show add printer wizard = no
+    # '';
 
     shares.trash = {
       path = "/srv/media/main/smb";
