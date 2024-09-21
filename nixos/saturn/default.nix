@@ -16,7 +16,7 @@
     ./gitea.nix
     ./hydra.nix
     ./jellyfin.nix
-    ./libreddit.nix
+    ./redlib
     ./nitter
     ./step-ca.nix
     ./transmission
