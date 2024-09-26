@@ -29,8 +29,8 @@
     nixfmt-rfc-style
     typst
     typst-fmt
-    # https://github.com/nvarner/typst-lsp/pull/515
-    # typst-lsp
+    tinymist
+    typstyle
     typst-live
     yarn
     gnumake
