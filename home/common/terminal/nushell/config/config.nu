@@ -243,7 +243,6 @@ $env.config = {
     }
 
     color_config: (kanagawa) # if you want a more interesting theme, you can replace the empty record with `$dark_theme`, `$light_theme` or another custom record
-    use_grid_icons: true
     footer_mode: "25" # always, never, number_of_rows, auto
     float_precision: 2 # the precision for displaying floats in tables
     buffer_editor: "" # command that will be used to edit the current line buffer with ctrl+o, if unset fallback to $env.EDITOR and $env.VISUAL
@@ -298,6 +297,13 @@ $env.config = {
         }
         display_output: "if (term size).columns >= 100 { table -e } else { table }" # run to display the output of a pipeline
         command_not_found: { null } # return an error message when a command is not found
+    }
+
+    display_errors: {
+        exit_code: false
+        # Core dump errors are always printed, and SIGPIPE never triggers an error.
+        # The setting below controls message printing for termination by all other signals.
+        termination_signal: true
     }
 
     menus: [
