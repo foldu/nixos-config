@@ -45,6 +45,9 @@
     flake = "/home/barnabas/src/github.com/foldu/nixos-config";
   };
 
+  # disable cups RCE service
+  services.printing.browsed.enable = false;
+
   nix = {
     # package = pkgs.nixVersions.latest;
     package = pkgs.lix;
