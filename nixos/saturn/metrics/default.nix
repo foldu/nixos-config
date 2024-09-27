@@ -35,7 +35,7 @@
           {
             targets = [
               "saturn.home.5kw.li:9273"
-              "ceres.home.5kw.li:9273"
+              # "ceres.home.5kw.li:9273"
             ];
             labels.type = "server";
           }
