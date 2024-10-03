@@ -20,7 +20,7 @@
 
     zed
     ast-grep
-    android-studio
+    # android-studio
     go
     gopls
     arduino-cli
