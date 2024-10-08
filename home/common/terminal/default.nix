@@ -73,6 +73,10 @@
         condition = "gitdir:~/uni/";
         path = "/home/barnabas/.config/git/uni";
       }
+      {
+        condition = "gitdir:~/eclipse-workspace/";
+        path = "/home/barnabas/.config/git/uni";
+      }
     ];
     extraConfig = {
       init.defaultBranch = "master";
