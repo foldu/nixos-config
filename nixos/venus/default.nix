@@ -1,0 +1,33 @@
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+
+    inputs.nixos-cosmic.nixosModules.default
+
+    ../common/profiles/laptop.nix
+
+    ../common/bluetooth.nix
+    ../common/butter.nix
+    ../common/cashewnix.nix
+    ../common/graphical
+  ];
+
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  networking.hostName = "venus"; # Define your hostname.
+
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_10;
+
+  services.desktopManager.cosmic.enable = true;
+
+  system.stateVersion = "24.05"; # Did you read the comment?
+}
