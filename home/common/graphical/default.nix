@@ -41,7 +41,7 @@
       _7zz
     ]);
 
-  #services.pickwp.enable = true;
+  services.pickwp.enable = true;
 
   services.wrrr.enable = true;
 }

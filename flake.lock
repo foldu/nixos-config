@@ -352,11 +352,11 @@
         "systems": "systems_7"
       },
       "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "lastModified": 1726560853,
+        "narHash": "sha256-X6rJYSESBVr3hBoH0WbKE5KvhPU5bloyZ2L4K60/fPQ=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "rev": "c1dfcf08411b08f6b8615f7d8971a2bfa81d5e8a",
         "type": "github"
       },
       "original": {
@@ -735,11 +735,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1727020409,
-        "narHash": "sha256-MUXO7Qa4s1dOWLL1aMiqQU6M4cBrmBLMQN4r5cevwBk=",
+        "lastModified": 1728402242,
+        "narHash": "sha256-CiQDYtMXgpQB8lVbUp7MSrHF8wadj1zt+BoHSq1lcoo=",
         "ref": "refs/heads/master",
-        "rev": "f456ca45454aa26c1d06d50b8d887500a2aded29",
-        "revCount": 288,
+        "rev": "dc2f97844520d6fe22594f4deb2526061263251e",
+        "revCount": 290,
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/pickwp"
       },
