@@ -25,8 +25,6 @@
     info.enable = false;
   };
 
-  environment.systemPackages = [ pkgs.pferd ];
-
   services.flatpak.enable = true;
 
   networking.firewall.enable = true;
