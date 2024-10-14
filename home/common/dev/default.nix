@@ -35,7 +35,6 @@
     # go
     go
     gopls
-    arduino-cli
     black
     ccls
 
