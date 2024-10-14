@@ -31,6 +31,10 @@ in
           id = "SS573IT-UI75K4S-RLJYSXJ-5AEAYD6-QMFURGD-J75C5E5-O7DWS4G-35KOXAN";
           addresses = [ "tcp://${devices.mars.vip}:${toString syncthingPort}" ];
         };
+        venus = {
+          id = "7QLRH3I-32ELROX-SSYZXEI-BAZYYDW-AA5ASUJ-RVGY4EG-KDYT66K-XFMPVQW";
+          addresses = [ "tcp://${devices.venus.vip}:${toString syncthingPort}" ];
+        };
       };
       otherDevices = lib.filterAttrs (k: _: k != config.networking.hostName) syncthingDevices;
       allOtherDeviceNames = lib.attrNames otherDevices;

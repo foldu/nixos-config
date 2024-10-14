@@ -6,59 +6,85 @@
   ];
 
   systemd.user.sessionVariables = {
-    EDITOR = "hx";
+    EDITOR = "nvim";
   };
 
   home.packages = with pkgs; [
+    # editors
+    zed
     tokei
     minicom
     gdb
+    # tools
+    sqlite-interactive
+    yarn
+    gnumake
+    just
+    cookiecutter
+    plantuml
+
+    # editor tools
+    ast-grep
+    tree-sitter
+
+    # c/c++ native tools
     clang-tools
     llvmPackages_latest.lld
     llvmPackages_latest.clang
-    sqlite-interactive
 
-    zed
-    ast-grep
-    # android-studio
+    # go
     go
     gopls
     arduino-cli
     black
     ccls
-    nixfmt-rfc-style
+
+    # typst
     typst
     typst-fmt
     tinymist
     typstyle
     typst-live
-    yarn
-    gnumake
+
+    # tex
+    texlab
+
+    # nix
     nixd
+    nixfmt-rfc-style
+
+    # shell
     nodePackages.bash-language-server
+    shellcheck
+    shfmt
+
+    # webshit
     nodePackages.prettier
     nodePackages.typescript
     nodePackages.typescript-language-server
-    # nodePackages.eslint
-    nodePackages.yaml-language-server
+    nodePackages.eslint
     nodePackages.vscode-langservers-extracted
-    plantuml
-    tree-sitter
+
+    # yaml
+    nodePackages.yaml-language-server
     taplo-cli
-    shellcheck
-    shfmt
+    # lua
     stylua
     sumneko-lua-language-server
-    texlab
+
+    # python
+    basedpyright # based on what?
     ruff-lsp
-    # based on what?
-    basedpyright
+    # markdown
+    marksman
     markdownlint-cli2
+
+    # java
     jdt-language-server
     jdk21
+
+    # :goat
     zig
     zls
-    just
-    cookiecutter
   ];
 }

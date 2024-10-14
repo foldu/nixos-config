@@ -27,3 +27,7 @@ vip = "100.64.0.1"
 dns = "moehre.home.5kw.li"
 ip = "192.168.1.79"
 vip = "100.64.0.8"
+
+[devices.venus]
+dns = "venus.home.5kw.li"
+vip = "100.64.0.9"
