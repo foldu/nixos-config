@@ -81,6 +81,7 @@
     # java
     jdt-language-server
     jdk21
+    maven
 
     # :goat
     zig
