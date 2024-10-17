@@ -28,8 +28,6 @@
 
   networking.hostName = "venus"; # Define your hostname.
 
-  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_6_10;
-
   services.desktopManager.cosmic.enable = true;
 
   system.stateVersion = "24.05"; # Did you read the comment?
