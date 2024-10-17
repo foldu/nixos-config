@@ -482,11 +482,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1729165983,
-        "narHash": "sha256-gtcodl79t5ZbbX4TSx4RNyggasEvLdVnc/IM+RyxqJw=",
+        "lastModified": 1729171802,
+        "narHash": "sha256-Eip3uI+XeyAfBoQXpkm/F7eG3M7AgvzSyhyJdzxVt74=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "78a7a070bbcc3b37cc36080c2a3514207d427b3b",
+        "rev": "9c1a1c7df49a9b28539ccb509b36d0b81e41391c",
         "type": "github"
       },
       "original": {
@@ -735,11 +735,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728402242,
-        "narHash": "sha256-CiQDYtMXgpQB8lVbUp7MSrHF8wadj1zt+BoHSq1lcoo=",
+        "lastModified": 1729184993,
+        "narHash": "sha256-B9wYULH2QXCJI/1k0wQBE9CjtzYfxGJNhLSxffj7nVI=",
         "ref": "refs/heads/master",
-        "rev": "dc2f97844520d6fe22594f4deb2526061263251e",
-        "revCount": 290,
+        "rev": "cc246fa34295680ec826c3d5192598772dcf4d06",
+        "revCount": 292,
         "type": "git",
         "url": "https://git.home.5kw.li/foldu/pickwp"
       },
