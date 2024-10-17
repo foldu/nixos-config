@@ -29,8 +29,8 @@ pkgs: {
   apps = {
     browser = {
       pkg = null;
-      command = "librewolf";
-      desktopFile = "librewolf.desktop";
+      command = "io.github.zen_browser.zen";
+      desktopFile = "io.github.zen_browser.zen.desktop";
     };
     pdfViewer = {
       pkg = pkgs.evince;
