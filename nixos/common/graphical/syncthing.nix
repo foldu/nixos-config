@@ -27,10 +27,6 @@ in
           id = "O7RPI7X-O7EEEJO-TH55KF5-64PE6MS-RPFJZ5B-LIA2ZEW-GJVBCHS-76W54AP";
           addresses = [ "tcp://${devices.jupiter.vip}:${toString syncthingPort}" ];
         };
-        mars = {
-          id = "SS573IT-UI75K4S-RLJYSXJ-5AEAYD6-QMFURGD-J75C5E5-O7DWS4G-35KOXAN";
-          addresses = [ "tcp://${devices.mars.vip}:${toString syncthingPort}" ];
-        };
         venus = {
           id = "7QLRH3I-32ELROX-SSYZXEI-BAZYYDW-AA5ASUJ-RVGY4EG-KDYT66K-XFMPVQW";
           addresses = [ "tcp://${devices.venus.vip}:${toString syncthingPort}" ];
