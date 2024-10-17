@@ -13,20 +13,20 @@ dns = "saturn.home.5kw.li"
 ip = "192.168.1.9"
 vip = "100.64.0.3"
 
-[devices.ceres]
-dns = "ceres.home.5kw.li"
-ip = "192.168.1.13"
-vip = "100.64.0.5"
+# [devices.ceres]
+# dns = "ceres.home.5kw.li"
+# ip = "192.168.1.13"
+# vip = "100.64.0.5"
 
-[devices.mars]
-dns = "mars.home.5kw.li"
-ip = "192.168.1.10"
-vip = "100.64.0.1"
-
-[devices.moehre]
-dns = "moehre.home.5kw.li"
-ip = "192.168.1.79"
-vip = "100.64.0.8"
+# [devices.mars]
+# dns = "mars.home.5kw.li"
+# ip = "192.168.1.10"
+# vip = "100.64.0.1"
+#
+# [devices.moehre]
+# dns = "moehre.home.5kw.li"
+# ip = "192.168.1.79"
+# vip = "100.64.0.8"
 
 [devices.venus]
 dns = "venus.home.5kw.li"
