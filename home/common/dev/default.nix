@@ -11,7 +11,7 @@
 
   home.packages = with pkgs; [
     # editors
-    zed
+    zed-editor
     tokei
     minicom
     gdb

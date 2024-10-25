@@ -52,7 +52,7 @@ end
 -- For example, changing the color scheme:
 config.color_scheme = "Kanagawa (Gogh)"
 
-config.enable_wayland = false
+config.enable_wayland = true
 config.keys = {
     {
         key = "Enter",

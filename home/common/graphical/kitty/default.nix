@@ -12,8 +12,8 @@ in
     keybindings = {
       #"ctrl+c" = "copy_or_interrupt";
       #"ctrl+v" = "paste_from_clipboard";
-      "ctrl+shift+k" = "previous_window";
-      "ctrl+shift+j" = "next_window";
+      # "ctrl+shift+k" = "previous_window";
+      # "ctrl+shift+j" = "next_window";
       "ctrl+shift+t" = "new_tab_with_cwd";
       "ctrl+shift+enter" = "new_window_with_cwd";
     };
@@ -32,9 +32,16 @@ in
       allow_remote_control = "yes";
 
       notify_on_cmd_finish = "unfocused";
+      shell_integration = "no-cursor";
 
-      enabled_layouts = "tall,stack,splits";
-      tab_bar_style = "custom";
+      enabled_layouts = "splits";
+      tab_bar_margin_width = "9";
+      tab_bar_margin_height = "9 0";
+      tab_bar_style = "powerline";
+      tab_separator = "";
+      # tab_title_template = "{fmt.fg._323449}{fmt.bg.default}{fmt.fg._04d1f9}{fmt.bg.default}{index}{fmt.fg._04d1f9}{fmt.bg._323449} {title[:15] + (title[15:] and '…')} {fmt.fg._323449}{fmt.bg.default} ";
+      # active_tab_title_template = "{fmt.fg._37f499}{fmt.bg.default}{fmt.fg._212337}{fmt.bg._37f499}{fmt.fg._212337}{fmt.bg._37f499} {title[:40] + (title[40:] and '…')} {fmt.fg._37f499}{fmt.bg.default} ";
+
       enable_audio_bell = "no";
       disable_ligatures = "always";
       update_check_interval = 0;
