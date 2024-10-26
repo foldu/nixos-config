@@ -20,6 +20,25 @@
     ../common/graphical
   ];
 
+  networking.nftables = {
+    enable = true;
+    tables.excludeTraffic = {
+      name = "excludeTraffic";
+      family = "inet";
+      content = ''
+        chain excludeOutgoing {
+          type route hook output priority 0; policy accept;
+          ip daddr 100.64.0.0/10 ct mark set 0x00000f41 meta mark set 0x6d6f6c65;
+        }
+        chain excludeDns {
+          type filter hook output priority -10; policy accept;
+          ip daddr 100.64.0.3 udp dport 53 ct mark set 0x00000f41 meta mark set 0x6d6f6c65;
+          ip daddr 100.64.0.3 tcp dport 53 ct mark set 0x00000f41 meta mark set 0x6d6f6c65;
+        }
+      '';
+    };
+  };
+
   services.fwupd.enable = true;
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_6_10;

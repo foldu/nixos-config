@@ -19,7 +19,7 @@ in
     };
     settings = {
       tab_bar_edge = "top";
-      tab_bar_min_tabs = 1;
+      tab_bar_min_tabs = 2;
 
       # shouldn't these be a part of the colorscheme?
       active_border_color = "#FFA066";
@@ -29,18 +29,25 @@ in
 
       show_hyperlink_targets = "yes";
 
-      allow_remote_control = "yes";
+      # allow_remote_control = "yes";
 
       notify_on_cmd_finish = "unfocused";
       shell_integration = "no-cursor";
 
       enabled_layouts = "splits";
-      tab_bar_margin_width = "9";
-      tab_bar_margin_height = "9 0";
-      tab_bar_style = "powerline";
-      tab_separator = "";
-      # tab_title_template = "{fmt.fg._323449}{fmt.bg.default}{fmt.fg._04d1f9}{fmt.bg.default}{index}{fmt.fg._04d1f9}{fmt.bg._323449} {title[:15] + (title[15:] and '…')} {fmt.fg._323449}{fmt.bg.default} ";
-      # active_tab_title_template = "{fmt.fg._37f499}{fmt.bg.default}{fmt.fg._212337}{fmt.bg._37f499}{fmt.fg._212337}{fmt.bg._37f499} {title[:40] + (title[40:] and '…')} {fmt.fg._37f499}{fmt.bg.default} ";
+      # tab_bar_edge = "bottom";
+      tab_bar_margin_height = "0 7.5";
+      tab_bar_style = "slant";
+      tab_bar_align = "left";
+      tab_title_max_length = "0";
+
+      # tab_title_template = " {tab.active_exe} {title[title.rfind('/')+1:]}";
+      # active_tab_title_template = " {tab.active_exe} {title[title.rfind('/')+1:]}";
+      tab_title_template = " {tab.active_exe} {title}";
+      active_tab_title_template = " {tab.active_exe} {title}";
+
+      active_tab_font_style = "normal";
+      inactive_tab_font_style = "normal";
 
       enable_audio_bell = "no";
       disable_ligatures = "always";
@@ -72,8 +79,8 @@ in
       # Tabs
       active_tab_background #1F1F28
       active_tab_foreground #C8C093
-      inactive_tab_background  #1F1F28
-      inactive_tab_foreground #727169
+      inactive_tab_background  #15161E
+      inactive_tab_foreground #C8C093
       tab_bar_background #15161E
 
       # normal
@@ -104,6 +111,5 @@ in
     '';
   };
 
-  xdg.configFile."kitty/tab_bar.py".source = ./tab_bar.py;
   xdg.configFile."kitty/open-actions.conf".source = ./open-actions.conf;
 }
