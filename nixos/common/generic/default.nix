@@ -14,6 +14,8 @@
     ./telegraf.nix
   ];
 
+  services.dbus.implementation = "broker";
+
   hardware.enableRedistributableFirmware = true;
 
   # FIXME: should be in home-manager, but it currently doesn't support wayland sessions
