@@ -20,6 +20,10 @@
     ../common/graphical
   ];
 
+  environment.sessionVariables = {
+    MAKEFLAGS = "-j 12";
+  };
+
   networking.nftables = {
     enable = true;
     tables.excludeTraffic = {
