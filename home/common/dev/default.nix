@@ -2,7 +2,6 @@
 {
   imports = [
     ./rust.nix
-    ./helix.nix
   ];
 
   systemd.user.sessionVariables = {
