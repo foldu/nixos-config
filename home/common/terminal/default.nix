@@ -2,7 +2,6 @@
 {
   imports = [
     ./nushell
-    ./wezterm
     ./fish
   ];
 
@@ -11,13 +10,10 @@
     hosts."git.home.5kw.li".flatten = true;
   };
 
-  programs.neovim = {
-    package = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
-    enable = true;
-    withRuby = false;
-    withNodeJs = false;
-    withPython3 = false;
-  };
+  # programs.neovim = {
+  #   package = pkgs.neovim;
+  #   enable = true;
+  # };
 
   home.packages = with pkgs; [
     dua
@@ -34,14 +30,6 @@
     rename
     man-pages
   ];
-
-  programs.broot = {
-    enable = true;
-    settings = {
-      skin =
-        (builtins.fromTOML (builtins.readFile "${inputs.kanagawa-theme}/extras/broot_kanagawa.toml")).skin;
-    };
-  };
 
   programs.htop = {
     enable = true;
