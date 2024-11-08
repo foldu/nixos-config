@@ -20,9 +20,4 @@
   services.cashewnix.settings.priority_config."0".timeout = "2s";
 
   services.upower.enable = true;
-
-  systemd.tmpfiles.rules = [
-    "w /sys/class/power_supply/BAT0/charge_start_threshold - - - - 70"
-    "w /sys/class/power_supply/BAT0/charge_stop_threshold - - - - 80"
-  ];
 }
