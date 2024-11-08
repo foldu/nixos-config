@@ -33,7 +33,7 @@
 
   hardware.graphics.enable = true;
 
-  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  # boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
 
   services.mullvad-vpn = {
     enable = true;
