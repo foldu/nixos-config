@@ -32,7 +32,7 @@ in
       # allow_remote_control = "yes";
 
       notify_on_cmd_finish = "unfocused";
-      shell_integration = "no-cursor";
+      shell_integration = "no-rc no-cursor";
 
       enabled_layouts = "splits";
       # tab_bar_edge = "bottom";

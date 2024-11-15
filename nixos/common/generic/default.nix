@@ -22,6 +22,7 @@
   environment.sessionVariables = {
     EDITOR = "nvim";
     NIX_GCC = "${pkgs.gcc}/bin/gcc";
+    LESS = "FRX";
   };
 
   environment.systemPackages =
@@ -87,10 +88,12 @@
 
   time.timeZone = "Europe/Amsterdam";
 
+  programs.fish.enable = true;
+
   users.users.barnabas = {
     isNormalUser = true;
     uid = 1000;
-    shell = pkgs.nushell;
+    shell = pkgs.fish;
     extraGroups = [
       "wheel"
       "video"
