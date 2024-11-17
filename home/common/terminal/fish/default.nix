@@ -10,7 +10,7 @@
       rm = "rm -v";
       mv = "mv -iv";
       cp = "cp -iv";
-      rsync = "rsync -azvP";
+      rsync = "rsync -azv --info=progress2 --filter=':- .gitignore'";
       sm = "src-manage";
     };
     interactiveShellInit = ''
