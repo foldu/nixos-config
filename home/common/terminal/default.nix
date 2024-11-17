@@ -52,6 +52,12 @@
 
   programs.jujutsu = {
     enable = true;
+    settings = {
+      user = {
+        email = "foldu@protonmail.com";
+        name = "foldu";
+      };
+    };
   };
 
   programs.git = {
