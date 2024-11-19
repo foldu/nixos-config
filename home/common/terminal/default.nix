@@ -29,6 +29,7 @@
     fastfetch
     rename
     man-pages
+    (inputs.src-manage.packages.${pkgs.system}.src-manage)
   ];
 
   programs.htop = {
