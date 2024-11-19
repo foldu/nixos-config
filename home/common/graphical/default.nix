@@ -3,7 +3,6 @@
   imports = [
     ./gtk.nix
     ./kitty
-    ./librewolf.nix
     ./mpv.nix
     ./xdg-userdirs.nix
     ./xdg.nix
