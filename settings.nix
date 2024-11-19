@@ -58,7 +58,7 @@ pkgs: {
       desktopFile = "io.github.celluloid_player.Celluloid.desktop";
     };
     graphicalEditor = {
-      pkg = pkgs.neovide;
+      pkg = null;
       command = "neovide";
       desktopFile = "neovide.desktop";
     };
