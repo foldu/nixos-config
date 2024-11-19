@@ -777,11 +777,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1732041078,
-        "narHash": "sha256-xZkmFH+Q3LRR3oSMaQ1scdV2VxBBfghvXMqnzaAumRk=",
+        "lastModified": 1732042029,
+        "narHash": "sha256-Pctb42SL5rIvfrKj18m8AgM8crMazjkPe25v4RoTyBg=",
         "owner": "foldu",
         "repo": "src-manage",
-        "rev": "b81f2560766c06351f076189f436f0dd29f7284a",
+        "rev": "d9c02462c19d2d84d73aba9282688f942e6669d9",
         "type": "github"
       },
       "original": {
