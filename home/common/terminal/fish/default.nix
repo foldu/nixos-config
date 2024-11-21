@@ -14,11 +14,18 @@
       sm = "src-manage";
     };
     interactiveShellInit = ''
-      set -g tide_character_icon '$'
       set -g fish_greeting
     '';
     shellAliases = {
       ls = "ls --hyperlink=auto --color=auto";
+    };
+    functions = {
+      tide_setup = ''
+        tide configure --auto --style=Lean --prompt_colors='16 colors' --show_time='24-hour format' --lean_prompt_height='One line' --prompt_spacing=Compact --icons='Few icons' --transient=No
+        set -U tide_character_icon "\$"
+        set -U tide_left_prompt_items context pwd git character
+        set -U tide_right_prompt_items status cmd_duration jobs direnv bun node python rustc java php pulumi ruby go gcloud kubectl distrobox toolbox terraform aws nix_shell crystal elixir zig time
+      '';
     };
     plugins = [
       {
