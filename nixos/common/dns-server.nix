@@ -87,8 +87,8 @@ in
           ];
           shit_companies = [
             "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/pinterest/all"
-            "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/facebook/all"
-            "https://raw.githubusercontent.com/imkarthikk/pihole-facebook/master/pihole-facebook.txt"
+            # "https://raw.githubusercontent.com/jmdugan/blocklists/master/corporations/facebook/all"
+            # "https://raw.githubusercontent.com/imkarthikk/pihole-facebook/master/pihole-facebook.txt"
           ];
         };
         clientGroupsBlock.default = [
