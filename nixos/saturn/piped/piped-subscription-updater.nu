@@ -5,7 +5,7 @@ let token = (http post -t application/json $"($base)/login" {
   password: $env.PASSWORD,
 } | get token)
 
-http get -H [Authorization $token] --max-time 30 $"($base)/subscriptions"
+http get -H [Authorization $token] --max-time 30sec $"($base)/subscriptions"
   | get url 
   | each {|sub|
     http get $"($base)($sub)"
