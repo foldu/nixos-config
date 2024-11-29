@@ -22,7 +22,6 @@
     ./transmission
     ./vaultwarden.nix
     ./piped
-    ./unifi.nix
     ./miniflux.nix
     ./postgresql.nix
     ./metrics
