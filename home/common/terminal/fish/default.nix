@@ -12,6 +12,7 @@
       cp = "cp -iv";
       rsync = "rsync -azv --info=progress2 --filter=':- .gitignore'";
       sm = "src-manage";
+      gr = "cd (git rev-parse --show-toplevel)";
     };
     interactiveShellInit = ''
       set -g fish_greeting
