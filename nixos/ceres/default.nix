@@ -9,7 +9,6 @@
     inputs.nixos-hardware.nixosModules.raspberry-pi-4
     ../common/profiles/server.nix
 
-    ../common/dns-server.nix
     ../common/cashewnix.nix
 
     ./metrics

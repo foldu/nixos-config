@@ -6,7 +6,6 @@
 
     ../common/profiles/server.nix
 
-    ../common/dns-server.nix
     ../common/zfs.nix
     ../common/cashewnix.nix
 
