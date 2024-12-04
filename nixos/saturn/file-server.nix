@@ -10,7 +10,7 @@
       global = {
 
         # allow only local subnet
-        "hosts allow" = "10.20.30.0/24 192.168.1.0/24 localhost";
+        "hosts allow" = "10.20.30.0/24 192.168.8.0/24 localhost";
         "hosts deny" = "0.0.0.0/0";
 
         # allow executing files even without +x perm
