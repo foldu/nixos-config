@@ -34,9 +34,8 @@ in
         jetbrains-mono
         ubuntu_font_family
         ibm-plex
-        iosevka
         fira-mono
-        (nerdfonts.override { fonts = [ "3270" ]; })
+        nerd-fonts._0xproto
       ]
       ++ lib.mapAttrsToList (_: f: f.pkg) configSettings.font;
   };
