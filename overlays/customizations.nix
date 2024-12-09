@@ -4,15 +4,6 @@ final: prev: {
   #     sed -E 's/OnlyShowIn.+/\0COSMIC;/g' -i $out/etc/xdg/autostart/*.desktop
   #   '';
   # });
-  gcr_4 = prev.gcr_4.overrideAttrs (prevPkg: {
-    nativeBuildInputs = prevPkg.nativeBuildInputs ++ [
-      prev.gnupg
-      prev.openssh
-    ];
-    mesonFlags = [
-      "-Dssh_agent=true"
-    ];
-  });
   brave = prev.brave.overrideAttrs (oldAttrs: {
     postFixup =
       let
