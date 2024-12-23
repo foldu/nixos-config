@@ -1,16 +1,18 @@
 {
-  config,
-  lib,
-  pkgs,
   home-network,
+  config,
   ...
 }:
 let
   nfsMount = mountpoint: {
-    device = "${home-network.devices.saturn.vip}:${mountpoint}";
+    device =
+      if config.networking.hostName == "jupiter" then
+        "${home-network.devices.saturn.ip}:${mountpoint}"
+      else
+        "${home-network.devices.saturn.vip}:${mountpoint}";
     fsType = "nfs";
     options = [
-      # NOTE: soft mounts can cause corruption but I'd rather have a 
+      # NOTE: soft mounts can cause corruption but I'd rather have a
       # single corrupted file than nfs hanging
       "soft"
       "retrans=3"

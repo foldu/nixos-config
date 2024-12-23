@@ -10,7 +10,7 @@
       global = {
 
         # allow only local subnet
-        "hosts allow" = "10.20.30.0/24 192.168.8.0/24 localhost";
+        "hosts allow" = "192.168.8.0/24 localhost";
         "hosts deny" = "0.0.0.0/0";
 
         # allow executing files even without +x perm
@@ -98,21 +98,26 @@
     server = {
       enable = true;
       # NOTE: async doesn't commit on every client write but massively speeds up write perf
-      exports = ''
-        /srv/nfs ${home-network.virtual-network}(rw,no_subtree_check,async,crossmnt,fsid=0)
-        /srv/nfs/torrents ${home-network.virtual-network}(rw,no_subtree_check,async,all_squash,anonuid=${toString config.users.users.transmission.uid})
-        /srv/nfs/videos ${home-network.virtual-network}(rw,no_subtree_check,async)
-        /srv/nfs/cache ${home-network.virtual-network}(rw,no_subtree_check,async)
-        /srv/nfs/img ${home-network.virtual-network}(rw,no_subtree_check,async)
-        /srv/nfs/music ${home-network.virtual-network}(rw,no_subtree_check,async)
-        /srv/nfs/smb ${home-network.virtual-network}(rw,no_subtree_check,async)
-        /srv/nfs/other ${home-network.virtual-network}(rw,no_subtree_check,async)
-      '';
+      exports =
+        let
+          mkGenericEntry = opts: "${home-network.virtual-network}(${opts}) ${home-network.network}(${opts})";
+          mkEntry = mkGenericEntry "rw,no_subtree_check,async";
+        in
+        ''
+          /srv/nfs ${mkGenericEntry "rw,no_subtree_check,async,crossmnt,fsid=0"}
+          /srv/nfs/torrents ${mkGenericEntry "rw,no_subtree_check,async,all_squash,anonuid=${toString config.users.users.transmission.uid}"}
+          /srv/nfs/videos ${mkEntry}
+          /srv/nfs/cache  ${mkEntry}
+          /srv/nfs/img    ${mkEntry}
+          /srv/nfs/music  ${mkEntry}
+          /srv/nfs/smb    ${mkEntry}
+          /srv/nfs/other  ${mkEntry}
+        '';
     };
     settings = {
       nfsd.vers3 = false;
     };
   };
 
-  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 2049 ];
+  networking.firewall.allowedTCPPorts = [ 2049 ];
 }

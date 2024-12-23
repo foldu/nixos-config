@@ -1,7 +1,7 @@
-gateway = "192.168.1.1"
-network = "192.168.1.0/24"
+gateway = "192.168.8.1"
+network = "192.168.8.0/24"
 virtual-network = "100.64.0.0/10"
-dns = ["192.168.1.1"]
+dns = ["192.168.8.1"]
 
 [devices.jupiter]
 dns = "jupiter.home.5kw.li"
@@ -10,7 +10,7 @@ vip = "100.64.0.4"
 
 [devices.saturn]
 dns = "saturn.home.5kw.li"
-ip = "192.168.1.9"
+ip = "192.168.8.203"
 vip = "100.64.0.3"
 
 # [devices.ceres]
