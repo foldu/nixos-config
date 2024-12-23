@@ -30,7 +30,7 @@ pkgs: {
     browser = {
       pkg = null;
       command = "io.github.zen_browser.zen";
-      desktopFile = "io.github.zen_browser.zen.desktop";
+      desktopFile = "zen.desktop";
     };
     pdfViewer = {
       pkg = pkgs.evince;
