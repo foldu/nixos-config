@@ -12,7 +12,6 @@
     # editors
     # zed-editor
     tokei
-    minicom
     gdb
     # tools
     sqlite-interactive

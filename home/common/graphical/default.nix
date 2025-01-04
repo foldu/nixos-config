@@ -27,7 +27,8 @@
       imagemagick
       gnupg
       brave
-      inputs.zen-browser.packages.${pkgs.system}.specific
+      inputs.zen-browser.packages.${pkgs.system}.default
+      ghostty
       chromium
       pwgen
       d-spy
