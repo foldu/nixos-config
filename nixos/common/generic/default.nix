@@ -31,7 +31,6 @@
       inputs.home-manager.packages.${pkgs.system}.home-manager
     ]
     ++ (with pkgs; [
-      vopono
       wget
       curl
       jq
