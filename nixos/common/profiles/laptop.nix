@@ -12,7 +12,7 @@
     enable = true;
     dns = "systemd-resolved";
     wifi = {
-      backend = "wpa_supplicant";
+      backend = "iwd";
       powersave = true;
     };
   };
