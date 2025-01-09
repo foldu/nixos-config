@@ -2,6 +2,7 @@
 {
   imports = [
     ./rust.nix
+    ./python.nix
   ];
 
   systemd.user.sessionVariables = {
@@ -72,9 +73,6 @@
     stylua
     sumneko-lua-language-server
 
-    # python
-    basedpyright # based on what?
-    ruff-lsp
     # markdown
     marksman
     markdownlint-cli2

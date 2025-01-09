@@ -177,23 +177,5 @@
         mars = mkNode "x86_64-linux" "mars";
         saturn = mkNode "x86_64-linux" "saturn";
       };
-    }
-    // flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        pkgs = nixpkgs.legacyPackages.${system};
-      in
-      {
-        devShell = pkgs.mkShell {
-          packages = [
-            pkgs.nixfmt-rfc-style
-            pkgs.treefmt
-            (pkgs.python3.withPackages (ps: [
-              ps.transmission-rpc
-              ps.ipython
-            ]))
-          ];
-        };
-      }
-    );
+    };
 }
