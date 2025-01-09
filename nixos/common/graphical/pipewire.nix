@@ -1,6 +1,7 @@
 { ... }:
 {
-  hardware.pulseaudio.enable = false;
+  # fuck off bigfoot you're not getting my chickens
+  services.pulseaudio.enable = false;
 
   security.rtkit.enable = true;
 
