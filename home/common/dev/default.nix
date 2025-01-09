@@ -29,12 +29,15 @@
     clang-tools
     llvmPackages_latest.lld
     llvmPackages_latest.clang
+    cmake
+    neocmakelsp
+    cmake-lint
+    cmake-format
 
     # go
     go
     gopls
     black
-    ccls
 
     # typst
     typst
