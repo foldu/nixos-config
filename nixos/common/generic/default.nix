@@ -27,10 +27,11 @@
 
   environment.systemPackages =
     [
-      inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim
+      # inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim
       inputs.home-manager.packages.${pkgs.system}.home-manager
     ]
     ++ (with pkgs; [
+      neovim
       wget
       curl
       jq
