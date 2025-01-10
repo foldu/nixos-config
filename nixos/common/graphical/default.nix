@@ -33,7 +33,11 @@
 
   hardware.graphics.enable = true;
 
-  # boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+  # https://gitlab.freedesktop.org/drm/amd/-/issues/3693#note_2715660
+  boot.extraModulePackages = [
+    pkgs.amdgpu-module
+  ];
 
   services.mullvad-vpn = {
     enable = true;
