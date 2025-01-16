@@ -61,11 +61,6 @@
     fsType = "zfs";
   };
 
-  fileSystems."/srv/media/aux" = {
-    device = "Hietzing";
-    fsType = "zfs";
-  };
-
   fileSystems."/srv/media/nvme1/data" = {
     device = "nvme1/data";
     fsType = "zfs";
