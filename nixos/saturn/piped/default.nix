@@ -98,12 +98,9 @@ in
     containers = {
       frontend = {
         image = "docker.io/1337kavin/piped-frontend:latest";
-        cmd = [
-          "ash"
-          "-c"
-          "sed -i s/pipedapi.kavin.rocks/${backendHostname}/g /usr/share/nginx/html/assets/* && /docker-entrypoint.sh && nginx -g 'daemon off;'"
-        ];
         environment.BACKEND_HOSTNAME = backendHostname;
+        privileged = true;
+        extraOptions = [ "--cap-add=NET_BIND_SERVICE" ];
       };
 
       ytproxy = {
