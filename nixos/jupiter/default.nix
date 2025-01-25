@@ -16,6 +16,7 @@
     ../common/butter.nix
     ../common/graphical
     ../common/cashewnix-cache.nix
+    ../common/gitlab-runner.nix
 
     ./manual-hardware-configuration.nix
     ./docker.nix
