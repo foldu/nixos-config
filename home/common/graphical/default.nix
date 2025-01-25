@@ -7,6 +7,7 @@
     ./xdg-userdirs.nix
     ./xdg.nix
     ./yazi.nix
+    ./ghostty.nix
 
     inputs.pickwp.homeManagerModule
     inputs.atchr.homeManagerModule
@@ -28,7 +29,6 @@
       gnupg
       brave
       inputs.zen-browser.packages.${pkgs.system}.default
-      ghostty
       chromium
       pwgen
       d-spy
