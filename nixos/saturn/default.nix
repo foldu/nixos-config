@@ -13,7 +13,7 @@
     ./backups.nix
     ./file-server.nix
     ./gitea.nix
-    ./gitlab.nix
+    ./gitlab
     ./hydra.nix
     ./jellyfin.nix
     ./redlib

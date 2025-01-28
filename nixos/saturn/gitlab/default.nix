@@ -37,6 +37,19 @@
 
   users.groups.gitlab = { };
 
+  systemd.services.git-mirror-lab = {
+    path = [ pkgs.git ];
+    environment = {
+      STATE_DIR = "/var/gitlab/state/mirror-script";
+      SSH_KEY_FILE = "/var/secrets/gitlab/automation_lab";
+    };
+    script = builtins.readFile ./mirror.sh;
+    serviceConfig = {
+      User = "gitlab";
+    };
+    startAt = "*:0/10";
+  };
+
   services.caddy.extraConfig = ''
     lab.home.5kw.li {
       reverse_proxy unix//run/gitlab/gitlab-workhorse.socket
