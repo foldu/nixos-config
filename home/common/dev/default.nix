@@ -21,6 +21,7 @@
     just
     cookiecutter
     plantuml
+    glab
 
     # editor tools
     ast-grep
