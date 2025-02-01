@@ -26,6 +26,19 @@ while IFS=" " read -r repo_url repo_name; do
   else
     git clone --mirror "$repo_url" "$repo_name"
     (cd "$repo_name" && git config --add --local core.sshCommand "ssh -i $SSH_KEY_FILE" && git remote add lab "gitlab@lab.home.5kw.li:foldu/$repo_name.git")
+    curl --request POST \
+      --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+      --header 'Content-Type: application/json' \
+      --data-raw "$(
+        # FIXME: missing escaping for repo_name
+        cat <<EOF
+{
+  "name": "${repo_name}",
+  "visibility": "public"
+}
+EOF
+      )" \
+      https://lab.home.5kw.li/api/v4/projects
   fi
   (cd "$repo_name" && git push --all lab)
   sleep 5
