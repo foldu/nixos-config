@@ -14,7 +14,7 @@
     ./telegraf.nix
   ];
 
-  services.dbus.implementation = "broker";
+  services.dbus.implementation = "dbus";
 
   hardware.enableRedistributableFirmware = true;
 
