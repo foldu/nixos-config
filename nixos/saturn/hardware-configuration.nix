@@ -66,6 +66,16 @@
     fsType = "zfs";
   };
 
+  fileSystems."/srv/media/blub/data" = {
+    device = "blub/data";
+    fsType = "zfs";
+  };
+
+  fileSystems."/srv/media/blub/cache" = {
+    device = "blub/cache";
+    fsType = "zfs";
+  };
+
   swapDevices = [ { device = "/dev/disk/by-uuid/6963baa8-8979-4cd1-b740-7a06900a7b03"; } ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
