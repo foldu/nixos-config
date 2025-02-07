@@ -10,7 +10,7 @@
     user = "gitlab";
     group = "gitlab";
     registry = {
-      enable = true;
+      enable = false;
       package = pkgs.gitlab-container-registry;
       externalAddress = "container-registry.home.5kw.li";
       externalPort = 443;

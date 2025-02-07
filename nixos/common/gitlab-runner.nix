@@ -1,7 +1,6 @@
 { lib, pkgs, ... }:
 {
   boot.kernel.sysctl."net.ipv4.ip_forward" = true;
-  virtualisation.docker.enable = true;
   services.gitlab-runner = {
     enable = true;
     services = {
@@ -10,7 +9,7 @@
       nix = with lib; {
         # File should contain at least these two variables:
         # `CI_SERVER_URL`
-        # `REGISTRATION_TOKEN`
+        # `CI_SERVER_TOKEN`
         authenticationTokenConfigFile = "/var/secrets/gitlab-runner.env";
         dockerImage = "alpine";
         dockerVolumes = [
@@ -18,7 +17,8 @@
           "/nix/var/nix/db:/nix/var/nix/db:ro"
           "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
         ];
-        dockerDisableCache = true;
+        dockerDisableCache = false;
+        dockerPrivileged = true;
         preBuildScript = pkgs.writeScript "setup-container" ''
           mkdir -p -m 0755 /nix/var/log/nix/drvs
           mkdir -p -m 0755 /nix/var/nix/gcroots
@@ -29,9 +29,9 @@
           mkdir -p -m 1777 /nix/var/nix/profiles/per-user
           mkdir -p -m 0755 /nix/var/nix/profiles/per-user/root
           mkdir -p -m 0700 "$HOME/.nix-defexpr"
-          . ${pkgs.nix}/etc/profile.d/nix-daemon.sh
-          ${pkgs.nix}/bin/nix-channel --add https://nixos.org/channels/nixos-20.09 nixpkgs # 3
-          ${pkgs.nix}/bin/nix-channel --update nixpkgs
+
+          . ${pkgs.nix}/etc/profile.d/nix.sh
+
           ${pkgs.nix}/bin/nix-env -i ${
             concatStringsSep " " (
               with pkgs;

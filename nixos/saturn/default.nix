@@ -8,6 +8,7 @@
 
     ../common/zfs.nix
     ../common/cashewnix.nix
+    ../common/gitlab-runner.nix
 
     ./hardware-configuration.nix
     ./backups.nix
