@@ -29,6 +29,7 @@
     ./podman
     ./invidious.nix
     ./ffsync.nix
+    ./navidrome.nix
     "${inputs.homeserver-sekret}"
   ];
 
