@@ -89,7 +89,7 @@
       "/srv/nfs/videos" = bind "/srv/media/main/vid";
       "/srv/nfs/cache" = bind "/srv/media/cia/cache";
       "/srv/nfs/img" = bind "/srv/media/cia/data/img";
-      "/srv/nfs/music" = bind "/srv/media/cia/data/beets-lib";
+      "/srv/nfs/music" = bind "/srv/media/blub/data/music";
       "/srv/nfs/smb" = bind "/srv/media/main/smb";
       "/srv/nfs/other" = bind "/srv/media/main/other";
     };
