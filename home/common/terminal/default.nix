@@ -8,6 +8,7 @@
   xdg.configFile."src-manage/config.json".text = builtins.toJSON {
     config.src_dir = "~/src";
     hosts."git.home.5kw.li".flatten = true;
+    hosts."lab.home.5kw.li".flatten = true;
   };
 
   # programs.neovim = {
