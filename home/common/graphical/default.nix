@@ -34,6 +34,7 @@
       d-spy
       gimp
       streamlink
+      supersonic
       # temporarily needed until https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/merge_requests/97
       thunderbird
       newsflash
