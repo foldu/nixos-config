@@ -20,6 +20,7 @@
 
     ./manual-hardware-configuration.nix
     ./docker.nix
+    ./ollama.nix
   ];
 
   nix.gc.automatic = lib.mkForce false;

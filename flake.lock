@@ -695,6 +695,26 @@
         "url": "https://git.home.5kw.li/foldu/pickwp"
       }
     },
+    "quadlet-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1739316033,
+        "narHash": "sha256-yHBsu5I2GOTaMzqEYXfDWzEH+pTpNKp/Ew/8x+cVCZg=",
+        "owner": "SEIAROTg",
+        "repo": "quadlet-nix",
+        "rev": "31e4175bdc1cee453f66cada21f9dd6eb90e507f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SEIAROTg",
+        "repo": "quadlet-nix",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "atchr": "atchr",
@@ -714,6 +734,7 @@
           "nixpkgs"
         ],
         "pickwp": "pickwp",
+        "quadlet-nix": "quadlet-nix",
         "src-manage": "src-manage",
         "wpp-gtk": "wpp-gtk",
         "yazi": "yazi",

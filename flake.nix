@@ -84,6 +84,11 @@
     };
 
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
+
+    quadlet-nix = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:SEIAROTg/quadlet-nix";
+    };
   };
 
   outputs =
