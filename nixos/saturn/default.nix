@@ -30,6 +30,7 @@
     ./invidious.nix
     ./ffsync.nix
     ./navidrome.nix
+    ./open-webui.nix
     "${inputs.homeserver-sekret}"
   ];
 
