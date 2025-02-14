@@ -12,9 +12,7 @@
 
     pickwp = {
       type = "git";
-      url = "https://git.home.5kw.li/foldu/pickwp";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
+      url = "https://lab.home.5kw.li/foldu/pickwp";
     };
 
     nixos-hardware = {
@@ -22,7 +20,7 @@
     };
 
     crane = {
-      url = "github:ipetkov/crane";
+      url = "github:ipetkov/crane/v0.20.0";
     };
 
     atchr = {
@@ -41,10 +39,8 @@
 
     wpp-gtk = {
       type = "git";
-      url = "https://git.home.5kw.li/foldu/wpp-gtk";
+      url = "https://lab.home.5kw.li/foldu/wpp-gtk";
       inputs.flake-utils.follows = "flake-utils";
-      inputs.crane.follows = "crane";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     kanagawa-theme = {
