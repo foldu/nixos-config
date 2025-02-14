@@ -14,6 +14,7 @@
         ];
         volumes = [
           "/home/barnabas/ai/text/ollama:/root/.ollama"
+          "/home/barnabas/ai/text/models:/root/models"
         ];
         publishPorts = [
           "11434:11434"
