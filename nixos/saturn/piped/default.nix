@@ -5,7 +5,6 @@
   ...
 }:
 let
-  #internalIp = "10.88.0.42";
   backendHostname = "pipedapi.home.5kw.li";
   frontendHostname = "piped.home.5kw.li";
   ytproxyHostname = "ytproxy.home.5kw.li";
@@ -100,7 +99,7 @@ in
     in
     {
       containers = {
-        frontend.containerConfig = {
+        piped-frontend.containerConfig = {
           image = "docker.io/1337kavin/piped-frontend:latest";
           environments.BACKEND_HOSTNAME = backendHostname;
           addCapabilities = [ "NET_BIND_SERVICE" ];
@@ -108,7 +107,7 @@ in
           autoUpdate = "registry";
         };
 
-        ytproxy.containerConfig = {
+        piped-ytproxy.containerConfig = {
           image = "docker.io/1337kavin/piped-proxy:latest";
           environments.UDS = "1";
           volumes = [ "${ytproxySockdir}:/app/socket" ];
@@ -116,13 +115,20 @@ in
           autoUpdate = "registry";
         };
 
-        backend.containerConfig = {
+        piped-backend.containerConfig = {
           image = "docker.io/1337kavin/piped:latest";
           volumes = [ "${./piped.properties}:/app/config.properties:ro" ];
           pod = pods.piped-pott.ref;
           autoUpdate = "registry";
         };
+
+        piped-bg-helper.containerConfig = {
+          image = "docker.io/1337kavin/bg-helper-server:latest";
+          pod = pods.piped-pott.ref;
+          autoUpdate = "registry";
+        };
       };
+
       pods.piped-pott.podConfig = {
         publishPorts = [
           "${backendPort}:8080"
