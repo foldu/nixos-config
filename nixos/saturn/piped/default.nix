@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  config,
+  pkgs,
+  ...
+}:
 let
   #internalIp = "10.88.0.42";
   backendHostname = "pipedapi.home.5kw.li";
@@ -89,32 +94,43 @@ in
     }
   '';
 
-  podman-pods.pods.piped = {
-    ip = internalIp;
-    ports = [
-      "${backendPort}:8080"
-      "${frontendPort}:80"
-    ];
-    containers = {
-      frontend = {
-        image = "docker.io/1337kavin/piped-frontend:latest";
-        environment.BACKEND_HOSTNAME = backendHostname;
-        privileged = true;
-        extraOptions = [ "--cap-add=NET_BIND_SERVICE" ];
-      };
+  virtualisation.quadlet =
+    let
+      inherit (config.virtualisation.quadlet) pods;
+    in
+    {
+      containers = {
+        frontend.containerConfig = {
+          image = "docker.io/1337kavin/piped-frontend:latest";
+          environments.BACKEND_HOSTNAME = backendHostname;
+          addCapabilities = [ "NET_BIND_SERVICE" ];
+          pod = pods.piped-pott.ref;
+          autoUpdate = "registry";
+        };
 
-      ytproxy = {
-        image = "docker.io/1337kavin/piped-proxy:latest";
-        environment.UDS = "1";
-        volumes = [ "${ytproxySockdir}:/app/socket" ];
-      };
+        ytproxy.containerConfig = {
+          image = "docker.io/1337kavin/piped-proxy:latest";
+          environments.UDS = "1";
+          volumes = [ "${ytproxySockdir}:/app/socket" ];
+          pod = pods.piped-pott.ref;
+          autoUpdate = "registry";
+        };
 
-      backend = {
-        image = "docker.io/1337kavin/piped:latest";
-        volumes = [ "${./piped.properties}:/app/config.properties:ro" ];
+        backend.containerConfig = {
+          image = "docker.io/1337kavin/piped:latest";
+          volumes = [ "${./piped.properties}:/app/config.properties:ro" ];
+          pod = pods.piped-pott.ref;
+          autoUpdate = "registry";
+        };
+      };
+      pods.piped-pott.podConfig = {
+        publishPorts = [
+          "${backendPort}:8080"
+          "${frontendPort}:80"
+        ];
+        ip = internalIp;
       };
     };
-  };
 
   services.postgresql = {
     authentication = ''
