@@ -15,7 +15,6 @@
     ./file-server.nix
     ./gitea.nix
     ./gitlab
-    ./hydra.nix
     ./jellyfin.nix
     ./redlib
     ./nitter
