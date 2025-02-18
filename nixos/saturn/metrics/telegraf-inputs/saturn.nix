@@ -40,6 +40,36 @@
         response_string_match = "Miniflux";
         tags.host = "saturn";
       }
+      {
+        urls = [ "https://reddit.home.5kw.li" ];
+        follow_redirects = true;
+        response_string_match = "Redlib";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://lab.home.5kw.li" ];
+        follow_redirects = true;
+        response_string_match = "gitlab";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://music.home.5kw.li" ];
+        follow_redirects = true;
+        response_string_match = "Navidrome";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://music.home.5kw.li" ];
+        follow_redirects = true;
+        response_string_match = "Navidrome";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://ai.home.5kw.li" ];
+        follow_redirects = true;
+        response_string_match = "Open WebUI";
+        tags.host = "saturn";
+      }
     ];
   };
 }
