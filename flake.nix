@@ -33,7 +33,7 @@
 
     homeserver-sekret = {
       type = "git";
-      url = "https://git.home.5kw.li/foldu/sekret";
+      url = "https://lab.home.5kw.li/foldu/sekret";
       flake = false;
     };
 
