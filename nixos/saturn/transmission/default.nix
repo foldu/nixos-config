@@ -23,9 +23,9 @@ in
   };
   users.groups.transmission = { };
 
-  virtualisation.oci-containers.containers.transmission = {
+  virtualisation.quadlet.containers.transmission.containerConfig = {
     image = "docker.io/haugene/transmission-openvpn";
-    environment = {
+    environments = {
       PUID = toString config.users.users.transmission.uid;
       PGID = toString config.users.groups.transmission.gid;
       TRANSMISSION_RPC_USERNAME = "barnabas";
@@ -33,16 +33,14 @@ in
       TRANSMISSION_INCOMPLETE_DIR = "/data/.incomplete";
       TRANSMISSION_RPC_PORT = rpcPort;
     };
-    ports = [ "${rpcPort}:${rpcPort}" ];
+    publishPorts = [ "${rpcPort}:${rpcPort}" ];
     volumes = [
       "${configDir}:/config"
       "${torrentDir}:/data"
     ];
-    extraOptions = [
-      "--privileged"
-      "--cap-add=NET_ADMIN"
-      "--env-file=/var/secrets/transmission.env"
-    ];
+    environmentFiles = [ "/var/secrets/transmission.env" ];
+    addCapabilities = [ "NET_ADMIN" ];
+    podmanArgs = [ "--privileged" ];
   };
 
   users.users.barnabas.extraGroups = [ "transmission" ];
