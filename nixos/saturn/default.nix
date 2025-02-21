@@ -33,6 +33,8 @@
     "${inputs.homeserver-sekret}"
   ];
 
+  services.tailscale.extraSetFlags = [ "--advertise-exit-node" ];
+
   networking.hostName = "saturn";
 
   boot.loader.grub = {
