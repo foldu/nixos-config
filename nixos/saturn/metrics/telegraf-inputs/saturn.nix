@@ -4,9 +4,7 @@
     http_response = [
       {
         urls = [ "https://torrent.home.5kw.li/transmission/web" ];
-        # it's transmission, will try to set some header which you're supposed to send back
-        # it sends a 301 now huh
-        response_status_code = 301;
+        response_status_code = 401;
         tags.host = "saturn";
       }
       {
@@ -50,12 +48,6 @@
         urls = [ "https://lab.home.5kw.li" ];
         follow_redirects = true;
         response_string_match = "gitlab";
-        tags.host = "saturn";
-      }
-      {
-        urls = [ "https://music.home.5kw.li" ];
-        follow_redirects = true;
-        response_string_match = "Navidrome";
         tags.host = "saturn";
       }
       {
