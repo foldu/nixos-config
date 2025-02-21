@@ -30,10 +30,9 @@
     ./ffsync.nix
     ./navidrome.nix
     ./open-webui.nix
+    ./tailscale-exit-node.nix
     "${inputs.homeserver-sekret}"
   ];
-
-  services.tailscale.extraSetFlags = [ "--advertise-exit-node" ];
 
   networking.hostName = "saturn";
 
