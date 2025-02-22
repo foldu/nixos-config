@@ -12,6 +12,7 @@
     ./secrets.nix
     ./ssh.nix
     ./telegraf.nix
+    ./faster-man-page-generation.nix
   ];
 
   services.dbus.implementation = "dbus";
