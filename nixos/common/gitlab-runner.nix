@@ -16,6 +16,9 @@
           "/nix/store:/nix/store:ro"
           "/nix/var/nix/db:/nix/var/nix/db:ro"
           "/nix/var/nix/daemon-socket:/nix/var/nix/daemon-socket:ro"
+          "/etc/nix/nix.conf:/etc/nix/nix.conf:ro"
+          "/etc/ssl/certs:/etc/ssl/certs:ro"
+          "/etc/static/ssl/certs:/etc/static/ssl/certs:ro"
         ];
         dockerDisableCache = false;
         dockerPrivileged = true;
@@ -30,14 +33,13 @@
           mkdir -p -m 0755 /nix/var/nix/profiles/per-user/root
           mkdir -p -m 0700 "$HOME/.nix-defexpr"
 
-          . ${pkgs.nix}/etc/profile.d/nix.sh
+          . ${pkgs.lix}/etc/profile.d/nix.sh
 
-          ${pkgs.nix}/bin/nix-env -i ${
+          ${pkgs.lix}/bin/nix-env -i ${
             concatStringsSep " " (
               with pkgs;
               [
-                nix
-                cacert
+                lix
                 git
                 openssh
               ]
@@ -49,7 +51,6 @@
           USER = "root";
           NIX_REMOTE = "daemon";
           PATH = "/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/bin:/sbin:/usr/bin:/usr/sbin";
-          NIX_SSL_CERT_FILE = "/nix/var/nix/profiles/default/etc/ssl/certs/ca-bundle.crt";
         };
       };
     };
