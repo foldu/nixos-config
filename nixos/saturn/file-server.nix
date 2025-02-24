@@ -57,7 +57,7 @@
     # '';
 
     shares.trash = {
-      path = "/srv/media/main/smb";
+      path = "/srv/media/nvme1/data/windows";
       browseable = "yes";
       "valid users" = config.users.users.wangblows.name;
       "force user" = config.users.users.barnabas.name;
@@ -90,7 +90,7 @@
       "/srv/nfs/cache" = bind "/srv/media/cia/cache";
       "/srv/nfs/img" = bind "/srv/media/cia/data/img";
       "/srv/nfs/music" = bind "/srv/media/blub/data/music";
-      "/srv/nfs/smb" = bind "/srv/media/main/smb";
+      "/srv/nfs/smb" = bind "/srv/media/nvme1/data/windows";
       "/srv/nfs/other" = bind "/srv/media/main/other";
     };
 
