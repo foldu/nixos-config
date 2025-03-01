@@ -9,7 +9,7 @@
     ./yazi.nix
     ./ghostty.nix
 
-    inputs.pickwp.homeManagerModule
+    inputs.pickwp.homeManagerModules.pickwp
     inputs.atchr.homeManagerModule
   ];
 
