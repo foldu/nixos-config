@@ -8,6 +8,7 @@
     ./xdg.nix
     ./yazi.nix
     ./ghostty.nix
+    ./niri.nix
 
     inputs.pickwp.homeManagerModules.pickwp
     inputs.atchr.homeManagerModule
