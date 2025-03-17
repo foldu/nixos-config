@@ -19,7 +19,10 @@
     ./niri.nix
   ];
 
-  programs.kdeconnect.enable = true;
+  programs.kdeconnect = {
+    enable = true;
+    package = pkgs.kdePackages.kdeconnect-kde;
+  };
 
   documentation = {
     dev.enable = true;
