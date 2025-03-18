@@ -2,13 +2,13 @@
 {
   qt = {
     enable = true;
-    style = "adwaita-dark";
+    style = "kvantum";
+    platformTheme = "qt5ct";
   };
   #programs.qt5ct.enable = true;
   # environment.sessionVariables."QT_QPA_PLATFORM" = "xcb";
-  #environment.systemPackages = [
-  #  pkgs.breeze-gtk
-  #  pkgs.breeze-icons
-  #  pkgs.breeze-gtk
-  #];
+  environment.systemPackages = [
+    pkgs.kdePackages.breeze-icons
+    pkgs.kdePackages.breeze
+  ];
 }
