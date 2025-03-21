@@ -31,6 +31,7 @@
     ./navidrome.nix
     ./open-webui.nix
     ./tailscale-exit-node.nix
+    ./home-assistant.nix
     "${inputs.homeserver-sekret}"
   ];
 
