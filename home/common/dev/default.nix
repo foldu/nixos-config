@@ -66,6 +66,9 @@
     nodePackages.typescript-language-server
     nodePackages.eslint
     nodePackages.vscode-langservers-extracted
+    vue-language-server
+    vtsls
+    biome
 
     # yaml
     nodePackages.yaml-language-server
