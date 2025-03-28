@@ -67,6 +67,7 @@
     nodePackages.eslint
     nodePackages.vscode-langservers-extracted
     vue-language-server
+    nodejs
     vtsls
     biome
 
