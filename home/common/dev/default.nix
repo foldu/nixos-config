@@ -68,6 +68,7 @@
     nodePackages.vscode-langservers-extracted
     vue-language-server
     nodejs
+    bun
     vtsls
     biome
 
