@@ -32,6 +32,7 @@
     ./open-webui.nix
     ./tailscale-exit-node.nix
     ./home-assistant.nix
+    ./lldap.nix
     "${inputs.homeserver-sekret}"
   ];
 
