@@ -29,8 +29,8 @@ pkgs: {
   apps = {
     browser = {
       pkg = null;
-      command = "io.github.zen_browser.zen";
-      desktopFile = "zen.desktop";
+      command = "zen";
+      desktopFile = "zen-beta.desktop";
     };
     pdfViewer = {
       pkg = pkgs.evince;
