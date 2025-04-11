@@ -402,6 +402,24 @@
         "type": "github"
       }
     },
+    "flake-utils_8": {
+      "inputs": {
+        "systems": "systems_9"
+      },
+      "locked": {
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
     "git-hooks": {
       "inputs": {
         "flake-compat": "flake-compat_3",
@@ -1094,6 +1112,21 @@
         "type": "github"
       }
     },
+    "systems_9": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
     "treefmt-nix": {
       "inputs": {
         "nixpkgs": [
@@ -1136,17 +1169,15 @@
     "wpp-gtk": {
       "inputs": {
         "crane": "crane_5",
-        "flake-utils": [
-          "flake-utils"
-        ],
+        "flake-utils": "flake-utils_7",
         "nixpkgs": "nixpkgs_6"
       },
       "locked": {
-        "lastModified": 1744391484,
-        "narHash": "sha256-UnlFVo3yWw5KVPRt6JVwh1j3J5LOqB5DYlDbYqjYykM=",
+        "lastModified": 1744391659,
+        "narHash": "sha256-th0nvSZv7oVZnMZhAp+sH1L675Baw4KgHLpLBPPJyvc=",
         "ref": "refs/heads/master",
-        "rev": "b942dccd8041e05ffc7ed50ebdc49c610451d066",
-        "revCount": 80,
+        "rev": "a154ca94644284f540d29eb7e3092381578162b2",
+        "revCount": 81,
         "type": "git",
         "url": "https://lab.home.5kw.li/foldu/wpp-gtk"
       },
@@ -1190,7 +1221,7 @@
     },
     "yazi": {
       "inputs": {
-        "flake-utils": "flake-utils_7",
+        "flake-utils": "flake-utils_8",
         "nixpkgs": [
           "nixpkgs"
         ],
