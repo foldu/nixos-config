@@ -17,7 +17,7 @@
   home.packages =
     [
       inputs.nix-stuff.packages.${pkgs.system}.eunzip
-      # inputs.wpp-gtk.packages.${pkgs.system}.wpp
+      inputs.wpp-gtk.packages.${pkgs.system}.wpp
     ]
     ++ (with pkgs; [
       steam-run

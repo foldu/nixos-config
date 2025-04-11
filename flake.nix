@@ -40,7 +40,6 @@
     wpp-gtk = {
       type = "git";
       url = "https://lab.home.5kw.li/foldu/wpp-gtk";
-      inputs.flake-utils.follows = "flake-utils";
     };
 
     kanagawa-theme = {
