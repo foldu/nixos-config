@@ -67,6 +67,7 @@
     nodePackages.eslint
     nodePackages.vscode-langservers-extracted
     vue-language-server
+    tailwindcss-language-server
     nodejs
     bun
     vtsls
