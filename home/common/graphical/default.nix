@@ -9,6 +9,7 @@
     ./yazi.nix
     ./ghostty.nix
     ./niri.nix
+    ./zen-browser.nix
 
     inputs.pickwp.homeManagerModules.pickwp
     inputs.atchr.homeManagerModule
@@ -29,7 +30,6 @@
       imagemagick
       gnupg
       brave
-      inputs.zen-browser.packages.${pkgs.system}.default
       chromium
       pwgen
       d-spy
