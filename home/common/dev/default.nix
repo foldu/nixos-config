@@ -36,6 +36,9 @@
     cmake-lint
     cmake-format
 
+    # slint
+    slint-lsp
+
     # go
     go
     gopls
