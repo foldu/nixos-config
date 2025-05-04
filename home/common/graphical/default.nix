@@ -12,7 +12,6 @@
     ./zen-browser.nix
 
     inputs.pickwp.homeManagerModules.pickwp
-    inputs.atchr.homeManagerModule
   ];
 
   home.packages =
@@ -45,6 +44,4 @@
     ]);
 
   services.pickwp.enable = true;
-
-  services.wrrr.enable = true;
 }

@@ -33,6 +33,7 @@
     ./tailscale-exit-node.nix
     ./home-assistant.nix
     ./lldap.nix
+    ./wrrr.nix
     "${inputs.homeserver-sekret}"
   ];
 
