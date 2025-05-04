@@ -24,6 +24,8 @@
     MAKEFLAGS = "-j 12";
   };
 
+  programs.nix-ld.enable = true;
+
   networking.nftables = {
     enable = true;
     tables.excludeTraffic = {
