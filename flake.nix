@@ -24,11 +24,11 @@
     };
 
     atchr = {
-      type = "git";
-      url = "https://git.home.5kw.li/foldu/atchr";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.crane.follows = "crane";
-      inputs.flake-utils.follows = "flake-utils";
+      type = "gitlab";
+      owner = "foldu";
+      repo = "atchr";
+      ref = "master";
+      host = "lab.home.5kw.li";
     };
 
     homeserver-sekret = {
