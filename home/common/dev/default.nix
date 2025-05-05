@@ -1,12 +1,43 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
+let
+  postgresDir = "/home/barnabas/.local/share/postgresql";
+in
 {
   imports = [
     ./rust.nix
     ./python.nix
+    inputs.quadlet-nix.homeManagerModules.quadlet
   ];
 
   systemd.user.sessionVariables = {
     EDITOR = "nvim";
+  };
+
+  systemd.user.tmpfiles.rules = [
+    "d ${postgresDir} 755 barnabas users"
+  ];
+
+  services.podman = {
+    enable = true;
+    autoUpdate.enable = true;
+  };
+
+  virtualisation.quadlet.containers.postgres-dev = {
+    autoStart = true;
+    containerConfig = {
+      image = "docker.io/postgres:17";
+      volumes = [
+        "${postgresDir}:/var/lib/postgresql/data"
+      ];
+      environments = {
+        POSTGRES_PASSWORD = "changeme";
+      };
+      publishPorts = [
+        "127.0.0.1:5432:5432"
+      ];
+      autoUpdate = "registry";
+      userns = "keep-id";
+    };
   };
 
   home.packages = with pkgs; [
