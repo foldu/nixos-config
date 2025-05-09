@@ -56,7 +56,7 @@
 
   nix = {
     # package = pkgs.nixVersions.latest;
-    package = pkgs.lix;
+    package = pkgs.lixPackageSets.latest.lix;
     settings = {
       experimental-features = [
         "nix-command"
