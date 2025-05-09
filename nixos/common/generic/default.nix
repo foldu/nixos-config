@@ -13,6 +13,7 @@
     ./ssh.nix
     ./telegraf.nix
     ./faster-man-page-generation.nix
+    ./no-telemetry.nix
   ];
 
   services.dbus.implementation = "dbus";
