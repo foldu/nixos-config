@@ -55,11 +55,6 @@
       };
     };
 
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     yazi = {
       url = "github:sxyazi/yazi";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -95,7 +90,6 @@
       self,
       nixpkgs,
       home-manager,
-      deploy-rs,
       cashewnix,
       flake-utils,
       ...
@@ -130,28 +124,6 @@
               ;
           };
         };
-      mkNode = arch: name: {
-        hostname = home-network.devices.${name}.dns;
-        fastConnection = true;
-        magicRollback = false;
-        interactiveSudo = true;
-        profilesOrder = [
-          "system"
-          "home"
-        ];
-        profiles = {
-          system = {
-            sshUser = "barnabas";
-            path = deploy-rs.lib.${arch}.activate.nixos self.nixosConfigurations.${name};
-            user = "root";
-          };
-          home = {
-            sshUser = "barnabas";
-            path = deploy-rs.lib.${arch}.activate.home-manager self.homeConfigurations."barnabas@${name}";
-            user = "barnabas";
-          };
-        };
-      };
     in
     {
       homeConfigurations = {
@@ -172,14 +144,5 @@
       };
       overlays = import ./overlays { inherit inputs; };
       lib = import ./lib { inherit (nixpkgs) lib; };
-
-      # enable this if you want to evaluate all systems at once lol
-      # checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) deploy-rs.lib;
-      deploy.nodes = {
-        ceres = mkNode "aarch64-linux" "ceres";
-        jupiter = mkNode "x86_64-linux" "jupiter";
-        mars = mkNode "x86_64-linux" "mars";
-        saturn = mkNode "x86_64-linux" "saturn";
-      };
     };
 }
