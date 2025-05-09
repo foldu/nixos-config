@@ -36,6 +36,7 @@ in
         ibm-plex
         fira-mono
         nerd-fonts._0xproto
+        maple-mono.NL-NF-CN-unhinted
       ]
       ++ lib.mapAttrsToList (_: f: f.pkg) configSettings.font;
   };

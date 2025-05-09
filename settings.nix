@@ -1,13 +1,13 @@
 pkgs: {
   font = {
     monospace = {
-      pkg = pkgs.fira-mono;
-      name = "Fira Mono";
+      pkg = pkgs.maple-mono.NL-NF-CN-unhinted;
+      name = "Maple Mono";
       size = 12;
     };
     devMonospace = {
-      pkg = pkgs.fira-mono;
-      name = "Fira Mono";
+      pkg = pkgs.maple-mono.NL-NF-CN-unhinted;
+      name = "Maple Mono";
       size = 12;
     };
     documents = {
