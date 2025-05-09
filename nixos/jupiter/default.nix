@@ -23,6 +23,8 @@
     ./ollama.nix
   ];
 
+  programs.nix-ld.enable = true;
+
   nix.gc.automatic = lib.mkForce false;
 
   environment.systemPackages = [ inputs.deploy-rs.packages.${pkgs.system}.deploy-rs ];
