@@ -2,12 +2,12 @@ pkgs: {
   font = {
     monospace = {
       pkg = pkgs.maple-mono.NL-NF-CN-unhinted;
-      name = "Maple Mono";
+      name = "Maple Mono NL NF CN";
       size = 12;
     };
     devMonospace = {
       pkg = pkgs.maple-mono.NL-NF-CN-unhinted;
-      name = "Maple Mono";
+      name = "Maple Mono NL NF CN";
       size = 12;
     };
     documents = {

@@ -66,7 +66,7 @@
         document-font-name = "Roboto Slab 11";
         color-scheme = "prefer-dark";
         #font-name = "Fira Sans Semi-Light 10";
-        monospace-font-name = "Maple Mono 11";
+        monospace-font-name = "Maple Mono NL NF CN 11";
 
         show-battery-percentage = true;
 
