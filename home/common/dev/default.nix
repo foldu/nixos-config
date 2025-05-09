@@ -42,9 +42,8 @@ in
 
   home.packages = with pkgs; [
     # editors
+    neovide
     # zed-editor
-    tokei
-    gdb
     # tools
     gnumake
     just
@@ -52,6 +51,7 @@ in
     plantuml
     glab
     gitu
+    tokei
 
     # editor tools
     ast-grep
