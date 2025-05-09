@@ -7,7 +7,7 @@ in
     ./rust.nix
     ./python.nix
     inputs.quadlet-nix.homeManagerModules.quadlet
-    ./powershell.nix
+    ./powershell
   ];
 
   systemd.user.sessionVariables = {
