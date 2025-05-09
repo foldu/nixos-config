@@ -46,7 +46,6 @@ in
     tokei
     gdb
     # tools
-    sqlite-interactive
     yarn
     gnumake
     just
@@ -67,13 +66,13 @@ in
     cmake-lint
     cmake-format
 
-    # slint
-    slint-lsp
+    # sql
+    sqlfluff
+    sqlite-interactive
 
     # go
     go
     gopls
-    black
 
     # typst
     typst
@@ -105,7 +104,6 @@ in
     nodejs
     bun
     vtsls
-    biome
 
     # yaml
     nodePackages.yaml-language-server
