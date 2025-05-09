@@ -46,12 +46,12 @@ in
     tokei
     gdb
     # tools
-    yarn
     gnumake
     just
     cookiecutter
     plantuml
     glab
+    gitu
 
     # editor tools
     ast-grep
