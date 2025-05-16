@@ -1,7 +1,7 @@
 { ... }:
 {
   programs.beets = {
-    enable = false;
+    enable = true;
     settings = {
       directory = "/run/media/beets-lib";
       library = "~/.local/share/beets/library.db";
