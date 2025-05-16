@@ -17,7 +17,6 @@
     ./gitlab
     ./jellyfin.nix
     ./redlib
-    ./nitter
     ./step-ca.nix
     ./transmission
     ./vaultwarden.nix
