@@ -27,6 +27,9 @@
       secretFile = "/var/secrets/gitlab/secret";
       otpFile = "/var/secrets/gitlab/otp";
       jwsFile = "/var/secrets/gitlab/jws";
+      activeRecordPrimaryKeyFile = "/var/secrets/gitlab/active_record_primary_key";
+      activeRecordDeterministicKeyFile = "/var/secrets/gitlab/active_record_deterministic_key";
+      activeRecordSaltFile = "/var/secrets/gitlab/active_record_salt";
     };
   };
 
