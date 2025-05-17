@@ -10,19 +10,16 @@
       global = {
 
         # allow only local subnet
-        "hosts allow" = "192.168.8.0/24 localhost";
+        "hosts allow" = "192.168.8.0/24 100.64.0.0/24 localhost";
         "hosts deny" = "0.0.0.0/0";
-
-        # allow executing files even without +x perm
-        "acl allow execute always" = "yes";
 
         "min protocol" = "SMB3";
 
         "guest account" = "nobody";
         "map to guest" = "bad user";
 
-        # enable encryption
-        "smb encrypt" = "desired";
+        # disable encryption for FAST
+        "smb encrypt" = "no";
 
         # disable printer sharing so samba doesn't spam journald
         "load printers" = "no";
@@ -33,6 +30,8 @@
       };
 
       trash = {
+        # allow executing files even without +x perm
+        "acl allow execute always" = "yes";
         path = "/srv/media/nvme1/data/windows";
         browseable = "yes";
         "valid users" = config.users.users.wangblows.name;
@@ -40,30 +39,31 @@
         public = "no";
         writeable = "yes";
       };
+
+      music = {
+        path = "/srv/media/blub/data/music";
+        browseable = "yes";
+        "valid users" = config.users.users.barnabas.name;
+        "force user" = config.users.users.barnabas.name;
+        public = "no";
+        writeable = "yes";
+      };
     };
-    # extraConfig = ''
-    #   # allow only local subnet
-    #   hosts allow = 10.20.30.0/24 192.168.1.0/24 localhost
-    #   hosts deny = 0.0.0.0/0
-    #
-    #   # allow executing files even without +x perm
-    #   acl allow execute always = yes
-    #
-    #   min protocol = SMB3
-    #
-    #   guest account = nobody
-    #   map to guest = bad user
-    #
-    #   # enable encryption
-    #   smb encrypt = desired
-    #
-    #   # disable printer sharing so samba doesn't spam journald
-    #   load printers = no
-    #   printing = bsd
-    #   printcap name = /dev/null
-    #   disable spoolss = yes
-    #   show add printer wizard = no
-    # '';
+  };
+
+  services.samba-wsdd = {
+    enable = true;
+    openFirewall = true;
+  };
+
+  services.avahi = {
+    publish.enable = true;
+    publish.userServices = true;
+    # ^^ Needed to allow samba to automatically register mDNS records (without the need for an `extraServiceFile`
+    nssmdns4 = true;
+    # ^^ Not one hundred percent sure if this is needed- if it aint broke, don't fix it
+    enable = true;
+    openFirewall = true;
   };
 
   systemd.tmpfiles.rules = [

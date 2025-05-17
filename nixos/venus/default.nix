@@ -55,5 +55,9 @@
 
   services.desktopManager.cosmic.enable = true;
 
+  users.users.barnabas.openssh.authorizedKeys.keys = [
+    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC7S1RuayMtU1b9g6rLIcYFvdhTFphIZiK2RdeV4fYNP venus.home.5kw.li"
+  ];
+
   system.stateVersion = "24.05"; # Did you read the comment?
 }

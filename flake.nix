@@ -3,6 +3,8 @@
     #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
+    sops-nix.url = "github:Mic92/sops-nix";
+
     flake-utils.url = "github:numtide/flake-utils";
 
     home-manager = {
@@ -92,6 +94,7 @@
       home-manager,
       cashewnix,
       flake-utils,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -114,7 +117,10 @@
       mkNixos =
         modules:
         nixpkgs.lib.nixosSystem {
-          modules = modules ++ [ cashewnix.nixosModules.cashewnix ];
+          modules = modules ++ [
+            cashewnix.nixosModules.cashewnix
+            sops-nix.nixosModules.sops
+          ];
           specialArgs = {
             inherit
               inputs

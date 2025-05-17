@@ -14,6 +14,7 @@
     ./telegraf.nix
     ./faster-man-page-generation.nix
     ./no-telemetry.nix
+    ./sops.nix
   ];
 
   services.dbus.implementation = "dbus";
@@ -42,7 +43,6 @@
       fd
       ripgrep
       file
-      helix
     ]);
 
   programs.nh = {

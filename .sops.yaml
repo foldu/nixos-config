@@ -1,0 +1,13 @@
+keys:
+  - &admin_barnabas age14yat0hyq3w0ahkzetdw9t9q28x2pe3x4e27qs2kw9e968frdec3sx0ntr7
+  - &server_jupiter age1f238rql2gzxsk726swhtgflsa7a5emt37flzwe2qk6lakem583vs40430l
+  - &server_saturn age1gaydqjxf7xc7atmnzt229vyaedtfhqj4lxuuh6nj8q8flh8nysjq6p5npl
+  - &server_venus age14jhnmvmemu20ek0hflzdrp3t7qz7q69l0zzsfjpu86tk7ped650qrwlvk0
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *admin_barnabas
+          - *server_jupiter
+          - *server_saturn
+          - *server_venus
