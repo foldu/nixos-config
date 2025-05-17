@@ -27,6 +27,16 @@
         "printcap name" = "/dev/null";
         "disable spoolss" = "yes";
         "show add printer wizard" = "no";
+
+        # don't map the stupid windows bits
+        "map archive" = "no";
+        "map system" = "no";
+        "map hidden" = "no";
+        "unix extensions" = "no";
+
+        "mangled names" = "no";
+        "dos charset" = "CP850";
+        "unix charset" = "UTF-8";
       };
 
       trash = {
@@ -42,6 +52,33 @@
 
       music = {
         path = "/srv/media/blub/data/music";
+        browseable = "yes";
+        "valid users" = config.users.users.barnabas.name;
+        "force user" = config.users.users.barnabas.name;
+        public = "no";
+        writeable = "yes";
+      };
+
+      torrents = {
+        path = "/srv/media/nvme1/data/torrents";
+        browseable = "yes";
+        "valid users" = config.users.users.barnabas.name;
+        "force user" = config.users.users.barnabas.name;
+        public = "no";
+        writeable = "yes";
+      };
+
+      other = {
+        path = "/srv/media/main/other";
+        browseable = "yes";
+        "valid users" = config.users.users.barnabas.name;
+        "force user" = config.users.users.barnabas.name;
+        public = "no";
+        writeable = "yes";
+      };
+
+      cache = {
+        path = "/srv/media/cia/cache";
         browseable = "yes";
         "valid users" = config.users.users.barnabas.name;
         "force user" = config.users.users.barnabas.name;

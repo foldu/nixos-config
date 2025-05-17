@@ -3,7 +3,7 @@
   programs.beets = {
     enable = true;
     settings = {
-      directory = "/run/media/beets-lib";
+      directory = "/run/media/barnabas/music";
       library = "~/.local/share/beets/library.db";
       plugins = [
         "lastgenre"

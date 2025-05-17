@@ -3,7 +3,7 @@
   services.navidrome = {
     enable = true;
     settings = {
-      MusicFolder = "/srv/nfs/music";
+      MusicFolder = "/srv/media/blub/data/music";
     };
   };
 
