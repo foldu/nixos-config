@@ -31,6 +31,15 @@
         "disable spoolss" = "yes";
         "show add printer wizard" = "no";
       };
+
+      trash = {
+        path = "/srv/media/nvme1/data/windows";
+        browseable = "yes";
+        "valid users" = config.users.users.wangblows.name;
+        "force user" = config.users.users.barnabas.name;
+        public = "no";
+        writeable = "yes";
+      };
     };
     # extraConfig = ''
     #   # allow only local subnet
@@ -55,15 +64,6 @@
     #   disable spoolss = yes
     #   show add printer wizard = no
     # '';
-
-    shares.trash = {
-      path = "/srv/media/nvme1/data/windows";
-      browseable = "yes";
-      "valid users" = config.users.users.wangblows.name;
-      "force user" = config.users.users.barnabas.name;
-      public = "no";
-      writeable = "yes";
-    };
   };
 
   systemd.tmpfiles.rules = [
