@@ -3,7 +3,10 @@
     #nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     flake-utils.url = "github:numtide/flake-utils";
 
@@ -78,7 +81,6 @@
     zen-browser.url = "github:0xc000022070/zen-browser-flake";
 
     quadlet-nix = {
-      inputs.nixpkgs.follows = "nixpkgs";
       url = "github:SEIAROTg/quadlet-nix";
     };
 
