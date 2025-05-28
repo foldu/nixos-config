@@ -16,7 +16,6 @@
     ./game-devices.nix
     inputs.nixos-cosmic.nixosModules.default
     ./cosmic.nix
-    ./niri.nix
     ./samba.nix
   ];
 

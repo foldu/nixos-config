@@ -8,7 +8,6 @@
     ./xdg.nix
     ./yazi.nix
     ./ghostty.nix
-    ./niri.nix
     ./zen-browser.nix
 
     inputs.pickwp.homeManagerModules.pickwp

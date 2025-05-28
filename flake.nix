@@ -83,10 +83,6 @@
     quadlet-nix = {
       url = "github:SEIAROTg/quadlet-nix";
     };
-
-    niri-flake = {
-      url = "github:sodiboo/niri-flake";
-    };
   };
 
   outputs =
