@@ -1,6 +1,6 @@
 { config, home-network, ... }:
 {
-  users.users.wangblows.isNormalUser = true;
+  users.users.Luser.isNormalUser = true;
   services.samba = {
     enable = true;
 
@@ -44,7 +44,7 @@
         "acl allow execute always" = "yes";
         path = "/srv/media/nvme1/data/windows";
         browseable = "yes";
-        "valid users" = config.users.users.wangblows.name;
+        "valid users" = "Luser";
         "force user" = config.users.users.barnabas.name;
         public = "no";
         writeable = "yes";
