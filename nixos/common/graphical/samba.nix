@@ -14,7 +14,9 @@ let
     options = [
       "x-systemd.automount"
       "noauto"
-      "x-systemd.idle-timeout=60"
+      "noatime"
+      "_netdev"
+      "x-systemd.idle-timeout=60s"
       "x-systemd.device-timeout=5s"
       "x-systemd.mount-timeout=5s"
       "credentials=${config.sops.secrets.samba-saturn-barnabas.path}"
@@ -31,5 +33,6 @@ in
     "/run/media/barnabas/other" = smbMount "other";
     "/run/media/barnabas/cache" = smbMount "cache";
     "/run/media/barnabas/torrents" = smbMount "torrents";
+    "/run/media/barnabas/windows" = smbMount "trash";
   };
 }

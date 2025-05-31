@@ -18,6 +18,8 @@
     ../common/butter.nix
     ../common/cashewnix.nix
     ../common/graphical
+
+    inputs.quadlet-nix.nixosModules.quadlet
   ];
 
   environment.sessionVariables = {

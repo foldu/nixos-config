@@ -44,7 +44,7 @@
         "acl allow execute always" = "yes";
         path = "/srv/media/nvme1/data/windows";
         browseable = "yes";
-        "valid users" = "Luser";
+        "valid users" = "Luser barnabas";
         "force user" = config.users.users.barnabas.name;
         public = "no";
         writeable = "yes";
@@ -102,59 +102,4 @@
     enable = true;
     openFirewall = true;
   };
-
-  systemd.tmpfiles.rules = [
-    "d /srv/nfs 755 barnabas users"
-    "z /srv/nfs 755 barnabas users"
-  ];
-
-  fileSystems =
-    let
-      bind = mount: {
-        device = mount;
-        fsType = "none";
-        options = [
-          "bind"
-          "defaults"
-          "nofail"
-          "x-systemd.requires=zfs-mount.service"
-        ];
-      };
-    in
-    {
-      "/srv/nfs/torrents" = bind "/srv/media/nvme1/data/torrents";
-      "/srv/nfs/videos" = bind "/srv/media/main/vid";
-      "/srv/nfs/cache" = bind "/srv/media/cia/cache";
-      "/srv/nfs/img" = bind "/srv/media/cia/data/img";
-      "/srv/nfs/music" = bind "/srv/media/blub/data/music";
-      "/srv/nfs/smb" = bind "/srv/media/nvme1/data/windows";
-      "/srv/nfs/other" = bind "/srv/media/main/other";
-    };
-
-  services.nfs = {
-    server = {
-      enable = true;
-      # NOTE: async doesn't commit on every client write but massively speeds up write perf
-      exports =
-        let
-          mkGenericEntry = opts: "${home-network.virtual-network}(${opts}) ${home-network.network}(${opts})";
-          mkEntry = mkGenericEntry "rw,no_subtree_check,async";
-        in
-        ''
-          /srv/nfs ${mkGenericEntry "rw,no_subtree_check,async,crossmnt,fsid=0"}
-          /srv/nfs/torrents ${mkGenericEntry "rw,no_subtree_check,async,all_squash,anonuid=${toString config.users.users.transmission.uid}"}
-          /srv/nfs/videos ${mkEntry}
-          /srv/nfs/cache  ${mkEntry}
-          /srv/nfs/img    ${mkEntry}
-          /srv/nfs/music  ${mkEntry}
-          /srv/nfs/smb    ${mkEntry}
-          /srv/nfs/other  ${mkEntry}
-        '';
-    };
-    settings = {
-      nfsd.vers3 = false;
-    };
-  };
-
-  networking.firewall.allowedTCPPorts = [ 2049 ];
 }

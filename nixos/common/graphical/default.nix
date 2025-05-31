@@ -9,7 +9,6 @@
     ./corectrl.nix
     ./fancy-login.nix
     ./fonts.nix
-    ./nfs.nix
     ./pipewire.nix
     ./qt5.nix
     ./syncthing.nix
