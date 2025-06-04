@@ -18,16 +18,6 @@
         tags.host = "saturn";
       }
       {
-        urls = [ "https://piped.home.5kw.li" ];
-        response_string_match = "Piped";
-        tags.host = "saturn";
-      }
-      {
-        urls = [ "https://pipedapi.home.5kw.li/config" ];
-        response_string_match = "https://ytproxy.home.5kw.li";
-        tags.host = "saturn";
-      }
-      {
         urls = [ "https://vaultwarden.home.5kw.li/alive" ];
         response_status_code = 200;
         tags.host = "saturn";

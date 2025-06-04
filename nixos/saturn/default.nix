@@ -20,7 +20,6 @@
     ./step-ca.nix
     ./transmission
     ./vaultwarden.nix
-    ./piped
     ./miniflux.nix
     ./postgresql.nix
     ./metrics
