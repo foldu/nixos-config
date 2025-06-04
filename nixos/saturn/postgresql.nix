@@ -4,11 +4,14 @@
   lib,
   ...
 }:
+let
+  postgresRoot = "/var/postgres";
+in
 {
   services.postgresql = {
     enable = true;
     package = pkgs.postgresql_17;
-    dataDir = "/var/postgres/${config.services.postgresql.package.psqlSchema}";
+    dataDir = "${postgresRoot}/${config.services.postgresql.package.psqlSchema}";
   };
 
   boot.kernel.sysctl."net.core.rmem_max" = 2500000;
@@ -28,7 +31,7 @@
   #       # XXX it's perhaps advisable to stop all services that depend on postgresql
   #       systemctl stop postgresql
   #
-  #       export NEWDATA="/var/postgres/${newPostgres.psqlSchema}"
+  #       export NEWDATA="${postgresRoot}/${newPostgres.psqlSchema}"
   #
   #       export NEWBIN="${newPostgres}/bin"
   #
