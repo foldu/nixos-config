@@ -50,6 +50,7 @@
     dua
     wget
     curl
+    difftastic
     jq
     fd
     ripgrep
