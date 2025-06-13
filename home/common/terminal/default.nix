@@ -16,6 +16,36 @@
   #   enable = true;
   # };
 
+  programs.tmux = {
+    enable = true;
+    focusEvents = true;
+    mouse = true;
+    newSession = true;
+    prefix = "C-x";
+    sensibleOnTop = true;
+    plugins =
+      let
+        smart-splits = pkgs.tmuxPlugins.mkTmuxPlugin {
+          pluginName = "smart-splits";
+          version = "";
+          src = pkgs.fetchFromGitHub {
+            owner = "mrjones2014";
+            repo = "smart-splits.nvim";
+            rev = "9af865e451e55a9835fae6862dd7c55396870ecb";
+            sha256 = "sha256-YkfLXyxwCG7lvPMpGUC93qhOyT6G5K9W+dCDtXQVi+s=";
+          };
+        };
+      in
+      [
+        {
+          plugin = smart-splits;
+          extraConfig = ''
+            set -g @plugin 'mrjones2014/smart-splits.nvim'
+          '';
+        }
+      ];
+  };
+
   home.packages = with pkgs; [
     dua
     wget
