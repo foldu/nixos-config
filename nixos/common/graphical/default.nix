@@ -16,6 +16,7 @@
     inputs.nixos-cosmic.nixosModules.default
     ./cosmic.nix
     ./samba.nix
+    ./vm.nix
   ];
 
   programs.kdeconnect = {
