@@ -67,13 +67,6 @@
       #     }
       #   ];
       # }
-      {
-        job_name = "gitea";
-        scrape_interval = "60s";
-        metrics_path = "/metrics";
-        scheme = "https";
-        static_configs = [ { targets = [ "git.home.5kw.li:443" ]; } ];
-      }
     ];
     alertmanagers = [ { static_configs = [ { targets = [ "localhost:9093" ]; } ]; } ];
   };

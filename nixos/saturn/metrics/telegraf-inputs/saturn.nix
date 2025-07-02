@@ -13,11 +13,6 @@
         tags.host = "saturn";
       }
       {
-        urls = [ "https://git.home.5kw.li" ];
-        response_string_match = "gitea";
-        tags.host = "saturn";
-      }
-      {
         urls = [ "https://vaultwarden.home.5kw.li/alive" ];
         response_status_code = 200;
         tags.host = "saturn";
