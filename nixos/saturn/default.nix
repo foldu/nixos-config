@@ -13,7 +13,6 @@
     ./hardware-configuration.nix
     ./backups.nix
     ./file-server.nix
-    ./gitea.nix
     ./gitlab
     ./jellyfin.nix
     ./redlib
