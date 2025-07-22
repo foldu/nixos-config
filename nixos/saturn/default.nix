@@ -31,6 +31,7 @@
     ./home-assistant.nix
     ./lldap.nix
     ./wrrr.nix
+    ./piped
     "${inputs.homeserver-sekret}"
   ];
 
