@@ -13,7 +13,6 @@
     ./qt5.nix
     ./syncthing.nix
     ./game-devices.nix
-    inputs.nixos-cosmic.nixosModules.default
     ./cosmic.nix
     ./samba.nix
     ./vm.nix

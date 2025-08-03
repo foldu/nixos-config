@@ -69,10 +69,6 @@
 
     cashewnix.url = "github:foldu/cashewnix";
 
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-    };
-
     src-manage = {
       url = "github:foldu/src-manage";
       inputs.nixpkgs.follows = "nixpkgs";
