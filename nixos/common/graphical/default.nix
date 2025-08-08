@@ -18,6 +18,9 @@
     ./vm.nix
   ];
 
+  # enable wayland for electron apps
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   programs.kdeconnect = {
     enable = true;
     package = pkgs.kdePackages.kdeconnect-kde;
