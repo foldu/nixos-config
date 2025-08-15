@@ -19,6 +19,7 @@ in
     packages =
       with pkgs;
       [
+        material-symbols
         corefonts
         liberation_ttf
         noto-fonts

@@ -16,6 +16,7 @@
     ./cosmic.nix
     ./samba.nix
     ./vm.nix
+    ./niri.nix
   ];
 
   # enable wayland for electron apps
