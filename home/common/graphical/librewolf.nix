@@ -37,7 +37,7 @@
         "privacy.clearOnShutdown.history" = false;
         "privacy.clearOnShutdown.downloads" = false;
 
-        # for gnome theme
+        # for gnome theme https://github.com/rafaelmardojai/firefox-gnome-theme
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "browser.uidensity" = 0;
         "svg.context-properties.content.enabled" = true;
