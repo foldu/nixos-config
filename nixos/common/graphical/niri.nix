@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, ... }:
 {
   # services.dbus.packages = with pkgs; [
   #   gcr
@@ -11,7 +11,8 @@
     enable = true;
   };
 
-  environment.systemPackages = [
-    pkgs.xwayland-satellite
+  environment.systemPackages = with pkgs; [
+    xwayland-satellite
+    swww
   ];
 }
