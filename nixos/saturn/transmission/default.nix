@@ -6,9 +6,10 @@
   ...
 }:
 let
-  torrentDir = "/srv/media/nvme1/data/torrents";
+  torrentDir = "/srv/media/blub/data/torrents";
   configDir = "/var/lib/transmission/config";
   incompleteDir = "${torrentDir}/.incomplete";
+  watchDir = "${torrentDir}/watch";
   rpcPort = "9091";
   domain = "torrent.home.5kw.li";
   start-stop-torrents = pkgs.buildGoModule {
@@ -51,7 +52,7 @@ in
           volumes = [
             "${configDir}:/config"
             "${torrentDir}:/downloads"
-            "${torrentDir}/watch:/watch"
+            "${watchDir}:/watch"
           ];
           networks = [ "container:gluetun" ];
           pod = pods.gluetun-pott.ref;
