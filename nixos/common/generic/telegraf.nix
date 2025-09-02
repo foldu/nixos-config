@@ -110,19 +110,18 @@ in
         };
         system = { };
         mem = { };
-        file =
-          [
-            {
-              data_format = "influx";
-              file_tag = "name";
-              files = [ "/var/log/telegraf/*" ];
-            }
-          ]
-          ++ lib.optional (supportsFs "ext4") {
-            name_override = "ext4_errors";
-            files = [ "/sys/fs/ext4/*/errors_count" ];
-            data_format = "value";
-          };
+        file = [
+          {
+            data_format = "influx";
+            file_tag = "name";
+            files = [ "/var/log/telegraf/*" ];
+          }
+        ]
+        ++ lib.optional (supportsFs "ext4") {
+          name_override = "ext4_errors";
+          files = [ "/sys/fs/ext4/*/errors_count" ];
+          data_format = "value";
+        };
         exec = [
           {
             ## Commands array
