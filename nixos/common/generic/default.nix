@@ -142,4 +142,6 @@
     # set scheduler for rotating disks
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
   '';
+
+  zramSwap.enable = true;
 }

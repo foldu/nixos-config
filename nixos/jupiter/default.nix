@@ -49,8 +49,6 @@
 
   nix.settings.secret-key-files = [ "/var/secrets/jupiter.priv" ];
 
-  zramSwap.enable = true;
-
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   services.hardware.openrgb = {
