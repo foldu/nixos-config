@@ -2,7 +2,7 @@
 {
   services.redlib = {
     enable = true;
-    package = pkgs.callPackage ./package.nix { };
+    # package = pkgs.callPackage ./package.nix { };
     port = 7777;
   };
 
