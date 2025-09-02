@@ -33,6 +33,8 @@ in
       Group = "wrrr";
       Type = "simple";
     };
+    requires = [ "postgresql.service" ];
+    after = [ "postgresql.service" ];
     wantedBy = [ "multi-user.target" ];
   };
 
