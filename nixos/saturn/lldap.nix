@@ -14,6 +14,7 @@ in
       http_url = "https://${domain}";
       database_url = "postgresql:///lldap?host=/run/postgresql";
       ldap_user_pass_file = "/var/secrets/lldap/admin_pass";
+      force_ldap_user_pass_reset = "always";
     };
   };
 
