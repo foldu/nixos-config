@@ -3,9 +3,10 @@
 # to /etc/nixos/configuration.nix instead.
 { lib, modulesPath, ... }:
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  imports = [(modulesPath + "/profiles/qemu-guest.nix")];
 
   boot.initrd.availableKernelModules = [
+"ata_piix" "uhci_hcd" "virtio_pci" "virtio_scsi" "sd_mod" "sr_mod"
     "nvme"
     "xhci_pci"
     "ahci"
@@ -16,35 +17,16 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "rpool/system/root";
-    fsType = "zfs";
-  };
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/92ecc08e-509f-4edc-ad66-2fbaba7ada20";
+      fsType = "ext4";
+    };
 
-  fileSystems."/nix" = {
-    device = "rpool/local/nix";
-    fsType = "zfs";
-  };
-
-  fileSystems."/var" = {
-    device = "rpool/system/var";
-    fsType = "zfs";
-  };
-
-  fileSystems."/var/postgres" = {
-    device = "rpool/system/postgres";
-    fsType = "zfs";
-  };
-
-  fileSystems."/home" = {
-    device = "rpool/user";
-    fsType = "zfs";
-  };
-
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/2664640c-30c5-48c2-8610-dda048ace8bd";
-    fsType = "ext4";
-  };
+  fileSystems."/boot" =
+    { device = "/dev/disk/by-uuid/64E6-3DEC";
+      fsType = "vfat";
+      options = [ "fmask=0077" "dmask=0077" ];
+    };
 
   fileSystems."/srv/media/main" = {
     device = "main";
@@ -76,7 +58,7 @@
     fsType = "zfs";
   };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/6963baa8-8979-4cd1-b740-7a06900a7b03"; } ];
+  swapDevices = [];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
 }

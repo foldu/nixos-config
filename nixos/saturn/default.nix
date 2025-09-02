@@ -28,7 +28,6 @@
     ./navidrome.nix
     ./open-webui.nix
     ./tailscale-exit-node.nix
-    ./home-assistant.nix
     ./lldap.nix
     ./wrrr.nix
     ./piped
@@ -37,14 +36,13 @@
 
   networking.hostName = "saturn";
 
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/disk/by-id/ata-Crucial_CT250MX200SSD1_153610838381";
-  };
+  # Use the systemd-boot EFI boot loader.
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostId = "964725e9";
 
-  networking.interfaces.enp5s0.useDHCP = true;
+  networking.networkmanager.enable = true;
 
   services.caddy = {
     enable = true;
