@@ -9,7 +9,7 @@
     ./yazi.nix
     ./ghostty.nix
     ./zen-browser.nix
-    ./niri.nix
+    ./niri
     ./librewolf.nix
 
     inputs.pickwp.homeManagerModules.pickwp
