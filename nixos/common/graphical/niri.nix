@@ -11,7 +11,10 @@
     enable = true;
   };
 
-  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm = {
+    enable = true;
+    autoSuspend = false;
+  };
 
   environment.systemPackages = with pkgs; [
     xwayland-satellite
