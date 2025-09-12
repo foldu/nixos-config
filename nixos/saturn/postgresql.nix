@@ -5,7 +5,7 @@
   ...
 }:
 let
-  postgresRoot = "/var/postgres";
+  postgresRoot = "/srv/media/fast/postgres";
 in
 {
   services.postgresql = {

@@ -39,16 +39,16 @@
         "unix charset" = "UTF-8";
       };
 
-      # trash = {
-      #   # allow executing files even without +x perm
-      #   "acl allow execute always" = "yes";
-      #   path = "/srv/media/nvme1/data/windows";
-      #   browseable = "yes";
-      #   "valid users" = "Luser barnabas";
-      #   "force user" = config.users.users.barnabas.name;
-      #   public = "no";
-      #   writeable = "yes";
-      # };
+      trash = {
+        # allow executing files even without +x perm
+        "acl allow execute always" = "yes";
+        path = "/srv/media/fast/windows-share";
+        browseable = "yes";
+        "valid users" = "Luser barnabas";
+        "force user" = config.users.users.barnabas.name;
+        public = "no";
+        writeable = "yes";
+      };
 
       music = {
         path = "/srv/media/blub/data/music";
@@ -60,7 +60,7 @@
       };
 
       torrents = {
-        path = "/srv/media/blub/data/torrents";
+        path = "/srv/media/fast/torrents";
         browseable = "yes";
         "valid users" = config.users.users.barnabas.name;
         "force user" = config.users.users.barnabas.name;
@@ -77,8 +77,8 @@
         writeable = "yes";
       };
 
-      cache = {
-        path = "/srv/media/cia/cache";
+      dump = {
+        path = "/srv/media/fast/dump";
         browseable = "yes";
         "valid users" = config.users.users.barnabas.name;
         "force user" = config.users.users.barnabas.name;

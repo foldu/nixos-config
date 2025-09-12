@@ -52,10 +52,25 @@
     fsType = "zfs";
   };
 
-  # fileSystems."/srv/media/nvme1/data" = {
-  #   device = "nvme1/data";
-  #   fsType = "zfs";
-  # };
+  fileSystems."/srv/media/fast/postgres" = {
+    device = "fast/postgres";
+    fsType = "zfs";
+  };
+
+  fileSystems."/srv/media/fast/torrents" = {
+    device = "fast/torrents";
+    fsType = "zfs";
+  };
+
+  fileSystems."/srv/media/fast/windows-share" = {
+    device = "fast/windows-share";
+    fsType = "zfs";
+  };
+
+  fileSystems."/srv/media/fast/dump" = {
+    device = "fast/dump";
+    fsType = "zfs";
+  };
 
   fileSystems."/srv/media/blub/data" = {
     device = "blub/data";

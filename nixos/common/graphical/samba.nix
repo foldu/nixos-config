@@ -31,7 +31,7 @@ in
   fileSystems = {
     "/run/media/barnabas/music" = smbMount "music";
     "/run/media/barnabas/other" = smbMount "other";
-    "/run/media/barnabas/cache" = smbMount "cache";
+    "/run/media/barnabas/dump" = smbMount "dump";
     "/run/media/barnabas/torrents" = smbMount "torrents";
     "/run/media/barnabas/windows" = smbMount "trash";
   };

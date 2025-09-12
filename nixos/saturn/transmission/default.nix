@@ -3,7 +3,7 @@
   ...
 }:
 let
-  torrentDir = "/srv/media/blub/data/torrents";
+  torrentDir = "/srv/media/fast/torrents";
   configDir = "/var/lib/transmission/config";
   watchDir = "${torrentDir}/watch";
   rpcPort = "9091";
