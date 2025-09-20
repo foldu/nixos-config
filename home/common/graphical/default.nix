@@ -8,7 +8,6 @@
     ./xdg.nix
     ./yazi.nix
     ./ghostty.nix
-    ./zen-browser.nix
     ./niri
     ./librewolf.nix
 
