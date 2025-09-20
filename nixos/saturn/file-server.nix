@@ -69,7 +69,7 @@
       };
 
       other = {
-        path = "/srv/media/main/other";
+        path = "/srv/media/blub/data/other";
         browseable = "yes";
         "valid users" = config.users.users.barnabas.name;
         "force user" = config.users.users.barnabas.name;

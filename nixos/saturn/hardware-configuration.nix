@@ -37,11 +37,6 @@
     ];
   };
 
-  fileSystems."/srv/media/main" = {
-    device = "main";
-    fsType = "zfs";
-  };
-
   fileSystems."/srv/media/cia/data" = {
     device = "cia/data";
     fsType = "zfs";
