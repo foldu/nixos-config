@@ -13,8 +13,11 @@ in
   users.users.transmission = {
     isSystemUser = true;
     group = "transmission";
+    uid = 987;
   };
-  users.groups.transmission = { };
+  users.groups.transmission = {
+    gid = 980;
+  };
 
   virtualisation.quadlet =
     let
