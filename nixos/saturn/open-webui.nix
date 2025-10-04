@@ -23,7 +23,6 @@ in
       ];
       autoUpdate = "registry";
       environments = {
-        OLLAMA_BASE_URL = "http://100.64.0.4:11434";
         WEBUI_URL = "https://ai.home.5kw.li";
       };
     };

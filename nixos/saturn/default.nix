@@ -32,6 +32,7 @@
     ./lldap.nix
     ./wrrr.nix
     ./piped
+    ./llama-swap.nix
     "${inputs.homeserver-sekret}"
   ];
 
@@ -65,6 +66,8 @@
   users.users.barnabas.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIt82hTo4kjw6/T3bK+e5h3ZBMhV67/qIKEYaGTP/ETw saturn.home.5kw.li"
   ];
+
+  services.qemuGuest.enable = true;
 
   system.stateVersion = "20.09";
 }

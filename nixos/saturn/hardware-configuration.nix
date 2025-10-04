@@ -47,6 +47,11 @@
     fsType = "zfs";
   };
 
+  fileSystems."/srv/media/fast" = {
+    device = "fast";
+    fsType = "zfs";
+  };
+
   fileSystems."/srv/media/fast/postgres" = {
     device = "fast/postgres";
     fsType = "zfs";
