@@ -42,7 +42,6 @@
           {
             targets = [
               "jupiter.home.5kw.li:9273"
-              "mars.home.5kw.li:9273"
             ];
             labels.type = "pc";
           }
