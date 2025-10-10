@@ -19,6 +19,7 @@
     inputs.wpp-gtk.packages.${pkgs.system}.wpp
   ]
   ++ (with pkgs; [
+    opencloud-desktop
     steam-run
     kooha
     croc
