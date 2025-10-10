@@ -1,12 +1,10 @@
 { ... }:
 {
-  programs.corectrl = {
+  hardware.amdgpu.overdrive = {
     enable = true;
-    gpuOverclock = {
-      enable = true;
-      ppfeaturemask = "0xffffffff";
-    };
+    ppfeaturemask = "0xffffffff";
   };
+  programs.corectrl.enable = true;
 
   users.users.barnabas.extraGroups = [ "corectrl" ];
 }
