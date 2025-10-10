@@ -10,7 +10,7 @@
     ./fancy-login.nix
     ./fonts.nix
     ./pipewire.nix
-    ./qt5.nix
+    ./qt.nix
     ./syncthing.nix
     ./game-devices.nix
     ./cosmic.nix
