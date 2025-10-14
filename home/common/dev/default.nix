@@ -103,8 +103,7 @@ in
     vue-language-server
     tailwindcss-language-server
     nodejs
-    bun
-    vtsls
+    deno
 
     # yaml
     nodePackages.yaml-language-server
