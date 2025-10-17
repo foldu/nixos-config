@@ -1,4 +1,7 @@
 { ... }:
+let
+  swapPort = 9292;
+in
 {
   virtualisation.quadlet = {
     containers.llama-swap = {
@@ -13,10 +16,16 @@
           "/srv/media/fast/ai/llm/llama-cache:/root/.cache/llama.cpp"
         ];
         publishPorts = [
-          "9292:8080"
+          "${toString swapPort}:8080"
         ];
         autoUpdate = "registry";
       };
     };
   };
+
+  services.caddy.extraConfig = ''
+    llama.home.5kw.li {
+      reverse_proxy localhost:${toString swapPort}
+    }
+  '';
 }
