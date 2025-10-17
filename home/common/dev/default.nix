@@ -105,6 +105,8 @@ in
     nodejs
     deno
 
+    opencode
+
     # yaml
     nodePackages.yaml-language-server
     taplo-cli
