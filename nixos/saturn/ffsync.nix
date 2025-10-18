@@ -3,7 +3,7 @@
   services.mysql.package = pkgs.mariadb;
 
   services.firefox-syncserver = {
-    enable = true;
+    enable = false;
     secrets = "/var/secrets/ffsync.env";
     singleNode = {
       enable = true;
