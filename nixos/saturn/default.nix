@@ -12,6 +12,7 @@
     ../common/nivea.nix
 
     ./hardware-configuration.nix
+    ./imgen.nix
     ./backups.nix
     ./file-server.nix
     ./gitlab
