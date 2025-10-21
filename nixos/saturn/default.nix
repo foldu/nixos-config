@@ -37,6 +37,9 @@
     "${inputs.homeserver-sekret}"
   ];
 
+  # enable serial console
+  boot.kernelParams = [ "console=ttyS0" ];
+
   networking.hostName = "saturn";
 
   # Use the systemd-boot EFI boot loader.
