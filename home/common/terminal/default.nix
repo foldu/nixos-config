@@ -21,7 +21,7 @@
     focusEvents = true;
     mouse = true;
     newSession = true;
-    prefix = "C-x";
+    prefix = "C-Space";
     sensibleOnTop = true;
     plugins =
       let
@@ -96,7 +96,6 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    delta.enable = true;
     userName = "foldu";
     userEmail = "foldu@protonmail.com";
     includes = [
@@ -107,6 +106,8 @@
     extraConfig = {
       init.defaultBranch = "master";
       pull.rebase = true;
+      diff.tool = "nvim_difftool";
+      difftool.nvim_difftool.cmd = "nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"";
     };
   };
 
