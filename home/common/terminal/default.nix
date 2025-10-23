@@ -103,6 +103,7 @@
         path = "/home/barnabas/.config/git/sekret";
       }
     ];
+    difftastic.enable = true;
     extraConfig = {
       init.defaultBranch = "master";
       pull.rebase = true;
