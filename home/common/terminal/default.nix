@@ -50,7 +50,6 @@
     dua
     wget
     curl
-    difftastic
     jq
     fd
     ripgrep
@@ -96,20 +95,26 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    userName = "foldu";
-    userEmail = "foldu@protonmail.com";
-    includes = [
-      {
-        path = "/home/barnabas/.config/git/sekret";
-      }
-    ];
-    difftastic.enable = true;
-    extraConfig = {
+    settings = {
+      user = {
+        name = "foldu";
+        email = "foldu@protonmail.com";
+      };
       init.defaultBranch = "master";
       pull.rebase = true;
       diff.tool = "nvim_difftool";
       difftool.nvim_difftool.cmd = "nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"";
     };
+    includes = [
+      {
+        path = "/home/barnabas/.config/git/sekret";
+      }
+    ];
+  };
+
+  programs.difftastic = {
+    enable = true;
+    git.enable = true;
   };
 
   programs.fzf.enable = true;
