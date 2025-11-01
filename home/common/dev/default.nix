@@ -77,7 +77,7 @@ in
 
     # typst
     typst
-    typst-fmt
+    typstfmt
     tinymist
     typstyle
     typst-live
@@ -109,10 +109,9 @@ in
 
     # yaml
     nodePackages.yaml-language-server
-    taplo-cli
     # lua
     stylua
-    sumneko-lua-language-server
+    lua-language-server
 
     # markdown
     marksman
