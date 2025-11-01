@@ -27,13 +27,13 @@ in
         #noto-fonts-cjk
         inter
         source-code-pro
-        vistafonts
+        vista-fonts
         etBook
         eb-garamond
         monaspace
         domitian
         jetbrains-mono
-        ubuntu_font_family
+        ubuntu-classic
         ibm-plex
         fira-mono
         nerd-fonts._0xproto
