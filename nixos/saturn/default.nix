@@ -30,7 +30,7 @@
     ./navidrome.nix
     ./open-webui.nix
     ./tailscale-exit-node.nix
-    ./lldap.nix
+    ./auth
     ./wrrr.nix
     ./piped
     ./llama-swap.nix
