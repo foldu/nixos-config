@@ -77,7 +77,6 @@ in
 
     # typst
     typst
-    typstfmt
     tinymist
     typstyle
     typst-live
