@@ -66,7 +66,6 @@
       }
     '';
     environmentFile = "/var/secrets/caddy.env";
-    logFormat = "level INFO";
   };
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [
