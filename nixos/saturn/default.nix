@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -52,8 +52,21 @@
 
   services.caddy = {
     enable = true;
-    acmeCA = "https://ca.home.5kw.li:4321/acme/acme/directory";
-    email = "webmaster@5kw.li";
+    email = "foldu@protonmail.com";
+    package = pkgs.caddy.withPlugins {
+      plugins = [ "github.com/caddy-dns/ovh@v1.1.0" ];
+      hash = "sha256-EOlZ594X3IE1j2uORW8n9gtRfQR/IBIPYyriH2bUpts=";
+    };
+    globalConfig = ''
+      acme_dns ovh {
+        endpoint ovh-eu
+        application_key {$OVH_APPLICATION_KEY}
+        application_secret {$OVH_APPLICATION_SECRET}
+        consumer_key {$OVH_CONSUMER_KEY}
+      }
+    '';
+    environmentFile = "/var/secrets/caddy.env";
+    logFormat = "level INFO";
   };
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [
