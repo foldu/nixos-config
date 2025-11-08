@@ -1,0 +1,46 @@
+identity_providers:
+  oidc:
+    clients:
+      - client_id: "HNcsNHmq~dNWJ-CPSPKzV-G4ifjsgTcTYhLcIpLE4lTCae_3YxXAOzGDN2BPWi-E"
+        client_name: "Open WebUI"
+        client_secret: "$argon2id$v=19$m=65536,t=3,p=4$JagVlyCTrV1x0IZ9hEDiQw$CUgXZz1UlDFSU2dvxzGcGf1IjMt+Ld2N6L+InlYIIcs"
+        public: false
+        authorization_policy: "one_factor"
+        require_pkce: true
+        pkce_challenge_method: "S256"
+        redirect_uris:
+          - "https://ai.home.5kw.li/oauth/oidc/callback"
+        scopes:
+          - "openid"
+          - "profile"
+          - "groups"
+          - "email"
+        response_types:
+          - "code"
+        grant_types:
+          - "authorization_code"
+        access_token_signed_response_alg: "none"
+        userinfo_signed_response_alg: "none"
+        token_endpoint_auth_method: "client_secret_basic"
+
+      - client_id: "BUZmb2r5H~mUMqH_MwQwFGGP2KKJeD5nwMDn2DbzY4qXh2mSjzjaJHUxXdBT9aoK"
+        client_name: "GitLab"
+        client_secret: "$argon2id$v=19$m=65536,t=3,p=4$aV/1xAT3n0FoC9qZddDvvw$GKHxJgS6ylkk6TXy5Z1WwGtHCpM+Bl/jEF69PMaM9AQ"
+        public: false
+        authorization_policy: "one_factor"
+        require_pkce: true
+        pkce_challenge_method: "S256"
+        redirect_uris:
+          - "https://lab.home.5kw.li/users/auth/openid_connect/callback"
+        scopes:
+          - "openid"
+          - "profile"
+          - "groups"
+          - "email"
+        response_types:
+          - "code"
+        grant_types:
+          - "authorization_code"
+        access_token_signed_response_alg: "none"
+        userinfo_signed_response_alg: "none"
+        token_endpoint_auth_method: "client_secret_basic"

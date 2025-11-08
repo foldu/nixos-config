@@ -58,35 +58,41 @@ in
         ];
       };
       log.level = "info";
-      # identity_providers.oidc = {
-      #   cors = {
-      #     endpoints = [ "token" ];
-      #     allowed_origins_from_client_redirect_uris = true;
-      #   };
-      #   authorization_policies.default = {
-      #     default_policy = "one_factor";
-      #     rules = [
-      #       {
-      #         policy = "deny";
-      #         subject = "group:lldap_strict_readonly";
-      #       }
-      #     ];
-      #   };
-      # };
+      identity_providers.oidc = {
+        cors = {
+          endpoints = [
+            "token"
+            "authorization"
+            "revocation"
+            "introspection"
+          ];
+          allowed_origins_from_client_redirect_uris = true;
+          allowed_origins = [ "https://auth.home.5kw.li" ];
+        };
+        authorization_policies.default = {
+          default_policy = "one_factor";
+          rules = [
+            {
+              policy = "deny";
+              subject = "group:lldap_strict_readonly";
+            }
+          ];
+        };
+      };
       server = {
         endpoints.authz.forward-auth.implementation = "ForwardAuth";
         address = "tcp://:${toString autheliaHomePort}";
       };
     };
 
-    # settingsFiles = [
-    #   ./oidc_clients.yml
-    # ];
+    settingsFiles = [
+      ./oidc_clients.yml
+    ];
 
     secrets = {
       jwtSecretFile = "${secretRoot}/jwt_secret";
-      # oidcIssuerPrivateKeyFile = "${secretRoot}/jwks";
-      # oidcHmacSecretFile = "${secretRoot}/hmac_secret";
+      oidcIssuerPrivateKeyFile = "${secretRoot}/jwks";
+      oidcHmacSecretFile = "${secretRoot}/hmac_secret";
       storageEncryptionKeyFile = "${secretRoot}/storage_secret";
       sessionSecretFile = "${secretRoot}/session_secret";
     };

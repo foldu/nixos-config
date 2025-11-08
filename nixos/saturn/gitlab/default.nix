@@ -22,6 +22,48 @@
       address = "localhost";
       port = 25;
     };
+    extraConfig = {
+      omniauth = {
+        enabled = true;
+        allow_single_sign_on = [ "openid_connect" ];
+        sync_email_from_provider = "openid_connect";
+        sync_profile_from_provider = [ "openid_connect" ];
+        sync_profile_attributes = [ "email" ];
+        auto_sign_in_with_provider = "openid_connect";
+        block_auto_created_users = true;
+        auto_link_user = [ "openid_connect" ];
+
+        providers = [
+          {
+            name = "openid_connect";
+            label = "Authelia";
+            args = {
+              name = "openid_connect";
+              strategy_class = "OmniAuth::Strategies::OpenIDConnect";
+              scope = [
+                "openid"
+                "profile"
+                "email"
+              ];
+              response_type = "code";
+              response_mode = "query";
+              issuer = "https://auth.home.5kw.li";
+              discovery = true;
+              client_auth_method = "basic";
+              uid_field = "preferred_username";
+              send_scope_to_token_endpoint = true;
+              pkce = true;
+              client_options = {
+                # For production, use secret management with _secret attribute
+                identifier = "BUZmb2r5H~mUMqH_MwQwFGGP2KKJeD5nwMDn2DbzY4qXh2mSjzjaJHUxXdBT9aoK";
+                secret._secret = "/var/secrets/gitlab/auth_pass";
+                redirect_uri = "https://lab.home.5kw.li/users/auth/openid_connect/callback";
+              };
+            };
+          }
+        ];
+      };
+    };
     secrets = {
       dbFile = "/var/secrets/gitlab/db";
       secretFile = "/var/secrets/gitlab/secret";
