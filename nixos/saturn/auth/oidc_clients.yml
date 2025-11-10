@@ -6,8 +6,9 @@ identity_providers:
         client_secret: "$argon2id$v=19$m=65536,t=3,p=4$JagVlyCTrV1x0IZ9hEDiQw$CUgXZz1UlDFSU2dvxzGcGf1IjMt+Ld2N6L+InlYIIcs"
         public: false
         authorization_policy: "one_factor"
-        require_pkce: true
-        pkce_challenge_method: "S256"
+        # currently broken with open webui
+        require_pkce: false
+        #pkce_challenge_method: "S256"
         redirect_uris:
           - "https://ai.home.5kw.li/oauth/oidc/callback"
         scopes:
