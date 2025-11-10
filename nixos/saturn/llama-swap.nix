@@ -13,7 +13,7 @@ in
         volumes = [
           "/srv/media/fast/ai/llm/models:/models"
           "/srv/media/fast/ai/llm/llama-swap-config.yaml:/app/config.yaml"
-          "/srv/media/fast/ai/llm/llama-cache:/root/.cache/llama.cpp"
+          "/srv/media/fast/ai/llm/llama-cache:/app/.cache/llama.cpp"
         ];
         publishPorts = [
           "${toString swapPort}:8080"
@@ -23,9 +23,7 @@ in
     };
   };
 
-  services.caddy.extraConfig = ''
-    llama.home.5kw.li {
-      reverse_proxy localhost:${toString swapPort}
-    }
+  services.caddy.virtualHosts."llama.home.5kw.li".extraConfig = ''
+    reverse_proxy :${toString swapPort}
   '';
 }
