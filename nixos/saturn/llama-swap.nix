@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 let
   swapPort = 9292;
 in
@@ -24,6 +24,21 @@ in
   };
 
   services.caddy.virtualHosts."llama.home.5kw.li".extraConfig = ''
-    reverse_proxy :${toString swapPort}
+    @valid_auth_header {
+      header Auhorization {env.LLAMA_SWAP_API_KEY}
+    }
+
+    handle @valid_auth_header {
+      reverse_proxy :${toString swapPort}
+    }
+
+    handle {
+      forward_auth https://auth.home.5kw.li {
+        uri /api/authz/forward-auth
+        copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+        header_up Host {upstream_hostport}
+      }
+      reverse_proxy :${toString swapPort}
+    }
   '';
 }
