@@ -30,7 +30,7 @@
         tags.host = "saturn";
       }
       {
-        urls = [ "https://lab.home.5kw.li" ];
+        urls = [ "https://lab.home.5kw.li/foldu/nixos-config" ];
         follow_redirects = true;
         response_string_match = "gitlab";
         tags.host = "saturn";
