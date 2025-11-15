@@ -16,6 +16,10 @@
     autoSuspend = false;
   };
 
+  # needed for noctalia
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
+
   environment.systemPackages = with pkgs; [
     xwayland-satellite
   ];

@@ -348,7 +348,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal" { spawn "ghostty"; }
-    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "qs" "ipc" "call" "launcher" "toggle"; }
+    Mod+Space hotkey-overlay-title="Run an Application: noctalia launcher" { spawn "qs" "ipc" "call" "launcher" "toggle"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
@@ -594,14 +594,25 @@ binds {
     // Mod+Shift+P { power-off-monitors; }
 }
 
-// enable xwayland-satellite on startup https://github.com/YaLTeR/niri/wiki/Xwayland
-// spawn-at-startup "xwayland-satellite" ":1"
-//
-// environment {
-//     DISPLAY ":1"
-// }
+// for noctalia
+window-rule {
+  // Rounded corners for a modern look.
+  geometry-corner-radius 20
 
-spawn-at-startup "quickshell"
+  // Clips window contents to the rounded corner boundaries.
+  clip-to-geometry true
+}
+
+debug {
+  // Allows notification actions and window activation from Noctalia.
+  honor-xdg-activation-with-invalid-serial
+}
+
+// Set the overview wallpaper on the backdrop.
+layer-rule {
+  match namespace="^noctalia-overview*"
+  place-within-backdrop true
+}
 
 spawn-sh-at-startup "sleep 1 && flatpak run com.valvesoftware.Steam"
 
