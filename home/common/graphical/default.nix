@@ -10,6 +10,7 @@
     ./ghostty.nix
     ./niri
     ./librewolf.nix
+    ./obsidian.nix
 
     inputs.pickwp.homeManagerModules.pickwp
   ];

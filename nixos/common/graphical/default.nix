@@ -13,7 +13,6 @@
     ./qt.nix
     ./syncthing.nix
     ./game-devices.nix
-    ./cosmic.nix
     ./samba.nix
     ./vm.nix
     ./niri.nix

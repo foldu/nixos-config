@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    # nixpkgs.follows = "nixos-cosmic/nixpkgs";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
