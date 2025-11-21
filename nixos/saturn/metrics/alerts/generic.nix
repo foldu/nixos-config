@@ -54,7 +54,7 @@
     # };
 
     filesystem_full_80percent = {
-      condition = ''disk_used_percent{mode!="ro",fstype!="btrfs"} >= 80'';
+      condition = ''disk_used_percent{mode!="ro",fstype!="btrfs",fstype!="efivarfs"} >= 80'';
       time = "10m";
       description = "{{$labels.instance}} device {{$labels.device}} on {{$labels.path}} got less than 20% space left on its filesystem";
     };
