@@ -16,6 +16,7 @@
     ./samba.nix
     ./vm.nix
     ./niri.nix
+    ./sddm.nix
   ];
 
   # enable wayland for electron apps
