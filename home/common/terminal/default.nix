@@ -54,6 +54,7 @@
     fd
     ripgrep
     file
+    git-absorb
     libarchive
     unzip
     bat
