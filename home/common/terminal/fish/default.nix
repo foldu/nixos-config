@@ -16,6 +16,8 @@
     };
     interactiveShellInit = ''
       set -g fish_greeting
+      bind alt-backspace backward-kill-word
+      bind ctrl-w backward-kill-bigword
     '';
     shellAliases = {
       ls = "ls --hyperlink=auto --color=auto";
