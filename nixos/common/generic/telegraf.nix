@@ -87,20 +87,14 @@ in
 #     )
 #     nfsHosts;
 {
-  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [ 9273 ];
-
   systemd.services.telegraf.path = lib.optional (!isVM && hasNvme) pkgs.nvme-cli;
 
   services.telegraf = {
     enable = true;
+    environmentFiles = [ "/var/secrets/telegraf.env" ];
     extraConfig = {
       agent.interval = "60s";
       inputs = {
-        prometheus.urls = lib.mkIf config.services.promtail.enable [
-          # default promtail port
-          "http://localhost:9080/metrics"
-        ];
-        prometheus.metric_version = 2;
         kernel_vmstat = { };
         nginx.urls = lib.mkIf config.services.nginx.statusPage [ "http://localhost/nginx_status" ];
         smart = lib.mkIf (!isVM) {
@@ -155,9 +149,13 @@ in
           poolMetrics = true;
         };
       };
-      outputs.prometheus_client = {
-        listen = ":9273";
-        metric_version = 2;
+      outputs.influxdb_v2 = {
+        urls = [ "https://metrics.home.5kw.li" ];
+        http_headers = {
+          Authorization = "Bearer $VM_AUTH_TOKEN";
+        };
+        organization = "";
+        bucket = "";
       };
     };
   };

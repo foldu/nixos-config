@@ -1,0 +1,104 @@
+groups:
+  - name: default
+    rules:
+      - alert: system-reboot
+        expr: "system_uptime != 0 and system_uptime < 300"
+        for: "1m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.host}} just rebooted"
+      - alert: filesystem-full
+        expr: 'disk_used_percent{mode!="ro",fstype!="btrfs",fstype!="efivarfs"} >= 80'
+        for: "10m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.instance}} device {{$labels.device}} on {{$labels.path}} got less than 20% space left on its filesystem"
+      - alert: filesystem-inocdes-full
+        expr: "disk_inodes_free / disk_inodes_total < 0.10"
+        for: "10m"
+        annotations:
+          summary: "{{$labels.instance}} device {{$labels.device}} on {{$labels.path}} got less than 10% inodes left on its filesystem"
+      - alert: swap-using-50percent
+        expr: "mem_swap_total - (mem_swap_cached + mem_swap_free) > mem_swap_total * 0.5"
+        for: "30m"
+        annotations:
+          summary: "{{$labels.host}} is using 50% of its swap space for at least 30 minutes"
+      - alert: systemd-service-failed
+        expr: 'systemd_units_active_code{name!~"user@\\d+.service"} == 3'
+        annotations:
+          summary: "{{$labels.host}} failed to (re)start service {{$labels.name}}"
+      - alert: ram-using-95percent
+        expr: "mem_buffered + mem_free + mem_cached < mem_total * 0.05"
+        for: "1h"
+        annotations:
+          summary: "{{$labels.host}} is using at least 95% of its RAM for at least 1 hour"
+      - alert: load15
+        expr: "system_load15 / system_n_cpus >= 2.0"
+        for: "10m"
+        annotations:
+          summary: "{{$labels.host}} is running with load15 > 1 for at least 5 minutes: {{$value}}"
+      - alert: telegraf-down
+        expr: 'min(up{job=~"telegraf",type="server"}) by (source, job, instance, org) == 0'
+        for: "3m"
+        annotations:
+          summary: "{{$labels.instance}}: {{$labels.job}} telegraf exporter from {{$labels.source}} is down"
+
+      - alert: http
+        expr: "http_response_result_code != 0"
+        annotations:
+          summary: "{{$labels.server}} : http request failed from {{$labels.instance}}: {{$labels.result}}"
+      - alert: http-match-failed
+        expr: "http_response_response_string_match == 0"
+        annotations:
+          summary: "{{$labels.server}} : http body not as expected; status code: {{$labels.status_code}}"
+      - alert: dns-query
+        expr: "dns_query_result_code != 0"
+        annotations:
+          summary: "{{$labels.domain}} : could retrieve A record {{$labels.instance}} from server {{$labels.server}}: {{$labels.result}}"
+      - alert: connection-failed
+        expr: "net_response_result_code != 0"
+        annotations:
+          summary: "{{$labels.server}}: connection to {{$labels.port}}({{$labels.protocol}}) failed from {{$labels.instance}}"
+
+      - alert: healthchecks
+        expr: "hc_check_up == 0"
+        annotations:
+          summary: "{{$labels.instance}}: healtcheck {{$labels.job}} fails"
+      - alert: oom-kills
+        expr: "increase(kernel_vmstat_oom_kill[5m]) > 0"
+        annotations:
+          summary: "{{$labels.instance}}: OOM kill detected"
+      - alert: uptime
+        expr: "system_uptime > 2592000"
+        annotations:
+          summary: "Uptime monster: {{$labels.host}} has been up for more than 30 days"
+
+      # doesn't seem to be working properly
+      # - alert: unusual-disk-read-latency
+      #   expr: "rate(diskio_read_time[1m]) / rate(diskio_reads[1m]) > 0.1 and rate(diskio_reads[1m]) > 0"
+      #   annotations:
+      #     summary: "{{$labels.instance}}: Disk latency is growing (read operations > 100ms)"
+      # - alert: unusual-disk-write-latency
+      #   expr: "rate(diskio_write_time[1m]) / rate(diskio_write[1m]) > 0.1 and rate(diskio_write[1m]) > 0"
+      #   annotations:
+      #     summary: "{{$labels.instance}}: Disk latency is growing (write operations > 100ms)"
+      # needs extra telegraf input
+      - alert: ext4-errors
+        expr: "ext4_errors_value > 0"
+        annotations:
+          summary: "{{$labels.instance}}: ext4 has reported {{$value}} I/O errors: check /sys/fs/ext4/*/errors_count"
+      #  needs extra telegraf input
+      - alert: zpool-status
+        expr: "zpool_status_errors > 0"
+        annotations:
+          summary: "{{$labels.instance}} reports: zpool {{$labels.name}} has {{$value}} errors"
+      - alert: zfs-errors
+        expr: "zfs_arcstats_l2_io_error + zfs_dmu_tx_error + zfs_arcstats_l2_writes_error > 0"
+        annotations:
+          summary: "{{$labels.instance}} reports: {{$value}} ZFS IO errors"
+      - alert: smart-errors
+        expr: 'smart_device_health_ok{enabled!="Disabled"} != 1'
+        annotations:
+          summary: "{{$labels.instance}}: S.M.A.R.T reports: {{$labels.device}} ({{$labels.model}}) has errors"

@@ -5,80 +5,61 @@
   outputs,
   ...
 }:
+let
+  vmPort = 8428;
+  vlPort = 9428;
+in
 {
   imports = [
-    ../../common/alertmanager
+    # ../../common/alertmanager
     ./telegraf-inputs/saturn.nix
+    ./alerts
   ];
 
-  services.prometheus = {
+  services.victoriametrics = {
     enable = true;
-    webExternalUrl = "https://prometheus.home.5kw.li";
-    ruleFiles = [
-      (pkgs.writeText "prometheus-rules.yml" (
-        builtins.toJSON {
-          groups = [
-            {
-              name = "generic-alerts";
-              rules = outputs.lib.mkPrometheusRules (import ./alerts/generic.nix { inherit lib; });
-            }
-          ];
-        }
-      ))
+    listenAddress = ":${toString vmPort}";
+    extraOptions = [
+      "-vmalert.proxyURL=http://localhost:8880"
     ];
-    scrapeConfigs = [
-      {
-        job_name = "telegraf";
-        scrape_interval = "60s";
-        metrics_path = "/metrics";
-        static_configs = [
-          {
-            targets = [
-              "saturn.home.5kw.li:9273"
-              # "ceres.home.5kw.li:9273"
-            ];
-            labels.type = "server";
-          }
-          {
-            targets = [
-              "jupiter.home.5kw.li:9273"
-            ];
-            labels.type = "pc";
-          }
-          # {
-          #   targets = [
-          #     # TODO: give hostname
-          #     "100.64.0.6:9273"
-          #   ];
-          #   labels.type = "server";
-          # }
-        ];
-      }
-      # {
-      #   job_name = "caddy";
-      #   scrape_interval = "60s";
-      #   # metrics_path = "/metrics";
-      #   static_configs = [
-      #     {
-      #       targets = [
-      #         "localhost:2019"
-      #       ];
-      #     }
-      #   ];
-      # }
-    ];
-    alertmanagers = [ { static_configs = [ { targets = [ "localhost:9093" ]; } ]; } ];
+  };
+
+  services.victorialogs = {
+    enable = true;
+    listenAddress = ":${toString vlPort}";
   };
 
   services.prometheus.alertmanager.webExternalUrl = "https://alertmanager.home.5kw.li";
 
-  services.caddy.extraConfig = ''
-    prometheus.home.5kw.li {
-        reverse_proxy localhost:${toString config.services.prometheus.port}
-    }
+  services.caddy.virtualHosts =
+    let
+      proxyWithAuth = port: ''
+        encode zstd gzip
 
-    alertmanager.home.5kw.li {
-        reverse_proxy localhost:${toString config.services.prometheus.alertmanager.port}
-    }
-  '';
+        @has_valid_token header Authorization {env.METRICS_AUTH_TOKEN}
+        @has_auth_header header Authorization *
+
+        handle @has_valid_token {
+          reverse_proxy :${toString port}
+        }
+
+        handle @has_auth_header {
+          respond "Unauthorized" 401
+        }
+
+        handle {
+          forward_auth https://auth.home.5kw.li {
+            uri /api/authz/forward-auth
+            copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
+            header_up Host {upstream_hostport}
+          }
+          reverse_proxy :${toString port}
+        }
+      '';
+    in
+    {
+      "metrics.home.5kw.li".extraConfig = proxyWithAuth vmPort;
+
+      "logs.home.5kw.li".extraConfig = proxyWithAuth vlPort;
+    };
 }
