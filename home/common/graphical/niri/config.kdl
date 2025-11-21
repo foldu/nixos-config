@@ -594,15 +594,6 @@ binds {
     // Mod+Shift+P { power-off-monitors; }
 }
 
-// for noctalia
-window-rule {
-  // Rounded corners for a modern look.
-  geometry-corner-radius 20
-
-  // Clips window contents to the rounded corner boundaries.
-  clip-to-geometry true
-}
-
 debug {
   // Allows notification actions and window activation from Noctalia.
   honor-xdg-activation-with-invalid-serial
@@ -614,9 +605,10 @@ layer-rule {
   place-within-backdrop true
 }
 
-spawn-sh-at-startup "sleep 1 && flatpak run com.valvesoftware.Steam"
+spawn-sh-at-startup "steam_id=com.valvesoftware.Steam; if flatpak list | grep -q $steam_id; then sleep 1 && flatpak run $steam_id fi"
 
-// switch-events {
-//     lid-close { spawn "qs" "ipc" "call" "globalIPC" "toggleLock" }
-// }
+switch-events {
+    lid-close { spawn "sh" "-c" "qs ipc call lockScreen lock; niri msg action power-off-monitors"; }
+    lid-open { spawn "sh" "-c" "niri msg action power-on-monitors"; }
+}
 
