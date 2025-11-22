@@ -72,6 +72,16 @@
     fsType = "zfs";
   };
 
+  # fileSystems."/var/lib/victoriametrics" = {
+  #   device = "fast/victoriametrics";
+  #   fsType = "zfs";
+  # };
+  #
+  # fileSystems."/var/lib/victorialogs" = {
+  #   device = "fast/victorialogs";
+  #   fsType = "zfs";
+  # };
+  #
   fileSystems."/srv/media/blub/data" = {
     device = "blub/data";
     fsType = "zfs";
