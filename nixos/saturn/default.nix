@@ -66,6 +66,12 @@
       }
     '';
     environmentFile = "/var/secrets/caddy.env";
+    virtualHosts."hass.home.5kw.li" = {
+      extraConfig = ''
+        encode zstd gzip
+        reverse_proxy 100.64.0.14:8123
+      '';
+    };
   };
 
   networking.firewall.interfaces."tailscale0".allowedTCPPorts = [
