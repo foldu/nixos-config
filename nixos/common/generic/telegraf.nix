@@ -93,7 +93,10 @@ in
     enable = true;
     environmentFiles = [ "/var/secrets/telegraf.env" ];
     extraConfig = {
-      agent.interval = "60s";
+      agent = {
+        collection_jitter = "2s";
+        interval = "60s";
+      };
       inputs = {
         kernel_vmstat = { };
         nginx.urls = lib.mkIf config.services.nginx.statusPage [ "http://localhost/nginx_status" ];
