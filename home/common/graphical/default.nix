@@ -21,7 +21,7 @@
   ]
   ++ (with pkgs; [
     mumble
-    opencloud-desktop
+    # opencloud-desktop
     steam-run
     kooha
     croc
