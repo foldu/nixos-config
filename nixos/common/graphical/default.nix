@@ -17,6 +17,7 @@
     ./vm.nix
     ./niri.nix
     ./sddm.nix
+    ./plasma.nix
   ];
 
   # enable wayland for electron apps
@@ -24,7 +25,6 @@
 
   programs.kdeconnect = {
     enable = true;
-    package = pkgs.kdePackages.kdeconnect-kde;
   };
 
   documentation = {
