@@ -1,0 +1,27 @@
+name: Mirror from codeberg
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    # every day at 3 UTC
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+jobs:
+  mirror:
+    name: "Mirror from codeberg"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Mirror
+        # no reason for setting the git config usernames/emails etc. but good idea
+        # if I copy paste something
+        run: |
+          git config user.name 'github-actions'
+          git config user.email 'action@github.com'
+          git remote add codeberg "https://codeberg.org/${GITHUB_REPOSITORY}"
+          git pull codeberg master
+          git push
