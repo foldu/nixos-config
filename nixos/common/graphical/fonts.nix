@@ -15,7 +15,18 @@ in
       serif = [ configSettings.font.serif.name ];
       monospace = [ configSettings.font.monospace.name ];
     };
-    fontconfig.hinting.enable = true;
+    fontconfig = {
+      hinting = {
+        enable = true;
+        style = "full";
+        autohint = false;
+      };
+      antialias = true;
+      subpixel = {
+        lcdfilter = "default";
+        rgba = "rgb";
+      };
+    };
     packages =
       with pkgs;
       [
