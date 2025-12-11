@@ -66,6 +66,13 @@ input {
 output "ASUSTek COMPUTER INC VG27AQ1A NALMQS043970" {
     mode "2560x1440@144.006"
     // variable-refresh-rate
+    // focus-at-startup
+}
+
+output "Microstep MPG272UX OLED 0x01010101" {
+    mode "3840x2160@240.000"
+    // variable-refresh-rate
+    scale 1.5
     focus-at-startup
 }
 

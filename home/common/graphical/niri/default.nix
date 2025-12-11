@@ -19,25 +19,26 @@
     systemd.enable = true;
   };
 
+  systemd.user.services = {
+    quickshell.Unit.PartOf = [ "niri.service" ];
+    swayidle.Unit.PartOf = [ "niri.service" ];
+  };
+
   services.swayidle =
     let
       lockMonitor = "qs ipc call lockScreen lock";
     in
     {
       enable = true;
-      events = [
-        {
-          command = lockMonitor;
-          event = "before-sleep";
-        }
-        {
-          command = "niri msg action power-on-monitors";
-          event = "after-resume";
-        }
-      ];
+      events = {
+        "before-sleep" = lockMonitor;
+        "after-resume" = "niri msg action power-on-monitors";
+      };
+
       timeouts = [
         {
           timeout = 600;
+          resumeCommand = "niri msg action power-on-monitors";
           command = "niri msg action power-off-monitors";
         }
         {
