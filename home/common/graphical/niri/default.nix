@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = with pkgs; [
     # needed for noctalia
@@ -20,8 +20,18 @@
   };
 
   systemd.user.services = {
-    quickshell.Unit.PartOf = [ "niri.service" ];
-    swayidle.Unit.PartOf = [ "niri.service" ];
+    quickshell = {
+      Unit = {
+        PartOf = [ "niri.service" ];
+      };
+      Install.WantedBy = lib.mkForce [ "niri.service" ];
+    };
+    swayidle = {
+      Unit = {
+        PartOf = [ "niri.service" ];
+      };
+      Install.WantedBy = lib.mkForce [ "niri.service" ];
+    };
   };
 
   services.swayidle =
