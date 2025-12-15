@@ -82,25 +82,26 @@
 
   users.groups.gitlab = { };
 
-  systemd.services.git-mirror-lab = {
-    path = with pkgs; [
-      git
-      openssh
-      curl
-    ];
-    environment = {
-      STATE_DIR = "/var/gitlab/state/mirror-script";
-      SSH_KEY_FILE = "/var/secrets/gitlab/automation_lab";
-      GITLAB_HOST = "lab.home.5kw.li";
-    };
-    # needs GITLAB_TOKEN env var
-    script = builtins.readFile ./mirror.sh;
-    serviceConfig = {
-      User = "gitlab";
-      EnvironmentFile = "/var/secrets/gitlab/glab.env";
-    };
-    startAt = "*:0/10";
-  };
+  # systemd.services.git-mirror-lab = {
+  #   path = with pkgs; [
+  #     git
+  #     git-lfs
+  #     openssh
+  #     curl
+  #   ];
+  #   environment = {
+  #     STATE_DIR = "/var/gitlab/state/mirror-script";
+  #     SSH_KEY_FILE = "/var/secrets/gitlab/automation_lab";
+  #     GITLAB_HOST = "lab.home.5kw.li";
+  #   };
+  #   # needs GITLAB_TOKEN env var
+  #   script = builtins.readFile ./mirror.sh;
+  #   serviceConfig = {
+  #     User = "gitlab";
+  #     EnvironmentFile = "/var/secrets/gitlab/glab.env";
+  #   };
+  #   startAt = "*:0/10";
+  # };
 
   services.caddy.extraConfig = ''
     lab.home.5kw.li {
