@@ -36,20 +36,21 @@
 
   services.swayidle =
     let
-      lockMonitor = "qs ipc call lockScreen lock";
+      lockMonitor = "${pkgs.quickshell}/bin/qs ipc call lockScreen lock";
+      niri = "${pkgs.niri}/bin/niri";
     in
     {
       enable = true;
       events = {
         "before-sleep" = lockMonitor;
-        "after-resume" = "niri msg action power-on-monitors";
+        "after-resume" = "${niri} msg action power-on-monitors";
       };
 
       timeouts = [
         {
           timeout = 600;
-          resumeCommand = "niri msg action power-on-monitors";
-          command = "niri msg action power-off-monitors";
+          resumeCommand = "${niri} msg action power-on-monitors";
+          command = "${niri} msg action power-off-monitors";
         }
         {
           timeout = 300;
