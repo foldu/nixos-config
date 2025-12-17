@@ -33,7 +33,7 @@
     ./auth
     ./wrrr.nix
     ./piped
-    ./llama-swap.nix
+    ./llama.nix
     "${inputs.homeserver-sekret}"
   ];
 
