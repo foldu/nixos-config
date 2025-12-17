@@ -1,5 +1,6 @@
 {
   inputs,
+  config,
   lib,
   pkgs,
   ...
@@ -56,6 +57,8 @@
     package = pkgs.openrgb-with-all-plugins;
     motherboard = "amd";
   };
+
+  networking.firewall.allowedTCPPorts = [ config.services.hardware.openrgb.server.port ];
 
   users.users.barnabas.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOD4usy2QkPC6J7YLNW9kSm5ZZdS11j2Ad3qipzhpUy/ jupiter.home.5kw.li"
