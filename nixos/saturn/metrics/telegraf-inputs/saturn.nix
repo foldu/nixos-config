@@ -27,13 +27,13 @@
         response_timeout = "30s";
         tags.host = "saturn";
       }
-      {
-        urls = [ "https://reddit.home.5kw.li" ];
-        follow_redirects = true;
-        response_string_match = "Redlib";
-        response_timeout = "30s";
-        tags.host = "saturn";
-      }
+      # {
+      #   urls = [ "https://reddit.home.5kw.li" ];
+      #   follow_redirects = true;
+      #   response_string_match = "Redlib";
+      #   response_timeout = "30s";
+      #   tags.host = "saturn";
+      # }
       {
         urls = [ "https://lab.home.5kw.li/foldu/nixos-config" ];
         follow_redirects = true;
