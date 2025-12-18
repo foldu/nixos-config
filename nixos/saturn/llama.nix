@@ -11,6 +11,8 @@ in
           # "llama-server"
           "--models-preset"
           "/llama-config.ini"
+          "--models-max"
+          "1"
         ];
         image = "ghcr.io/ggml-org/llama.cpp:server-cuda";
         devices = [
