@@ -7,6 +7,7 @@
     cava
     gpu-screen-recorder
     wlsunset
+    ddcutil
 
     # needed for x11 on niri
     xwayland-satellite
