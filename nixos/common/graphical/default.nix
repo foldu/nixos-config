@@ -12,7 +12,7 @@
     ./pipewire.nix
     ./qt.nix
     ./syncthing.nix
-    ./game-devices.nix
+    ./gaming.nix
     ./samba.nix
     ./vm.nix
     ./niri.nix

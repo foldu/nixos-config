@@ -64,6 +64,11 @@
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOD4usy2QkPC6J7YLNW9kSm5ZZdS11j2Ad3qipzhpUy/ jupiter.home.5kw.li"
   ];
 
+  environment.sessionVariables = {
+    # auto upgrade fsr games to fsr4
+    PROTON_FSR4_RDNA3_UPGRADE = "1";
+  };
+
   system.stateVersion = "23.05"; # Did you read the comment?
   # no
 }
