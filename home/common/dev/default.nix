@@ -44,6 +44,7 @@ in
   home.packages = with pkgs; [
     # editors
     neovide
+    jetbrains.rider
     # zed-editor
     # tools
     gnumake
@@ -120,6 +121,8 @@ in
     jdt-language-server
     jdk21
     maven
+
+    dotnet-sdk_10
 
     # :goat
     zig
