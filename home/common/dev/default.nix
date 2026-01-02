@@ -45,7 +45,7 @@ in
     # editors
     neovide
     jetbrains.rider
-    # zed-editor
+    zed-editor
     # tools
     gnumake
     just
