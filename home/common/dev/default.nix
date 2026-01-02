@@ -69,7 +69,7 @@ in
     cmake-format
 
     # sql
-    sqlfluff
+    # sqlfluff
     sqlite-interactive
 
     # go
