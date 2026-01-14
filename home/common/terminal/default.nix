@@ -1,7 +1,7 @@
 { pkgs, inputs, ... }:
 {
   imports = [
-    ./fish
+    ./fish.nix
   ];
 
   xdg.configFile."src-manage/config.json".text = builtins.toJSON {
@@ -10,10 +10,7 @@
     hosts."lab.home.5kw.li".flatten = true;
   };
 
-  # programs.neovim = {
-  #   package = pkgs.neovim;
-  #   enable = true;
-  # };
+  programs.zoxide.enable = true;
 
   programs.tmux = {
     enable = true;
