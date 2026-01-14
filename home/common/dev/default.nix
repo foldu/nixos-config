@@ -79,7 +79,7 @@ in
 
     # nix
     nixd
-    nixfmt-rfc-style
+    nixfmt
 
     # shell
     shellcheck
