@@ -6,7 +6,7 @@
 }:
 {
   imports = [
-    ./corectrl.nix
+    ./amd-gpu.nix
     ./fancy-login.nix
     ./fonts.nix
     ./pipewire.nix
