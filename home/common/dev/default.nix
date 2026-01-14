@@ -5,7 +5,6 @@ in
 {
   imports = [
     ./rust.nix
-    ./python.nix
     inputs.quadlet-nix.homeManagerModules.quadlet
     ./powershell
   ];
@@ -43,16 +42,10 @@ in
 
   home.packages = with pkgs; [
     # editors
-    neovide
-    jetbrains.rider
     zed-editor
     # tools
     gnumake
-    just
-    cookiecutter
-    plantuml
     glab
-    gitu
     tokei
 
     # editor tools
@@ -74,7 +67,6 @@ in
 
     # go
     go
-    gopls
 
     # typst
     typst
@@ -90,42 +82,33 @@ in
     nixfmt-rfc-style
 
     # shell
-    nodePackages.bash-language-server
     shellcheck
     shfmt
 
     # webshit
     nodePackages.prettier
-    nodePackages.typescript
-    nodePackages.typescript-language-server
-    nodePackages.eslint
-    nodePackages.vscode-langservers-extracted
-    vue-language-server
-    tailwindcss-language-server
-    nodejs
     deno
 
-    opencode
-
-    # yaml
-    nodePackages.yaml-language-server
     # lua
     stylua
-    lua-language-server
 
     # markdown
     marksman
     markdownlint-cli2
 
     # java
-    jdt-language-server
     jdk21
     maven
+    gradle
 
     dotnet-sdk_10
 
     # :goat
     zig
-    zls
+
+    # :snek
+    python314
+    uv
+    ruff
   ];
 }
