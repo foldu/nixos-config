@@ -21,6 +21,13 @@
   };
 
   systemd.user.services = {
+    kwallet-pam-init = {
+      Service.ExecStart = "${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init";
+      Unit = {
+        PartOf = [ "niri.service" ];
+      };
+      Install.WantedBy = lib.mkForce [ "niri.service" ];
+    };
     quickshell = {
       Unit = {
         PartOf = [ "niri.service" ];

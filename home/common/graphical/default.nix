@@ -29,7 +29,6 @@
     yt-dlp
     pass
     imagemagick
-    bitwarden-desktop
     gnupg
     brave
     chromium

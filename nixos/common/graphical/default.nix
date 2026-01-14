@@ -23,9 +23,14 @@
   # enable wayland for electron apps
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  environment.systemPackages = [ pkgs.bitwarden-desktop ];
+
   programs.kdeconnect = {
     enable = true;
   };
+
+  # enable kwallet autounlock
+  security.pam.services.login.kwallet.enable = true;
 
   documentation = {
     dev.enable = true;
