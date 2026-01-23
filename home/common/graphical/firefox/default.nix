@@ -14,57 +14,42 @@
     profiles."default" = {
       isDefault = true;
       extraConfig = (builtins.readFile ./betterfox.js) + ''
+        # don't auto enable picture in picture when switching tabs (annoying on TWMs)
+        user_pref("media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled", false);
+
         user_pref("browser.contentblocking.category", "strict");
-        user_pref("browser.theme.dark-private-windows", false);
-        user_pref("browser.uidensity", 0);
+
+        # use my own syncserver
         user_pref("identity.fxaccounts.enabled", true);
         user_pref("identity.sync.tokenserver.uri", "https://ffsync.home.5kw.li/1.0/sync/1.5");
-        user_pref("media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled", false);
+
+        # do not turn on DOH and don't let mozarella enable it
         user_pref("network.trr.mode", 5);
+
+        # don't clear entire history on shutdown
         user_pref("privacy.clearOnShutdown.downloads", false);
         user_pref("privacy.clearOnShutdown.history", false);
+
+        # I dislike being flashbanged so just break resistFingerprinting
         user_pref("privacy.fingerprintingProtection", true);
         user_pref("privacy.fingerprintingProtection.overrides", "+AllTargets,-CSSPrefersColorScheme");
         user_pref("privacy.resistFingerprinting", false);
+
+        # don't sync things I don't want to sync
         user_pref("services.sync.engine.history", false);
         user_pref("services.sync.engine.tabs", false);
         user_pref("services.sync.engine.workspaces", true);
+
+        # use vertical tabs
         user_pref("sidebar.verticalTabs", true);
-        user_pref("svg.context-properties.content.enabled", true);
+
+        # for gnome theme https://github.com/rafaelmardojai/firefox-gnome-theme
         user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
         user_pref("widget.gtk.rounded-bottom-corners.enabled", true);
+        user_pref("svg.context-properties.content.enabled", true);
+        user_pref("browser.theme.dark-private-windows", false);
+        user_pref("browser.uidensity", 0);
       '';
-      # settings = {
-      #   # don't auto enable picture in picture when switching tabs (annoying on TWMs)
-      #   "media.videocontrols.picture-in-picture.enable-when-switching-tabs.enabled" = false;
-      #   "browser.contentblocking.category" = "strict";
-      #   # firefox llm integration sucks and is bound to only proprietary models$$$
-      #   "browser.ml.enable" = false;
-      #   "identity.sync.tokenserver.uri" = "https://ffsync.home.5kw.li/1.0/sync/1.5";
-      #   "identity.fxaccounts.enabled" = true;
-      #   "services.sync.engine.tabs" = false;
-      #   "services.sync.engine.history" = false;
-      #   "services.sync.engine.workspaces" = true;
-      #   # do not turn on DOH and don't let mozarella enable it
-      #   "network.trr.mode" = 5;
-      #
-      #   "sidebar.verticalTabs" = true;
-      #
-      #   # I dislike being flashbanged so just break resistFingerprinting
-      #   "privacy.resistFingerprinting" = false;
-      #   "privacy.fingerprintingProtection" = true;
-      #   "privacy.fingerprintingProtection.overrides" = "+AllTargets,-CSSPrefersColorScheme";
-      #
-      #   "privacy.clearOnShutdown.history" = false;
-      #   "privacy.clearOnShutdown.downloads" = false;
-      #
-      #   # for gnome theme https://github.com/rafaelmardojai/firefox-gnome-theme
-      #   "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
-      #   "browser.uidensity" = 0;
-      #   "svg.context-properties.content.enabled" = true;
-      #   "browser.theme.dark-private-windows" = false;
-      #   "widget.gtk.rounded-bottom-corners.enabled" = true;
-      # };
     };
   };
 }
