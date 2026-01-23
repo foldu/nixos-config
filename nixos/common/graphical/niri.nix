@@ -10,6 +10,10 @@
   programs.niri = {
     enable = true;
   };
+  xdg.portal.config.niri = {
+    "org.freedesktop.impl.portal.FileChooser" = "kde";
+    "org.freedesktop.impl.portal.Secret" = "kwallet";
+  };
 
   # needed for noctalia
   services.power-profiles-daemon.enable = true;
