@@ -49,6 +49,11 @@
         user_pref("svg.context-properties.content.enabled", true);
         user_pref("browser.theme.dark-private-windows", false);
         user_pref("browser.uidensity", 0);
+
+        # always use the desktop portal file picker instead of the shitty gtk3 one
+        user_pref("widget.use-xdg-desktop-portal.file-picker", 1);
+        # always use desktop portal for opening files
+        user_pref("widget.use-xdg-desktop-portal.open-uri", 1);
       '';
     };
   };
