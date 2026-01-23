@@ -66,7 +66,7 @@
 
   environment.sessionVariables = {
     # auto upgrade fsr games to fsr4
-    PROTON_FSR4_RDNA3_UPGRADE = "1";
+    PROTON_FSR4_UPGRADE = "1";
   };
 
   system.stateVersion = "23.05"; # Did you read the comment?
