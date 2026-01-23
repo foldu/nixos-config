@@ -10,7 +10,7 @@ in
 {
   home.packages =
     let
-      pkgs = builtins.map (lib.attrByPath [ "pkg" ] null) (lib.attrValues settings.apps);
+      pkgs = map (lib.attrByPath [ "pkg" ] null) (lib.attrValues settings.apps);
     in
     builtins.filter (pkg: pkg != null) pkgs;
   xdg = {
