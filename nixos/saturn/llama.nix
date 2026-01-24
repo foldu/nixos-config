@@ -34,7 +34,7 @@ in
 
   services.caddy.virtualHosts."llama.home.5kw.li".extraConfig = ''
     @valid_auth_header {
-      header Auhorization {env.LLAMA_SWAP_API_TOKEN}
+      header Authorization {env.LLAMA_SWAP_API_TOKEN}
     }
 
     handle @valid_auth_header {
