@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   # services.dbus.packages = with pkgs; [
   #   gcr
@@ -12,7 +12,7 @@
   };
   xdg.portal.config.niri = {
     "org.freedesktop.impl.portal.FileChooser" = "kde";
-    "org.freedesktop.impl.portal.Secret" = "kwallet";
+    "org.freedesktop.impl.portal.Secret" = lib.mkForce "kwallet";
   };
 
   # needed for noctalia
