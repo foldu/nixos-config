@@ -20,8 +20,7 @@
     ../common/gitlab-runner.nix
 
     ./manual-hardware-configuration.nix
-    ./docker.nix
-    ./ollama.nix
+    ./llama.nix
   ];
 
   programs.nix-ld.enable = true;
@@ -68,7 +67,6 @@
     # auto upgrade fsr games to fsr4
     PROTON_FSR4_UPGRADE = "1";
   };
-
   system.stateVersion = "23.05"; # Did you read the comment?
   # no
 }

@@ -7,7 +7,8 @@
 
   systemd.timers.podman-auto-update = {
     enable = true;
-    timerConfig.OnCalendar = "03:00";
+    timerConfig.OnCalendar = "daily";
+    wantedBy = [ "multi-user.target" ];
   };
   boot.enableContainers = false;
 }
