@@ -588,8 +588,6 @@ layer-rule {
   place-within-backdrop true
 }
 
-spawn-sh-at-startup "steam_id=com.valvesoftware.Steam; if flatpak list | grep -q $steam_id; then sleep 1 && flatpak run $steam_id fi"
-
 switch-events {
     lid-close { spawn "sh" "-c" "qs ipc call lockScreen lock; niri msg action power-off-monitors"; }
     lid-open { spawn "sh" "-c" "niri msg action power-on-monitors"; }
