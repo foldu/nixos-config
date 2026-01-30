@@ -18,6 +18,7 @@
       set -g fish_greeting
       bind alt-backspace backward-kill-word
       bind ctrl-w backward-kill-bigword
+      export SSH_AUTH_SOCK=/home/barnabas/.bitwarden-ssh-agent.sock
     '';
     shellAliases = {
       ls = "ls --hyperlink=auto --color=auto";
