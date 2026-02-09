@@ -28,6 +28,21 @@
       };
       Install.WantedBy = lib.mkForce [ "niri.service" ];
     };
+    plasma-polkit-agent-niri = {
+      Service = {
+        ExecStart = "${pkgs.kdePackages.polkit-kde-agent-1}/libexec/polkit-kde-authentication-agent-1";
+        BusName = "org.kde.polkit-kde-authentication-agent-1";
+        Slice = "background.slice";
+        After = "graphical-session.target";
+        Requisite = "graphical-session.target";
+        RestartSec = "5";
+        Restart = "on-failure";
+      };
+      Unit = {
+        PartOf = [ "niri.service" ];
+      };
+      Install.WantedBy = [ "niri.service" ];
+    };
     quickshell = {
       Unit = {
         PartOf = [ "niri.service" ];
