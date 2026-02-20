@@ -6,7 +6,6 @@ in
   imports = [
     ./rust.nix
     inputs.quadlet-nix.homeManagerModules.quadlet
-    ./powershell
   ];
 
   systemd.user.sessionVariables = {
