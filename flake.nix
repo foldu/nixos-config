@@ -76,10 +76,6 @@
     quadlet-nix = {
       url = "github:SEIAROTg/quadlet-nix";
     };
-
-    zed = {
-      url = "github:zed-industries/zed";
-    };
   };
 
   outputs =
