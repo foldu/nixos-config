@@ -32,7 +32,7 @@ in
     serviceConfig.Type = "simple";
     script = ''
       while true; do
-        chmod 777 -R ${ytproxySockdir} 
+        chmod 777 -R ${ytproxySockdir}
         ${pkgs.inotify-tools}/bin/inotifywait -r -e create ${ytproxySockdir} || exit 1
       done
     '';
@@ -116,7 +116,7 @@ in
         };
 
         piped-backend.containerConfig = {
-          image = "docker.io/1337kavin/piped:latest";
+          image = "ghcr.io/10203/piped-backend-fixes/piped:fixes";
           volumes = [ "${./piped.properties}:/app/config.properties:ro" ];
           pod = pods.piped-pott.ref;
           autoUpdate = "registry";
