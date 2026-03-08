@@ -141,5 +141,16 @@
       };
       overlays = import ./overlays { inherit inputs; };
       lib = import ./lib { inherit (nixpkgs) lib; };
-    };
+    }
+    // flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        packages = {
+          helium = pkgs.callPackage ./packages/helium { };
+        };
+      }
+    );
 }

@@ -43,6 +43,7 @@
     wl-clipboard
     unrar
     _7zz
+    helium
   ]);
 
   services.pickwp.enable = true;
