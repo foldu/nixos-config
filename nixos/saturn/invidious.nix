@@ -19,6 +19,7 @@ in
       invidious_companion = [
         {
           private_url = "http://localhost:${companionPort}/companion";
+          public_url = "https://${domain}/companion";
         }
       ];
       invidious_companion_key = "aephahm5Ca2ut6ha";
@@ -56,9 +57,7 @@ in
 
   services.caddy.extraConfig = ''
     ${domain} {
-      handle /vi/* {
-        header Cache-Control "public, max-age=604800"
-      }
+      reverse_proxy /companion/* localhost:${companionPort}
       reverse_proxy localhost:${toString config.services.invidious.port}
     }
   '';
