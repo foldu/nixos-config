@@ -39,7 +39,7 @@ in
         inter
         source-code-pro
         vista-fonts
-        etBook
+        et-book
         eb-garamond
         monaspace
         domitian
