@@ -22,7 +22,10 @@
   environment.etc."xdg/menus/applications.menu".source =
     "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
 
-  services.displayManager.gdm.enable = true;
+  services.displayManager.gdm = {
+    enable = true;
+    autoSuspend = false;
+  };
 
   # enable wayland for electron apps
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
