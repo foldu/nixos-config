@@ -27,7 +27,7 @@ in
       WRRR_BIND_TO = "127.0.0.1:${toString port}";
     };
     serviceConfig = {
-      ExecStart = "${inputs.atchr.packages.${pkgs.system}.wrrr}/bin/wrrr";
+      ExecStart = "${inputs.atchr.packages.${pkgs.stdenv.hostPlatform.system}.wrrr}/bin/wrrr";
       EnvironmentFile = "/var/secrets/wrrr.env";
       User = "wrrr";
       Group = "wrrr";

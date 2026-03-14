@@ -13,7 +13,7 @@ let
   frontendPort = "4456";
   varnishPort = "4099";
   backendPort = "4455";
-  writeNuScript = inputs.nix-stuff.packages.${pkgs.system}.writeNuScript;
+  writeNuScript = inputs.nix-stuff.packages.${pkgs.stdenv.hostPlatform.system}.writeNuScript;
 in
 {
   imports = [ inputs.nix-stuff.nixosModules.podman-pods ];

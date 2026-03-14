@@ -30,8 +30,8 @@
   environment.enableAllTerminfo = true;
 
   environment.systemPackages = [
-    inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim
-    inputs.home-manager.packages.${pkgs.system}.home-manager
+    inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim
+    inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
   ]
   ++ (with pkgs; [
     # neovim

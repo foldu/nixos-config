@@ -16,8 +16,8 @@
   ];
 
   home.packages = [
-    inputs.nix-stuff.packages.${pkgs.system}.eunzip
-    inputs.wpp-gtk.packages.${pkgs.system}.wpp
+    inputs.nix-stuff.packages.${pkgs.stdenv.hostPlatform.system}.eunzip
+    inputs.wpp-gtk.packages.${pkgs.stdenv.hostPlatform.system}.wpp
   ]
   ++ (with pkgs; [
     mumble

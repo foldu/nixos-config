@@ -2,7 +2,7 @@
 {
   programs.yazi = {
     enable = false;
-    package = inputs.yazi.packages.${pkgs.system}.yazi;
+    package = inputs.yazi.packages.${pkgs.stdenv.hostPlatform.system}.yazi;
     settings = {
       opener = {
         image = [
