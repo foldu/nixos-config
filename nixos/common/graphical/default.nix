@@ -18,6 +18,10 @@
     ./plasma.nix
   ];
 
+  # fix dolphin mime shit being broken
+  environment.etc."xdg/menus/applications.menu".source =
+    "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
+
   services.displayManager.gdm.enable = true;
 
   # enable wayland for electron apps
