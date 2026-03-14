@@ -15,9 +15,10 @@
     ./samba.nix
     ./vm.nix
     ./niri.nix
-    ./sddm.nix
     ./plasma.nix
   ];
+
+  services.displayManager.gdm.enable = true;
 
   # enable wayland for electron apps
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
