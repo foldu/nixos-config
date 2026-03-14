@@ -29,8 +29,8 @@ pkgs: {
   apps = {
     browser = {
       pkg = null;
-      command = "firefox";
-      desktopFile = "firefox.desktop";
+      command = "helium";
+      desktopFile = "helium.desktop";
     };
     pdfViewer = {
       pkg = pkgs.evince;
@@ -50,7 +50,7 @@ pkgs: {
     emailClient = {
       pkg = pkgs.thunderbird;
       command = "thunderbird";
-      desktopFile = "thunderbird";
+      desktopFile = "thunderbird.desktop";
     };
     videoPlayer = {
       pkg = pkgs.celluloid;
@@ -59,13 +59,13 @@ pkgs: {
     };
     graphicalEditor = {
       pkg = null;
-      command = "neovide";
-      desktopFile = "neovide.desktop";
+      command = "zed";
+      desktopFile = "dev.zed.Zed.desktop";
     };
     fileBrowser = {
-      pkg = pkgs.nautilus;
-      command = "nautilus";
-      desktopFile = "org.gnome.Nautilus.desktop";
+      pkg = null;
+      command = "dolphin";
+      desktopFile = "org.kde.dolphin.desktop";
     };
     torrentClient = {
       pkg = pkgs.fragments;
