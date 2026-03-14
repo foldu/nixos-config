@@ -31,16 +31,10 @@
 
   boot.loader = {
     efi = {
-      #canTouchEfiVariables = true;
+      canTouchEfiVariables = true;
       efiSysMountPoint = "/efi";
     };
-    grub = {
-      enable = true;
-      device = "nodev";
-      efiInstallAsRemovable = true;
-      efiSupport = true;
-      useOSProber = true;
-    };
+    limine.enable = true;
   };
 
   environment.sessionVariables = {
