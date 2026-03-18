@@ -13,8 +13,8 @@ input {
             // For more information, see xkeyboard-config(7).
 
             // For example:
-            layout "us,us(intl)"
-            options "grp:win_space_toggle,caps:escape"
+            layout "us"
+            options "grp:win_space_toggle,caps:escape,compose:ralt"
         }
 
         // Enable numlock on startup, omitting this setting disables it.
@@ -86,7 +86,7 @@ output "BOE NE135A1M-NY1 Unknown" {
 
 // laptop dock screen
 output "Dell Inc. DELL U2415 08DXD49F38EL" {
-    position x=0 y=0
+    // position x=0 y=0
 }
 
 // Settings that influence how windows are positioned and sized.

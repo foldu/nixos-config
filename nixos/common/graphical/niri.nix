@@ -10,6 +10,11 @@
 
   services.gvfs.enable = true;
 
+  i18n.inputMethod = {
+    enable = true;
+    type = "ibus";
+  };
+
   programs.dms-shell = {
     enable = true;
 
