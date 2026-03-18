@@ -20,6 +20,7 @@
     ../common/gitlab-runner.nix
 
     ./manual-hardware-configuration.nix
+    ../common/graphical/amd-gpu.nix
     ./llama.nix
   ];
 
