@@ -22,7 +22,7 @@
     enable = true;
     package = pkgs.steam.override {
       extraEnv = {
-        MANGOHUD = true;
+        # MANGOHUD = true;
         PROTON_USE_NTSYNC = true;
       };
     };
