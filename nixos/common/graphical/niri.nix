@@ -1,13 +1,9 @@
-{ inputs, pkgs, ... }:
 {
-  environment.systemPackages = [
-    pkgs.dms-shell
-  ];
-  # services.dbus.packages = with pkgs; [
-  #   gcr
-  #   gnome-settings-daemon
-  # ];
-
+  inputs,
+  pkgs,
+  ...
+}:
+{
   services.gvfs.enable = true;
 
   i18n.inputMethod = {
