@@ -103,9 +103,9 @@
       "dialout"
       "networkmanager"
     ];
-    # FIXME: too lazy
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJQ+TsvKvdWG+9KLVeg5N4y1Ce1jr/fP3ELTHVWLxZOR"
+      # barnabas@home from bitwarden
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHt6FyRH9+5nbAGbKyuDcjz5YzJ31xLKPJBWAjdTWbJq"
     ];
   };
 
