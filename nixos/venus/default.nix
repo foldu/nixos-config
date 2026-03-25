@@ -34,7 +34,10 @@
 
   # go into hibernate after being suspended for 30minutes
   # https://wiki.nixos.org/wiki/Power_Management#Go_into_hibernate_after_specific_suspend_time
-  systemd.sleep.settings.Sleep.HibernateDelaySec = "30m";
+  systemd.sleep.settings.Sleep = {
+    HibernateOnACPower = false;
+    HibernateDelaySec = "30m";
+  };
   services.logind.settings.Login.HandleLidSwitch = "suspend-then-hibernate";
 
   networking.nftables = {
