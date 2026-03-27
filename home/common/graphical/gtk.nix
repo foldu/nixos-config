@@ -1,4 +1,9 @@
-{ pkgs, getSettings, ... }:
+{
+  pkgs,
+  config,
+  getSettings,
+  ...
+}:
 let
   iconTheme = "Adwaita";
   gtkTheme = "Adwaita";
@@ -18,12 +23,7 @@ in
     gtk3.extraConfig.gtk-key-theme-name = "Emacs";
   };
 
-  xdg.configFile."gtk-4.0/settings.ini".text = ''
-    [Settings]
-    gtk-font-name=Inter 11
-    gtk-icon-theme-name=${iconTheme}
-    gtk-theme-name=${gtkTheme}
-  '';
+  gtk.gtk4.theme = config.gtk.theme;
 
   gtk.font = {
     name = configSettings.font.sans.name;
