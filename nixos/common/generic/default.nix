@@ -14,6 +14,7 @@
     ./telegraf.nix
     ./no-telemetry.nix
     ./sops.nix
+    ./udev.nix
   ];
 
   services.dbus.implementation = "dbus";
