@@ -32,6 +32,7 @@
     ./tailscale-exit-node.nix
     ./auth
     ./wrrr.nix
+    ./paperless.nix
     # ./piped
     ./llama.nix
     "${inputs.homeserver-sekret}"
