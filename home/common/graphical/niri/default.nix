@@ -5,6 +5,12 @@
     xwayland-satellite
   ];
 
-  xdg.configFile."niri/config.kdl".source = ./config.kdl;
+  xdg.configFile = {
+    "niri/config.kdl".source = ./config.kdl;
+    "niri/launch-bitwarden.sh" = {
+      executable = true;
+      source = ./launch-bitwarden.sh;
+    };
+  };
 
 }

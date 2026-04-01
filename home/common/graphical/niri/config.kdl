@@ -611,6 +611,8 @@ binds {
     // Mod+Shift+P { power-off-monitors; }
 }
 
+spawn-at-startup "~/.config/niri/launch-bitwarden.sh"
+
 // switch-events {
 //     lid-close { spawn "sh" "-c" "qs ipc call lockScreen lock; niri msg action power-off-monitors"; }
 //     lid-open { spawn "sh" "-c" "niri msg action power-on-monitors"; }
