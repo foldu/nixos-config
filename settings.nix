@@ -64,8 +64,8 @@ pkgs: {
     };
     fileBrowser = {
       pkg = null;
-      command = "dolphin";
-      desktopFile = "org.kde.dolphin.desktop";
+      command = "nautilus";
+      desktopFile = "org.gnome.Nautilus.desktop";
     };
     torrentClient = {
       pkg = pkgs.fragments;

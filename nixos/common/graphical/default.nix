@@ -14,12 +14,8 @@
     ./samba.nix
     ./vm.nix
     ./niri.nix
-    ./plasma.nix
+    ./gnome.nix
   ];
-
-  # fix dolphin mime shit being broken
-  environment.etc."xdg/menus/applications.menu".source =
-    "${pkgs.kdePackages.plasma-workspace}/etc/xdg/menus/plasma-applications.menu";
 
   services.displayManager.defaultSession = "niri";
   services.displayManager.gdm = {
@@ -31,13 +27,6 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   environment.systemPackages = [ pkgs.bitwarden-desktop ];
-
-  programs.kdeconnect = {
-    enable = true;
-  };
-
-  # enable kwallet autounlock
-  security.pam.services.login.kwallet.enable = true;
 
   documentation = {
     dev.enable = true;
