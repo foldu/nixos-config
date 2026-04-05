@@ -52,7 +52,7 @@ in
           pod = pods.gluetun-pott.ref;
         };
         gluetun.containerConfig = {
-          image = "docker.io/qmcgaw/gluetun:v3.39.1";
+          image = "docker.io/qmcgaw/gluetun:v3";
           addCapabilities = [ "NET_ADMIN" ];
           devices = [ "/dev/net/tun:/dev/net/tun" ];
           environmentFiles = [ "/var/secrets/gluetun.env" ];
