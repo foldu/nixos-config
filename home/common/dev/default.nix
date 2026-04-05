@@ -85,7 +85,7 @@ in
     shfmt
 
     # webshit
-    nodePackages.prettier
+    # nodePackages.prettier
     deno
 
     # lua
