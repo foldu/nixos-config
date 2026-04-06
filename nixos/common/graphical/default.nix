@@ -12,7 +12,6 @@
     ./syncthing.nix
     ./gaming.nix
     ./samba.nix
-    ./vm.nix
     ./niri.nix
     ./gnome.nix
   ];
