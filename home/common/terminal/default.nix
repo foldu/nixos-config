@@ -102,6 +102,7 @@
       diff.tool = "nvim_difftool";
       difftool.nvim_difftool.cmd = "nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"";
     };
+    signing.format = null;
     includes = [
       {
         path = "/home/barnabas/.config/git/sekret";
