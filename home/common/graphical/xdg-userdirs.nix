@@ -1,12 +1,13 @@
-{ ... }:
+{ config, ... }:
 {
   xdg.userDirs = {
     enable = true;
-    desktop = "$HOME";
-    documents = "$HOME/doc";
-    download = "$HOME/downloads";
-    pictures = "$HOME/img";
+    desktop = "${config.home.homeDirectory}";
+    documents = "${config.home.homeDirectory}/doc";
+    download = "${config.home.homeDirectory}/downloads";
+    pictures = "${config.home.homeDirectory}/img";
     music = "/run/media/beets-lib";
-    videos = "$HOME/videos";
+    videos = "${config.home.homeDirectory}/videos";
+    setSessionVariables = true;
   };
 }
