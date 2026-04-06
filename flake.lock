@@ -673,11 +673,11 @@
         "nixpkgs": "nixpkgs_7"
       },
       "locked": {
-        "lastModified": 1775474401,
-        "narHash": "sha256-yzDPMrb1yAwMgfb+KvcuNqiAD0hOxmbUvuPIIqyYq78=",
+        "lastModified": 1775480140,
+        "narHash": "sha256-vSXuEyMGW4MsruvLcTWiWf35WFNi/N5J7U56BK3c/nk=",
         "ref": "refs/heads/master",
-        "rev": "436af352554db8049ca71ec1fc878fb09dbc5381",
-        "revCount": 83,
+        "rev": "6d3717c1bdb272f0de89ca2531f0dcff45b82220",
+        "revCount": 84,
         "type": "git",
         "url": "https://lab.home.5kw.li/foldu/wpp-gtk"
       },
