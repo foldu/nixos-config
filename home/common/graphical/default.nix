@@ -15,7 +15,7 @@
   ];
 
   home.packages = [
-    inputs.nix-stuff.packages.${pkgs.stdenv.hostPlatform.system}.eunzip
+    inputs.eunzip.packages.${pkgs.stdenv.hostPlatform.system}.eunzip
     inputs.wpp-gtk.packages.${pkgs.stdenv.hostPlatform.system}.wpp
   ]
   ++ (with pkgs; [

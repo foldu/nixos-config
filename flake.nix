@@ -23,10 +23,6 @@
       url = "github:NixOS/nixos-hardware";
     };
 
-    crane = {
-      url = "github:ipetkov/crane/v0.20.0";
-    };
-
     atchr = {
       type = "gitlab";
       owner = "foldu";
@@ -51,27 +47,11 @@
       flake = false;
     };
 
-    nix-stuff = {
-      url = "github:foldu/nix-stuff";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-        crane.follows = "crane";
-      };
-    };
-
-    yazi = {
-      url = "github:sxyazi/yazi";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    eunzip.url = "github:foldu/eunzip";
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
     cashewnix.url = "github:foldu/cashewnix";
-
-    src-manage = {
-      url = "github:foldu/src-manage";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
 
     quadlet-nix = {
       url = "github:SEIAROTg/quadlet-nix";
