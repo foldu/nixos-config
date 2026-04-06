@@ -2,7 +2,6 @@
 {
   imports = [
     ./gtk.nix
-    ./kitty
     ./mpv.nix
     ./xdg-userdirs.nix
     ./xdg.nix
@@ -36,7 +35,6 @@
     d-spy
     gimp
     streamlink
-    supersonic-wayland
     feishin
     # temporarily needed until https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/merge_requests/97
     thunderbird
