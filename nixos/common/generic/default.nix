@@ -64,6 +64,9 @@
       ];
       auto-optimise-store = true;
       trusted-public-keys = [ "jupiter:2laywrj8EfgDWW8GnDkIPuONvzMyrIirdAPWkvSIU0g=" ];
+
+      # don't explode on unavailable binary caches
+      fallback = true;
     };
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flake
