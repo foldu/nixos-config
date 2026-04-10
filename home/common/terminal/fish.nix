@@ -18,7 +18,10 @@
       set -g fish_greeting
       bind alt-backspace backward-kill-word
       bind ctrl-w backward-kill-bigword
-      export SSH_AUTH_SOCK=/home/barnabas/.bitwarden-ssh-agent.sock
+      # only use bitwarden ssh agent when not connected over ssh
+      if test -z $SSH_CONNECTION
+          export SSH_AUTH_SOCK=/home/barnabas/.bitwarden-ssh-agent.sock
+      end
     '';
     shellAliases = {
       ls = "ls --hyperlink=auto --color=auto";
