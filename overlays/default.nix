@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ ... }:
 {
   customizations = import ./customizations.nix;
   extra = import ./extra.nix;

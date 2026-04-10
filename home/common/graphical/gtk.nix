@@ -6,7 +6,6 @@
 }:
 let
   iconTheme = "Adwaita";
-  gtkTheme = "Adwaita";
   configSettings = getSettings pkgs;
 in
 {
