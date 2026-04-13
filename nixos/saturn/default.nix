@@ -10,6 +10,7 @@
     ../common/cashewnix.nix
     ../common/gitlab-runner.nix
     ../common/nivea.nix
+    ../common/systemd-resolved.nix
 
     ./hardware-configuration.nix
     ./imgen.nix
@@ -49,7 +50,10 @@
 
   networking.hostId = "964725e9";
 
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    dns = "systemd-resolved";
+  };
 
   services.caddy = {
     enable = true;
