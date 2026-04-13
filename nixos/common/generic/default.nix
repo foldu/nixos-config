@@ -136,7 +136,7 @@
 
   security.pki.certificateFiles = [ ../../../home_ca.crt ];
 
-  services.tailscale.enable = true;
+  services.netbird.enable = true;
 
   networking.wireguard.enable = true;
 
