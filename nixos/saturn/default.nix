@@ -18,7 +18,7 @@
     ./file-server.nix
     ./gitlab
     ./jellyfin.nix
-    ./redlib
+    ./redlib.nix
     ./step-ca.nix
     ./transmission
     ./vaultwarden.nix
