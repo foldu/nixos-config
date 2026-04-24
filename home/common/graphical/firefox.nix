@@ -90,6 +90,7 @@ in
 {
   programs.firefox = {
     enable = true;
+    configPath = ".mozilla/firefox";
     policies = {
       DisableAppUpdate = true;
       DisableTelemetry = true;
