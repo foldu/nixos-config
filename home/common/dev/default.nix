@@ -95,13 +95,6 @@ in
     marksman
     markdownlint-cli2
 
-    # java
-    jdk21
-    maven
-    gradle
-
-    dotnet-sdk_10
-
     # :goat
     zig
 

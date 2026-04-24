@@ -5,11 +5,9 @@
     ./mpv.nix
     ./xdg-userdirs.nix
     ./xdg.nix
-    ./yazi.nix
     ./ghostty.nix
     ./niri
     ./firefox.nix
-    ./obsidian.nix
 
     inputs.pickwp.homeManagerModules.pickwp
   ];
