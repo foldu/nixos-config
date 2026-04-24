@@ -95,6 +95,15 @@
 
   time.timeZone = "Europe/Amsterdam";
 
+  security = {
+    sudo.enable = false;
+    sudo-rs = {
+      enable = true;
+      execWheelOnly = true;
+      wheelNeedsPassword = true;
+    };
+  };
+
   programs.fish.enable = true;
 
   users.users.barnabas = {

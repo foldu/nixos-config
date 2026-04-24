@@ -162,7 +162,7 @@ in
       };
     };
   };
-  security.sudo.extraRules = lib.mkIf (!isVM) [
+  security.sudo-rs.extraRules = lib.mkIf (!isVM) [
     {
       users = [ "telegraf" ];
       commands = [
@@ -173,10 +173,6 @@ in
       ];
     }
   ];
-  # avoid logging sudo use
-  security.sudo.configFile = ''
-    Defaults:telegraf !syslog,!pam_session
-  '';
   # create dummy file to avoid telegraf errors
   systemd.tmpfiles.rules = [ "f /var/log/telegraf/dummy 0444 root root - -" ];
 }
