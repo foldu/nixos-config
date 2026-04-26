@@ -21,10 +21,10 @@ groups:
         annotations:
           summary: "{{$labels.instance}} device {{$labels.device}} on {{$labels.path}} got less than 10% inodes left on its filesystem"
       - alert: swap-using-50percent
-        expr: "mem_swap_total - (mem_swap_cached + mem_swap_free) > mem_swap_total * 0.5"
-        for: "30m"
+        expr: "swap_used_percent >= 50"
+        for: "10m"
         annotations:
-          summary: "{{$labels.host}} is using 50% of its swap space for at least 30 minutes"
+          summary: "{{$labels.host}} is using 50% of its swap space for at least 10 minutes"
       - alert: systemd-service-failed
         expr: 'systemd_units_active_code{name!~"user@\\d+.service"} == 3'
         annotations:
