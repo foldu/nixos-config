@@ -1,5 +1,6 @@
 {
   pkgs,
+  inputs,
   lib,
   ...
 }:
@@ -14,6 +15,10 @@
     ./samba.nix
     ./niri.nix
     ./gnome.nix
+  ];
+
+  nixpkgs.overlays = [
+    inputs.nix-cachyos-kernel.overlays.pinned
   ];
 
   services.displayManager.defaultSession = "niri";

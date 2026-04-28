@@ -30,6 +30,10 @@
 
   networking.hostName = "jupiter";
 
+  boot.kernelPackages =
+    lib.mkForce
+      inputs.nix-cachyos-kernel.legacyPackages.${pkgs.stdenv.hostPlatform.system}.linuxPackages-cachyos-latest-lto-zen4;
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;

@@ -58,9 +58,11 @@
     };
 
     quickshell = {
-      url = "git+https://git.outfoxxed.me/quickshell/quickshell/?rev=1b2519d9f3d963e575b8a1ef08fab47c7af0d1b3";
+      url = "git+https://git.outfoxxed.me/quickshell/quickshell/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
   };
 
   outputs =
