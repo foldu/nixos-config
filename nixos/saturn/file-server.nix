@@ -10,7 +10,7 @@
       global = {
 
         # allow only local subnet
-        "hosts allow" = "192.168.8.0/24 100.64.0.0/24 localhost";
+        "hosts allow" = "192.168.8.0/24 172.25.74.0/24 localhost";
         "hosts deny" = "0.0.0.0/0";
 
         "min protocol" = "SMB3";

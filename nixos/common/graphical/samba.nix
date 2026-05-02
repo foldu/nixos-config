@@ -9,7 +9,7 @@ let
       if config.networking.hostName == "jupiter" then
         "//${home-network.devices.saturn.ip}/${mountpoint}"
       else
-        "//${home-network.devices.saturn.vip}/${mountpoint}";
+        "//saturn.home.5kw.li/${mountpoint}";
     fsType = "cifs";
     options = [
       "x-systemd.automount"
