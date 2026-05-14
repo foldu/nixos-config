@@ -57,6 +57,7 @@
     fastfetch
     rename
     man-pages
+    gitu
   ];
 
   programs.htop = {
@@ -78,16 +79,6 @@
     };
   };
 
-  programs.jujutsu = {
-    enable = true;
-    settings = {
-      user = {
-        email = "foldu@protonmail.com";
-        name = "foldu";
-      };
-    };
-  };
-
   programs.git = {
     enable = true;
     lfs.enable = true;
@@ -98,8 +89,6 @@
       };
       init.defaultBranch = "master";
       pull.rebase = true;
-      diff.tool = "nvim_difftool";
-      difftool.nvim_difftool.cmd = "nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"";
     };
     signing.format = null;
     includes = [
@@ -107,11 +96,6 @@
         path = "/home/barnabas/.config/git/sekret";
       }
     ];
-  };
-
-  programs.difftastic = {
-    enable = true;
-    git.enable = true;
   };
 
   programs.fzf.enable = true;
