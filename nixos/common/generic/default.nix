@@ -15,6 +15,7 @@
     ./no-telemetry.nix
     ./sops.nix
     ./udev.nix
+    ./mitigations.nix
   ];
 
   services.dbus.implementation = "dbus";
@@ -126,13 +127,6 @@
   boot.tmp.useTmpfs = true;
 
   networking.firewall.enable = true;
-
-  # dirty frag: blacklist shit kernel modules nobody ever used
-  boot.blacklistedKernelModules = [
-    "esp4"
-    "esp6"
-    "rxrpc"
-  ];
 
   # increase fd limits because they're way too low
   security.pam.loginLimits = [
