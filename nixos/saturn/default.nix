@@ -60,7 +60,7 @@
     email = "foldu@protonmail.com";
     package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddy-dns/ovh@v1.1.0" ];
-      hash = "sha256-9t6urBpExPzBoZyscs08qvMK5QHjAuGDme0uA9LFBqM=";
+      hash = "sha256-AQB86GFrydS6ILLhmySJnRAb2CmFTxIYr760ztOjn00=";
     };
     globalConfig = ''
       acme_dns ovh {
