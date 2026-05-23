@@ -14,6 +14,7 @@
 
     ./hardware-configuration.nix
     ./imgen.nix
+    ./bambu.nix
     ./backups.nix
     ./file-server.nix
     ./gitlab
