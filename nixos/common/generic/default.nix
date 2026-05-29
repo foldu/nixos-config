@@ -29,7 +29,7 @@
     LESS = "FRX";
   };
 
-  environment.enableAllTerminfo = true;
+  environment.enableAllTerminfo = false;
 
   environment.systemPackages = [
     inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim
