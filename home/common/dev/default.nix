@@ -87,6 +87,7 @@ in
     # webshit
     # nodePackages.prettier
     deno
+    nodejs
 
     # lua
     stylua

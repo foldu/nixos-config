@@ -25,6 +25,7 @@
     '';
     shellAliases = {
       ls = "ls --hyperlink=auto --color=auto";
+      reasonix = "npx reasonix";
     };
     functions = {
       tide_setup = ''
