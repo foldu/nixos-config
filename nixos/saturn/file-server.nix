@@ -93,7 +93,7 @@
       };
 
       backups_home-assistant = {
-        path = "/srv/media/backups/home-assistant";
+        path = "/srv/media/blub/data/backups/home-assistant";
         browseable = "yes";
         "valid users" = "home-assistant";
         "force user" = "home-assistant";
