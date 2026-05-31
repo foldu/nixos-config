@@ -10,7 +10,6 @@
       rm = "rm -v";
       mv = "mv -iv";
       cp = "cp -iv";
-      rsync = "rsync -azv --info=progress2 --filter=':- .gitignore'";
       sm = "src-manage";
       gr = "cd (git rev-parse --show-toplevel)";
     };

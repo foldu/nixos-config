@@ -35,6 +35,7 @@
           "uni" = mkSharedShare "/home/barnabas/uni";
           "sync" = mkSharedShare "/home/barnabas/sync";
           "ssh" = mkSharedShare "/home/barnabas/.ssh";
+          "rclone" = mkSharedShare "/home/barnabas/.config/rclone";
         };
       };
     };

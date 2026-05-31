@@ -58,6 +58,7 @@
     rename
     man-pages
     gitu
+    rclone
   ];
 
   programs.htop = {
