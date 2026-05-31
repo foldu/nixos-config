@@ -1,10 +1,12 @@
-{ config, home-network, ... }:
+{ config, ... }:
 {
   users.users.Luser.isNormalUser = true;
   users.users.home-assistant = {
     isSystemUser = true;
-    group = "users";
+    group = "home-assistant";
   };
+  users.groups.home-assistant = { };
+
   services.samba = {
     enable = true;
 
@@ -90,7 +92,7 @@
         writeable = "yes";
       };
 
-      home-assistant = {
+      backups_home-assistant = {
         path = "/srv/media/backups/home-assistant";
         browseable = "yes";
         "valid users" = "home-assistant";
