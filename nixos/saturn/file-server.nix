@@ -1,6 +1,10 @@
 { config, home-network, ... }:
 {
   users.users.Luser.isNormalUser = true;
+  users.users.home-assistant = {
+    isSystemUser = true;
+    group = "users";
+  };
   services.samba = {
     enable = true;
 
@@ -82,6 +86,15 @@
         browseable = "yes";
         "valid users" = config.users.users.barnabas.name;
         "force user" = config.users.users.barnabas.name;
+        public = "no";
+        writeable = "yes";
+      };
+
+      home-assistant = {
+        path = "/srv/media/backups/home-assistant";
+        browseable = "yes";
+        "valid users" = "home-assistant";
+        "force user" = "home-assistant";
         public = "no";
         writeable = "yes";
       };
