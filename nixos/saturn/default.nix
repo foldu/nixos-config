@@ -27,7 +27,7 @@
     ./postgresql.nix
     ./metrics
     ./podman
-    ./invidious.nix
+    # ./invidious.nix
     ./ffsync.nix
     ./navidrome.nix
     ./open-webui.nix
@@ -37,6 +37,7 @@
     ./paperless.nix
     # ./piped
     ./llama.nix
+    ./materialious.nix
     "${inputs.homeserver-sekret}"
   ];
 
