@@ -31,6 +31,11 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   environment.systemPackages = [ pkgs.bitwarden-desktop ];
+  # FIXME:
+  # bitwarden uses EOL electron
+  nixpkgs.config.permittedInsecurePackages = [
+    "electron-39.8.10"
+  ];
 
   documentation = {
     dev.enable = true;
