@@ -16,7 +16,6 @@
     ../common/bluetooth.nix
     ../common/butter.nix
     ../common/graphical
-    ../common/cashewnix-cache.nix
     ../common/gitlab-runner.nix
 
     ./manual-hardware-configuration.nix
@@ -56,11 +55,30 @@
     motherboard = "amd";
   };
 
-  networking.firewall.allowedTCPPorts = [ config.services.hardware.openrgb.server.port ];
+  networking.firewall.allowedTCPPorts = [ config.services.hardware.openrgb.server.port
+    # harmonia
+    5000
+  ];
 
   users.users.barnabas.openssh.authorizedKeys.keys = [
     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOD4usy2QkPC6J7YLNW9kSm5ZZdS11j2Ad3qipzhpUy/ jupiter.home.5kw.li"
   ];
+
+  services.nix-cache-beacon = {
+    # Announce cache to the local network
+    advert = {
+      enable = true;
+      port = 5000; # Harmonia port
+    };
+
+    # Enable local binary cache using discovered caches on the local network
+    cache.enable = true;
+  };
+
+  # Local binary cache using Harmonia
+  # nix-cache-beacon can be used with any cache implementation
+  services.harmonia.cache.enable = true; # Serve up local Nix store
+  services.harmonia.signKeyPaths = ["/var/secrets/cashewnix-private"];
 
   environment.sessionVariables = {
     # auto upgrade fsr games to fsr4

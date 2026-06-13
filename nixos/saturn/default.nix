@@ -7,7 +7,6 @@
     ../common/profiles/server.nix
 
     ../common/zfs.nix
-    ../common/cashewnix.nix
     ../common/gitlab-runner.nix
     ../common/nivea.nix
     ../common/systemd-resolved.nix

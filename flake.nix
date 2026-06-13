@@ -51,8 +51,6 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
-    cashewnix.url = "github:foldu/cashewnix";
-
     quadlet-nix = {
       url = "github:SEIAROTg/quadlet-nix";
     };
@@ -63,6 +61,8 @@
     };
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+
+    nix-cache-beacon.url = "github:adisbladis/nix-cache-beacon";
   };
 
   outputs =
@@ -70,9 +70,9 @@
       self,
       nixpkgs,
       home-manager,
-      cashewnix,
       flake-utils,
       sops-nix,
+      nix-cache-beacon,
       ...
     }@inputs:
     let
@@ -96,8 +96,8 @@
         modules:
         nixpkgs.lib.nixosSystem {
           modules = modules ++ [
-            cashewnix.nixosModules.cashewnix
             sops-nix.nixosModules.sops
+            nix-cache-beacon.nixosModules.default
           ];
           specialArgs = {
             inherit
