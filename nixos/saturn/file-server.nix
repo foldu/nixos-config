@@ -1,6 +1,5 @@
 { config, ... }:
 {
-  users.users.Luser.isNormalUser = true;
   users.users.home-assistant = {
     isSystemUser = true;
     group = "home-assistant";
@@ -50,7 +49,7 @@
         "acl allow execute always" = "yes";
         path = "/srv/media/fast/windows-share";
         browseable = "yes";
-        "valid users" = "Luser barnabas";
+        "valid users" = "barnabas";
         "force user" = config.users.users.barnabas.name;
         public = "no";
         writeable = "yes";
