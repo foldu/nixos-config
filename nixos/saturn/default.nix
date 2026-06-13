@@ -27,7 +27,7 @@
     ./postgresql.nix
     ./metrics
     ./podman
-    # ./invidious.nix
+    ./invidious.nix
     ./ffsync.nix
     ./navidrome.nix
     ./open-webui.nix
