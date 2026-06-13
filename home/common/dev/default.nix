@@ -21,13 +21,6 @@ in
     autoUpdate.enable = true;
   };
 
-  programs.npm = {
-    enable = true;
-    settings = {
-      min-release-age = "7";
-    };
-  };
-
   # virtualisation.quadlet.containers.postgres-dev = {
   #   autoStart = true;
   #   containerConfig = {
@@ -45,6 +38,12 @@ in
   #     userns = "keep-id";
   #   };
   # };
+  xdg.configFile = {
+    "pnpm/config.yaml".text = ''
+      # 7 days
+      minimumReleaseAge: 10080
+    '';
+  };
 
   home.packages = with pkgs; [
     # editors
@@ -92,9 +91,8 @@ in
     shfmt
 
     # webshit
-    # nodePackages.prettier
-    deno
     nodejs
+    pnpm
 
     # lua
     stylua
