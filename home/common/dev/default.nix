@@ -21,6 +21,13 @@ in
     autoUpdate.enable = true;
   };
 
+  programs.npm = {
+    enable = true;
+    settings = {
+      min-release-age = "7";
+    };
+  };
+
   # virtualisation.quadlet.containers.postgres-dev = {
   #   autoStart = true;
   #   containerConfig = {
