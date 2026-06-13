@@ -28,8 +28,6 @@
     MAKEFLAGS = "-j 12";
   };
 
-  programs.nix-ld.enable = true;
-
   # https://wiki.archlinux.org/title/Power_management/Suspend_and_hibernate#Hibernation_into_swap_file
   boot.resumeDevice = "/dev/nvme0n1p2";
   # found out via btrfs inspect-internal map-swapfile -r /swap/swapfile

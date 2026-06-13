@@ -24,8 +24,6 @@
     ./llama.nix
   ];
 
-  programs.nix-ld.enable = true;
-
   nix.gc.automatic = lib.mkForce false;
 
   networking.hostName = "jupiter";

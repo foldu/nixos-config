@@ -66,4 +66,6 @@
     MODE:="0666", \
     SYMLINK+="stlinkv2_%n"
   '';
+
+  programs.nix-ld.enable = true;
 }
