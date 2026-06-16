@@ -589,11 +589,11 @@
         "nixpkgs": "nixpkgs_8"
       },
       "locked": {
-        "lastModified": 1781643695,
-        "narHash": "sha256-caoqFgHSxVvSG1bHqBnj3IbFHgXoVGhSqDiMjbNohxQ=",
+        "lastModified": 1781644148,
+        "narHash": "sha256-+B7iyYmSsu3szkza/+8C7Oq6pEkKC+YtHy8pYwmGdDs=",
         "ref": "refs/heads/master",
-        "rev": "7266d192f27edb0110a59429c4806c8a2ae37596",
-        "revCount": 359,
+        "rev": "bd697dc053d01de3ed10ae93ed48e119d48cc060",
+        "revCount": 360,
         "type": "git",
         "url": "https://lab.home.5kw.li/foldu/pickwp"
       },
