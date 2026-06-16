@@ -56,8 +56,6 @@
 
   networking.firewall.allowedTCPPorts = [
     config.services.hardware.openrgb.server.port
-    # harmonia
-    5000
   ];
 
   users.users.barnabas.openssh.authorizedKeys.keys = [
