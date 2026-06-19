@@ -8,21 +8,30 @@
   boot.kernel.sysctl."net.ipv4.ip_forward" = true;
 
   sops.secrets."gitlab-runner-podman" = { };
+  sops.secrets."gitlab-runner/jupiter/docker" = { };
 
   services.gitlab-runner = {
     enable = true;
-    services = {
-      podman = {
-        authenticationTokenConfigFile = config.sops.secrets."gitlab-runner-podman".path;
-
-        executor = "docker";
-        dockerImage = "quay.io/podman/stable:latest";
-        description = "podman runner";
-
-        dockerVolumes = [
-          "/run/podman/podman.sock:/var/run/docker.sock"
-        ];
+    settings = {
+      feature_flags = {
+        FF_ENABLE_JOB_CLEANUP = true;
+        FF_USE_ADAPTIVE_REQUEST_CONCURRENCY = true;
       };
+    };
+    services = {
+      # podman = {
+      #   authenticationTokenConfigFile = config.sops.secrets."gitlab-runner-podman".path;
+
+      #   executor = "docker";
+      #   dockerImage = "docker:stable";
+      #   description = "podman runner";
+
+      #   dockerVolumes = [
+      #     "/run/podman/podman.sock:/var/run/docker.sock"
+      #   ];
+
+      #   dockerPrivileged = true;
+      # };
       # runner for building in docker via host's nix-daemon
       # nix store will be readable in runner, might be insecure
       nix = with lib; {
@@ -71,6 +80,23 @@
           NIX_REMOTE = "daemon";
           PATH = "/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/bin:/sbin:/usr/bin:/usr/sbin";
         };
+      };
+    }
+    # docker is only enabled on jupiter
+    // lib.mkIf (config.networking.hostName == "jupiter") {
+      dind-runner = {
+        authenticationTokenConfigFile = config.sops.secrets."gitlab-runner/jupiter/docker".path;
+
+        dockerImage = "docker.io/docker:29";
+        dockerVolumes = [
+          "/var/run/docker.sock:/var/run/docker.sock"
+          "/cache"
+        ];
+
+        dockerPrivileged = true;
+
+        dockerDisableCache = false;
+
       };
     };
   };
