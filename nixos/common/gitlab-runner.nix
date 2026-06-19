@@ -1,9 +1,28 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  config,
+  pkgs,
+  ...
+}:
 {
   boot.kernel.sysctl."net.ipv4.ip_forward" = true;
+
+  sops.secrets."gitlab-runner-podman" = { };
+
   services.gitlab-runner = {
     enable = true;
     services = {
+      podman = {
+        authenticationTokenConfigFile = config.sops.secrets."gitlab-runner-podman".path;
+
+        executor = "docker";
+        dockerImage = "quay.io/podman/stable:latest";
+        description = "podman runner";
+
+        dockerVolumes = [
+          "/run/podman/podman.sock:/var/run/docker.sock"
+        ];
+      };
       # runner for building in docker via host's nix-daemon
       # nix store will be readable in runner, might be insecure
       nix = with lib; {
