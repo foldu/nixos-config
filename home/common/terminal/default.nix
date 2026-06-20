@@ -59,6 +59,7 @@
     man-pages
     gitu
     rclone
+    just
   ];
 
   programs.htop = {
