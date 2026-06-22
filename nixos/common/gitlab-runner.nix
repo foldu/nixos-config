@@ -84,7 +84,7 @@
 
       default = {
         authenticationTokenConfigFile = config.sops.secrets."gitlab-runner/default".path;
-        dockerImage = "docker.io/ubuntu:26.04";
+        dockerImage = "docker.io/ubuntu:latest";
         dockerPrivileged = false;
         dockerDisableCache = false;
         requestConcurrency = 4;
@@ -92,7 +92,7 @@
 
       podman-builder = {
         authenticationTokenConfigFile = config.sops.secrets."gitlab-runner/podman".path;
-        dockerImage = "quay.io/podman/stable";
+        dockerImage = "quay.io/podman/stable:latest";
         dockerPullPolicy = "always";
         dockerPrivileged = true;
         dockerDisableCache = false;
