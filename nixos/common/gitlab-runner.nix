@@ -7,11 +7,23 @@
 {
   boot.kernel.sysctl."net.ipv4.ip_forward" = true;
 
-  sops.secrets."gitlab-runner-podman" = { };
-  sops.secrets."gitlab-runner/jupiter/docker" = { };
+  sops.secrets."gitlab-runner/podman" = { };
+  sops.secrets."gitlab-runner/default" = { };
+  sops.secrets."gitlab-runner/nix" = { };
+
+  # podman docker compat mode just causes too many problems, use normal docker instead
+  virtualisation.docker = {
+    enable = true;
+  };
 
   services.gitlab-runner = {
     enable = true;
+    concurrent = 6;
+    clear-docker-cache = {
+      enable = true;
+      flags = [ "prune" ];
+      dates = "weekly";
+    };
     settings = {
       feature_flags = {
         FF_ENABLE_JOB_CLEANUP = true;
@@ -19,27 +31,14 @@
       };
     };
     services = {
-      # podman = {
-      #   authenticationTokenConfigFile = config.sops.secrets."gitlab-runner-podman".path;
-
-      #   executor = "docker";
-      #   dockerImage = "docker:stable";
-      #   description = "podman runner";
-
-      #   dockerVolumes = [
-      #     "/run/podman/podman.sock:/var/run/docker.sock"
-      #   ];
-
-      #   dockerPrivileged = true;
-      # };
       # runner for building in docker via host's nix-daemon
       # nix store will be readable in runner, might be insecure
       nix = with lib; {
         # File should contain at least these two variables:
         # `CI_SERVER_URL`
         # `CI_SERVER_TOKEN`
-        authenticationTokenConfigFile = "/var/secrets/gitlab-runner.env";
-        dockerImage = "alpine";
+        authenticationTokenConfigFile = config.sops.secrets."gitlab-runner/nix".path;
+        dockerImage = "docker.io/alpine";
         dockerVolumes = [
           "/nix/store:/nix/store:ro"
           "/nix/var/nix/db:/nix/var/nix/db:ro"
@@ -80,23 +79,24 @@
           NIX_REMOTE = "daemon";
           PATH = "/nix/var/nix/profiles/default/bin:/nix/var/nix/profiles/default/sbin:/bin:/sbin:/usr/bin:/usr/sbin";
         };
+        requestConcurrency = 4;
       };
-    }
-    # docker is only enabled on jupiter
-    // lib.mkIf (config.networking.hostName == "jupiter") {
-      dind-runner = {
-        authenticationTokenConfigFile = config.sops.secrets."gitlab-runner/jupiter/docker".path;
 
-        dockerImage = "docker.io/docker:29";
-        dockerVolumes = [
-          "/var/run/docker.sock:/var/run/docker.sock"
-          "/cache"
-        ];
-
-        dockerPrivileged = true;
-
+      default = {
+        authenticationTokenConfigFile = config.sops.secrets."gitlab-runner/default".path;
+        dockerImage = "docker.io/ubuntu:26.04";
+        dockerPrivileged = false;
         dockerDisableCache = false;
+        requestConcurrency = 4;
+      };
 
+      podman-builder = {
+        authenticationTokenConfigFile = config.sops.secrets."gitlab-runner/podman".path;
+        dockerImage = "quay.io/podman/stable";
+        dockerPullPolicy = "always";
+        dockerPrivileged = true;
+        dockerDisableCache = false;
+        requestConcurrency = 4;
       };
     };
   };
