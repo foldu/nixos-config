@@ -72,6 +72,7 @@ in
 
     # go
     go
+    gopls
 
     # typst
     typst
