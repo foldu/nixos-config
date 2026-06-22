@@ -1,4 +1,4 @@
-{ config, ... }:
+{ ... }:
 let
   port = "9845";
   db_dir = "/db";

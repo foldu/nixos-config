@@ -18,13 +18,13 @@
 
   services.gitlab-runner = {
     enable = true;
-    concurrent = 6;
     clear-docker-cache = {
       enable = true;
       flags = [ "prune" ];
       dates = "weekly";
     };
     settings = {
+      concurrent = 6;
       feature_flags = {
         FF_ENABLE_JOB_CLEANUP = true;
         FF_USE_ADAPTIVE_REQUEST_CONCURRENCY = true;
