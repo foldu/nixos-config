@@ -38,6 +38,7 @@
     # ./piped
     ./llama.nix
     ./materialious.nix
+    ./img-bookmark.nix
     "${inputs.homeserver-sekret}"
   ];
 
