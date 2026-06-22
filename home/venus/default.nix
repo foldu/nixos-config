@@ -8,10 +8,10 @@
     ../common/gnome
   ];
 
-  services.easyeffects = {
-    enable = true;
-    extraPresets = {
-      framework13 = builtins.fromJSON (builtins.readFile ./fw13-easy-effects.json);
-    };
-  };
+  # services.easyeffects = {
+  #   enable = true;
+  #   extraPresets = {
+  #     framework13 = builtins.fromJSON (builtins.readFile ./fw13-easy-effects.json);
+  #   };
+  # };
 }
