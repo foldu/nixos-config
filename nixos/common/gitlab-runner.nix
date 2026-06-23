@@ -7,8 +7,8 @@
 {
   boot.kernel.sysctl."net.ipv4.ip_forward" = true;
 
-  sops.secrets."gitlab-runner/podman" = { };
   sops.secrets."gitlab-runner/default" = { };
+  sops.secrets."gitlab-runner/buildkit" = { };
   sops.secrets."gitlab-runner/nix" = { };
 
   # podman docker compat mode just causes too many problems, use normal docker instead
@@ -90,13 +90,17 @@
         requestConcurrency = 4;
       };
 
-      podman-builder = {
-        authenticationTokenConfigFile = config.sops.secrets."gitlab-runner/podman".path;
-        dockerImage = "quay.io/podman/stable:latest";
+      buildkit = {
+        authenticationTokenConfigFile = config.sops.secrets."gitlab-runner/buildkit".path;
+        dockerImage = "docker.io/moby/buildkit:rootless";
         dockerPullPolicy = "always";
-        dockerPrivileged = true;
+        dockerPrivileged = false;
         dockerDisableCache = false;
         requestConcurrency = 4;
+        registrationFlags = [
+          "--docker-security-opt seccomp=unconfined"
+          "--docker-security-opt apparmor=unconfined"
+        ];
       };
     };
   };
