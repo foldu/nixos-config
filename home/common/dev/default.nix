@@ -40,8 +40,8 @@ in
   # };
   xdg.configFile = {
     "pnpm/config.yaml".text = ''
-      # 7 days
-      minimumReleaseAge: 10080
+      # 2 days
+      minimumReleaseAge: 2880
     '';
   };
 
