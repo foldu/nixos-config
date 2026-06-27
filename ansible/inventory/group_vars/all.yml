@@ -1,0 +1,14 @@
+---
+# Also run 'apt autoremove' and 'apt autoclean' after the upgrade.
+# probably a bad idea to auto-enable, just don't do it for the time being
+apt_cleanup: false
+
+# Cache validity for apt update (seconds). 3600 = skip update if cache < 1h old.
+apt_cache_valid_time: 3600
+
+# Comma-separated packages to hold back (won't be upgraded).
+# Example: "pve-kernel-*,proxmox-ve"
+apt_hold_packages: ""
+
+# Always run as root.
+ansible_user: root

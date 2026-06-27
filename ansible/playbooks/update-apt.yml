@@ -1,0 +1,61 @@
+---
+- name: Update APT-based hosts (Debian / Proxmox)
+  hosts: proxmox:debian
+  gather_facts: true
+  become: true
+
+  pre_tasks:
+    - name: Collect pre-update package state
+      ansible.builtin.package_facts:
+        manager: apt
+
+    - name: Hold back specified packages
+      ansible.builtin.command: "apt-mark hold {{ apt_hold_packages }}"
+      when: apt_hold_packages | length > 0
+      changed_when: false
+
+  tasks:
+    - name: Update apt cache
+      ansible.builtin.apt:
+        update_cache: yes
+        cache_valid_time: "{{ apt_cache_valid_time }}"
+
+    - name: Upgrade all packages (dist-upgrade)
+      ansible.builtin.apt:
+        upgrade: dist
+      register: _upgrade
+
+    - name: Remove unused dependencies
+      ansible.builtin.apt:
+        autoremove: yes
+      when: apt_cleanup | bool
+
+    - name: Clean apt package cache
+      ansible.builtin.apt:
+        autoclean: yes
+      when: apt_cleanup | bool
+
+  post_tasks:
+    - name: Collect post-update package state
+      ansible.builtin.package_facts:
+        manager: apt
+
+    - name: Check if reboot is required
+      ansible.builtin.stat:
+        path: /var/run/reboot-required
+      register: _reboot_required
+
+    - name: Show reboot warning
+      ansible.builtin.debug:
+        msg: >
+          ⚠  {{ ansible_facts['hostname'] }} needs a reboot — /var/run/reboot-required exists.
+          Run 'ansible {{ ansible_facts['hostname'] }} -m reboot -b' when ready.
+      when: _reboot_required.stat.exists
+
+    - name: Show upgrade summary
+      ansible.builtin.debug:
+        msg: |
+          ── {{ ansible_facts['hostname'] }} ──────────────────────────────────
+          Upgrade result:  {{ _upgrade is changed | ternary('packages updated ✓', 'nothing to upgrade ✓') }}
+          Reboot needed:   {{ _reboot_required.stat.exists | ternary('YES ⚠', 'no ✓') }}
+          ─────────────────────────────────────────────────────────────
