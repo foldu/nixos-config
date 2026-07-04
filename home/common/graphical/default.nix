@@ -21,7 +21,8 @@
     # opencloud-desktop
     steam-run
     kooha
-    croc
+    # currently broken
+    # croc
     ffmpeg
     yt-dlp
     pass
