@@ -66,6 +66,8 @@ in
     cmake-lint
     cmake-format
 
+    bubblewrap
+
     # sql
     # sqlfluff
     sqlite-interactive
