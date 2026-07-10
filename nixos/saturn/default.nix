@@ -10,7 +10,7 @@
     ../common/gitlab-runner.nix
     ../common/nivea.nix
     ../common/systemd-resolved.nix
-    ../common/nix-cache-beacon-cache.nix
+    ../common/cashewnix.nix
 
     ./hardware-configuration.nix
     ./imgen.nix

@@ -58,14 +58,14 @@
       url = "github:SEIAROTg/quadlet-nix";
     };
 
+    cashewnix.url = "github:foldu/cashewnix";
+
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell/";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
-
-    nix-cache-beacon.url = "github:adisbladis/nix-cache-beacon";
   };
 
   outputs =
@@ -73,9 +73,9 @@
       self,
       nixpkgs,
       home-manager,
+      cashewnix,
       flake-utils,
       sops-nix,
-      nix-cache-beacon,
       ...
     }@inputs:
     let
@@ -100,7 +100,7 @@
         nixpkgs.lib.nixosSystem {
           modules = modules ++ [
             sops-nix.nixosModules.sops
-            nix-cache-beacon.nixosModules.default
+            cashewnix.nixosModules.cashewnix
           ];
           specialArgs = {
             inherit

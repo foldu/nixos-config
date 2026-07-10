@@ -17,7 +17,7 @@
     ../common/butter.nix
     ../common/graphical
     ../common/gitlab-runner.nix
-    ../common/nix-cache-beacon-cache.nix
+    ../common/cashewnix-cache.nix
 
     ./manual-hardware-configuration.nix
     ../common/graphical/amd-gpu.nix

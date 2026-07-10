@@ -17,5 +17,7 @@
     };
   };
 
+  services.cashewnix.settings.priority_config."0".timeout = "2s";
+
   services.upower.enable = true;
 }

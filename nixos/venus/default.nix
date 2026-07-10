@@ -16,6 +16,7 @@
     ../common/bluetooth.nix
     ../common/butter.nix
     ../common/graphical
+    ../common/cashewnix.nix
 
     inputs.quadlet-nix.nixosModules.quadlet
   ];

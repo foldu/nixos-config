@@ -157,18 +157,5 @@
     ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="1", ATTR{queue/scheduler}="bfq"
   '';
 
-  services.nix-cache-beacon.cache = {
-    enable = true;
-    timeout = 5.0;
-  };
-
-  nix.settings.extra-trusted-public-keys = [
-    "jupiter.home.5kw.li:7ZvacpgTXe7qCa7awMfrJjnsbh8GcM358Yu+i6S0lLU="
-    "saturn.home.5kw.li:IiUt+shpYRss8lOqmlfq8ZZcnGvyr2s6/1HpULLZbHA="
-  ];
-
-  # Make Nix aware of our local network cache
-  nix.settings.substituters = [ "http://localhost:5028" ];
-
   zramSwap.enable = true;
 }

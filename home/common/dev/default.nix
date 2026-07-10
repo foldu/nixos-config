@@ -68,6 +68,8 @@ in
 
     bubblewrap
 
+    opencode
+
     # sql
     # sqlfluff
     sqlite-interactive
