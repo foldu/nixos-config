@@ -62,11 +62,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1783665132,
-        "narHash": "sha256-bKvVkqVyrWvjCGCQ8GiMVCPsIwGppxEb2UwRXJ5Mzos=",
+        "lastModified": 1783703571,
+        "narHash": "sha256-uGLbLyYaS9TfjabRtZcSxjDdPxC1aBh6lmxRixd8d10=",
         "owner": "foldu",
         "repo": "cashewnix",
-        "rev": "d3a78ab9a816cd7a924f334655c647408420edc9",
+        "rev": "1ca95d75309634e5aab90a506d6682db200849d0",
         "type": "github"
       },
       "original": {
