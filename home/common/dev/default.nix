@@ -52,6 +52,7 @@ in
     gnumake
     glab
     tokei
+    devenv
 
     # editor tools
     ast-grep
