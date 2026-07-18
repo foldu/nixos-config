@@ -8,6 +8,7 @@ in
   sops.secrets."cashewnix-private" = { };
 
   services.cashewnix = {
+    privateKeyPath = config.sops.secrets."cashewnix-private".path;
     settings.local_binary_caches.local_cache = {
       advertise = "ip";
       port = harmoniaPort;
