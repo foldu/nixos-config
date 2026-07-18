@@ -1,4 +1,8 @@
-{ pkgs, inputs, ... }:
+{
+  inputs,
+  pkgs,
+  ...
+}:
 let
   postgresDir = "/home/barnabas/.local/share/postgresql";
 in
@@ -45,74 +49,80 @@ in
     '';
   };
 
-  home.packages = with pkgs; [
-    # editors
-    zed-editor
-    # tools
-    gnumake
-    glab
-    tokei
-    devenv
+  home.packages =
+    let
+      llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
+    in
+    with pkgs;
+    [
+      # editors
+      zed-editor
+      # tools
+      gnumake
+      glab
+      tokei
+      devenv
 
-    # editor tools
-    ast-grep
-    tree-sitter
+      # editor tools
+      ast-grep
+      tree-sitter
 
-    # c/c++ native tools
-    clang-tools
-    llvmPackages_latest.lld
-    llvmPackages_latest.clang
-    cmake
-    neocmakelsp
-    cmake-lint
-    cmake-format
+      # c/c++ native tools
+      clang-tools
+      llvmPackages_latest.lld
+      llvmPackages_latest.clang
+      cmake
+      neocmakelsp
+      cmake-lint
+      cmake-format
 
-    bubblewrap
+      bubblewrap
 
-    opencode
+      llm-agents.reasonix
+      llm-agents.opencode
 
-    # sql
-    # sqlfluff
-    sqlite-interactive
+      # sql
+      # sqlfluff
+      sqlite-interactive
 
-    # go
-    go
-    gopls
+      # go
+      go
+      gopls
 
-    # typst
-    typst
-    tinymist
-    typstyle
-    typst-live
+      # typst
+      typst
+      tinymist
+      typstyle
+      typst-live
 
-    # tex
-    texlab
+      # tex
+      texlab
 
-    # nix
-    nixd
-    nixfmt
+      # nix
+      nixd
+      nixfmt
 
-    # shell
-    shellcheck
-    shfmt
+      # shell
+      shellcheck
+      shfmt
 
-    # webshit
-    nodejs
-    pnpm
+      # webshit
+      nodejs
+      pnpm
 
-    # lua
-    stylua
+      # lua
+      stylua
 
-    # markdown
-    marksman
-    markdownlint-cli2
+      # markdown
+      marksman
+      markdownlint-cli2
 
-    # :goat
-    zig
+      # :goat
+      zig
 
-    # :snek
-    python314
-    uv
-    ruff
-  ];
+      # :snek
+      python314
+      uv
+      ruff
+    ];
 }

@@ -66,6 +66,8 @@
     };
 
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
+
+    llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
   outputs =
