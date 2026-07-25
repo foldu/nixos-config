@@ -15,7 +15,7 @@
     ./hardware-configuration.nix
     ./imgen.nix
     ./bambu.nix
-    ./backups.nix
+    ./postgresql-backup.nix
     ./file-server.nix
     ./gitlab
     ./jellyfin.nix
