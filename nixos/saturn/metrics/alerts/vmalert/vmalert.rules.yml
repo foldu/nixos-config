@@ -1,13 +1,13 @@
 groups:
   - name: default
     rules:
-      - alert: system-reboot
-        expr: "system_uptime != 0 and system_uptime < 300"
-        for: "1m"
-        labels:
-          severity: warning
-        annotations:
-          summary: "{{$labels.host}} just rebooted"
+      # - alert: system-reboot
+      #   expr: "system_uptime != 0 and system_uptime < 300"
+      #   for: "1m"
+      #   labels:
+      #     severity: warning
+      #   annotations:
+      #     summary: "{{$labels.host}} just rebooted"
       - alert: filesystem-full
         expr: 'disk_used_percent{mode!="ro",fstype!="btrfs",fstype!="efivarfs"} >= 80'
         for: "10m"
