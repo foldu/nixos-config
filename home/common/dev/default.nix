@@ -79,6 +79,7 @@ in
       bubblewrap
 
       llm-agents.reasonix
+      llm-agents.omp
       llm-agents.opencode
 
       # sql
