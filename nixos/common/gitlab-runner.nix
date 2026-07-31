@@ -16,6 +16,19 @@
     enable = true;
   };
 
+  # if gitlab runs on the same host: wait for gitlab.service (Type=notify,
+  # active once puma is ready) so the configure step doesn't fail at boot and
+  # leave the unit dead; Restart covers any residual gap.
+  systemd.services.gitlab-runner = lib.mkIf config.services.gitlab.enable {
+    after = [ "gitlab.service" ];
+    wants = [ "gitlab.service" ];
+    unitConfig.StartLimitIntervalSec = 0;
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = "30s";
+    };
+  };
+
   services.gitlab-runner =
     let
       # for some reason saturn can't access anything from netbird or the local network
