@@ -62,6 +62,7 @@ in
       glab
       tokei
       devenv
+      bitwarden-cli
 
       # editor tools
       ast-grep
