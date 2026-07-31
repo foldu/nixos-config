@@ -109,7 +109,7 @@
     }
 
     container-registry.home.5kw.li {
-      reverse_proxy http://localhost:${toString config.services.gitlab.registry.port}
+      reverse_proxy http://${config.services.gitlab.registry.settings.http.addr}
     }
   '';
 }
