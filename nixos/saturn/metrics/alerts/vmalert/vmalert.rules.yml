@@ -27,6 +27,8 @@ groups:
           summary: "{{$labels.host}} is using 50% of its swap space for at least 10 minutes"
       - alert: systemd-service-failed
         expr: 'systemd_units_active_code{name!~"user@\\d+.service"} == 3'
+        # delay so units that briefly fail during boot/startup don't alert
+        for: "2m"
         annotations:
           summary: "{{$labels.host}} failed to (re)start service {{$labels.name}}"
       - alert: ram-using-95percent
@@ -45,25 +47,32 @@ groups:
         annotations:
           summary: "{{$labels.instance}}: {{$labels.job}} telegraf exporter from {{$labels.source}} is down"
 
+      # for-duration so brief blips (service restarts, slow startups like gitlab)
+      # don't page; only sustained outages alert
       - alert: http
         expr: "http_response_result_code != 0"
+        for: "5m"
         annotations:
           summary: "{{$labels.server}} : http request failed from {{$labels.instance}}: {{$labels.result}}"
       - alert: http-match-failed
         expr: "http_response_response_string_match == 0"
+        for: "5m"
         annotations:
           summary: "{{$labels.server}} : http body not as expected; status code: {{$labels.status_code}}"
       - alert: dns-query
         expr: "dns_query_result_code != 0"
+        for: "5m"
         annotations:
           summary: "{{$labels.domain}} : could retrieve A record {{$labels.instance}} from server {{$labels.server}}: {{$labels.result}}"
       - alert: connection-failed
         expr: "net_response_result_code != 0"
+        for: "5m"
         annotations:
           summary: "{{$labels.server}}: connection to {{$labels.port}}({{$labels.protocol}}) failed from {{$labels.instance}}"
 
       - alert: healthchecks
         expr: "hc_check_up == 0"
+        for: "5m"
         annotations:
           summary: "{{$labels.instance}}: healtcheck {{$labels.job}} fails"
       - alert: oom-kills
