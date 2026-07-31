@@ -21,6 +21,16 @@
       if test -z $SSH_CONNECTION
           export SSH_AUTH_SOCK=/home/barnabas/.bitwarden-ssh-agent.sock
       end
+      # auto-unlock the bitwarden vault so new terminals get a session
+      if command -q bw
+          and not set -q BW_SESSION
+          and test -n "$BW_MASTER_PASSWORD"
+          set -l bwstatus (bw status --nointeraction 2>/dev/null | string match -r '"status":"[a-z]+"')
+          if test -n "$bwstatus"
+              and test (string replace -r '.*:"([a-z]+)"' '$1' -- $bwstatus) = locked
+              set -gx BW_SESSION (bw unlock --raw --passwordenv BW_MASTER_PASSWORD 2>/dev/null)
+          end
+      end
     '';
     shellAliases = {
       ls = "ls --hyperlink=auto --color=auto";
