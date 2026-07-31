@@ -42,17 +42,7 @@
     info.enable = false;
   };
 
-  # needs downgrade due to https://github.com/flatpak/flatpak/issues/6717
-  services.flatpak = {
-    enable = true;
-    package = pkgs.flatpak.overrideAttrs (oldAttrs: rec {
-      version = "1.16.6";
-      src = pkgs.fetchurl {
-        url = "https://github.com/flatpak/flatpak/releases/download/${version}/flatpak-${version}.tar.xz";
-        hash = "sha256-HmPn8/5EtgLzTZKm/kb9ijvGvpRgwDwmgeV5dsZY7sM=";
-      };
-    });
-  };
+  services.flatpak.enable = true;
 
   networking.firewall.enable = true;
 
