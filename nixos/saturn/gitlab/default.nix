@@ -22,6 +22,13 @@
       address = "localhost";
       port = 25;
     };
+    backup = {
+      startAt = "02:00";
+      # on the blub zpool, separate disk from the VM root
+      path = "/srv/media/blub/data/backups/gitlab";
+      # module multiplies keepTime by 3600 (option is in hours)
+      keepTime = 14 * 24; # 14 days
+    };
     extraConfig = {
       omniauth = {
         enabled = true;
