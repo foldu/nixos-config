@@ -83,12 +83,25 @@
     };
   };
 
-  networking.firewall.interfaces."tailscale0".allowedTCPPorts = [
+  # tailscale0 no longer exists; the vpn is netbird (wt0). The container
+  # bridges need 80/443 too, otherwise gitlab-runner containers (bridge
+  # networking) can't reach caddy and require the old host-networking hack.
+  networking.firewall.interfaces."wt0".allowedTCPPorts = [
     80
     443
   ];
 
-  networking.firewall.interfaces."tailscale0".allowedUDPPorts = [
+  networking.firewall.interfaces."wt0".allowedUDPPorts = [
+    80
+    443
+  ];
+
+  networking.firewall.interfaces.docker0.allowedTCPPorts = [
+    80
+    443
+  ];
+
+  networking.firewall.interfaces.podman0.allowedTCPPorts = [
     80
     443
   ];
