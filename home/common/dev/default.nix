@@ -47,6 +47,9 @@ in
       # 2 days
       minimumReleaseAge: 2880
     '';
+    "tombi/config.toml".text = ''
+      toml-version = "v1.1.0"
+    '';
   };
 
   home.packages =
