@@ -1,55 +1,104 @@
-{ lib, ... }:
+{ pkgs, config, ... }:
 let
-  pgBackupRepo = "/srv/media/fast/postgres/backups";
-  pgSpool = "/var/spool/pgbackrest";
+  # just backing up to the same host currently, could be improved
+  walgEnv = {
+    WALG_SSH_PREFIX = "ssh://saturn.home.5kw.li/srv/media/blub/data/backups/postgres";
+    WALG_SSH_USERNAME = "backup";
+    WALG_SSH_PRIVATE_KEY_PATH = config.sops.secrets."wal-g/sftp-key".path;
+    WALG_COMPRESSION_METHOD = "zstd";
+  };
 in
 {
-  services.pgbackrest = {
-    enable = true;
+  sops.secrets."wal-g/sftp-key" = {
+    owner = "postgres";
+    group = "postgres";
+    mode = "0600";
+  };
 
-    settings = {
-      compress-type = "zst";
-      process-max = 2;
+  services.postgresql.settings = {
+    archive_mode = "on";
+    archive_command = "${pkgs.wal-g}/bin/wal-g wal-push \"%p\"";
+  };
 
-      # Async WAL archiving: archive-push acknowledges immediately by writing
-      # to a local spool; a background process ships to the repo. PostgreSQL
-      # never blocks on backup I/O.
-      #
-      # in the current setup this isn't really needed; due to everything being local on the same nvme,
-      # but really nice if I ever decide to make proper backups to an external provider
-      archive-async = true;
-      spool-path = pgSpool;
+  # archive_command runs inside postgres, so the storage config must be in
+  # the postgres service environment (merged with the module's PGDATA/PGPORT)
+  systemd.services.postgresql.environment = walgEnv;
+
+  systemd.services.walg-backup-full = {
+    after = [ "postgresql.service" ];
+    serviceConfig = {
+      User = "postgres";
+      Group = "postgres";
+      Type = "oneshot";
+      ExecStart = "${pkgs.wal-g}/bin/wal-g backup-push ${config.services.postgresql.dataDir} --full";
     };
-
-    repos.localhost = {
-      path = pgBackupRepo;
-      retention-full = 4;
-      retention-diff = 14;
-    };
-
-    stanzas.default.jobs = {
-      full = {
-        type = "full";
-        schedule = "Sun 03:00";
-      };
-      diff = {
-        type = "diff";
-        schedule = "Mon..Sat 03:00";
-      };
+    environment = walgEnv;
+  };
+  systemd.timers.walg-backup-full = {
+    wantedBy = [ "timers.target" ];
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    timerConfig = {
+      OnCalendar = "Sun 03:00";
+      Persistent = true;
     };
   };
 
-  # postgres sandboxing prevents it from writing to the repo which
-  # shows up as ROfs write error, so add it to ReadWritePaths
-  systemd.services.postgresql.serviceConfig.ReadWritePaths = lib.mkAfter [
-    pgBackupRepo
-    pgSpool
-  ];
+  systemd.services.walg-backup-delta = {
+    after = [ "postgresql.service" ];
+    serviceConfig = {
+      User = "postgres";
+      Group = "postgres";
+      Type = "oneshot";
+      ExecStart = "${pkgs.wal-g}/bin/wal-g backup-push ${config.services.postgresql.dataDir}";
+    };
+    environment = walgEnv;
+  };
+  systemd.timers.walg-backup-delta = {
+    wantedBy = [ "timers.target" ];
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    timerConfig = {
+      OnCalendar = "Mon..Sat 03:00";
+      Persistent = true;
+    };
+  };
 
-  # postgres user writes WAL/spool; pgbackrest user reads data for backups.
-  # the module adds both users to each other's groups
-  systemd.tmpfiles.rules = [
-    "d ${pgBackupRepo} 0770 postgres pgbackrest - -"
-    "d ${pgSpool} 0770 postgres pgbackrest - -"
-  ];
+  # count-based retention: keep the 4 most recent full chains (weekly fulls
+  # => roughly a month)
+  systemd.services.walg-delete = {
+    after = [
+      "walg-backup-full.service"
+      "walg-backup-delta.service"
+    ];
+    serviceConfig = {
+      User = "postgres";
+      Group = "postgres";
+      Type = "oneshot";
+      ExecStart = "${pkgs.wal-g}/bin/wal-g delete retain FULL 4 --confirm";
+    };
+    environment = walgEnv;
+  };
+  systemd.timers.walg-delete = {
+    wantedBy = [ "timers.target" ];
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
+    timerConfig = {
+      OnCalendar = "*-*-* 03:30:00";
+      Persistent = true;
+    };
+  };
+
+  users.users.backup = {
+    isSystemUser = true;
+    group = "backup";
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINzY49SFkq3YCfXDEyGQNTcLloQX3bVrdqQFcIJvEUEz pgbackrest-sftp@saturn"
+    ];
+  };
+  users.groups.backup = { };
+
+  # internal-sftp so the nologin backup user can accept sftp sessions
+  # (external sftp-server execs through the user's shell and dies on nologin)
+  services.openssh.sftpServerExecutable = "internal-sftp";
 }
