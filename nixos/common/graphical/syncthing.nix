@@ -36,6 +36,15 @@
           "sync" = mkSharedShare "/home/barnabas/sync";
           "ssh" = mkSharedShare "/home/barnabas/.ssh";
           "rclone" = mkSharedShare "/home/barnabas/.config/rclone";
+          "omp" = (mkSharedShare "/home/barnabas/.omp/agent") // {
+            ignorePatterns = [
+              "secret-placeholder.key"
+              "*.db"
+              "*.db-*"
+              "terminal-sessions"
+              "last-changelog-version"
+            ];
+          };
         };
       };
     };
