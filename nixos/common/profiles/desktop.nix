@@ -2,6 +2,7 @@
 {
   imports = [
     ../generic
+    ../home
     ../systemd-resolved.nix
   ];
 

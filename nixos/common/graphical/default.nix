@@ -15,6 +15,14 @@
     ./samba.nix
     ./niri.nix
     ./gnome.nix
+    ./udev.nix
+  ];
+
+  users.users.barnabas.extraGroups = [
+    "video"
+    "audio"
+    "dialout"
+    "networkmanager"
   ];
 
   nixpkgs.overlays = [

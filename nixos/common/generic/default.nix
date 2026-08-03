@@ -10,10 +10,8 @@
   imports = [
     ./cachix
     ./ssh.nix
-    ./telegraf.nix
     ./no-telemetry.nix
     ./sops.nix
-    ./udev.nix
     ./mitigations.nix
     inputs.quadlet-nix.nixosModules.quadlet
   ];
@@ -33,7 +31,6 @@
 
   environment.systemPackages = [
     inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim
-    inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
   ]
   ++ (with pkgs; [
     # neovim
@@ -49,7 +46,6 @@
     enable = true;
     clean.enable = true;
     clean.extraArgs = "--keep-since 14d";
-    flake = "/home/barnabas/src/github.com/foldu/nixos-config";
   };
 
   # disable cups RCE service
@@ -113,10 +109,6 @@
     shell = pkgs.fish;
     extraGroups = [
       "wheel"
-      "video"
-      "audio"
-      "dialout"
-      "networkmanager"
     ];
     openssh.authorizedKeys.keys = [
       # barnabas@home from bitwarden

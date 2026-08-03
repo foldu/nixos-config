@@ -5,6 +5,7 @@
     inputs.nixos-hardware.nixosModules.common-gpu-amd
 
     ../common/profiles/server.nix
+    ../common/home
 
     ../common/zfs.nix
     ../common/gitlab-runner.nix
