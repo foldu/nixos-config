@@ -20,7 +20,6 @@
     ./gitlab
     ./jellyfin.nix
     ./redlib.nix
-    ./step-ca.nix
     ./transmission
     ./vaultwarden.nix
     ./miniflux.nix

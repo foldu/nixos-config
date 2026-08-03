@@ -144,8 +144,6 @@
     }
   ];
 
-  security.pki.certificateFiles = [ ../../../home_ca.crt ];
-
   services.netbird.enable = true;
 
   networking.wireguard.enable = true;
