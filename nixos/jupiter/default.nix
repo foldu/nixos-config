@@ -50,6 +50,9 @@
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
+  # let nix schedule aarch64 builds under binfmt emulation
+  nix.settings.extra-platforms = [ "aarch64-linux" ];
+
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;

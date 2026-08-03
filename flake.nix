@@ -98,8 +98,10 @@
           };
         };
       mkNixos =
+        system:
         modules:
         nixpkgs.lib.nixosSystem {
+          inherit system;
           modules = modules ++ [
             sops-nix.nixosModules.sops
             cashewnix.nixosModules.cashewnix
@@ -121,9 +123,10 @@
         "barnabas@venus" = mkHome [ ./home/venus ] nixpkgs.legacyPackages."x86_64-linux";
       };
       nixosConfigurations = {
-        "jupiter" = mkNixos [ ./nixos/jupiter ];
-        "saturn" = mkNixos [ ./nixos/saturn ];
-        "venus" = mkNixos [ ./nixos/venus ];
+        "jupiter" = mkNixos "x86_64-linux" [ ./nixos/jupiter ];
+        "saturn" = mkNixos "x86_64-linux" [ ./nixos/saturn ];
+        "venus" = mkNixos "x86_64-linux" [ ./nixos/venus ];
+        "ubuntu-4gb-fsn1-3" = mkNixos "aarch64-linux" [ ./nixos/ubuntu-4gb-fsn1-3 ];
       };
       overlays = import ./overlays { inherit inputs; };
       lib = import ./lib { inherit (nixpkgs) lib; };
