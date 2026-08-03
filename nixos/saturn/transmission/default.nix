@@ -10,6 +10,11 @@ let
   domain = "torrent.home.5kw.li";
 in
 {
+  sops.secrets = {
+    "transmission/env" = { };
+    "gluetun/env" = { };
+  };
+
   users.users.transmission = {
     isSystemUser = true;
     group = "transmission";
@@ -42,7 +47,7 @@ in
             PGID = toString config.users.groups.transmission.gid;
             TZ = "Europe/Amsterdam";
           };
-          environmentFiles = [ "/var/secrets/transmission.env" ];
+          environmentFiles = [ config.sops.secrets."transmission/env".path ];
           volumes = [
             "${configDir}:/config"
             "${torrentDir}:/downloads"
@@ -55,7 +60,7 @@ in
           image = "docker.io/qmcgaw/gluetun:v3";
           addCapabilities = [ "NET_ADMIN" ];
           devices = [ "/dev/net/tun:/dev/net/tun" ];
-          environmentFiles = [ "/var/secrets/gluetun.env" ];
+          environmentFiles = [ config.sops.secrets."gluetun/env".path ];
           pod = pods.gluetun-pott.ref;
         };
       };

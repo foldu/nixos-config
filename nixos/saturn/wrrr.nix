@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 let
   port = 4319;
 in
@@ -9,6 +9,8 @@ in
   };
 
   users.groups.wrrr = { };
+
+  sops.secrets."wrrr/env" = { };
 
   services.postgresql = {
     ensureDatabases = [ "wrrr" ];
@@ -28,7 +30,7 @@ in
     };
     serviceConfig = {
       ExecStart = "${inputs.atchr.packages.${pkgs.stdenv.hostPlatform.system}.wrrr}/bin/wrrr";
-      EnvironmentFile = "/var/secrets/wrrr.env";
+      EnvironmentFile = config.sops.secrets."wrrr/env".path;
       User = "wrrr";
       Group = "wrrr";
       Type = "simple";

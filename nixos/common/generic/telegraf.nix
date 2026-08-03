@@ -89,9 +89,11 @@ in
 {
   systemd.services.telegraf.path = lib.optional (!isVM && hasNvme) pkgs.nvme-cli;
 
+  sops.secrets."telegraf/env" = { };
+
   services.telegraf = {
     enable = true;
-    environmentFiles = [ "/var/secrets/telegraf.env" ];
+    environmentFiles = [ config.sops.secrets."telegraf/env".path ];
     extraConfig = {
       agent = {
         collection_jitter = "2s";

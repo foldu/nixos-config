@@ -9,13 +9,13 @@
 {
   imports = [
     ./cachix
-    ./secrets.nix
     ./ssh.nix
     ./telegraf.nix
     ./no-telemetry.nix
     ./sops.nix
     ./udev.nix
     ./mitigations.nix
+    inputs.quadlet-nix.nixosModules.quadlet
   ];
 
   services.dbus.implementation = "dbus";

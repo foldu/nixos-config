@@ -17,8 +17,6 @@
     ../common/butter.nix
     ../common/graphical
     ../common/cashewnix.nix
-
-    inputs.quadlet-nix.nixosModules.quadlet
   ];
 
   boot.kernelPackages =

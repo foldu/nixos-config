@@ -3,9 +3,11 @@ let
   domain = "alertmanager.home.5kw.li";
 in
 {
+  sops.secrets."alertmanager/env" = { };
+
   services.prometheus.alertmanager = {
     enable = true;
-    environmentFile = "/var/secrets/alertmanager.env";
+    environmentFile = config.sops.secrets."alertmanager/env".path;
     checkConfig = false;
     configText = builtins.readFile ./alertmanager.yml;
     webExternalUrl = "https://${domain}";

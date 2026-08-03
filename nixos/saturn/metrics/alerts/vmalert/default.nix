@@ -8,6 +8,8 @@ let
   vmalertDir = "/var/lib/vmalert";
 in
 {
+  sops.secrets."vmalert/env" = { };
+
   users.users.vmalert = {
     isSystemUser = true;
     group = "vmalert";
@@ -36,7 +38,7 @@ in
         "-remoteRead.url=https://metrics.home.5kw.li"
         "-external.url=https://metrics.home.5kw.li"
       ];
-      EnvironmentFile = "/var/secrets/vmalert.env";
+      EnvironmentFile = config.sops.secrets."vmalert/env".path;
       User = "vmalert";
       Group = "vmalert";
       WorkingDirectory = vmalertDir;

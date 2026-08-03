@@ -3,6 +3,8 @@ let
   port = "4398";
 in
 {
+  sops.secrets."materialious/env" = { };
+
   virtualisation.quadlet =
     let
       inherit (config.virtualisation.quadlet) volumes;
@@ -12,7 +14,7 @@ in
         containerConfig = {
           image = "docker.io/wardpearce/materialious-full:latest";
           # contains COOKIE_SECRET
-          environmentFiles = [ "/var/secrets/materialious.env" ];
+          environmentFiles = [ config.sops.secrets."materialious/env".path ];
           environments = {
             DATABASE_CONNECTION_URI = "sqlite:///materialious-data/materialious.db";
             PUBLIC_INTERNAL_AUTH = "false";
