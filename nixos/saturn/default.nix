@@ -26,7 +26,6 @@
     ./metrics
     ./podman
     ./invidious.nix
-    ./ffsync.nix
     ./navidrome.nix
     ./tailscale-exit-node.nix
     ./auth

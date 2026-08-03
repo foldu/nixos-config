@@ -14,6 +14,7 @@ let
     user_pref("browser.contentblocking.category", "strict");
 
     // use my own syncserver
+    // ffsync was removed; this endpoint is dead, sync will fail against it
     user_pref("identity.fxaccounts.enabled", true);
     user_pref("identity.sync.tokenserver.uri", "https://ffsync.home.5kw.li/1.0/sync/1.5");
 
