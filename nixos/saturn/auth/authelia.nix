@@ -1,6 +1,5 @@
-{ lib, ... }:
+{ config, lib, ... }:
 let
-  secretRoot = "/var/secrets/authelia";
   autheliaHomePort = 9923;
 in
 {
@@ -14,7 +13,7 @@ in
     ensureDatabases = [ "authelia-home" ];
   };
 
-  users.users.authelia-home.extraGroups = [ "secrets" ];
+  users.users.authelia-home = { };
 
   services.authelia.instances.home = {
     enable = true;
@@ -90,14 +89,41 @@ in
     ];
 
     secrets = {
-      jwtSecretFile = "${secretRoot}/jwt_secret";
-      oidcIssuerPrivateKeyFile = "${secretRoot}/jwks";
-      oidcHmacSecretFile = "${secretRoot}/hmac_secret";
-      storageEncryptionKeyFile = "${secretRoot}/storage_secret";
-      sessionSecretFile = "${secretRoot}/session_secret";
+      jwtSecretFile = config.sops.secrets."authelia/jwt-secret".path;
+      oidcIssuerPrivateKeyFile = config.sops.secrets."authelia/jwks".path;
+      oidcHmacSecretFile = config.sops.secrets."authelia/hmac-secret".path;
+      storageEncryptionKeyFile = config.sops.secrets."authelia/storage-secret".path;
+      sessionSecretFile = config.sops.secrets."authelia/session-secret".path;
     };
 
-    environmentVariables.AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE = "${secretRoot}/ldap_password";
+    environmentVariables.AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE = config.sops.secrets."authelia/ldap-password".path;
+  };
+
+  sops.secrets = {
+    "authelia/jwt-secret" = {
+      owner = "authelia-home";
+      mode = "0600";
+    };
+    "authelia/jwks" = {
+      owner = "authelia-home";
+      mode = "0600";
+    };
+    "authelia/hmac-secret" = {
+      owner = "authelia-home";
+      mode = "0600";
+    };
+    "authelia/storage-secret" = {
+      owner = "authelia-home";
+      mode = "0600";
+    };
+    "authelia/session-secret" = {
+      owner = "authelia-home";
+      mode = "0600";
+    };
+    "authelia/ldap-password" = {
+      owner = "authelia-home";
+      mode = "0600";
+    };
   };
 
   services.caddy.virtualHosts."auth.home.5kw.li".extraConfig = ''

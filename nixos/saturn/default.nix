@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ config, inputs, pkgs, ... }:
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -57,6 +57,8 @@
     dns = "systemd-resolved";
   };
 
+  sops.secrets."caddy/env" = { };
+
   services.caddy = {
     enable = true;
     email = "foldu@protonmail.com";
@@ -73,7 +75,7 @@
         consumer_key {$OVH_CONSUMER_KEY}
       }
     '';
-    environmentFile = "/var/secrets/caddy.env";
+    environmentFile = config.sops.secrets."caddy/env".path;
     virtualHosts."hass.home.5kw.li" = {
       extraConfig = ''
         encode zstd gzip

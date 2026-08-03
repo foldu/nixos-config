@@ -2,8 +2,8 @@
 {
   services.gitlab = {
     enable = true;
-    databasePasswordFile = "/var/secrets/gitlab/db_password";
-    initialRootPasswordFile = "/var/secrets/gitlab/initial_root_password";
+    databasePasswordFile = config.sops.secrets."gitlab/db-password".path;
+    initialRootPasswordFile = config.sops.secrets."gitlab/initial-root-password".path;
     https = true;
     host = "lab.home.5kw.li";
     port = 443;
@@ -63,7 +63,7 @@
               client_options = {
                 # For production, use secret management with _secret attribute
                 identifier = "BUZmb2r5H~mUMqH_MwQwFGGP2KKJeD5nwMDn2DbzY4qXh2mSjzjaJHUxXdBT9aoK";
-                secret._secret = "/var/secrets/gitlab/auth_pass";
+                secret._secret = config.sops.secrets."gitlab/auth-pass".path;
                 redirect_uri = "https://lab.home.5kw.li/users/auth/openid_connect/callback";
               };
             };
@@ -72,19 +72,61 @@
       };
     };
     secrets = {
-      dbFile = "/var/secrets/gitlab/db";
-      secretFile = "/var/secrets/gitlab/secret";
-      otpFile = "/var/secrets/gitlab/otp";
-      jwsFile = "/var/secrets/gitlab/jws";
-      activeRecordPrimaryKeyFile = "/var/secrets/gitlab/active_record_primary_key";
-      activeRecordDeterministicKeyFile = "/var/secrets/gitlab/active_record_deterministic_key";
-      activeRecordSaltFile = "/var/secrets/gitlab/active_record_salt";
+      dbFile = config.sops.secrets."gitlab/db".path;
+      secretFile = config.sops.secrets."gitlab/secret".path;
+      otpFile = config.sops.secrets."gitlab/otp".path;
+      jwsFile = config.sops.secrets."gitlab/jws".path;
+      activeRecordPrimaryKeyFile = config.sops.secrets."gitlab/active-record-primary-key".path;
+      activeRecordDeterministicKeyFile = config.sops.secrets."gitlab/active-record-deterministic-key".path;
+      activeRecordSaltFile = config.sops.secrets."gitlab/active-record-salt".path;
+    };
+  };
+
+  sops.secrets = {
+    "gitlab/db-password" = {
+      owner = "gitlab";
+      mode = "0600";
+    };
+    "gitlab/initial-root-password" = {
+      owner = "gitlab";
+      mode = "0600";
+    };
+    "gitlab/auth-pass" = {
+      owner = "gitlab";
+      mode = "0600";
+    };
+    "gitlab/db" = {
+      owner = "gitlab";
+      mode = "0600";
+    };
+    "gitlab/secret" = {
+      owner = "gitlab";
+      mode = "0600";
+    };
+    "gitlab/otp" = {
+      owner = "gitlab";
+      mode = "0600";
+    };
+    "gitlab/jws" = {
+      owner = "gitlab";
+      mode = "0600";
+    };
+    "gitlab/active-record-primary-key" = {
+      owner = "gitlab";
+      mode = "0600";
+    };
+    "gitlab/active-record-deterministic-key" = {
+      owner = "gitlab";
+      mode = "0600";
+    };
+    "gitlab/active-record-salt" = {
+      owner = "gitlab";
+      mode = "0600";
     };
   };
 
   users.users.gitlab = {
     group = "gitlab";
-    extraGroups = [ "secrets" ];
   };
 
   users.groups.gitlab = { };

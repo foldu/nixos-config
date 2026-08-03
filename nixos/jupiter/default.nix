@@ -44,7 +44,9 @@
     MAKEFLAGS = "-j 32";
   };
 
-  nix.settings.secret-key-files = [ "/var/secrets/jupiter.priv" ];
+  nix.settings.secret-key-files = [ config.sops.secrets."jupiter/binary-cache-secret-key".path ];
+
+  sops.secrets."jupiter/binary-cache-secret-key" = { };
 
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
