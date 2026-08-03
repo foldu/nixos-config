@@ -1,18 +1,38 @@
 gateway = "192.168.8.1"
 network = "192.168.8.0/24"
-virtual-network = "172.25.74.0/24"
+mesh-network = "172.25.74.0/24"
 dns = ["192.168.8.1"]
 
 [devices.jupiter]
+description = "Desktop workstation (NixOS)"
 dns = "jupiter.home.5kw.li"
-ip = "192.168.1.12"
-vip = "100.64.0.4"
-
-[devices.saturn]
-dns = "saturn.home.5kw.li"
-ip = "192.168.8.149"
-vip = "100.64.0.3"
+ip = "192.168.8.107"
+mesh = "172.25.74.214"
 
 [devices.venus]
+description = "Laptop (NixOS)"
 dns = "venus.home.5kw.li"
-vip = "100.64.0.9"
+ip = "dynamic"
+mesh = "172.25.74.166"
+
+[devices.sol]
+description = "Proxmox hypervisor; (see docs/network.md)"
+dns = "sol.home.5kw.li"
+ip = "192.168.8.203"
+
+[devices.saturn]
+description = "Fat VM; (NixOS, Proxmox VM 100 on sol)"
+dns = "saturn.home.5kw.li"
+ip = "192.168.8.149"
+mesh = "172.25.74.33"
+
+[devices.netbird-gw]
+description = "Netbird gateway (Debian LXC CT 104 on sol)"
+dns = "netbird-gw.home.5kw.li"
+ip = "192.168.8.116"
+mesh = "172.25.74.230"
+
+[devices.hass]
+description = "home-assistant; (Proxmox VM 103 on sol)"
+dns = "hass.home.5kw.li"
+mesh = "172.25.74.192"
