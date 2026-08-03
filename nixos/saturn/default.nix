@@ -27,7 +27,6 @@
     ./podman
     ./invidious.nix
     ./navidrome.nix
-    ./tailscale-exit-node.nix
     ./auth
     ./wrrr.nix
     ./paperless.nix
@@ -81,9 +80,9 @@
     };
   };
 
-  # tailscale0 no longer exists; the vpn is netbird (wt0). The container
-  # bridges need 80/443 too, otherwise gitlab-runner containers (bridge
-  # networking) can't reach caddy and require the old host-networking hack.
+  # The container bridges need 80/443 too, otherwise gitlab-runner
+  # containers (bridge networking) can't reach caddy and require the old
+  # host-networking hack.
   networking.firewall.interfaces."wt0".allowedTCPPorts = [
     80
     443
