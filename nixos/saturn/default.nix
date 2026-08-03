@@ -22,14 +22,12 @@
     ./redlib.nix
     ./transmission
     ./vaultwarden.nix
-    ./miniflux.nix
     ./postgresql.nix
     ./metrics
     ./podman
     ./invidious.nix
     ./ffsync.nix
     ./navidrome.nix
-    ./open-webui.nix
     ./tailscale-exit-node.nix
     ./auth
     ./wrrr.nix

@@ -20,13 +20,6 @@
         response_timeout = "30s";
         tags.host = "saturn";
       }
-      {
-        urls = [ "https://miniflux.home.5kw.li" ];
-        follow_redirects = true;
-        response_string_match = "Miniflux";
-        response_timeout = "30s";
-        tags.host = "saturn";
-      }
       # {
       #   urls = [ "https://reddit.home.5kw.li" ];
       #   follow_redirects = true;
@@ -45,13 +38,6 @@
         urls = [ "https://music.home.5kw.li" ];
         follow_redirects = true;
         response_string_match = "Navidrome";
-        response_timeout = "30s";
-        tags.host = "saturn";
-      }
-      {
-        urls = [ "https://ai.home.5kw.li" ];
-        follow_redirects = true;
-        response_string_match = "Open WebUI";
         response_timeout = "30s";
         tags.host = "saturn";
       }
