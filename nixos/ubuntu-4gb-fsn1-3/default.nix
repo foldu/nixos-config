@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ../common/profiles/server.nix
@@ -11,6 +11,12 @@
     ./tandoor.nix
     ./netbird.nix
   ];
+
+  # Hetzner ARM VM (virtio/xen): no special firmware needed
+  # saves ~700MB closure size
+  # cfg80211 will log a harmless "failed to load regulatory.db" at boot, nobody cares.
+  hardware.enableRedistributableFirmware = lib.mkForce false;
+  hardware.firmware = lib.mkForce [ ];
 
   boot.enableContainers = false;
 
