@@ -23,7 +23,6 @@
   # FIXME: should be in home-manager, but it currently doesn't support wayland sessions
   environment.sessionVariables = {
     EDITOR = "nvim";
-    NIX_GCC = "${pkgs.gcc}/bin/gcc";
     LESS = "FRX";
   };
 
@@ -66,9 +65,10 @@
       # don't explode on unavailable binary caches
       fallback = true;
     };
-    # This will add each flake input as a registry
-    # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: { flake = value; }) inputs;
+    # Only really relevant flake input for subcommands, don't pin everything.
+    registry = {
+      nixpkgs = { flake = inputs.nixpkgs; };
+    };
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
