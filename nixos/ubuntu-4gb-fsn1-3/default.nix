@@ -6,7 +6,7 @@
     ./hardware-configuration.nix
 
     ./mirko.nix
-    ./opencloud.nix
+    #./opencloud.nix
     ./postgresql.nix
     ./tandoor.nix
     ./netbird.nix
