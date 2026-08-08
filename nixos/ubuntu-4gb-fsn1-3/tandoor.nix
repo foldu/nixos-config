@@ -1,16 +1,21 @@
 { config, ... }:
 let
   inherit (config.virtualisation.quadlet) pods;
+  postgresShared = {
+    POSTGRES_USER = "tandoor_recipes";
+    POSTGRES_DB = "tandoor_recipes";
+    POSTGRES_PORT = "5432";
+    POSTGRES_HOST = "localhost";
+  };
 in
 {
   #  contains:
   #  SECRET_KEY
-  #  POSTGRES_HOST=localhost
-  #  POSTGRES_PORT=5432
-  #  POSTGRES_DB=tandoor_recipes
-  #  POSTGRES_USER=tandoor_recipes
   #  POSTGRES_PASSWORD
   sops.secrets."tandoor/env" = { };
+  #  contains:
+  #  POSTGRES_PASSWORD
+  sops.secrets."tandoor/postgres/env" = { };
 
   virtualisation.quadlet.pods.tandoor.podConfig = {
     publishPorts = [ "127.0.0.1:8080:8080" ];
@@ -19,7 +24,8 @@ in
   virtualisation.quadlet.containers = {
     tandoor-db.containerConfig = {
       image = "docker.io/library/postgres:16-alpine";
-      environmentFiles = [ config.sops.secrets."tandoor/env".path ];
+      environments = postgresShared;
+      environmentFiles = [ config.sops.secrets."tandoor/postgres/env".path ];
       volumes = [ "tandoor_db:/var/lib/postgresql/data" ];
       pod = pods.tandoor.ref;
       autoUpdate = "registry";
@@ -32,7 +38,7 @@ in
           ENABLE_SIGNUP = "0";
           # explicit; container failed once for some unknown reason by this not being defined
           ALLOWED_HOSTS = "recipes.5kw.li";
-        };
+        } // postgresShared;
         environmentFiles = [ config.sops.secrets."tandoor/env".path ];
         volumes = [
           "tandoor_staticfiles:/opt/recipes/staticfiles"
