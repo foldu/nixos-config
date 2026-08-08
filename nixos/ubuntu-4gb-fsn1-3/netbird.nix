@@ -3,12 +3,12 @@ let
   domain = "netbird.5kw.li";
   dashboardPort = toString 8890;
   managementPort = toString 8891;
-  stunPort = toString 3478;
+  stunPort = 3478;
   netbirdConfig = {
     server = {
       listenAddress = ":80";
       exposedAddress = "https://netbird.5kw.li:443";
-      stunPorts = [ 3478 ];
+      stunPorts = [ stunPort ];
       metricsPort = [ 9090 ];
       healthcheckAddress = ":9000";
       logLevel = "info";
@@ -74,7 +74,7 @@ in
       ];
       publishPorts = [
         "127.0.0.1:${managementPort}:80"
-        "${stunPort}:${stunPort}/udp"
+        "${toString stunPort}:${toString stunPort}/udp"
       ];
       volumes = [
         "netbird_data:/var/lib/netbird"
@@ -83,6 +83,9 @@ in
       autoUpdate = "registry";
     };
   };
+
+  # STUN/TURN for direct peer connections
+  networking.firewall.allowedUDPPorts = [ stunPort ];
 
   services.caddy.virtualHosts.${domain}.extraConfig = ''
     # Native gRPC (needs HTTP/2 cleartext to backend)

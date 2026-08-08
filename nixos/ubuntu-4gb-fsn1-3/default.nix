@@ -5,7 +5,6 @@
 
     ./hardware-configuration.nix
 
-    ./mirko.nix
     #./opencloud.nix
     ./tandoor.nix
     ./netbird.nix
@@ -61,12 +60,6 @@
     allowedTCPPorts = [
       80
       443
-    ];
-    allowedUDPPortRanges = [
-      {
-        from = 51821;
-        to = 51825;
-      }
     ];
   };
 
