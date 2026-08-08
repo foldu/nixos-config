@@ -106,6 +106,7 @@ in
       # nix
       nixd
       nixfmt
+      nix-update
 
       # shell
       shellcheck
