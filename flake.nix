@@ -60,6 +60,8 @@
 
     cashewnix.url = "github:foldu/cashewnix";
 
+    copyparty.url = "github:9001/copyparty";
+
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell/";
       inputs.nixpkgs.follows = "nixpkgs";

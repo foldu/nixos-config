@@ -5,7 +5,7 @@
 
     ./hardware-configuration.nix
 
-    #./opencloud.nix
+    ./copyparty.nix
     ./tandoor.nix
     ./netbird.nix
   ];
