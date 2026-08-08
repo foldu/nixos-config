@@ -1,64 +1,15 @@
-{ ... }:
+{ config, ... }:
 let
   domain = "netbird.5kw.li";
   dashboardPort = toString 8890;
   managementPort = toString 8891;
   stunPort = 3478;
-  netbirdConfig = {
-    server = {
-      listenAddress = ":80";
-      exposedAddress = "https://netbird.5kw.li:443";
-      stunPorts = [ stunPort ];
-      metricsPort = [ 9090 ];
-      healthcheckAddress = ":9000";
-      logLevel = "info";
-      logFile = "console";
-
-      #authSecret: ""
-      dataDir = "/var/lib/netbird";
-
-      auth = {
-        issuer = "https://netbird.5kw.li/oauth2";
-        signKeyRefreshEnabled = true;
-        dashboardRedirectURIs = [
-          "https://netbird.5kw.li/nb-auth"
-          "https://netbird.5kw.li/nb-silent-auth"
-        ];
-        cliRedirectURIs = [ "http://localhost:53000/" ];
-      };
-
-      reverseProxy = {
-        trustedHTTPProxies = [ "172.30.0.10/32" ];
-      };
-      store = {
-        engine = "sqlite";
-        #encryptionKey: ""
-      };
-    };
-  };
-  netbirdDashboardConfig = {
-    NETBIRD_MGMT_API_ENDPOINT = "https://netbird.5kw.li";
-    NETBIRD_MGMT_GRPC_API_ENDPOINT = "https://netbird.5kw.li";
-    # OIDC - using embedded IdP
-    AUTH_AUDIENCE = "netbird-dashboard";
-    AUTH_CLIENT_ID = "netbird-dashboard";
-    AUTH_CLIENT_SECRET = "";
-    AUTH_AUTHORITY = "https://netbird.5kw.li/oauth2";
-    USE_AUTH0 = "false";
-    AUTH_SUPPORTED_SCOPES = "openid profile email groups";
-    AUTH_REDIRECT_URI = "/nb-auth";
-    AUTH_SILENT_REDIRECT_URI = "/nb-silent-auth";
-    # SSL
-    NGINX_SSL_PORT = "443";
-    # Letsencrypt
-    LETSENCRYPT_DOMAIN = "none";
-  };
 in
 {
   virtualisation.quadlet.containers = {
     netbird-dashboard.containerConfig = {
       image = "docker.io/netbirdio/dashboard:latest";
-      environmentFiles = [ "/var/secrets/netbird_dashboard.env" ];
+      environmentFiles = [ config.sops.secrets."netbird/dashboard/env".path ];
       publishPorts = [
         "127.0.0.1:${dashboardPort}:80"
       ];
@@ -78,10 +29,15 @@ in
       ];
       volumes = [
         "netbird_data:/var/lib/netbird"
-        "/var/secrets/netbird_config.yaml:/etc/netbird/config.yaml"
+        "${config.sops.secrets."netbird/config_yaml".path}:/etc/netbird/config.yaml"
       ];
       autoUpdate = "registry";
     };
+  };
+
+  sops.secrets = {
+    "netbird/config_yaml" = { };
+    "netbird/dashboard/env" = { };
   };
 
   # STUN/TURN for direct peer connections
