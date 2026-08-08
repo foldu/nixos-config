@@ -65,7 +65,6 @@
 
   environment.systemPackages = with pkgs; [
     htop
-    helix
     fastfetch
     tmux
     git
