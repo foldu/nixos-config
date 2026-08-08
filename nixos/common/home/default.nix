@@ -17,6 +17,8 @@
     ];
   };
 
+  sops.defaultSopsFile = ../../../secrets/secrets.yaml;
+
   services.netbird.enable = true;
 
   environment.systemPackages = [

@@ -7,7 +7,6 @@
 
     ./mirko.nix
     #./opencloud.nix
-    ./postgresql.nix
     ./tandoor.nix
     ./netbird.nix
   ];
@@ -27,6 +26,8 @@
       dates = "weekly";
     };
   };
+
+  sops.defaultSopsFile = ../../secrets/hetzner.yaml;
 
   virtualisation.oci-containers.backend = "podman";
 

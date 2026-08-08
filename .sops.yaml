@@ -3,7 +3,13 @@ keys:
   - &server_jupiter age1f238rql2gzxsk726swhtgflsa7a5emt37flzwe2qk6lakem583vs40430l
   - &server_saturn age17ff6gus63leamv7czfyv54jfpxhwdj6pstezz7anzdllfwhqc98qhupt9p
   - &server_venus age14jhnmvmemu20ek0hflzdrp3t7qz7q69l0zzsfjpu86tk7ped650qrwlvk0
+  - &server_hetzner age1y8gn9yrsuld5l2d87n8kwfupqap8j3dvga2vuqy93u8s49egvvhqe83egm
 creation_rules:
+  - path: secrets/hetzner.yaml
+    key_groups:
+      - age:
+          - *admin_barnabas
+          - *server_hetzner
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:

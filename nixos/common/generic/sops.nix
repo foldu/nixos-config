@@ -8,8 +8,6 @@
     ssh-to-age
   ];
 
-  sops.defaultSopsFile = ../../../secrets/secrets.yaml;
-
   # Per-host identity = the ssh host key (see the server_* recipients in
   # .sops.yaml). The admin key (admin_barnabas) is the backed-up recovery,
   # if the host key breaks, use it to add the new one in .sops.yaml and `sops updatekeys`
