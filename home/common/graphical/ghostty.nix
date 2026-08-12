@@ -10,6 +10,7 @@
       keybind = [
         "ctrl+enter=unbind"
       ];
+      gtk-single-instance = true;
     };
   };
 }
