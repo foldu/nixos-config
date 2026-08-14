@@ -43,7 +43,7 @@ in
         eb-garamond
         monaspace
         domitian
-        jetbrains-mono
+        # jetbrains-mono
         ubuntu-classic
         ibm-plex
         fira-mono
