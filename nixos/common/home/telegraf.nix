@@ -9,10 +9,6 @@
 # Example prometheus alert rules:
 # - https://github.com/Mic92/dotfiles/blob/master/nixos/eva/modules/prometheus/alert-rules.nix
 let
-  isVM = lib.any (
-    mod: mod == "xen-blkfront" || mod == "virtio_console"
-  ) config.boot.initrd.kernelModules;
-  # potentially wrong if the nvme is not used at boot...
   hasNvme = lib.any (m: m == "nvme") config.boot.initrd.availableKernelModules;
 
   ipv6DadCheck = pkgs.writeShellScript "ipv6-dad-check" ''
@@ -87,7 +83,7 @@ in
 #     )
 #     nfsHosts;
 {
-  systemd.services.telegraf.path = lib.optional (!isVM && hasNvme) pkgs.nvme-cli;
+  systemd.services.telegraf.path = lib.optional hasNvme pkgs.nvme-cli;
 
   sops.secrets."telegraf/env" = { };
 
@@ -102,10 +98,9 @@ in
       inputs = {
         kernel_vmstat = { };
         nginx.urls = lib.mkIf config.services.nginx.statusPage [ "http://localhost/nginx_status" ];
-        smart = lib.mkIf (!isVM) {
-          path_smartctl = pkgs.writeShellScript "smartctl" ''
-            exec /run/wrappers/bin/sudo ${pkgs.smartmontools}/bin/smartctl "$@"
-          '';
+        smart = {
+          # setuid wrapper instead of sudo: see security.wrappers.smartctl below
+          path_smartctl = "/run/wrappers/bin/smartctl";
         };
         system = { };
         mem = { };
@@ -164,17 +159,21 @@ in
       };
     };
   };
-  security.sudo-rs.extraRules = lib.mkIf (!isVM) [
-    {
-      users = [ "telegraf" ];
-      commands = [
-        {
-          command = "${pkgs.smartmontools}/bin/smartctl";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
+  # smartctl needs root for device access. Wrapping it through sudo would
+  # spam the journal every collection interval with pam_unix session
+  # opened/closed + COMMAND lines (sudo-rs has no !syslog support yet, see
+  # https://github.com/trifectatechfoundation/sudo-rs/issues/1181), and it
+  # also collides with sudo-rs' execWheelOnly = true (wrapper is 4750
+  # root:wheel). Instead, give smartctl its own setuid wrapper, executable
+  # only by the telegraf group — no sudo, no PAM, no journal spam.
+  security.wrappers.smartctl = {
+    owner = "root";
+    group = "telegraf";
+    setuid = true;
+    permissions = "u+rx,g+x"; # 4750 root:telegraf
+    source = "${pkgs.smartmontools}/bin/smartctl";
+  };
+
   # create dummy file to avoid telegraf errors
   systemd.tmpfiles.rules = [ "f /var/log/telegraf/dummy 0444 root root - -" ];
 }
