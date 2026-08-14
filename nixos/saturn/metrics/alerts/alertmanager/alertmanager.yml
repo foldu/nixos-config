@@ -18,4 +18,15 @@ receivers:
     telegram_configs:
       - bot_token: "$TELEGRAM_BOT_TOKEN"
         chat_id: $TELEGRAM_CHAT_ID
+        parse_mode: "HTML"
+        # rendered with the alertmanager template data (see
+        # https://pkg.go.dev/github.com/prometheus/alertmanager/template#Data)
+        message: |
+          {{- if eq .Status "firing" }}<b>🔥 {{ len .Alerts }} alert(s) firing</b>{{ else }}<b>✅ {{ len .Alerts }} alert(s) resolved</b>{{ end }}
+          {{- range .Alerts }}
+
+          {{ if eq .Labels.severity "critical" }}🔴{{ else if eq .Labels.severity "warning" }}🟠{{ else }}🔵{{ end }} <b><a href="{{ .GeneratorURL }}">{{ .Labels.alertname }}</a></b>
+          {{ .Annotations.summary }}
+          <code>{{ .Labels.host }}</code>
+          {{- end }}
   - name: "default"
