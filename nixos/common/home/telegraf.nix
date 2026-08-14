@@ -37,7 +37,7 @@ let
   );
 in
 {
-  systemd.services.telegraf.path = lib.optional hasNvme pkgs.nvme-cli;
+  systemd.services.telegraf.path = lib.optional hasNvme pkgs.nvme-cli ++ [ pkgs.lm_sensors ];
 
   sops.secrets."telegraf/env" = { };
 
@@ -70,15 +70,8 @@ in
           files = [ "/sys/fs/ext4/*/errors_count" ];
           data_format = "value";
         };
-        exec = [
-          {
-            ## Commands array
-            commands = zfsChecks;
-            # ++ nfsChecks;
-            data_format = "influx";
-          }
-        ];
         systemd_units = { };
+        sensors = { };
         swap = { };
         disk.tagdrop = {
           fstype = [
@@ -102,6 +95,16 @@ in
         zfs = {
           poolMetrics = true;
         };
+        # only add exec input on hosts with actual commands (zpool health);
+        # an exec input with no commands makes telegraf refuse the config
+      }
+      // lib.optionalAttrs (zfsChecks != [ ]) {
+        exec = [
+          {
+            commands = zfsChecks;
+            data_format = "influx";
+          }
+        ];
       };
       outputs.influxdb_v2 = {
         urls = [ "https://metrics.home.5kw.li" ];

@@ -157,6 +157,7 @@ groups:
           severity: warning
         annotations:
           summary: "{{$labels.instance}}: {{$labels.device}} ({{$labels.model}}) has {{$value}} reallocated sectors"
+      # nvme over high temps have degraded perf
       - alert: smart-temperature
         expr: "smart_device_temp_c > 60"
         for: "10m"
@@ -164,6 +165,29 @@ groups:
           severity: warning
         annotations:
           summary: "{{$labels.instance}}: {{$labels.device}} ({{$labels.model}}) temperature {{$value}}°C"
+      # CPU temp over 85 is pretty sus
+      - alert: cpu-temp-high
+        expr: 'sensors_temp_input{chip=~"k10temp.*|coretemp.*"} > 85'
+        for: "10m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.host}}: CPU temperature {{$value}}°C ({{$labels.chip}}/{{$labels.feature}}) above 85°C for 10m"
+      # same for GPUs
+      - alert: gpu-temp-high
+        expr: 'sensors_temp_input{chip=~"amdgpu.*"} > 85'
+        for: "10m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.host}}: GPU temperature {{$value}}°C ({{$labels.chip}}/{{$labels.feature}}) above 85°C for 10m"
+      - alert: nvidia-gpu-temp-high
+        expr: "nvidia_smi_temperature_gpu > 85"
+        for: "10m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.host}}: NVIDIA GPU ({{$labels.name}}) temperature {{$value}}°C above 85°C for 10m"
       - alert: disk-busy
         expr: "rate(diskio_io_time[5m]) / 1000 > 0.9"
         for: "10m"
