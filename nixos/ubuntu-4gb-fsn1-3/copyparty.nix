@@ -1,6 +1,11 @@
-{ pkgs, config, inputs, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 let
-  port = 3920;
+  port = 3923;
   shareDir = "/srv/syncthing-share";
   filesGroup = "fileshare";
 in
@@ -22,24 +27,27 @@ in
     settings = {
       options = {
         # home hosts dial in explicitly; nothing to announce or discover
-        listenAddresses = [ "tcp://0.0.0.0:22000" ];
-        globalAnnounceEnabled = false;
+        # listenAddresses = [ "tcp://0.0.0.0:22000" ];
+        globalAnnounceEnabled = true;
         localAnnounceEnabled = false;
       };
       devices = {
         jupiter = {
           id = "O7RPI7X-O7EEEJO-TH55KF5-64PE6MS-RPFJZ5B-LIA2ZEW-GJVBCHS-76W54AP";
-          dynamic = false; # inbound only; home hosts connect to us
+          # dynamic = false; # inbound only; home hosts connect to us
         };
         venus = {
           id = "7QLRH3I-32ELROX-SSYZXEI-BAZYYDW-AA5ASUJ-RVGY4EG-KDYT66K-XFMPVQW";
-          dynamic = false;
+          # dynamic = false;
         };
       };
       folders = {
         syncthing-share = {
           path = shareDir;
-          devices = [ "jupiter" "venus" ];
+          devices = [
+            "jupiter"
+            "venus"
+          ];
         };
       };
     };
@@ -61,6 +69,10 @@ in
       p = port;
       no-reload = true;
       hist = "/var/cache/copyparty";
+      # caddy is the only peer (127.0.0.1 is in the default --xff-src trust
+      # CIDR); read the client ip from the single-valued X-Real-IP header
+      xff-hdr = "X-Real-IP";
+      rproxy = 1;
     };
     package = pkgs.copyparty-min;
     accounts.barnabas.passwordFile = config.sops.secrets."copyparty/password".path;
@@ -68,7 +80,9 @@ in
       # whole share: barnabas only (full perms). No anon access.
       "/" = {
         path = shareDir;
-        access = { rwmd = [ "barnabas" ]; };
+        access = {
+          rwmd = [ "barnabas" ];
+        };
       };
       # anon r-only access to /public
       "/public" = {
@@ -82,7 +96,17 @@ in
   };
 
   services.caddy.virtualHosts."cloud.5kw.li".extraConfig = ''
+    reverse_proxy 127.0.0.1:${toString port} {
+      header_up X-Real-IP {http.request.remote.host}
+    }
+
     encode zstd gzip
-    reverse_proxy 127.0.0.1:${toString port}
+
+    header {
+      -Server
+      X-Content-Type-Options nosniff
+      X-Frame-Options DENY
+      Referrer-Policy strict-origin-when-cross-origin
+    }
   '';
 }
