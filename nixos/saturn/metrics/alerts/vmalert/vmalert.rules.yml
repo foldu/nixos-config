@@ -1,13 +1,15 @@
 groups:
   - name: default
     rules:
-      # - alert: system-reboot
-      #   expr: "system_uptime != 0 and system_uptime < 300"
-      #   for: "1m"
-      #   labels:
-      #     severity: warning
-      #   annotations:
-      #     summary: "{{$labels.host}} just rebooted"
+      # only for servers (tagged type="server" via the server profile);
+      # desktops/laptops reboot too often to be not obnoxious
+      - alert: system-reboot
+        expr: 'system_uptime{type="server"} != 0 and system_uptime{type="server"} < 300'
+        for: "1m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.host}} just rebooted"
       - alert: filesystem-full
         expr: 'disk_used_percent{mode!="ro",fstype!="btrfs",fstype!="efivarfs"} >= 80'
         for: "10m"
@@ -15,99 +17,157 @@ groups:
           severity: warning
         annotations:
           summary: "{{$labels.instance}} device {{$labels.device}} on {{$labels.path}} got less than 20% space left on its filesystem"
-      - alert: filesystem-inocdes-full
+      - alert: filesystem-inodes-full
         expr: "disk_inodes_free / disk_inodes_total < 0.10"
         for: "10m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.instance}} device {{$labels.device}} on {{$labels.path}} got less than 10% inodes left on its filesystem"
       - alert: swap-using-50percent
         expr: "swap_used_percent >= 50"
         for: "10m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.host}} is using 50% of its swap space for at least 10 minutes"
       - alert: systemd-service-failed
-        expr: 'systemd_units_active_code{name!~"user@\\d+.service"} == 3'
+        # exclude user units and podman transient units (systemd-run healthchecks,
+        # libpod scopes, machine-libpod pods) which fail routinely
+        expr: 'systemd_units_active_code{name!~"user@\\d+\\.service|[0-9a-f]{64}-[0-9a-f]{16}\\.service|libpod-.*|machine-libpod_pod_.*"} == 3'
         # delay so units that briefly fail during boot/startup don't alert
         for: "2m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.host}} failed to (re)start service {{$labels.name}}"
       - alert: ram-using-95percent
         expr: "mem_buffered + mem_free + mem_cached < mem_total * 0.05"
         for: "1h"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.host}} is using at least 95% of its RAM for at least 1 hour"
       - alert: load15
         expr: "system_load15 / system_n_cpus >= 2.0"
         for: "10m"
+        labels:
+          severity: warning
         annotations:
-          summary: "{{$labels.host}} is running with load15 > 1 for at least 5 minutes: {{$value}}"
+          summary: "{{$labels.host}} load15 is >= 2x its cpu count for at least 10 minutes: {{$value}}"
       - alert: telegraf-down
-        expr: 'min(up{job=~"telegraf",type="server"}) by (source, job, instance, org) == 0'
+        expr: '(time() - tlast_over_time(system_uptime{type="server"}[24h])) > 180'
         for: "3m"
+        labels:
+          severity: warning
         annotations:
-          summary: "{{$labels.instance}}: {{$labels.job}} telegraf exporter from {{$labels.source}} is down"
+          summary: "{{$labels.host}}: telegraf has not reported for {{$value}} seconds"
 
       # for-duration so brief blips (service restarts, slow startups like gitlab)
       # don't page; only sustained outages alert
       - alert: http
         expr: "http_response_result_code != 0"
         for: "5m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.server}} : http request failed from {{$labels.instance}}: {{$labels.result}}"
       - alert: http-match-failed
         expr: "http_response_response_string_match == 0"
         for: "5m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.server}} : http body not as expected; status code: {{$labels.status_code}}"
       - alert: dns-query
         expr: "dns_query_result_code != 0"
         for: "5m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.domain}} : could retrieve A record {{$labels.instance}} from server {{$labels.server}}: {{$labels.result}}"
       - alert: connection-failed
         expr: "net_response_result_code != 0"
         for: "5m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.server}}: connection to {{$labels.port}}({{$labels.protocol}}) failed from {{$labels.instance}}"
 
       - alert: healthchecks
         expr: "hc_check_up == 0"
         for: "5m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.instance}}: healtcheck {{$labels.job}} fails"
       - alert: oom-kills
         expr: "increase(kernel_vmstat_oom_kill[5m]) > 0"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.instance}}: OOM kill detected"
       - alert: uptime
         expr: "system_uptime > 2592000"
+        for: "10m"
+        labels:
+          severity: info
         annotations:
           summary: "Uptime monster: {{$labels.host}} has been up for more than 30 days"
-
-      # doesn't seem to be working properly
-      # - alert: unusual-disk-read-latency
-      #   expr: "rate(diskio_read_time[1m]) / rate(diskio_reads[1m]) > 0.1 and rate(diskio_reads[1m]) > 0"
-      #   annotations:
-      #     summary: "{{$labels.instance}}: Disk latency is growing (read operations > 100ms)"
-      # - alert: unusual-disk-write-latency
-      #   expr: "rate(diskio_write_time[1m]) / rate(diskio_write[1m]) > 0.1 and rate(diskio_write[1m]) > 0"
-      #   annotations:
-      #     summary: "{{$labels.instance}}: Disk latency is growing (write operations > 100ms)"
-      # needs extra telegraf input
       - alert: ext4-errors
         expr: "ext4_errors_value > 0"
+        for: "10m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.instance}}: ext4 has reported {{$value}} I/O errors: check /sys/fs/ext4/*/errors_count"
       #  needs extra telegraf input
       - alert: zpool-status
         expr: "zpool_status_errors > 0"
+        for: "10m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.instance}} reports: zpool {{$labels.name}} has {{$value}} errors"
+      - alert: zpool-degraded
+        expr: "zpool_status_healthy == 0"
+        for: "10m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.instance}} reports: zpool {{$labels.name}} is not ONLINE"
       - alert: zfs-errors
         expr: "zfs_arcstats_l2_io_error + zfs_dmu_tx_error + zfs_arcstats_l2_writes_error > 0"
+        for: "10m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.instance}} reports: {{$value}} ZFS IO errors"
       - alert: smart-errors
         expr: 'smart_device_health_ok{enabled!="Disabled"} != 1'
+        for: "10m"
+        labels:
+          severity: warning
         annotations:
           summary: "{{$labels.instance}}: S.M.A.R.T reports: {{$labels.device}} ({{$labels.model}}) has errors"
+      - alert: smart-reallocated-sectors
+        expr: "smart_device_reallocated_sectors_count > 0"
+        for: "10m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.instance}}: {{$labels.device}} ({{$labels.model}}) has {{$value}} reallocated sectors"
+      - alert: smart-temperature
+        expr: "smart_device_temp_c > 60"
+        for: "10m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.instance}}: {{$labels.device}} ({{$labels.model}}) temperature {{$value}}°C"
+      - alert: disk-busy
+        expr: "rate(diskio_io_time[5m]) / 1000 > 0.9"
+        for: "10m"
+        labels:
+          severity: warning
+        annotations:
+          summary: "{{$labels.instance}}: device {{$labels.device}} is >90% busy for at least 10 minutes"

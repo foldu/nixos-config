@@ -13,4 +13,6 @@
     enable = true;
     dns = "systemd-resolved";
   };
+
+  services.telegraf.extraConfig.global_tags.type = "pc";
 }

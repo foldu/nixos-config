@@ -11,10 +11,6 @@
 let
   hasNvme = lib.any (m: m == "nvme") config.boot.initrd.availableKernelModules;
 
-  ipv6DadCheck = pkgs.writeShellScript "ipv6-dad-check" ''
-    ${pkgs.iproute2}/bin/ip --json addr | \
-    ${pkgs.jq}/bin/jq -r 'map(.addr_info) | flatten(1) | map(select(.dadfailed == true)) | map(.local) | @text "ipv6_dad_failures count=\(length)i"'
-  '';
   supportsFs =
     fs:
     if builtins.isAttrs config.boot.supportedFilesystems then
@@ -29,7 +25,9 @@ let
       BEGIN {
         while ("${pkgs.zfs}/bin/zpool status" | getline) {
           if ($1 ~ /pool:/) { printf "zpool_status,name=%s ", $2 }
-          if ($1 ~ /state:/) { printf " state=\"%s\",", $2 }
+          if ($1 ~ /state:/) {
+              if ($2 == "ONLINE") printf " state=\"%s\",healthy=1,", $2; else printf " state=\"%s\",healthy=0,", $2
+          }
           if ($1 ~ /errors:/) {
               if (index($2, "No")) printf "errors=0i\n"; else printf "errors=%di\n", $2
           }
@@ -38,50 +36,6 @@ let
     ''
   );
 in
-# nfsChecks =
-#   let
-#     collectHosts = shares: fs:
-#       if builtins.elem fs.fsType [ "nfs" "nfs3" "nfs4" ]
-#       then
-#         shares
-#         // (
-#           let
-#             # also match ipv6 addresses
-#             group = builtins.match "\\[?([^\]]+)]?:([^:]+)$" fs.device;
-#             host = builtins.head group;
-#             path = builtins.elemAt group 1;
-#           in
-#           {
-#             ${host} = (shares.${host} or [ ]) ++ [ path ];
-#           }
-#         )
-#       else shares;
-#     nfsHosts = lib.foldl collectHosts { } (builtins.attrValues config.fileSystems);
-#   in
-#   lib.mapAttrsToList
-#     (
-#       host: args:
-#         (pkgs.writeScript "nfs-health" ''
-#           #!${pkgs.gawk}/bin/awk -f
-#           BEGIN {
-#             for (i = 2; i < ARGC; i++) {
-#                 mounts[ARGV[i]] = 1
-#             }
-#             while ("${pkgs.nfs-utils}/bin/showmount -e " ARGV[1] | getline) {
-#               if (NR == 1) { continue }
-#               if (mounts[$1] == 1) {
-#                   printf "nfs_export,host=%s,path=%s present=1\n", ARGV[1], $1
-#               }
-#               delete mounts[$1]
-#             }
-#             for (mount in mounts) {
-#                 printf "nfs_export,host=%s,path=%s present=0\n", ARGV[1], $1
-#             }
-#           }
-#         '')
-#         + " ${host} ${builtins.concatStringsSep " " args}"
-#     )
-#     nfsHosts;
 {
   systemd.services.telegraf.path = lib.optional hasNvme pkgs.nvme-cli;
 
@@ -119,7 +73,7 @@ in
         exec = [
           {
             ## Commands array
-            commands = [ ipv6DadCheck ] ++ zfsChecks;
+            commands = zfsChecks;
             # ++ nfsChecks;
             data_format = "influx";
           }

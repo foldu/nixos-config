@@ -41,6 +41,56 @@
         response_timeout = "30s";
         tags.host = "saturn";
       }
+      {
+        urls = [ "https://auth.home.5kw.li/api/health" ];
+        response_string_match = "OK";
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://paperless.home.5kw.li" ];
+        follow_redirects = true;
+        response_string_match = "Paperless-ngx";
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://invidious.home.5kw.li" ];
+        follow_redirects = true;
+        response_string_match = "Invidious";
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://materialious.home.5kw.li" ];
+        response_status_code = 200;
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://lldap.home.5kw.li" ];
+        response_status_code = 200;
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://wrrr.home.5kw.li" ];
+        response_status_code = 200;
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://img-bookmark.home.5kw.li" ];
+        response_status_code = 200;
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://bambu.home.5kw.li" ];
+        response_status_code = 200;
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
     ];
   };
 }
