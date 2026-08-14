@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
 # Flake output attributes (packages.<system>.<name>) to bump with nix-update.
@@ -16,9 +16,15 @@ if ! command -v nix-update >/dev/null 2>&1; then
     exit 1
 fi
 
+# --quiet appears to be broken currently https://github.com/Mic92/nix-update/issues/483
+# so just write to a file
+commit_msg_file="$(mktemp)"
+trap 'rm -f "$commit_msg_file"' EXIT
+
 for pkg in "${packages[@]}"; do
     echo "==> $pkg"
-    msg="$(nix-update --flake "$pkg" --print-commit-message)"
+    nix-update --flake "$pkg" --write-commit-message "$commit_msg_file"
+    msg="$(cat "$commit_msg_file")"
 
     if git diff --quiet -- "packages/$pkg"; then
         echo "    already up to date; nothing to commit."
