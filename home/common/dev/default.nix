@@ -85,6 +85,7 @@ in
       llm-agents.reasonix
       llm-agents.omp
       llm-agents.opencode
+      llm-agents.dsh
 
       # sql
       # sqlfluff
