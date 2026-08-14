@@ -35,6 +35,7 @@
     ./llama.nix
     ./materialious.nix
     ./img-bookmark.nix
+    ./grafana
     "${inputs.homeserver-sekret}"
   ];
 

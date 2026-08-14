@@ -1,0 +1,206 @@
+{
+  "uid": "gpu",
+  "title": "GPU",
+  "tags": ["gpu", "nvidia", "amdgpu"],
+  "timezone": "browser",
+  "schemaVersion": 39,
+  "version": 1,
+  "editable": true,
+  "refresh": "30s",
+  "time": { "from": "now-6h", "to": "now" },
+  "templating": {
+    "list": [
+      {
+        "name": "host",
+        "type": "query",
+        "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+        "query": "label_values({__name__=~\"nvidia_smi_temperature_gpu|sensors_temp_input\",chip=~\"amdgpu.*\"}, host)",
+        "includeAll": true,
+        "multi": false,
+        "allValue": ".*",
+        "current": { "text": "All", "value": "$__all" },
+        "refresh": 2
+      }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "timeseries",
+      "title": "GPU Temperature (NVIDIA + AMD)",
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 0 },
+      "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "custom": { "fillOpacity": 15, "lineWidth": 1, "drawStyle": "line" },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 85 }, { "color": "red", "value": 100 } ] }
+        },
+        "overrides": []
+      },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "showLegend": true }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        { "expr": "nvidia_smi_temperature_gpu{host=~\"$host\"}", "legendFormat": "{{host}} {{name}}" },
+        { "expr": "sensors_temp_input{host=~\"$host\",chip=~\"amdgpu.*\"}", "legendFormat": "{{host}} {{feature}}" }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "stat",
+      "title": "NVIDIA Temperature",
+      "gridPos": { "h": 5, "w": 6, "x": 0, "y": 9 },
+      "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "celsius",
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 75 }, { "color": "red", "value": 85 } ] },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "options": { "colorMode": "value", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "targets": [
+        { "expr": "max(nvidia_smi_temperature_gpu{host=~\"$host\"})", "legendFormat": "{{name}}" }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "stat",
+      "title": "NVIDIA Utilization",
+      "gridPos": { "h": 5, "w": 6, "x": 6, "y": 9 },
+      "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 80 }, { "color": "red", "value": 95 } ] },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "options": { "colorMode": "value", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "targets": [
+        { "expr": "max(nvidia_smi_utilization_gpu{host=~\"$host\"})", "legendFormat": "{{name}}" }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "stat",
+      "title": "NVIDIA Memory Used",
+      "gridPos": { "h": 5, "w": 6, "x": 12, "y": 9 },
+      "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null } ] },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "options": { "colorMode": "value", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "targets": [
+        { "expr": "max(nvidia_smi_memory_used{host=~\"$host\"}) * 1048576", "legendFormat": "{{name}}" }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "stat",
+      "title": "NVIDIA Power Draw",
+      "gridPos": { "h": 5, "w": 6, "x": 18, "y": 9 },
+      "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "watt",
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null } ] },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "options": { "colorMode": "value", "graphMode": "area", "reduceOptions": { "calcs": ["lastNotNull"] } },
+      "targets": [
+        { "expr": "max(nvidia_smi_power_draw{host=~\"$host\"})", "legendFormat": "{{name}}" }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "timeseries",
+      "title": "NVIDIA Utilization",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 14 },
+      "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "custom": { "fillOpacity": 20, "lineWidth": 1, "drawStyle": "line" },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "yellow", "value": 80 }, { "color": "red", "value": 95 } ] }
+        },
+        "overrides": []
+      },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "showLegend": true }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        { "expr": "nvidia_smi_utilization_gpu{host=~\"$host\"}", "legendFormat": "{{host}} {{name}}" },
+        { "expr": "nvidia_smi_utilization_memory{host=~\"$host\"}", "legendFormat": "{{host}} {{name}} mem" }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "timeseries",
+      "title": "NVIDIA Memory Used / Free",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 14 },
+      "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "custom": { "fillOpacity": 25, "lineWidth": 1, "drawStyle": "line" },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null } ] }
+        },
+        "overrides": []
+      },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "showLegend": true }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        { "expr": "nvidia_smi_memory_total{host=~\"$host\"} * 1048576", "legendFormat": "{{host}} {{name}} total" },
+        { "expr": "nvidia_smi_memory_used{host=~\"$host\"} * 1048576", "legendFormat": "{{host}} {{name}} used" },
+        { "expr": "nvidia_smi_memory_free{host=~\"$host\"} * 1048576", "legendFormat": "{{host}} {{name}} free" }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "timeseries",
+      "title": "NVIDIA Power & Clocks",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 22 },
+      "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+      "fieldConfig": {
+        "defaults": {
+          "custom": { "fillOpacity": 20, "lineWidth": 1, "drawStyle": "line" },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null } ] }
+        },
+        "overrides": [
+          { "matcher": { "id": "byName", "options": "Power" }, "properties": [ { "id": "unit", "value": "watt" } ] },
+          { "matcher": { "id": "byName", "options": "Clocks" }, "properties": [ { "id": "unit", "value": "hertz" } ] }
+        ]
+      },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "showLegend": true }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        { "expr": "nvidia_smi_power_draw{host=~\"$host\"}", "legendFormat": "Power {{host}} {{name}}" },
+        { "expr": "nvidia_smi_clocks_current_graphics{host=~\"$host\"} * 1000000", "legendFormat": "Clocks {{host}} {{name}}" }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "timeseries",
+      "title": "NVIDIA Fan Speed",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 22 },
+      "datasource": { "type": "prometheus", "uid": "victoriametrics" },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent",
+          "custom": { "fillOpacity": 25, "lineWidth": 1, "drawStyle": "line" },
+          "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null } ] }
+        },
+        "overrides": []
+      },
+      "options": { "legend": { "displayMode": "table", "placement": "bottom", "showLegend": true }, "tooltip": { "mode": "multi" } },
+      "targets": [
+        { "expr": "nvidia_smi_fan_speed{host=~\"$host\"}", "legendFormat": "{{host}} {{name}}" }
+      ]
+    }
+  ]
+}
