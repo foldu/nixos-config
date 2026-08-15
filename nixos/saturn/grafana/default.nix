@@ -15,11 +15,8 @@ in
         root_url = "https://${domain}";
       };
 
-      # no anonymous access; everything goes through authelia + grafana login
       "auth.anonymous".enabled = false;
 
-      # sign in via authelia OIDC; client id/secret come from the sops env
-      # file (GF_AUTH_GENERIC_OAUTH_CLIENT_ID/SECRET)
       "auth.generic_oauth" = {
         enabled = true;
         name = "Authelia";
@@ -33,8 +30,7 @@ in
         use_pkce = true;
       };
 
-      # secret key for signing datasource settings; value via file provider
-      # pointing at the sops secret (avoids leaking it into the nix store)
+      # horrid syntax for a raw file content include
       security.secret_key = "\$\${FILE:${config.sops.secrets."grafana/secret-key".path}}";
     };
 
@@ -59,7 +55,6 @@ in
   };
 
   sops.secrets."grafana/env" = { };
-  # grafana reads this via the $${FILE:...} provider as its own user
   sops.secrets."grafana/secret-key" = {
     owner = "grafana";
     group = "grafana";
@@ -71,12 +66,6 @@ in
 
   services.caddy.virtualHosts.${domain}.extraConfig = ''
     encode zstd gzip
-
-    forward_auth https://auth.home.5kw.li {
-      uri /api/authz/forward-auth
-      copy_headers Remote-User Remote-Groups Remote-Email Remote-Name
-      header_up Host {upstream_hostport}
-    }
 
     reverse_proxy 127.0.0.1:${toString port}
   '';
