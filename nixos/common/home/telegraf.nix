@@ -35,6 +35,20 @@ let
       }
     ''
   );
+
+  btrfsChecks = lib.optional (supportsFs "btrfs") (
+    pkgs.writeShellApplication {
+      name = "telegraf-btrfs";
+      runtimeInputs = [
+        pkgs.btrfs-progs
+        pkgs.util-linux
+        pkgs.gawk
+        pkgs.coreutils
+        pkgs.gnused
+      ];
+      text = builtins.readFile ./telegraf-btrfs.sh;
+    }
+  );
 in
 {
   systemd.services.telegraf.path = lib.optional hasNvme pkgs.nvme-cli ++ [ pkgs.lm_sensors ];
@@ -95,13 +109,16 @@ in
         zfs = {
           poolMetrics = true;
         };
-        # only add exec input on hosts with actual commands (zpool health);
+        # only add exec input on hosts with actual commands (zpool/btrfs health);
         # an exec input with no commands makes telegraf refuse the config
       }
-      // lib.optionalAttrs (zfsChecks != [ ]) {
+      // lib.optionalAttrs (zfsChecks != [ ] || btrfsChecks != [ ]) {
         exec = [
           {
-            commands = zfsChecks;
+            # writeShellApplication wraps the script in bin/<name>; writeScript
+            # produces the script at the top level, so normalize both to the
+            # actual executable path
+            commands = zfsChecks ++ (map (c: "${c}/bin/telegraf-btrfs") btrfsChecks);
             data_format = "influx";
           }
         ];

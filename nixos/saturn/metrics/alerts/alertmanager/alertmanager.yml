@@ -27,6 +27,5 @@ receivers:
 
           {{ if eq .Labels.severity "critical" }}🔴{{ else if eq .Labels.severity "warning" }}🟠{{ else }}🔵{{ end }} <b><a href="{{ .GeneratorURL }}">{{ .Labels.alertname }}</a></b>
           {{ .Annotations.summary }}
-          <code>{{ .Labels.host }}</code>
           {{- end }}
   - name: "default"

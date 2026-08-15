@@ -28,9 +28,7 @@
 
   networking.hostName = "jupiter";
 
-  boot.kernelPackages =
-    lib.mkForce
-      inputs.nix-cachyos-kernel.legacyPackages.${pkgs.stdenv.hostPlatform.system}.linuxPackages-cachyos-latest-lto-zen4;
+  boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 
   boot.loader = {
     efi = {

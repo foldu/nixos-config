@@ -297,8 +297,8 @@
       },
       "targets": [
         {
-          "expr": "smart_device_temp_c",
-          "legendFormat": "{{host}} {{device}} ({{model}})"
+          "expr": "max by (host, model, serial_no, wwn) (smart_device_temp_c)",
+          "legendFormat": "{{host}} {{model}} ({{serial_no}})"
         }
       ]
     },
@@ -346,8 +346,8 @@
       },
       "targets": [
         {
-          "expr": "smart_device_reallocated_sectors_count",
-          "legendFormat": "{{host}} {{device}}"
+          "expr": "max by (host, model, serial_no, wwn) (smart_device_reallocated_sectors_count)",
+          "legendFormat": "{{host}} {{model}} ({{serial_no}})"
         }
       ]
     },
@@ -409,8 +409,8 @@
       },
       "targets": [
         {
-          "expr": "smart_device_health_ok",
-          "legendFormat": "{{host}} {{device}}"
+          "expr": "min by (host, model, serial_no, wwn) (smart_device_health_ok)",
+          "legendFormat": "{{host}} {{model}} ({{serial_no}})"
         }
       ]
     },
@@ -458,8 +458,8 @@
       },
       "targets": [
         {
-          "expr": "smart_device_pending_sector_count",
-          "legendFormat": "{{host}} {{device}}"
+          "expr": "max by (host, model, serial_no, wwn) (smart_device_pending_sector_count)",
+          "legendFormat": "{{host}} {{model}} ({{serial_no}})"
         }
       ]
     },
@@ -507,8 +507,67 @@
       },
       "targets": [
         {
-          "expr": "smart_device_uncorrectable_sector_count",
-          "legendFormat": "{{host}} {{device}}"
+          "expr": "max by (host, model, serial_no, wwn) (smart_device_uncorrectable_sector_count)",
+          "legendFormat": "{{host}} {{model}} ({{serial_no}})"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "timeseries",
+      "title": "Btrfs Usage (accurate)",
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 12
+      },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "victoriametrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes",
+          "custom": {
+            "fillOpacity": 20,
+            "lineWidth": 1,
+            "drawStyle": "line"
+          },
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "options": {
+        "legend": {
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
+      },
+      "targets": [
+        {
+          "expr": "btrfs_usage_device_size{path=~\".*\"}",
+          "legendFormat": "{{host}} {{path}} device"
+        },
+        {
+          "expr": "btrfs_usage_used{path=~\".*\"}",
+          "legendFormat": "{{host}} {{path}} used"
+        },
+        {
+          "expr": "btrfs_usage_free_estimated{path=~\".*\"}",
+          "legendFormat": "{{host}} {{path}} free"
         }
       ]
     }
