@@ -1,0 +1,58 @@
+# Telegraf configuration for Proxmox hypervisors
+
+[global_tags]
+  type = "server"
+
+[agent]
+  interval = "60s"
+  round_interval = true
+  metric_batch_size = 1000
+  metric_buffer_limit = 10000
+  collection_jitter = "2s"
+  flush_interval = "10s"
+  flush_jitter = "0s"
+  precision = "0s"
+
+###############################################################################
+#                            OUTPUT PLUGINS                                   #
+###############################################################################
+
+[[outputs.influxdb_v2]]
+  urls = ["{{ vm_url }}"]
+  token = "${VM_AUTH_TOKEN}"
+  organization = ""
+  bucket = ""
+
+###############################################################################
+#                            INPUT PLUGINS                                    #
+###############################################################################
+
+# CPU, memory, system, swap, processes
+[[inputs.cpu]]
+  percpu = true
+  totalcpu = true
+  collect_cpu_time = false
+  report_active = false
+  core_tags = false
+[[inputs.mem]]
+[[inputs.system]]
+[[inputs.swap]]
+[[inputs.processes]]
+[[inputs.kernel]]
+
+# Disk usage
+[[inputs.disk]]
+  ignore_fs = ["tmpfs", "devtmpfs", "devfs", "iso9660", "overlay", "aufs", "squashfs"]
+[[inputs.diskio]]
+
+# Temperature sensors via lm-sensors
+[[inputs.sensors]]
+  remove_numbers = true
+
+# ZFS pool + dataset metrics
+[[inputs.zfs]]
+  kstatPath = "/proc/spl/kstat/zfs"
+
+# SMART disk health
+[[inputs.smart]]
+  path_smartctl = "/usr/sbin/smartctl"

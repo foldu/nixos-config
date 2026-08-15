@@ -1,0 +1,54 @@
+---
+- name: Deploy telegraf proxmox hosts -> victoriametrics
+  hosts: proxmox
+  gather_facts: true
+  become: true
+
+  vars:
+    # influxdb endpoint on saturn's LAN (sol can't reach the netbird mesh)
+    vm_url: "http://192.168.8.149:8428"
+    # token injected from sops/current env
+    vm_auth_token: "{{ lookup('ansible.builtin.env', 'VM_AUTH_TOKEN') }}"
+
+  tasks:
+    - name: Install telegraf, lm-sensors, nvme-cli and zfs
+      ansible.builtin.apt:
+        name:
+          - telegraf
+          - lm-sensors
+          - nvme-cli
+          - zfsutils-linux
+        state: present
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Write telegraf auth token to env file
+      ansible.builtin.copy:
+        dest: /etc/default/telegraf
+        content: |
+          VM_AUTH_TOKEN={{ vm_auth_token }}
+        mode: "0600"
+        owner: root
+        group: root
+      notify: restart telegraf
+
+    - name: Deploy telegraf configuration
+      ansible.builtin.template:
+        src: telegraf.conf.j2
+        dest: /etc/telegraf/telegraf.conf
+        mode: "0644"
+        owner: root
+        group: telegraf
+      notify: restart telegraf
+
+    - name: Ensure telegraf is enabled and running
+      ansible.builtin.systemd:
+        name: telegraf
+        enabled: true
+        state: started
+
+  handlers:
+    - name: restart telegraf
+      ansible.builtin.systemd:
+        name: telegraf
+        state: restarted

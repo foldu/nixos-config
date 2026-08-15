@@ -95,6 +95,12 @@
     443
   ];
 
+  # victoriametrics on the LAN so everyone can push metrics
+  # directly to the influxdb endpoint
+  networking.firewall.interfaces.ens18.allowedTCPPorts = [
+    8428
+  ];
+
   networking.firewall.interfaces.docker0.allowedTCPPorts = [
     80
     443
