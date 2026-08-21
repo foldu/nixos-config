@@ -70,6 +70,11 @@
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel";
 
     llm-agents.url = "github:numtide/llm-agents.nix";
+
+    nix-topology = {
+      url = "github:oddlama/nix-topology";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -80,6 +85,7 @@
       cashewnix,
       flake-utils,
       sops-nix,
+      nix-topology,
       ...
     }@inputs:
     let
@@ -107,6 +113,8 @@
           modules = modules ++ [
             sops-nix.nixosModules.sops
             cashewnix.nixosModules.cashewnix
+            nix-topology.nixosModules.default
+            ./docs/topology-extractors.nix
           ];
           specialArgs = {
             inherit
@@ -141,6 +149,17 @@
       {
         packages = {
           helium = pkgs.callPackage ./packages/helium { };
+        };
+
+        topology = import nix-topology {
+          # the topology overlay provides the renderer tooling (elk-to-svg)
+          pkgs = nixpkgs.legacyPackages.${system}.extend nix-topology.overlays.default;
+          modules = [
+            ./docs/topology.nix
+            {
+              inherit (self) nixosConfigurations;
+            }
+          ];
         };
       }
     );
