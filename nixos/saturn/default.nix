@@ -1,4 +1,9 @@
-{ config, inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -63,7 +68,7 @@
     package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddy-dns/ovh@v1.1.0" ];
       # don't forget to update this caddy hash/caddyhash
-      hash = "sha256-/xpTqYydmJEthBgGJ3uZ9FDF19dlvWs0h8XUf8KkS/M=";
+      hash = "sha256-EMYKR7aUcRTOATfoO+1rA+f2tSGxcudXUqWmfUAn2i4=";
     };
     globalConfig = ''
       acme_dns ovh {
