@@ -84,7 +84,6 @@ in
       socat
 
       llm-agents.reasonix
-      llm-agents.omp
       llm-agents.opencode
       llm-agents.dsh
       llm-agents.pi
