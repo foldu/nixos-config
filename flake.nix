@@ -149,6 +149,7 @@
       {
         packages = {
           helium = pkgs.callPackage ./packages/helium { };
+          hassctl = pkgs.callPackage ./packages/hassctl { };
         };
 
         topology = import nix-topology {

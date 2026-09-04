@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>hassctl</title>
+        <style>
+            :root {
+                color-scheme: light dark;
+            }
+            body {
+                font-family: system-ui, sans-serif;
+                line-height: 1.5;
+                margin: 0 auto;
+                max-width: 54rem;
+                padding: 1rem 1.5rem 3rem;
+            }
+            h1,
+            h2,
+            h3 {
+                line-height: 1.2;
+            }
+            code,
+            pre {
+                font-family: ui-monospace, monospace;
+            }
+            pre {
+                padding: 0.75rem;
+                border-radius: 0.5rem;
+                overflow-x: auto;
+                background: color-mix(in srgb, currentColor 8%, transparent);
+            }
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            th,
+            td {
+                text-align: left;
+                padding: 0.35rem 0.6rem;
+                border-bottom: 1px solid color-mix(in srgb, currentColor 15%, transparent);
+            }
+        </style>
+    </head>
+    <body>
+        {{.Readme}}
+    </body>
+</html>

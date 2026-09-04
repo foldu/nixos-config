@@ -1,0 +1,221 @@
+openapi: 3.1.0
+info:
+  title: hassctl API
+  description: >-
+    Control endpoint for waking, powering off and checking the liveness of LAN
+    devices. Runs on netbird-gw and is only reachable on the netbird mesh
+    (bound to 172.25.74.230:8080). All endpoints except the public `/` HTML
+    documentation page require the X-Token header.
+  version: 0.1.0
+servers:
+  - url: http://172.25.74.230:8080
+    description: netbird mesh address of netbird-gw
+security:
+  - tokenAuth: []
+paths:
+  /api/devices:
+    get:
+      operationId: listDevices
+      summary: List all configured devices with their live state
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DevicesResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+  /api/devices/{id}:
+    get:
+      operationId: getDevice
+      summary: Get one device with its live state
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Device id as configured in /etc/hassctl/config.yaml
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeviceResponse"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /api/devices/{id}/wake:
+    post:
+      operationId: wakeDevice
+      summary: Send a Wake-on-LAN magic packet for the device
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Magic packet sent
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+  /api/devices/{id}/off:
+    post:
+      operationId: poweroffDevice
+      summary: Power the device off over SSH (idempotent)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: >-
+            Poweroff triggered, or the device was already unreachable (treated
+            as success)
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OkResponse"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        "500":
+          $ref: "#/components/responses/InternalError"
+components:
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: X-Token
+      description: Shared secret, configured via the `token` config key
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-Token header
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    NotFound:
+      description: Unknown device id
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    BadRequest:
+      description: The device does not support the requested action
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+    InternalError:
+      description: The action failed
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"
+  schemas:
+    Device:
+      type: object
+      description: A configured device with its live state and capabilities
+      properties:
+        mac:
+          type: string
+          description: MAC address used for Wake-on-LAN, empty if not configured
+          example: "00:11:22:33:44:55"
+        state:
+          type: string
+          description: TCP liveness probe result (connect to the device's sshd)
+          enum:
+            - on
+            - off
+        wake:
+          type: boolean
+          description: Whether /wake is available (a MAC is configured)
+        poweroff:
+          type: boolean
+          description: Whether /off is available (a poweroff target is configured)
+      required:
+        - mac
+        - state
+        - wake
+        - poweroff
+    DevicesResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          enum:
+            - true
+        devices:
+          type: object
+          additionalProperties:
+            $ref: "#/components/schemas/Device"
+      required:
+        - ok
+        - devices
+    DeviceResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          enum:
+            - true
+        device:
+          $ref: "#/components/schemas/Device"
+      required:
+        - ok
+        - device
+    OkResponse:
+      type: object
+      description: Success response for action endpoints
+      properties:
+        ok:
+          type: boolean
+          enum:
+            - true
+      required:
+        - ok
+    Error:
+      type: object
+      properties:
+        code:
+          type: string
+          enum:
+            - unauthorized
+            - not_found
+            - bad_request
+            - internal
+        message:
+          type: string
+      required:
+        - code
+        - message
+    ErrorResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          enum:
+            - false
+        error:
+          $ref: "#/components/schemas/Error"
+      required:
+        - ok
+        - error

@@ -1,0 +1,93 @@
+---
+# Deploy hassctl — the HA control endpoint for waking/powering off LAN devices
+# (jupiter), running on netbird-gw.
+#
+# The binary comes from the nix flake; the config and the poweroff SSH key
+# are extracted from sops into local temp files (they contain multi-line
+# values — env-var injection would break on the key), see ansible/README.md
+# for the full invocation:
+#
+#   nix build .#hassctl -o result
+#   sops -d secrets/secrets.yaml --extract '["hassctl"]["config"]' > /tmp/hassctl-config.yaml
+#   sops -d secrets/secrets.yaml --extract '["hassctl"]["ssh-key"]'  > /tmp/hassctl-poweroff-key
+#   HASSCTL_BINARY=$(readlink -f result/bin/hassctl) \
+#     HASSCTL_CONFIG_FILE=/tmp/hassctl-config.yaml \
+#     HASSCTL_SSH_KEY_FILE=/tmp/hassctl-poweroff-key \
+#     ansible-playbook playbooks/hassctl.yml
+- name: Deploy hassctl — HA control endpoint (wake / off / status)
+  hosts: debian
+  gather_facts: true
+  become: true
+
+  vars:
+    # injected via env when running (see ansible/README.md)
+    hassctl_binary: "{{ lookup('ansible.builtin.env', 'HASSCTL_BINARY', default='/tmp/hassctl') }}"
+    hassctl_config_file: "{{ lookup('ansible.builtin.env', 'HASSCTL_CONFIG_FILE', default='') }}"
+    hassctl_ssh_key_file: "{{ lookup('ansible.builtin.env', 'HASSCTL_SSH_KEY_FILE', default='') }}"
+
+  tasks:
+    - name: Create /etc/hassctl
+      ansible.builtin.file:
+        path: /etc/hassctl/keys
+        state: directory
+        mode: "0700"
+
+    - name: Copy hassctl binary
+      ansible.builtin.copy:
+        src: "{{ hassctl_binary }}"
+        dest: /usr/local/bin/hassctl
+        mode: "0755"
+
+    - name: Install poweroff private key
+      ansible.builtin.copy:
+        src: "{{ hassctl_ssh_key_file }}"
+        dest: /etc/hassctl/keys/poweroff
+        mode: "0600"
+      when: hassctl_ssh_key_file | length > 0
+
+    - name: Write config
+      ansible.builtin.copy:
+        src: "{{ hassctl_config_file }}"
+        dest: /etc/hassctl/config.yaml
+        mode: "0600"
+      when: hassctl_config_file | length > 0
+
+    - name: Install systemd unit
+      ansible.builtin.copy:
+        dest: /etc/systemd/system/hassctl.service
+        content: |
+          [Unit]
+          Description=hassctl — HA control endpoint (wake / off / status)
+          After=network-online.target
+          Wants=network-online.target
+
+          [Service]
+          Type=simple
+          ExecStart=/usr/local/bin/hassctl
+          Restart=on-failure
+          RestartSec=2
+          NoNewPrivileges=true
+          PrivateTmp=true
+          ProtectSystem=strict
+          ProtectHome=true
+
+          [Install]
+          WantedBy=multi-user.target
+        mode: "0644"
+
+    - name: Reload systemd and start hassctl
+      ansible.builtin.systemd:
+        name: hassctl
+        enabled: true
+        state: restarted
+        daemon_reload: true
+
+    - name: Verify service is running
+      ansible.builtin.systemd:
+        name: hassctl
+        state: started
+      register: hassctl_svc
+
+    - name: Report
+      ansible.builtin.debug:
+        msg: "hassctl running on {{ inventory_hostname }} (active={{ hassctl_svc.status.ActiveState }})"
