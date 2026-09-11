@@ -19,10 +19,6 @@
     ../common/cashewnix.nix
   ];
 
-  boot.kernelPackages =
-    lib.mkForce
-      inputs.nix-cachyos-kernel.legacyPackages.${pkgs.stdenv.hostPlatform.system}.linuxPackages-cachyos-latest-lto-zen4;
-
   environment.sessionVariables = {
     MAKEFLAGS = "-j 12";
   };
