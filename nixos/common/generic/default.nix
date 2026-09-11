@@ -67,7 +67,9 @@
     };
     # Only really relevant flake input for subcommands, don't pin everything.
     registry = {
-      nixpkgs = { flake = inputs.nixpkgs; };
+      nixpkgs = {
+        flake = inputs.nixpkgs;
+      };
     };
 
     # This will additionally add your inputs to the system's legacy channels
