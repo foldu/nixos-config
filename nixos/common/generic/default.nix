@@ -28,18 +28,14 @@
 
   environment.enableAllTerminfo = true;
 
-  environment.systemPackages = [
-    inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim
-  ]
-  ++ (with pkgs; [
-    # neovim
+  environment.systemPackages = with pkgs; [
     wget
     curl
     jq
     fd
     ripgrep
     file
-  ]);
+  ];
 
   programs.nh = {
     enable = true;

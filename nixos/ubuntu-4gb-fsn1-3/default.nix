@@ -68,6 +68,8 @@
     fastfetch
     tmux
     git
+    # stable, cache.nixos.org builds it — no nightly overlay here
+    neovim
   ];
 
   services.openssh = {
