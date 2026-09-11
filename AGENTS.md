@@ -7,7 +7,7 @@ inputs (lab.home.5kw.li) are only reachable from the home mesh — see
 ## Checking your work
 
 ```sh
-nixfmt <files you touched>                      # treefmt's formatter; no `nix fmt` here
+nix fmt                                         # treefmt via the flake formatter, formats the repo
 nix eval --raw .#nixosConfigurations.jupiter.config.system.build.toplevel.drvPath
 nix build .#homeConfigurations."barnabas@venus".activationPackage
 ```

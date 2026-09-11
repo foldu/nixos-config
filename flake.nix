@@ -54,6 +54,11 @@
 
     neovim-nightly-overlay.url = "github:nix-community/neovim-nightly-overlay";
 
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     quadlet-nix = {
       url = "github:SEIAROTg/quadlet-nix";
     };
@@ -86,6 +91,7 @@
       flake-utils,
       sops-nix,
       nix-topology,
+      treefmt-nix,
       ...
     }@inputs:
     let
@@ -144,8 +150,14 @@
       system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
+        treefmt = treefmt-nix.lib.evalModule pkgs {
+          projectRootFile = "flake.nix";
+          programs.nixfmt.enable = true;
+        };
       in
       {
+        formatter = treefmt.config.build.wrapper;
+
         packages = {
           helium = pkgs.callPackage ./packages/helium { };
           hassctl = pkgs.callPackage ./packages/hassctl { };
