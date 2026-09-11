@@ -77,7 +77,8 @@
       otpFile = config.sops.secrets."gitlab/otp".path;
       jwsFile = config.sops.secrets."gitlab/jws".path;
       activeRecordPrimaryKeyFile = config.sops.secrets."gitlab/active-record-primary-key".path;
-      activeRecordDeterministicKeyFile = config.sops.secrets."gitlab/active-record-deterministic-key".path;
+      activeRecordDeterministicKeyFile =
+        config.sops.secrets."gitlab/active-record-deterministic-key".path;
       activeRecordSaltFile = config.sops.secrets."gitlab/active-record-salt".path;
     };
   };

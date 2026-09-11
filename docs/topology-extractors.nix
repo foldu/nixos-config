@@ -9,10 +9,10 @@
     );
   };
 
-  topology.self.services.netbird-server = lib.mkIf (
-    config.virtualisation.quadlet.containers ? netbird-server
-  ) {
-    name = "Netbird Server";
-    icon = ./img/netbird.svg;
-  };
+  topology.self.services.netbird-server =
+    lib.mkIf (config.virtualisation.quadlet.containers ? netbird-server)
+      {
+        name = "Netbird Server";
+        icon = ./img/netbird.svg;
+      };
 }

@@ -106,8 +106,7 @@
           };
         };
       mkNixos =
-        system:
-        modules:
+        system: modules:
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = modules ++ [

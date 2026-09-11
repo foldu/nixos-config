@@ -61,8 +61,7 @@ in
     mode = "0400";
   };
 
-  systemd.services.grafana.serviceConfig.EnvironmentFile =
-    [ config.sops.secrets."grafana/env".path ];
+  systemd.services.grafana.serviceConfig.EnvironmentFile = [ config.sops.secrets."grafana/env".path ];
 
   services.caddy.virtualHosts.${domain}.extraConfig = ''
     encode zstd gzip

@@ -96,7 +96,8 @@ in
       sessionSecretFile = config.sops.secrets."authelia/session-secret".path;
     };
 
-    environmentVariables.AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE = config.sops.secrets."authelia/ldap-password".path;
+    environmentVariables.AUTHELIA_AUTHENTICATION_BACKEND_LDAP_PASSWORD_FILE =
+      config.sops.secrets."authelia/ldap-password".path;
   };
 
   sops.secrets = {

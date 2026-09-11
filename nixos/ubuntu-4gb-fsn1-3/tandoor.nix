@@ -38,7 +38,8 @@ in
           ENABLE_SIGNUP = "0";
           # explicit; container failed once for some unknown reason by this not being defined
           ALLOWED_HOSTS = "recipes.5kw.li";
-        } // postgresShared;
+        }
+        // postgresShared;
         environmentFiles = [ config.sops.secrets."tandoor/env".path ];
         volumes = [
           "tandoor_staticfiles:/opt/recipes/staticfiles"
