@@ -132,5 +132,7 @@ in
       python314
       uv
       ruff
+
+      (ghidra.withExtensions (_: [ ghidra-mcp ]))
     ];
 }

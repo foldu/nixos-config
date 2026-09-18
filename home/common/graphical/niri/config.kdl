@@ -3,6 +3,18 @@
 // Check the wiki for a full description of the configuration:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Introduction
 
+// Java/AWT apps show up blank under xwayland-satellite on non-reparenting WMs.
+// Niri's docs name Ghidra as one of them.
+environment {
+    _JAVA_AWT_WM_NONREPARENTING "1"
+
+    // Ghidra pins -Dsun.java2d.uiScale=1 on Linux (support/launch.properties),
+    // so it never scales for HiDPI. ghidraRun passes these VM args last, which
+    // wins over the pinned value. Match the panel you're working on: 2 for the
+    // Framework/laptop and OLED panels, 1 for a plain 1440p monitor.
+    GHIDRA_GUI_JAVA_OPTIONS "-Dsun.java2d.uiScale=2"
+}
+
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
