@@ -1,5 +1,22 @@
 { config, ... }:
 {
+  # django-polymorphic (via drf-spectacular) pulls pytest-playwright into its
+  # check inputs, and thus playwright-browsers -> playwright-webkit, which does
+  # not build in this nixpkgs revision (libmanette missing, fixed upstream). The
+  # checks only need playwright to *import*, and paperless needs no browsers.
+  # Drop this on the next flake.lock update.
+  nixpkgs.overlays = [
+    (final: prev: {
+      pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+        (_pyFinal: pyPrev: {
+          django-polymorphic = pyPrev.django-polymorphic.overridePythonAttrs (_: {
+            doCheck = false;
+          });
+        })
+      ];
+    })
+  ];
+
   services.paperless = {
     enable = true;
     consumptionDirIsPublic = true;
