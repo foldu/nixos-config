@@ -5,8 +5,13 @@
 
 flake := "."
 
-# system + home-manager for one home host
-deploy host: (sys host) (home host)
+# system + home-manager + local checkout for one home host
+deploy host: (sync host) (sys host) (home host)
+
+# put the flake back at its canonical path on the host, so the machine has a
+# checkout to rebuild from locally
+sync host:
+    rsync -az --filter=':- .gitignore' ./ barnabas@{{host}}:/home/barnabas/src/github.com/foldu/nixos-config/
 
 # NixOS only. saturn stages with `nh os boot` instead of switching live — it runs
 # too many services to have them restarted under the running system — so the new

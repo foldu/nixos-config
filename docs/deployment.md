@@ -27,12 +27,15 @@ needed. The cache for this flake is a few hundred MB.
 ## One command
 
 ```sh
-just deploy jupiter                # NixOS + home-manager for one home host
+just deploy jupiter                # NixOS + home-manager + checkout for one home host
 just sys venus                     # NixOS only
 just deploy saturn                 # stages the generation; reboot it when convenient
 just deploy-hetzner                # the Hetzner box
 just deploy-all                    # everything
 ```
+
+`deploy` also rsyncs this checkout to `/home/barnabas/src/github.com/foldu/nixos-config/`
+on the host, so every home host keeps a usable local copy of the flake.
 
 Run it **from jupiter**. That's not a preference — jupiter is the only correct
 root for this:
