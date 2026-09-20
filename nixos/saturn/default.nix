@@ -79,12 +79,6 @@
       }
     '';
     environmentFile = config.sops.secrets."caddy/env".path;
-    virtualHosts."hass.home.5kw.li" = {
-      extraConfig = ''
-        encode zstd gzip
-        reverse_proxy 172.25.74.192:8123
-      '';
-    };
   };
 
   # The container bridges need 80/443 too, otherwise gitlab-runner
