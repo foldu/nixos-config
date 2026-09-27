@@ -20,13 +20,6 @@
     };
 
     quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-
-    # Core features
-    enableVPN = true; # VPN management widget
-    enableDynamicTheming = true; # Wallpaper-based theming (matugen)
-    enableAudioWavelength = true; # Audio visualizer (cava)
-    # currently broken on unstable
-    enableCalendarEvents = false; # Calendar integration (khal)
   };
 
   programs.niri = {
