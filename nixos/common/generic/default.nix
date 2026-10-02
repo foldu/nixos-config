@@ -26,7 +26,7 @@
     LESS = "FRX";
   };
 
-  environment.enableAllTerminfo = true;
+  environment.enableAllTerminfo = false;
 
   environment.systemPackages = with pkgs; [
     wget
