@@ -67,6 +67,11 @@ pkgs: {
       command = "nautilus";
       desktopFile = "org.gnome.Nautilus.desktop";
     };
+    diskImage = {
+      pkg = null;
+      command = "gnome-disks";
+      desktopFile = "org.gnome.DiskUtility.desktop";
+    };
     torrentClient = {
       pkg = pkgs.fragments;
       command = "fragments";

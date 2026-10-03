@@ -46,7 +46,11 @@ let
   # XML-derived types such as .ts/.tsx/.xhtml which browsers claim via
   # `text/xml`. So take the transitive closure of `text/plain` and emit one
   # exact default per type: one rule in the source, ~300 entries in
-  # mimeapps.list.
+  # mimeapps.list. Rulings are then spread across shared-mime-info's alias
+  # graph (see withAliases below), because a default is matched by exact
+  # string: without that, text/xml would not inherit application/xml, and
+  # video/matroska (what a .mkv is actually detected as) would not inherit the
+  # legacy video/x-matroska.
   #
   # Caveats, so nobody is surprised later:
   #  * This reads a file out of a derivation during evaluation (import from
@@ -89,8 +93,11 @@ let
   # LibreOffice, GIMP, Evince, Celluloid, Thunderbird, ...) to keep them.
   nonEditorMimes = [
     "text/html"
+    "application/xhtml+xml"
     "text/csv"
     "text/tab-separated-values"
+    "text/calendar"
+    "text/vcard"
     "application/postscript"
     "application/rtf"
     "image/svg+xml"
@@ -103,18 +110,17 @@ let
     "application/vnd.oasis.opendocument.presentation-flat-xml"
     "application/vnd.oasis.opendocument.graphics-flat-xml"
 
-    # Mail. These live under text/plain too, and several of them currently have
-    # no handler at all, which means they fall into the xdg-open browser hole.
+    # Mail and contacts. These live under text/plain too, and several of them
+    # have no handler at all otherwise, which is the xdg-open browser hole.
     "message/rfc822"
     "message/news"
     "message/partial"
     "message/delivery-status"
     "message/disposition-notification"
 
-    # Not actually text despite the text/ prefix.
-    "text/x-devicetree-binary"
-    "text/jscript.encode"
-    "text/x-imelody"
+    # A ringtone, not source code. Note the case: mimeapps matching is by exact
+    # string, so `text/x-imelody` here would silently do nothing.
+    "text/x-iMelody"
   ];
 
   # Source/script types that shared-mime-info does not model as descendants of
@@ -130,6 +136,50 @@ let
     "text/x-sed"
     "text/x-shellscript"
   ];
+
+  # Everything shared-mime-info calls text, minus the types that belong to some
+  # other app, plus the script types the db does not model under text/plain.
+  editorMimes = lib.subtractLists nonEditorMimes textMimes ++ alsoEditorMimes;
+
+  # "alias canonical-type" pairs, e.g. "text/xml application/xml". A default is
+  # matched by exact string, so an alias never inherits its canonical type's
+  # ruling. Spread every ruling across the alias graph until it settles: this
+  # keeps text/xml in step with application/xml, video/matroska (what a .mkv is
+  # detected as) in step with the legacy video/x-matroska, and video/vnd.avi
+  # (.avi) in step with video/x-msvideo.
+  aliasPairs = builtins.filter (p: builtins.length p == 2) (
+    map (lib.splitString " ") (
+      lib.filter (s: s != "") (lib.splitString "\n" (builtins.readFile "${mimeDb}/aliases"))
+    )
+  );
+
+  withAliases =
+    table:
+    lib.converge (
+      acc:
+      lib.foldl' (
+        a: p:
+        let
+          alias = builtins.elemAt p 0;
+          canonical = builtins.elemAt p 1;
+          value =
+            if builtins.hasAttr canonical a then
+              a.${canonical}
+            else if builtins.hasAttr alias a then
+              a.${alias}
+            else
+              null;
+        in
+        if value == null then
+          a
+        else
+          a
+          // {
+            ${alias} = value;
+            ${canonical} = value;
+          }
+      ) acc aliasPairs
+    ) table;
 in
 {
   home.packages =
@@ -141,20 +191,37 @@ in
     enable = true;
     mimeApps = rec {
       enable = true;
-      defaultApplications =
-        # Everything shared-mime-info considers text, minus the exclusions,
-        # goes to the editor.
-        lib.genAttrs (lib.subtractLists nonEditorMimes textMimes) (_: desktopFile.graphicalEditor)
-        // lib.genAttrs alsoEditorMimes (_: desktopFile.graphicalEditor)
+      defaultApplications = withAliases (
+        # Everything shared-mime-info considers text, minus the types that
+        # belong to another app, goes to the editor.
+        lib.genAttrs editorMimes (_: desktopFile.graphicalEditor)
         // {
           "image/bmp" = desktopFile.imageViewer;
           "image/png" = desktopFile.imageViewer;
           "image/jpeg" = desktopFile.imageViewer;
           "image/webp" = desktopFile.imageViewer;
           "image/gif" = desktopFile.imageViewer;
+          "image/tiff" = desktopFile.imageViewer;
+          "image/avif" = desktopFile.imageViewer;
+          "image/heif" = desktopFile.imageViewer;
+          "image/vnd.microsoft.icon" = desktopFile.imageViewer;
           "inode/directory" = desktopFile.fileBrowser;
           "text/html" = desktopFile.browser;
+          # Helium advertises these as well, but a default only exists if it is
+          # named here: otherwise mimeinfo.cache order picks whichever browser
+          # happens to sort first (brave, epiphany, firefox), and xhtml/xml
+          # types get caught by the text closure and land in the editor.
+          "application/xhtml+xml" = desktopFile.browser;
+          "application/xhtml_xml" = desktopFile.browser;
+          "application/x-mimearchive" = desktopFile.browser;
+          "multipart/related" = desktopFile.browser;
+          "x-scheme-handler/chromium" = desktopFile.browser;
+          "image/svg+xml" = desktopFile.imageViewer;
           "application/pdf" = desktopFile.pdfViewer;
+          # Disk images: mount them instead of handing them to the browser
+          # fallback.
+          "application/vnd.efi.iso" = desktopFile.diskImage;
+          "application/vnd.efi.img" = desktopFile.diskImage;
           "application/x-bittorrent" = desktopFile.torrentClient;
           "x-scheme-handler/http" = desktopFile.browser;
           "x-scheme-handler/https" = desktopFile.browser;
@@ -167,6 +234,50 @@ in
           "message/partial" = desktopFile.emailClient;
           "message/delivery-status" = desktopFile.emailClient;
           "message/disposition-notification" = desktopFile.emailClient;
+          "text/calendar" = desktopFile.emailClient;
+          "text/vcard" = desktopFile.emailClient;
+
+          # Audio. Celluloid plays music as well as video, so pin audio/* here
+          # rather than leaving it to mimeinfo.cache order (which sent .mp3 to
+          # Celluloid but .wav to mpv). Aliases such as audio/x-flac and
+          # audio/wav follow through withAliases.
+          "audio/aac" = desktopFile.videoPlayer;
+          "audio/ac3" = desktopFile.videoPlayer;
+          "audio/amr" = desktopFile.videoPlayer;
+          "audio/amr-wb" = desktopFile.videoPlayer;
+          "audio/basic" = desktopFile.videoPlayer;
+          "audio/flac" = desktopFile.videoPlayer;
+          "audio/matroska" = desktopFile.videoPlayer;
+          "audio/mp2" = desktopFile.videoPlayer;
+          "audio/mp4" = desktopFile.videoPlayer;
+          "audio/mpeg" = desktopFile.videoPlayer;
+          "audio/ogg" = desktopFile.videoPlayer;
+          "audio/vnd.audible.aax" = desktopFile.videoPlayer;
+          "audio/vnd.audible.aaxc" = desktopFile.videoPlayer;
+          "audio/vnd.dts" = desktopFile.videoPlayer;
+          "audio/vnd.dts.hd" = desktopFile.videoPlayer;
+          "audio/vnd.rn-realaudio" = desktopFile.videoPlayer;
+          "audio/vnd.wave" = desktopFile.videoPlayer;
+          "audio/webm" = desktopFile.videoPlayer;
+          "audio/x-aifc" = desktopFile.videoPlayer;
+          "audio/x-aiff" = desktopFile.videoPlayer;
+          "audio/x-ape" = desktopFile.videoPlayer;
+          "audio/x-dff" = desktopFile.videoPlayer;
+          "audio/x-dsf" = desktopFile.videoPlayer;
+          "audio/x-flac+ogg" = desktopFile.videoPlayer;
+          "audio/x-ms-asx" = desktopFile.videoPlayer;
+          "audio/x-ms-wma" = desktopFile.videoPlayer;
+          "audio/x-mpegurl" = desktopFile.videoPlayer;
+          "audio/x-musepack" = desktopFile.videoPlayer;
+          "audio/x-opus+ogg" = desktopFile.videoPlayer;
+          "audio/x-scpls" = desktopFile.videoPlayer;
+          "audio/x-speex" = desktopFile.videoPlayer;
+          "audio/x-speex+ogg" = desktopFile.videoPlayer;
+          "audio/x-tak" = desktopFile.videoPlayer;
+          "audio/x-tta" = desktopFile.videoPlayer;
+          "audio/x-vorbis+ogg" = desktopFile.videoPlayer;
+          "audio/x-wavpack" = desktopFile.videoPlayer;
+          "audio/x-wavpack-correction" = desktopFile.videoPlayer;
 
           # help
           "video/x-ogm+ogg" = desktopFile.videoPlayer;
@@ -214,7 +325,8 @@ in
           "video/x-theora" = desktopFile.videoPlayer;
           "video/x-theora+ogg" = desktopFile.videoPlayer;
           "video/x-totem-stream" = desktopFile.videoPlayer;
-        };
+        }
+      );
       associations.added = defaultApplications;
     };
   };
