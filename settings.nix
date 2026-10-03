@@ -11,23 +11,23 @@ pkgs: {
       size = 12;
     };
     documents = {
-      pkg = pkgs.roboto-slab;
-      name = "Roboto Slab";
+      pkg = pkgs.literata;
+      name = "Literata";
       size = 11;
     };
     sans = {
-      pkg = pkgs.inter;
-      name = "Inter";
+      pkg = pkgs.geist-font;
+      name = "Geist";
       size = 11;
     };
     serif = {
-      pkg = pkgs.inter;
-      name = "Inter";
+      pkg = pkgs.literata;
+      name = "Literata";
       size = 11;
     };
     titlebar = {
-      pkg = pkgs.inter; # same family, SemiBold face
-      name = "Inter Semi Bold";
+      pkg = pkgs.geist-font; # same family as sans, SemiBold face
+      name = "Geist SemiBold";
       size = 10;
     };
   };
