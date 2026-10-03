@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  getSettings,
+  ...
+}:
 {
   home.packages = with pkgs; [
     gnome-tweaks
@@ -17,6 +22,10 @@
   dconf.enable = true;
   dconf.settings =
     let
+      configSettings = getSettings pkgs;
+      # dconf spells fonts as "<family> <point size>"
+      fontName = font: "${font.name} ${toString font.size}";
+
       customKeybinds = [
         {
           binding = "<Shift><Super>Return";
@@ -63,10 +72,10 @@
     in
     {
       "org/gnome/desktop/interface" = {
-        document-font-name = "Roboto Slab 11";
+        document-font-name = fontName configSettings.font.documents;
         color-scheme = "prefer-dark";
         #font-name = "Fira Sans Semi-Light 10";
-        monospace-font-name = "Maple Mono NL NF CN 11";
+        monospace-font-name = fontName configSettings.font.monospace;
 
         show-battery-percentage = true;
 
@@ -74,7 +83,7 @@
       };
 
       "org/gnome/desktop/wm/preferences" = {
-        titlebar-font = "Inter Semi Bold 10";
+        titlebar-font = fontName configSettings.font.titlebar;
       };
 
       "org/gnome/desktop/privacy" = {

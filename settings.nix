@@ -25,6 +25,11 @@ pkgs: {
       name = "Inter";
       size = 11;
     };
+    titlebar = {
+      pkg = pkgs.inter; # same family, SemiBold face
+      name = "Inter Semi Bold";
+      size = 10;
+    };
   };
   apps = {
     browser = {
