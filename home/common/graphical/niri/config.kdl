@@ -625,7 +625,10 @@ binds {
     // Mod+Shift+P { power-off-monitors; }
 }
 
-spawn-at-startup "~/.config/niri/launch-bitwarden.sh"
+// Apps that put an icon in the DMS tray have to wait for its
+// org.kde.StatusNotifierWatcher to appear, or they never get an icon at all.
+spawn-at-startup "~/.config/niri/launch-when-tray-ready.sh" "bitwarden"
+spawn-at-startup "~/.config/niri/launch-when-tray-ready.sh" "mullvad-vpn"
 
 // switch-events {
 //     lid-close { spawn "sh" "-c" "qs ipc call lockScreen lock; niri msg action power-off-monitors"; }

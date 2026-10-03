@@ -8,9 +8,9 @@
   xdg.configFile = {
     "niri/config.kdl".source = ./config.kdl;
     # maybe just use a service for this? I don't think the tray stuff is up right after start, given how ass slow qt is
-    "niri/launch-bitwarden.sh" = {
+    "niri/launch-when-tray-ready.sh" = {
       executable = true;
-      source = ./launch-bitwarden.sh;
+      source = ./launch-when-tray-ready.sh;
     };
   };
 
