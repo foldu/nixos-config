@@ -11,7 +11,7 @@ deploy host: (sync host) (sys host) (home host)
 # put the flake back at its canonical path on the host, so the machine has a
 # checkout to rebuild from locally
 sync host:
-    rsync -az --filter=':- .gitignore' ./ barnabas@{{host}}:/home/barnabas/src/github.com/foldu/nixos-config/
+    rsync -az --filter=':- .gitignore' ./ barnabas@{{host}}.home.5kw.li:/home/barnabas/src/github.com/foldu/nixos-config/
 
 # NixOS only. saturn stages with `nh os boot` instead of switching live — it runs
 # too many services to have them restarted under the running system — so the new
@@ -21,7 +21,7 @@ sys host:
     set -euo pipefail
     mode=switch
     [[ {{host}} == saturn ]] && mode=boot
-    nh os "$mode" -H {{host}} --target-host barnabas@{{host}} {{flake}}
+    nh os "$mode" -H {{host}} --target-host barnabas@{{host}}.home.5kw.li {{flake}}
 
 # home-manager only: standalone config, so build here, copy, activate there
 # (the generation's activate script does the profile bookkeeping itself)
@@ -29,8 +29,8 @@ home host:
     #!/usr/bin/env bash
     set -euo pipefail
     gen=$(nix build --no-link --print-out-paths {{flake}}#homeConfigurations."barnabas@{{host}}".activationPackage)
-    nix copy --to ssh://barnabas@{{host}} "$gen"
-    ssh -t barnabas@{{host}} "$gen/activate"
+    nix copy --to ssh://barnabas@{{host}}.home.5kw.li "$gen"
+    ssh -t barnabas@{{host}}.home.5kw.li "$gen/activate"
 
 # Hetzner box: no barnabas user (root-only ssh) and a FQDN
 deploy-hetzner:
