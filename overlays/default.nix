@@ -1,7 +1,7 @@
-{ ... }:
+{ inputs, ... }:
 {
   customizations = import ./customizations.nix;
-  extra = import ./extra.nix;
+  extra = import ./extra.nix { inherit inputs; };
   # extern = inputs.flake-utils.lib.eachDefaultSystem (system: {
   #   extraPackages = inputs.nixpkgs.lib.foldl (acc: x: acc // x.packages.${system}) { } [
   #     inputs.nix-stuff

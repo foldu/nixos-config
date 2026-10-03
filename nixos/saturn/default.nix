@@ -40,6 +40,7 @@
     ./llama.nix
     ./materialious.nix
     ./img-bookmark.nix
+    ./dsh.nix
     ./grafana
     "${inputs.homeserver-sekret}"
   ];
