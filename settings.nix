@@ -33,9 +33,14 @@ pkgs: {
       desktopFile = "helium.desktop";
     };
     pdfViewer = {
-      pkg = pkgs.evince;
-      command = "evince";
-      desktopFile = "org.gnome.Evince.desktop";
+      pkg = null; # ships with GNOME
+      command = "papers";
+      desktopFile = "org.gnome.Papers.desktop";
+    };
+    ebookReader = {
+      pkg = pkgs.foliate;
+      command = "foliate";
+      desktopFile = "com.github.johnfactotum.Foliate.desktop";
     };
     consoleEditor = {
       pkg = null;

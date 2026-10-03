@@ -218,6 +218,16 @@ in
           "x-scheme-handler/chromium" = desktopFile.browser;
           "image/svg+xml" = desktopFile.imageViewer;
           "application/pdf" = desktopFile.pdfViewer;
+          # Ebooks. Papers has no EPUB backend, so these go to Foliate.
+          "application/epub+zip" = desktopFile.ebookReader;
+          "application/x-mobipocket-ebook" = desktopFile.ebookReader;
+          "application/vnd.amazon.mobi8-ebook" = desktopFile.ebookReader;
+          "application/x-fictionbook+xml" = desktopFile.ebookReader;
+          "application/x-zip-compressed-fb2" = desktopFile.ebookReader;
+          # Comic archives stay with the document viewer, which advertises them;
+          # Foliate claims cbz as well and would otherwise win by cache order.
+          "application/vnd.comicbook+zip" = desktopFile.pdfViewer;
+          "application/vnd.comicbook-rar" = desktopFile.pdfViewer;
           # Disk images: mount them instead of handing them to the browser
           # fallback.
           "application/vnd.efi.iso" = desktopFile.diskImage;
