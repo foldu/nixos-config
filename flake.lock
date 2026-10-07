@@ -771,11 +771,11 @@
       },
       "locked": {
         "host": "lab.home.5kw.li",
-        "lastModified": 1785675346,
-        "narHash": "sha256-cPgWfRE59fav6c80FXTRGQDDrEicXrABtIn0JUFJ6CY=",
+        "lastModified": 1791377574,
+        "narHash": "sha256-I84r81aFJDWszKCwvuDzbNqW6MogifNyQTDdJYAD7es=",
         "owner": "foldu",
         "repo": "pickwp",
-        "rev": "a0e9fb6c2be6fdd8a6525f3b69e500f1275ed0c1",
+        "rev": "a460bc3ec405ef8c45619e4f4d20def08a35845c",
         "type": "gitlab"
       },
       "original": {
