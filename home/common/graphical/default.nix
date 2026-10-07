@@ -33,6 +33,7 @@
     pwgen
     d-spy
     gimp
+    photocraft
     # streamlink
     feishin
     # temporarily needed until https://gitlab.gnome.org/GNOME/gnome-online-accounts/-/merge_requests/97
