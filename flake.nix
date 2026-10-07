@@ -161,6 +161,7 @@
         packages = {
           helium = pkgs.callPackage ./packages/helium { };
           hassctl = pkgs.callPackage ./packages/hassctl { };
+          gitlab-mirror = pkgs.callPackage ./packages/gitlab-mirror { };
         };
 
         topology = import nix-topology {

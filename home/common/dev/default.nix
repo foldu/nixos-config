@@ -62,10 +62,14 @@ in
       zed-editor
       # tools
       gnumake
-      glab
       tokei
       devenv
       bitwarden-cli
+
+      # forge CLIs
+      gh
+      glab
+      gitlab-mirror
 
       # editor tools
       ast-grep
