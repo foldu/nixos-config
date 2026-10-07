@@ -7,6 +7,7 @@ cd "$repo_root"
 # Flake output attributes (packages.<system>.<name>) to bump with nix-update.
 packages=(
     helium
+    photocraft
 )
 
 nix flake update --commit-lock-file

@@ -7,29 +7,25 @@
   fetchurl,
   lib,
   makeWrapper,
-  stdenv,
   writeShellScript,
 }:
 let
   pname = "photocraft";
   version = "0.3.0";
 
-  sources = {
-    x86_64-linux = fetchurl {
-      url = "https://github.com/storytold/photocraft/releases/download/v${version}/${pname}-${version}-linux-x86_64.AppImage";
-      hash = "sha256-KeMBH0mlLqJcj+QEJYpsX62wIJTbtAqITWnmuoCOYTY=";
-    };
-    aarch64-linux = fetchurl {
-      url = "https://github.com/storytold/photocraft/releases/download/v${version}/${pname}-${version}-linux-aarch64.AppImage";
-      hash = "sha256-jXtFCkReZ5X/3dOZa/pdRLzzfGyeYmja87uT0hYGP7k=";
-    };
+  # Upstream also publishes an aarch64 AppImage. It is deliberately not
+  # packaged: nix-update rewrites the hash of the one system it evaluates, so a
+  # second architecture here would go stale after the first version bump (see
+  # scripts/update.sh), and no aarch64 host in this repo runs desktops.
+  appimage = fetchurl {
+    url = "https://github.com/storytold/photocraft/releases/download/v${version}/${pname}-${version}-linux-x86_64.AppImage";
+    hash = "sha256-KeMBH0mlLqJcj+QEJYpsX62wIJTbtAqITWnmuoCOYTY=";
   };
 
-  src =
-    sources.${stdenv.hostPlatform.system}
-      or (throw "${pname} ${version} is not packaged for ${stdenv.hostPlatform.system}");
-
-  contents = appimageTools.extract { inherit pname version src; };
+  contents = appimageTools.extract {
+    inherit pname version;
+    src = appimage;
+  };
 
   runner = writeShellScript "${pname}-run" ''
     if [ "''${PHOTOCRAFT_RUN:-gui}" = cli ]; then
@@ -43,6 +39,11 @@ appimageTools.wrapAppImage {
   inherit pname version;
 
   src = contents;
+  # appimageTools.wrapType2 hands nix-update the versioned fetchurl through
+  # passthru.src, which keeps its position in this file; wrapAppImage is given
+  # an already-extracted tree instead, so do the same by hand or
+  # `nix-update --flake photocraft` has no source to rewrite.
+  passthru.src = appimage;
   runScript = "${runner}";
 
   nativeBuildInputs = [ makeWrapper ];
@@ -68,6 +69,6 @@ appimageTools.wrapAppImage {
       asl20
     ];
     mainProgram = pname;
-    platforms = builtins.attrNames sources;
+    platforms = [ "x86_64-linux" ];
   };
 }
