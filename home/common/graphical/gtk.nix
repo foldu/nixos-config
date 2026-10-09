@@ -19,7 +19,14 @@ in
       package = pkgs.adw-gtk3;
       name = "Adwaita-dark";
     };
-    gtk3.extraConfig.gtk-key-theme-name = "Emacs";
+    gtk3.extraConfig = {
+      gtk-key-theme-name = "Emacs";
+      # Chromium — and so Electron's window frame, which Chromium draws itself
+      # under Wayland — takes its light/dark decision from this GTK3 setting,
+      # not from the theme name above. Without it the frame renders as light
+      # Adwaita however dark the configured theme is.
+      gtk-application-prefer-dark-theme = true;
+    };
   };
 
   gtk.gtk4.theme = config.gtk.theme;
