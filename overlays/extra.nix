@@ -9,6 +9,7 @@ final: prev: {
   vectorcraft = prev.callPackage ../packages/vectorcraft { };
   gitlab-mirror = prev.callPackage ../packages/gitlab-mirror { };
   ovh-dns = prev.callPackage ../packages/ovh-dns { };
+  caddy-with-ovh = prev.callPackage ../packages/caddy-with-ovh { };
   dsh = prev.callPackage ../packages/dsh {
     dsh = inputs.llm-agents.packages.${prev.stdenv.hostPlatform.system}.dsh;
   };

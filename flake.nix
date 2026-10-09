@@ -167,6 +167,7 @@
           hassctl = pkgs.callPackage ./packages/hassctl { };
           gitlab-mirror = pkgs.callPackage ./packages/gitlab-mirror { };
           ovh-dns = pkgs.callPackage ./packages/ovh-dns { };
+          caddy-with-ovh = pkgs.callPackage ./packages/caddy-with-ovh { };
         };
 
         topology = import nix-topology {

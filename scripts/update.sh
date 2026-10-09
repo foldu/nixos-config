@@ -5,6 +5,10 @@ repo_root="$(git rev-parse --show-toplevel)"
 cd "$repo_root"
 
 # Flake output attributes (packages.<system>.<name>) to bump with nix-update.
+# caddy-with-ovh is deliberately absent: its sources are go.mod/go.sum rather
+# than a fetched tarball, so nix-update can't re-resolve the module graph, and
+# bumping `version` alone would leave the binary on the old release. Bump it
+# with packages/caddy-with-ovh/update.sh instead.
 packages=(
     helium
     photocraft
