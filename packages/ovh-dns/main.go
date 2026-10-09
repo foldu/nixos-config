@@ -52,6 +52,7 @@ type app struct {
 
 type options struct {
 	secretsFile string
+	zone        string
 	fieldType   string
 	ttl         int64
 	hasTTL      bool
@@ -146,7 +147,7 @@ func parseArgs(args []string) (*options, error) {
 		name, value, attached := strings.Cut(arg, "=")
 
 		switch name {
-		case "--secrets-file", "--ttl", "--type":
+		case "--secrets-file", "--zone", "--ttl", "--type":
 			if !attached {
 				if i+1 >= len(args) {
 					return nil, fmt.Errorf("%s needs a value", name)
@@ -157,6 +158,8 @@ func parseArgs(args []string) (*options, error) {
 			switch name {
 			case "--secrets-file":
 				opts.secretsFile = value
+			case "--zone":
+				opts.zone = normalise(value)
 			case "--ttl":
 				ttl, err := strconv.ParseInt(value, 10, 64)
 				if err != nil || ttl < 0 {
@@ -196,7 +199,7 @@ func (a *app) set(api dnsAPI, opts *options, args []string) int {
 		return a.errorf("%v", err)
 	}
 
-	zone, sub, err := a.resolve(api, name)
+	zone, sub, err := a.resolve(api, opts, name)
 	if err != nil {
 		return a.errorf("%v", err)
 	}
@@ -263,7 +266,7 @@ func (a *app) rm(api dnsAPI, opts *options, args []string) int {
 		want = args[2]
 	}
 
-	zone, sub, err := a.resolve(api, name)
+	zone, sub, err := a.resolve(api, opts, name)
 	if err != nil {
 		return a.errorf("%v", err)
 	}
@@ -304,7 +307,7 @@ func (a *app) list(api dnsAPI, opts *options, args []string) int {
 	if len(args) != 1 {
 		return a.errorf("usage: ovh-dns list <zone|name> [--type TYPE]")
 	}
-	zone, sub, err := a.resolve(api, args[0])
+	zone, sub, err := a.resolve(api, opts, args[0])
 	if err != nil {
 		return a.errorf("%v", err)
 	}
@@ -347,7 +350,7 @@ func (a *app) refresh(api dnsAPI, opts *options, args []string) int {
 	if len(args) != 1 {
 		return a.errorf("usage: ovh-dns refresh <zone|name>")
 	}
-	zone, _, err := a.resolve(api, args[0])
+	zone, _, err := a.resolve(api, opts, args[0])
 	if err != nil {
 		return a.errorf("%v", err)
 	}
@@ -377,17 +380,17 @@ func (a *app) publish(api dnsAPI, opts *options, zone string) int {
 }
 
 // resolve turns a name into the zone OVH is authoritative for and the subdomain
-// inside it.
-func (a *app) resolve(api dnsAPI, name string) (zone, sub string, err error) {
-	zones, err := api.zones()
-	if err != nil {
-		return "", "", err
+// inside it. --zone skips the lookup, which is also the way out when the
+// consumer key is scoped to a single zone.
+func (a *app) resolve(api dnsAPI, opts *options, name string) (zone, sub string, err error) {
+	if opts.zone != "" {
+		sub, err := splitName(opts.zone, name)
+		if err != nil {
+			return "", "", err
+		}
+		return opts.zone, sub, nil
 	}
-	zone, err = pickZone(zones, name)
-	if err != nil {
-		return "", "", err
-	}
-	return zone, relativeName(zone, name), nil
+	return api.zoneFor(name)
 }
 
 // validateTarget catches the obvious typos before they reach a zone.
@@ -426,12 +429,17 @@ Commands:
   refresh <zone|name>          Publish a zone to the nameservers
 
 Options:
+      --zone ZONE           Zone the name belongs to, skipping the lookup
       --ttl N               TTL in seconds for set (default: the zone's own)
       --type T              Only list records of this type
       --secrets-file PATH   Read PATH instead of secrets/secrets.yaml
       --no-refresh          Do not publish the zone after a change
   -n, --dry-run             Report what would change, change nothing
   -h, --help                This text
+
+Caddy's OVH credentials are scoped to the record routes, which is everything
+except 'zones' (listing the account's zones is a separate right). --zone skips
+the lookup when the key covers a single zone.
 
 Examples:
   ovh-dns set A fish.home.5kw.li 192.0.2.10

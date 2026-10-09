@@ -6,56 +6,84 @@ import (
 	"github.com/ovh/go-ovh/ovh"
 )
 
-func TestPickZone(t *testing.T) {
-	zones := []string{"5kw.li", "home.5kw.li", "lab.home.5kw.li", "example.com"}
-
+func TestZoneCandidates(t *testing.T) {
 	tests := []struct {
-		name    string
-		in      string
-		want    string
-		wantErr bool
+		name string
+		in   string
+		want []zoneCandidate
 	}{
-		{name: "zone itself", in: "5kw.li", want: "5kw.li"},
-		{name: "record in the parent zone", in: "frosch.5kw.li", want: "5kw.li"},
-		{name: "delegated subzone wins", in: "fish.home.5kw.li", want: "home.5kw.li"},
-		{name: "deepest subzone wins", in: "x.lab.home.5kw.li", want: "lab.home.5kw.li"},
-		{name: "trailing dot and case", in: "Frosch.5KW.LI.", want: "5kw.li"},
-		{name: "unrelated zone", in: "example.com", want: "example.com"},
-		{name: "not on this account", in: "fish.elsewhere.net", wantErr: true},
-		{name: "suffix but not a label", in: "not5kw.li", wantErr: true},
+		{
+			name: "whole name is a zone",
+			in:   "5kw.li",
+			want: []zoneCandidate{{zone: "5kw.li", sub: ""}},
+		},
+		{
+			name: "most specific first, so a delegated subzone wins",
+			in:   "fish.home.5kw.li",
+			want: []zoneCandidate{
+				{zone: "fish.home.5kw.li", sub: ""},
+				{zone: "home.5kw.li", sub: "fish"},
+				{zone: "5kw.li", sub: "fish.home"},
+			},
+		},
+		{
+			name: "trailing dot and case",
+			in:   "Frosch.5KW.LI.",
+			want: []zoneCandidate{
+				{zone: "frosch.5kw.li", sub: ""},
+				{zone: "5kw.li", sub: "frosch"},
+			},
+		},
+		{
+			name: "a single label is nobody's zone",
+			in:   "localhost",
+			want: []zoneCandidate{},
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := pickZone(zones, tt.in)
-			if tt.wantErr {
-				if err == nil {
-					t.Fatalf("pickZone(%q) = %q, want an error", tt.in, got)
+			got := zoneCandidates(tt.in)
+			if len(got) != len(tt.want) {
+				t.Fatalf("zoneCandidates(%q) = %v, want %v", tt.in, got, tt.want)
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("candidate %d = %v, want %v", i, got[i], tt.want[i])
 				}
-				return
-			}
-			if err != nil {
-				t.Fatalf("pickZone: %v", err)
-			}
-			if got != tt.want {
-				t.Errorf("pickZone(%q) = %q, want %q", tt.in, got, tt.want)
 			}
 		})
 	}
 }
 
-func TestRelativeName(t *testing.T) {
+func TestSplitName(t *testing.T) {
 	tests := []struct {
 		zone, name, want string
+		wantErr          bool
 	}{
-		{"5kw.li", "5kw.li", ""},
-		{"5kw.li", "frosch.5kw.li", "frosch"},
-		{"home.5kw.li", "fish.home.5kw.li", "fish"},
-		{"5kw.li", "a.b.5kw.li", "a.b"},
-		{"5kw.li", "Frosch.5KW.LI.", "frosch"},
+		{zone: "5kw.li", name: "5kw.li", want: ""},
+		{zone: "5kw.li", name: "frosch.5kw.li", want: "frosch"},
+		{zone: "home.5kw.li", name: "fish.home.5kw.li", want: "fish"},
+		{zone: "5kw.li", name: "a.b.5kw.li", want: "a.b"},
+		{zone: "5kw.li", name: "Frosch.5KW.LI.", want: "frosch"},
+		{zone: "5kw.li", name: "jupiter.home.5kw.li", want: "jupiter.home"},
+		// A --zone that does not hold the name must not silently become the apex.
+		{zone: "home.5kw.li", name: "frosch.5kw.li", wantErr: true},
+		{zone: "5kw.li", name: "not5kw.li", wantErr: true},
 	}
 	for _, tt := range tests {
-		if got := relativeName(tt.zone, tt.name); got != tt.want {
-			t.Errorf("relativeName(%q, %q) = %q, want %q", tt.zone, tt.name, got, tt.want)
+		got, err := splitName(tt.zone, tt.name)
+		if tt.wantErr {
+			if err == nil {
+				t.Errorf("splitName(%q, %q) = %q, want an error", tt.zone, tt.name, got)
+			}
+			continue
+		}
+		if err != nil {
+			t.Errorf("splitName(%q, %q): %v", tt.zone, tt.name, err)
+			continue
+		}
+		if got != tt.want {
+			t.Errorf("splitName(%q, %q) = %q, want %q", tt.zone, tt.name, got, tt.want)
 		}
 	}
 }
@@ -88,15 +116,29 @@ func TestValidateTarget(t *testing.T) {
 	}
 }
 
-func TestAPIErrorExplainsForbidden(t *testing.T) {
-	err := apiError(&ovh.APIError{Code: 403, Class: "Client::Forbidden", Message: "This call has not been granted"})
-	want := "OVH refused the call: This call has not been granted (check the keys are valid and the consumer key is scoped for this route)"
+func TestAPIErrorNamesTheRoute(t *testing.T) {
+	// A 403 is only diagnosable if the message says which route was refused.
+	err := apiError("GET", "/domain/zone", &ovh.APIError{Code: 403, Class: "Client::Forbidden", Message: "This call has not been granted"})
+	want := `GET /domain/zone: OVHcloud API error (status code 403): Client::Forbidden: "This call has not been granted" (the consumer key is not scoped for this route)`
 	if err == nil || err.Error() != want {
-		t.Errorf("apiError = %v, want %q", err, want)
+		t.Errorf("apiError =\n  %v\nwant\n  %q", err, want)
 	}
 
-	err = apiError(&ovh.APIError{Code: 404, Message: "The record does not exist"})
-	if err == nil || err.Error() != "OVH API 404: The record does not exist" {
-		t.Errorf("apiError = %v", err)
+	err = apiError("GET", "/domain/zone/5kw.li/record/7", &ovh.APIError{Code: 404, Message: "The record does not exist"})
+	if want := `GET /domain/zone/5kw.li/record/7: OVHcloud API error (status code 404): "The record does not exist"`; err == nil || err.Error() != want {
+		t.Errorf("apiError = %v, want %q", err, want)
+	}
+}
+
+func TestAPICode(t *testing.T) {
+	err := apiError("GET", "/x", &ovh.APIError{Code: 403, Message: "nope"})
+	if !apiCode(err, 403) {
+		t.Error("apiCode should see through the wrapping")
+	}
+	if apiCode(err, 404) {
+		t.Error("apiCode matched the wrong code")
+	}
+	if apiCode(nil, 403) {
+		t.Error("apiCode(nil) should be false")
 	}
 }

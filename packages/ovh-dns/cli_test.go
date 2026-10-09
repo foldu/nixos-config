@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -37,13 +38,33 @@ type fakeAPI struct {
 	refreshed []string
 
 	err error
+
+	zoneForCalls  int
+	zoneListCalls int
 }
 
 func (f *fakeAPI) zones() ([]string, error) {
 	if f.err != nil {
 		return nil, f.err
 	}
+	f.zoneListCalls++
 	return f.zoneList, nil
+}
+
+// zoneFor mirrors the real probe: candidate zones, most specific first.
+func (f *fakeAPI) zoneFor(name string) (string, string, error) {
+	if f.err != nil {
+		return "", "", f.err
+	}
+	f.zoneForCalls++
+	for _, candidate := range zoneCandidates(name) {
+		for _, zone := range f.zoneList {
+			if candidate.zone == zone {
+				return candidate.zone, candidate.sub, nil
+			}
+		}
+	}
+	return "", "", fmt.Errorf("no OVH zone found for %s", normalise(name))
 }
 
 func (f *fakeAPI) records(_, fieldType, sub string) ([]record, error) {
@@ -373,7 +394,7 @@ func TestSetUnknownZone(t *testing.T) {
 	if code := h.app.run([]string{"set", "A", "fish.elsewhere.net", "192.0.2.10"}); code != 1 {
 		t.Errorf("exit code = %d, want 1", code)
 	}
-	if !strings.Contains(h.stderr.String(), "not in any zone") {
+	if !strings.Contains(h.stderr.String(), "no OVH zone found") {
 		t.Errorf("stderr = %s", h.stderr)
 	}
 }
@@ -490,6 +511,71 @@ func TestZones(t *testing.T) {
 	}
 	if got := h.stdout.String(); got != "5kw.li\nhome.5kw.li\n" {
 		t.Errorf("zones output = %q", got)
+	}
+}
+
+// Regression test for the 403 a caddy-scoped consumer key gives: caddy's
+// credentials cover the record routes and the refresh, but not the account's
+// zone list, so nothing may reach for GET /domain/zone.
+func TestOnlyZonesListsTheAccount(t *testing.T) {
+	for _, args := range [][]string{
+		{"set", "A", "fish.home.5kw.li", "192.0.2.10"},
+		{"rm", "A", "fish.home.5kw.li"},
+		{"list", "home.5kw.li"},
+		{"refresh", "home.5kw.li"},
+	} {
+		t.Run(args[0], func(t *testing.T) {
+			api := homeZones()
+			h := newHarness(t, api)
+
+			if code := h.app.run(args); code != 0 {
+				t.Fatalf("exit code = %d, stderr: %s", code, h.stderr)
+			}
+			if api.zoneListCalls != 0 {
+				t.Errorf("%v called GET /domain/zone, which a caddy-scoped key cannot do", args)
+			}
+			if api.zoneForCalls == 0 {
+				t.Errorf("%v did not resolve a zone at all", args)
+			}
+		})
+	}
+}
+
+func TestZoneFlagSkipsTheLookup(t *testing.T) {
+	api := homeZones()
+	h := newHarness(t, api)
+
+	args := []string{"--zone", "home.5kw.li", "set", "A", "fish.home.5kw.li", "192.0.2.10"}
+	if code := h.app.run(args); code != 0 {
+		t.Fatalf("exit code = %d, stderr: %s", code, h.stderr)
+	}
+	if api.zoneForCalls != 0 {
+		t.Errorf("--zone should skip the lookup, but it probed %d times", api.zoneForCalls)
+	}
+	if api.zoneListCalls != 0 {
+		t.Errorf("--zone still listed the account's zones")
+	}
+	if len(api.created) != 1 || api.created[0].SubDomain != "fish" {
+		t.Fatalf("created = %v", api.created)
+	}
+	if len(api.refreshed) != 1 || api.refreshed[0] != "home.5kw.li" {
+		t.Errorf("refreshed = %v, want [home.5kw.li]", api.refreshed)
+	}
+}
+
+func TestZoneFlagRejectsANameItDoesNotHold(t *testing.T) {
+	api := homeZones()
+	h := newHarness(t, api)
+
+	args := []string{"--zone", "home.5kw.li", "set", "A", "frosch.5kw.li", "192.0.2.10"}
+	if code := h.app.run(args); code != 1 {
+		t.Errorf("exit code = %d, want 1", code)
+	}
+	if len(api.created) != 0 {
+		t.Errorf("a name outside the zone was still written: %v", api.created)
+	}
+	if !strings.Contains(h.stderr.String(), "is not in zone home.5kw.li") {
+		t.Errorf("stderr = %s", h.stderr)
 	}
 }
 
