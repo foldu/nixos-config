@@ -73,6 +73,11 @@ in
       "127.0.0.1:${toString prowlarrPort}:${toString prowlarrPort}"
     ];
 
+    # podman seeds a named volume from the image's own /config, which the
+    # flaresolverr image already owns as its own user - so there is no uid to
+    # guess, unlike the bind mounts above
+    volumes.flaresolverr-config.volumeConfig = { };
+
     containers = {
       # lidarr imports out of the same /downloads transmission writes to, so
       # the paths in its database match the ones transmission reports and no
@@ -92,6 +97,35 @@ in
         name = "prowlarr";
         image = "docker.io/linuxserver/prowlarr:version-2.6.5.5623";
         volumes = [ ];
+      };
+
+      # Cloudflare answers rutracker's login POST with 403 before a single
+      # credential is sent, so the fix has to happen below prowlarr. This
+      # drives a real browser through the challenge and hands the cookie back.
+      # It sits in the pod because that request has to egress the VPN as well.
+      #
+      # Nothing publishes its port: prowlarr shares this netns, so it just
+      # talks to http://127.0.0.1:8191 and the host never sees it.
+      #
+      # FlareSolverr and not Byparr, despite the maintainer suggesting both:
+      # Byparr's request model has no postData field at all, so it can only
+      # solve GET challenges, and this one is a POST to /forum/login.php.
+      flaresolverr = {
+        unitConfig = {
+          Requires = "gluetun.service";
+          After = [ "gluetun.service" ];
+        };
+        containerConfig = {
+          image = "ghcr.io/flaresolverr/flaresolverr:v3.5.2";
+          environments = {
+            LOG_LEVEL = "info";
+            TZ = "Europe/Amsterdam";
+          };
+          volumes = [ "${config.virtualisation.quadlet.volumes.flaresolverr-config.ref}:/config" ];
+          networks = [ "container:gluetun" ];
+          pod = config.virtualisation.quadlet.pods.gluetun-pott.ref;
+          autoUpdate = "registry";
+        };
       };
     };
   };
