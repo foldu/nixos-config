@@ -74,6 +74,10 @@ async function attach() {
 if (!app.requestSingleInstanceLock()) {
   app.quit();
 } else {
+  // Point launchers at the desktop entry this package installs, whose Icon is
+  // the harness mark, so the window never falls back to a generic icon.
+  app.setDesktopName("dsh-desktop.desktop");
+
   app.on("second-instance", () => {
     if (window === null) return;
     if (window.isMinimized()) window.restore();
@@ -85,6 +89,10 @@ if (!app.requestSingleInstanceLock()) {
       width: 1280,
       height: 860,
       title: "DeepSeek Harness",
+      // The mark, shipped beside this file, as the window-level icon. Wayland
+      // launchers take it from the desktop entry instead (see setDesktopName
+      // below), which is the route that matters on this desktop.
+      icon: path.join(__dirname, "icon.png"),
       // dsh's own light and dark base colours, picked by the desktop's
       // preference, so the first paint does not flash the other theme.
       backgroundColor: nativeTheme.shouldUseDarkColors ? "#151517" : "#ffffff",

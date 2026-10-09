@@ -3,6 +3,7 @@ Type=Application
 Name=DeepSeek Harness
 Comment=DeepSeek Harness agent, in its own window
 Exec=dsh-desktop
+Icon=dsh-desktop
 Terminal=false
 Categories=Development;
 Keywords=agent;llm;ai;harness;

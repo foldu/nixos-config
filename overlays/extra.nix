@@ -13,5 +13,7 @@ final: prev: {
   dsh = prev.callPackage ../packages/dsh {
     dsh = inputs.llm-agents.packages.${prev.stdenv.hostPlatform.system}.dsh;
   };
-  dsh-desktop = prev.callPackage ../packages/dsh-desktop { };
+  dsh-desktop = prev.callPackage ../packages/dsh-desktop {
+    dsh = inputs.llm-agents.packages.${prev.stdenv.hostPlatform.system}.dsh;
+  };
 }
