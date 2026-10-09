@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Waiting for the dsh web service</title>
+    <style>
+      /* dsh's own neutral ramp, so waiting looks like the page that follows. */
+      :root {
+        color-scheme: light dark;
+        --bg: #fff;
+        --surface: #f4f4f5;
+        --label: #0f1115;
+        --label-dim: #61666b;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #151517;
+          --surface: #1b1b1c;
+          --label: #f9fafb;
+          --label-dim: #cfd3d6;
+        }
+      }
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+        justify-content: center;
+        background: var(--bg);
+        color: var(--label);
+        font: 1rem/1.6 system-ui, sans-serif;
+      }
+      h1 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      p {
+        margin: 0;
+        color: var(--label-dim);
+      }
+      code {
+        padding: 0.1rem 0.35rem;
+        border-radius: 0.25rem;
+        background: var(--surface);
+        color: var(--label);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Waiting for the dsh web service…</h1>
+    <p>This window connects on its own once the server is serving.</p>
+    <p>Start it with <code>systemctl --user start dsh-web</code>; its log is <code>journalctl --user -u dsh-web</code>.</p>
+  </body>
+</html>

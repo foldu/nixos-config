@@ -168,6 +168,7 @@
           gitlab-mirror = pkgs.callPackage ./packages/gitlab-mirror { };
           ovh-dns = pkgs.callPackage ./packages/ovh-dns { };
           caddy-with-ovh = pkgs.callPackage ./packages/caddy-with-ovh { };
+          dsh-desktop = pkgs.callPackage ./packages/dsh-desktop { };
         };
 
         topology = import nix-topology {
