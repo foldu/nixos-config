@@ -71,6 +71,9 @@ in
       glab
       gitlab-mirror
 
+      # dns
+      ovh-dns
+
       # editor tools
       ast-grep
       tree-sitter

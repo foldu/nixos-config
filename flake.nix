@@ -163,6 +163,7 @@
           photocraft = pkgs.callPackage ./packages/photocraft { };
           hassctl = pkgs.callPackage ./packages/hassctl { };
           gitlab-mirror = pkgs.callPackage ./packages/gitlab-mirror { };
+          ovh-dns = pkgs.callPackage ./packages/ovh-dns { };
         };
 
         topology = import nix-topology {
