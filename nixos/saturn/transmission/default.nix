@@ -39,6 +39,7 @@ in
       containers = {
         transmission.unitConfig = {
           Requires = "gluetun.service";
+          After = [ "gluetun.service" ];
         };
         transmission.containerConfig = {
           image = "docker.io/linuxserver/transmission:latest";
