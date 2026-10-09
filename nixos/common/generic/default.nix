@@ -47,8 +47,7 @@
   services.printing.browsed.enable = false;
 
   nix = {
-    # package = pkgs.nixVersions.latest;
-    package = pkgs.lixPackageSets.latest.lix;
+    package = pkgs.nixVersions.latest;
     settings = {
       experimental-features = [
         "nix-command"
@@ -57,7 +56,6 @@
       auto-optimise-store = true;
       trusted-public-keys = [ "jupiter:2laywrj8EfgDWW8GnDkIPuONvzMyrIirdAPWkvSIU0g=" ];
 
-      log-format = "multiline-with-logs";
       # don't explode on unavailable binary caches
       fallback = true;
     };

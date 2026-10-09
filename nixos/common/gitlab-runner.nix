@@ -73,13 +73,13 @@
           mkdir -p -m 0755 /nix/var/nix/profiles/per-user/root
           mkdir -p -m 0700 "$HOME/.nix-defexpr"
 
-          . ${pkgs.lix}/etc/profile.d/nix.sh
+          . ${pkgs.nix}/etc/profile.d/nix.sh
 
-          ${pkgs.lix}/bin/nix-env -i ${
+          ${pkgs.nix}/bin/nix-env -i ${
             concatStringsSep " " (
               with pkgs;
               [
-                lix
+                nix
                 git
                 openssh
               ]
