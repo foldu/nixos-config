@@ -116,6 +116,56 @@ func TestValidateTarget(t *testing.T) {
 	}
 }
 
+func TestAbsoluteTarget(t *testing.T) {
+	tests := []struct {
+		fieldType, target, want string
+	}{
+		// OVH appends the zone name to a relative target, so these must end in a dot.
+		{fieldType: "CNAME", target: "saturn.home.5kw.li", want: "saturn.home.5kw.li."},
+		{fieldType: "CNAME", target: "saturn.home.5kw.li.", want: "saturn.home.5kw.li."},
+		{fieldType: "cname", target: "jupiter", want: "jupiter."},
+		{fieldType: "NS", target: "ns110.ovh.net", want: "ns110.ovh.net."},
+		{fieldType: "PTR", target: "host.example.com", want: "host.example.com."},
+		{fieldType: "DNAME", target: "old.example.com", want: "old.example.com."},
+		// The name is the last field, so appending to the string still lands on it.
+		{fieldType: "MX", target: "10 mail.example.com", want: "10 mail.example.com."},
+		{fieldType: "MX", target: "10 mail.example.com.", want: "10 mail.example.com."},
+		{fieldType: "SRV", target: "0 5 443 host.example.com", want: "0 5 443 host.example.com."},
+		// Everything else is literal and must not be touched.
+		{fieldType: "A", target: "192.0.2.10", want: "192.0.2.10"},
+		{fieldType: "AAAA", target: "2001:db8::1", want: "2001:db8::1"},
+		{fieldType: "TXT", target: "v=spf1 -all", want: "v=spf1 -all"},
+		{fieldType: "TXT", target: "challenge-token", want: "challenge-token"},
+		{fieldType: "TXT", target: "trailing.dot.", want: "trailing.dot."},
+	}
+	for _, tt := range tests {
+		if got := absoluteTarget(tt.fieldType, tt.target); got != tt.want {
+			t.Errorf("absoluteTarget(%q, %q) = %q, want %q", tt.fieldType, tt.target, got, tt.want)
+		}
+	}
+}
+
+func TestSameTarget(t *testing.T) {
+	tests := []struct {
+		fieldType, want, have string
+		same                  bool
+	}{
+		// OVH reports the target without the dot we sent.
+		{fieldType: "CNAME", want: "saturn.home.5kw.li.", have: "saturn.home.5kw.li", same: true},
+		{fieldType: "CNAME", want: "saturn.home.5kw.li.", have: "saturn.home.5kw.li.", same: true},
+		{fieldType: "CNAME", want: "saturn.home.5kw.li.", have: "saturn.home.5kw.li.5kw.li", same: false},
+		{fieldType: "MX", want: "10 mail.example.com.", have: "10 mail.example.com", same: true},
+		// A TXT value is literal, so a dot is a real difference.
+		{fieldType: "TXT", want: "token.", have: "token", same: false},
+		{fieldType: "A", want: "192.0.2.10", have: "192.0.2.10", same: true},
+	}
+	for _, tt := range tests {
+		if got := sameTarget(tt.fieldType, tt.want, tt.have); got != tt.same {
+			t.Errorf("sameTarget(%q, %q, %q) = %v, want %v", tt.fieldType, tt.want, tt.have, got, tt.same)
+		}
+	}
+}
+
 func TestAPIErrorNamesTheRoute(t *testing.T) {
 	// A 403 is only diagnosable if the message says which route was refused.
 	err := apiError("GET", "/domain/zone", &ovh.APIError{Code: 403, Class: "Client::Forbidden", Message: "This call has not been granted"})

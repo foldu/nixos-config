@@ -246,6 +246,38 @@ func apiCode(err error, code int) bool {
 	return errors.As(err, &apiErr) && apiErr.Code == code
 }
 
+// nameValuedTargets are the record types whose target is a hostname rather than
+// an address or a text value.
+var nameValuedTargets = map[string]bool{
+	"CNAME": true,
+	"NS":    true,
+	"PTR":   true,
+	"DNAME": true,
+	"MX":    true, // the name is the last field, after the priority
+	"SRV":   true,
+}
+
+// absoluteTarget marks a name-valued target absolute. OVH reads such a target as
+// relative unless it ends in a dot, and appends the zone name: in zone 5kw.li,
+// "saturn.home.5kw.li" is published as "saturn.home.5kw.li.5kw.li", a name that
+// resolves to nothing. Addresses and text values are left exactly as given.
+func absoluteTarget(fieldType, target string) string {
+	if !nameValuedTargets[strings.ToUpper(fieldType)] || strings.HasSuffix(target, ".") {
+		return target
+	}
+	return target + "."
+}
+
+// sameTarget compares a wanted target with the one OVH reports. OVH drops the
+// trailing dot when it reads a name-valued record back, so it is not part of the
+// comparison.
+func sameTarget(fieldType, want, have string) bool {
+	if nameValuedTargets[strings.ToUpper(fieldType)] {
+		return strings.TrimSuffix(want, ".") == strings.TrimSuffix(have, ".")
+	}
+	return want == have
+}
+
 // zoneCandidate is a zone a name might live in, and the subdomain it would have
 // there.
 type zoneCandidate struct {

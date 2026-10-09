@@ -193,7 +193,9 @@ func (a *app) set(api dnsAPI, opts *options, args []string) int {
 		return a.errorf("usage: ovh-dns set <type> <name> <target>")
 	}
 	fieldType := strings.ToUpper(args[0])
-	name, target := args[1], args[2]
+	name := args[1]
+	// A name-valued target has to be absolute or OVH appends the zone name to it.
+	target := absoluteTarget(fieldType, args[2])
 
 	if err := validateTarget(fieldType, target); err != nil {
 		return a.errorf("%v", err)
@@ -208,7 +210,7 @@ func (a *app) set(api dnsAPI, opts *options, args []string) int {
 		return a.errorf("%v", err)
 	}
 
-	if len(existing) == 1 && existing[0].Target == target && (!opts.hasTTL || existing[0].TTL == opts.ttl) {
+	if len(existing) == 1 && sameTarget(fieldType, target, existing[0].Target) && (!opts.hasTTL || existing[0].TTL == opts.ttl) {
 		a.note("%s %s already points at %s", fieldType, name, target)
 		return 0
 	}
@@ -263,7 +265,7 @@ func (a *app) rm(api dnsAPI, opts *options, args []string) int {
 	name := args[1]
 	want := ""
 	if len(args) == 3 {
-		want = args[2]
+		want = absoluteTarget(fieldType, args[2])
 	}
 
 	zone, sub, err := a.resolve(api, opts, name)
@@ -277,7 +279,7 @@ func (a *app) rm(api dnsAPI, opts *options, args []string) int {
 
 	var doomed []record
 	for _, r := range existing {
-		if want == "" || r.Target == want {
+		if want == "" || sameTarget(fieldType, want, r.Target) {
 			doomed = append(doomed, r)
 		}
 	}
@@ -420,6 +422,11 @@ Manages the DNS zones of the OVH account whose credentials sit in caddy/env in
 secrets/secrets.yaml. The zone is worked out from the name you give, and since
 OVH only publishes an edited zone to its nameservers when asked, set and rm
 refresh by default.
+
+Targets of CNAME, MX, NS, PTR, DNAME and SRV records are written absolute. OVH
+appends the zone name to a relative target, so 'set CNAME lidarr.home.5kw.li
+saturn.home.5kw.li' would otherwise publish lidarr as a CNAME to
+saturn.home.5kw.li.5kw.li, which resolves to nothing.
 
 Commands:
   set <type> <name> <target>   Create or replace records, then publish the zone

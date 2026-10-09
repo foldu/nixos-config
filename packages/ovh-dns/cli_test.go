@@ -313,6 +313,64 @@ func TestSetIsIdempotent(t *testing.T) {
 	}
 }
 
+// TestSetWritesANameTargetAbsolute is the regression test for a CNAME published
+// as saturn.home.5kw.li.5kw.li, which is what OVH makes of a relative target.
+func TestSetWritesANameTargetAbsolute(t *testing.T) {
+	// The real account has one zone here: home.5kw.li is a subtree of it.
+	api := &fakeAPI{zoneList: []string{"5kw.li"}}
+	h := newHarness(t, api)
+
+	if code := h.app.run([]string{"set", "CNAME", "lidarr.home.5kw.li", "saturn.home.5kw.li"}); code != 0 {
+		t.Fatalf("exit code = %d, stderr: %s", code, h.stderr)
+	}
+	if len(api.created) != 1 {
+		t.Fatalf("created = %v", api.created)
+	}
+	if got := api.created[0].Target; got != "saturn.home.5kw.li." {
+		t.Errorf("target = %q, want an absolute name", got)
+	}
+	if got := api.created[0].SubDomain; got != "lidarr.home" {
+		t.Errorf("subDomain = %q, want lidarr.home", got)
+	}
+	// An address is not a name and must go through untouched.
+	h = newHarness(t, &fakeAPI{zoneList: []string{"5kw.li"}})
+	if code := h.app.run([]string{"set", "A", "fish.home.5kw.li", "192.0.2.10"}); code != 0 {
+		t.Fatalf("exit code = %d", code)
+	}
+}
+
+func TestNameTargetIsIdempotentDespiteTheDot(t *testing.T) {
+	api := &fakeAPI{zoneList: []string{"5kw.li"}}
+	// OVH reports the target without the trailing dot it was given.
+	api.recordList = []record{{ID: 7, FieldType: "CNAME", SubDomain: "lidarr.home", Target: "saturn.home.5kw.li", TTL: 3600}}
+	h := newHarness(t, api)
+
+	if code := h.app.run([]string{"set", "CNAME", "lidarr.home.5kw.li", "saturn.home.5kw.li"}); code != 0 {
+		t.Fatalf("exit code = %d, stderr: %s", code, h.stderr)
+	}
+	if len(api.updated) != 0 || len(api.created) != 0 || len(api.refreshed) != 0 {
+		t.Errorf("a record already pointing there was rewritten: %+v", api)
+	}
+	if !strings.Contains(h.stderr.String(), "already points at") {
+		t.Errorf("stderr = %s", h.stderr)
+	}
+}
+
+// A target already mangled by the old behaviour must be recognised as different
+// so that re-running set repairs it.
+func TestSetRepairsAMangledNameTarget(t *testing.T) {
+	api := &fakeAPI{zoneList: []string{"5kw.li"}}
+	api.recordList = []record{{ID: 7, FieldType: "CNAME", SubDomain: "lidarr.home", Target: "saturn.home.5kw.li.5kw.li", TTL: 3600}}
+	h := newHarness(t, api)
+
+	if code := h.app.run([]string{"set", "CNAME", "lidarr.home.5kw.li", "saturn.home.5kw.li"}); code != 0 {
+		t.Fatalf("exit code = %d, stderr: %s", code, h.stderr)
+	}
+	if len(api.updated) != 1 || api.updated[0].Target != "saturn.home.5kw.li." {
+		t.Fatalf("updated = %v, want the target rewritten absolute", api.updated)
+	}
+}
+
 func TestSetCollapsesDuplicates(t *testing.T) {
 	api := homeZones()
 	api.recordList = []record{
