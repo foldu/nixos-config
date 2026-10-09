@@ -4,6 +4,9 @@ final: prev: {
   helium = prev.callPackage ../packages/helium { };
   ghidra-mcp = prev.callPackage ../packages/ghidra-mcp { };
   photocraft = prev.callPackage ../packages/photocraft { };
+  cadcraft = prev.callPackage ../packages/cadcraft { };
+  filmcraft = prev.callPackage ../packages/filmcraft { };
+  vectorcraft = prev.callPackage ../packages/vectorcraft { };
   gitlab-mirror = prev.callPackage ../packages/gitlab-mirror { };
   ovh-dns = prev.callPackage ../packages/ovh-dns { };
   dsh = prev.callPackage ../packages/dsh {

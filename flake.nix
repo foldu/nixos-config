@@ -161,6 +161,9 @@
         packages = {
           helium = pkgs.callPackage ./packages/helium { };
           photocraft = pkgs.callPackage ./packages/photocraft { };
+          cadcraft = pkgs.callPackage ./packages/cadcraft { };
+          filmcraft = pkgs.callPackage ./packages/filmcraft { };
+          vectorcraft = pkgs.callPackage ./packages/vectorcraft { };
           hassctl = pkgs.callPackage ./packages/hassctl { };
           gitlab-mirror = pkgs.callPackage ./packages/gitlab-mirror { };
           ovh-dns = pkgs.callPackage ./packages/ovh-dns { };

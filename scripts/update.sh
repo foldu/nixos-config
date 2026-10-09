@@ -8,6 +8,9 @@ cd "$repo_root"
 packages=(
     helium
     photocraft
+    cadcraft
+    filmcraft
+    vectorcraft
 )
 
 nix flake update --commit-lock-file
