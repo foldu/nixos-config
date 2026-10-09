@@ -437,9 +437,21 @@ Options:
   -n, --dry-run             Report what would change, change nothing
   -h, --help                This text
 
-Caddy's OVH credentials are scoped to the record routes, which is everything
-except 'zones' (listing the account's zones is a separate right). --zone skips
-the lookup when the key covers a single zone.
+Consumer key scope:
+  Create the credentials at https://eu.api.ovh.com/createToken/ with these
+  rights. They are the ones caddy-dns/ovh asks for, so a key that already
+  renews certificates through the ACME challenge is enough:
+
+    GET    /domain/zone/*/record
+    POST   /domain/zone/*/record
+    GET    /domain/zone/*/record/*
+    PUT    /domain/zone/*/record/*
+    DELETE /domain/zone/*/record/*
+    POST   /domain/zone/*/refresh
+
+  For a single zone, use the same rights with the zone name in place of *.
+  'zones' additionally needs GET /domain/zone, which that set deliberately
+  leaves out; name the zone with --zone instead of widening the key.
 
 Examples:
   ovh-dns set A fish.home.5kw.li 192.0.2.10
