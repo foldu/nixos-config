@@ -9,6 +9,19 @@
         tags.host = "saturn";
       }
       {
+        urls = [ "https://lidarr.home.5kw.li" ];
+        # authelia forward-auth rejects the unauthenticated probe
+        response_status_code = 401;
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
+      {
+        urls = [ "https://prowlarr.home.5kw.li" ];
+        response_status_code = 401;
+        response_timeout = "30s";
+        tags.host = "saturn";
+      }
+      {
         urls = [ "https://jellyfin.home.5kw.li/web/index.html" ];
         response_string_match = "jellyfin";
         response_timeout = "30s";

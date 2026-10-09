@@ -27,6 +27,7 @@
     ./jellyfin.nix
     ./redlib.nix
     ./transmission
+    ./lidarr
     ./vaultwarden.nix
     ./postgresql.nix
     ./metrics
