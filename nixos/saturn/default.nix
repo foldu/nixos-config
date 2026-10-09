@@ -70,7 +70,7 @@
     package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddy-dns/ovh@v1.1.0" ];
       # don't forget to update this caddy hash/caddyhash
-      hash = "sha256-EMYKR7aUcRTOATfoO+1rA+f2tSGxcudXUqWmfUAn2i4=";
+      hash = "sha256-7BeaQoWE/JQIP4QLenK6IXuQr89U7t2CZzB7ZVOC8Zk=";
     };
     globalConfig = ''
       acme_dns ovh {
