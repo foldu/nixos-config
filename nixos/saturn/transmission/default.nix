@@ -72,6 +72,15 @@ in
   systemd.tmpfiles.rules = [
     "d ${torrentDir} 775 ${config.services.transmission.user} ${config.services.transmission.group}"
     "d ${watchDir} 775 ${config.services.transmission.user} ${config.services.transmission.group}"
+    # Lidarr builds its completed-download path out of transmission's own
+    # download-dir (the "complete" below, set in the UI) and the category it
+    # asks for, then fails a health check - "places downloads in
+    # /downloads/complete/lidarr but Lidarr cannot see this directory" - until
+    # that path exists, even before the first torrent. Transmission only makes
+    # it when a download starts, so both it and the parent it writes into are
+    # created here.
+    "d ${torrentDir}/complete 775 ${config.services.transmission.user} ${config.services.transmission.group}"
+    "d ${torrentDir}/complete/lidarr 775 ${config.services.transmission.user} ${config.services.transmission.group}"
     "Z ${torrentDir} 775 ${config.services.transmission.user} ${config.services.transmission.group}"
     "d ${configDir} 700 transmission transmission"
     "Z ${configDir} 700 transmission transmission"
