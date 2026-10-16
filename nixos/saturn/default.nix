@@ -39,6 +39,7 @@
     ./paperless.nix
     # ./piped
     ./llama.nix
+    ./open-webui.nix
     ./materialious.nix
     ./img-bookmark.nix
     ./dsh.nix
