@@ -1,11 +1,13 @@
 {
   config,
+  inputs,
   pkgs,
   ...
 }:
 let
   port = 3080;
   domain = "dsh.home.5kw.li";
+  dsh = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.dsh;
 in
 {
   # `dsh web` only ever binds loopback (it rejects --host 0.0.0.0), so Caddy is
@@ -23,7 +25,7 @@ in
       DSH_HOME = "/home/barnabas/.dsh";
     };
     serviceConfig = {
-      ExecStart = "${pkgs.dsh}/bin/dsh web --no-open --port ${toString port} --trusted-host ${domain}";
+      ExecStart = "${dsh}/bin/dsh web --no-open --port ${toString port} --trusted-host ${domain}";
       User = "barnabas";
       WorkingDirectory = "/home/barnabas";
       Restart = "always";

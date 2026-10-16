@@ -92,7 +92,7 @@ in
 
       llm-agents.reasonix
       llm-agents.opencode
-      dsh
+      llm-agents.dsh
       llm-agents.pi
 
       # sql

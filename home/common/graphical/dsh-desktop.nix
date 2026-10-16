@@ -1,10 +1,13 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   ...
 }:
 let
+  dsh = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.dsh;
+
   # `dsh web` mints a fresh authentication token per process and prints the URL
   # carrying it once, at startup. The service parks that URL in its runtime
   # directory and the Electron window reads it back, so windows attach without
@@ -23,7 +26,7 @@ let
 
     # The URL line is the server's readiness signal, so publish it the moment
     # it arrives rather than buffering the server's output.
-    "${pkgs.dsh}/bin/dsh" web --no-open --port ${toString port} |
+    "${dsh}/bin/dsh" web --no-open --port ${toString port} |
       while IFS= read -r line || [ -n "$line" ]; do
         printf '%s\n' "$line"
         case "$line" in
