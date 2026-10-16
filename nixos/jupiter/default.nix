@@ -30,6 +30,11 @@
 
   boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
 
+  services.zerotierone.enable = true;
+  # the module wires the unit into multi-user.target; drop that so the daemon
+  # only runs when started by hand: `systemctl start zerotierone`
+  systemd.services.zerotierone.wantedBy = lib.mkForce [ ];
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
