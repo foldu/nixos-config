@@ -98,7 +98,7 @@ in
       # adding it as a root folder links those files in place.
       lidarr = mkApp {
         name = "lidarr";
-        image = "docker.io/linuxserver/lidarr:version-3.1.0.4875";
+        image = "docker.io/linuxserver/lidarr:latest";
         environments = servarrAuth "lidarr";
         volumes = [
           "${musicDir}:/music"
@@ -109,7 +109,7 @@ in
       # prowlarr only feeds indexers to lidarr, it never touches the media
       prowlarr = mkApp {
         name = "prowlarr";
-        image = "docker.io/linuxserver/prowlarr:version-2.6.5.5623";
+        image = "docker.io/linuxserver/prowlarr:latest";
         environments = servarrAuth "prowlarr";
       };
 
@@ -121,7 +121,7 @@ in
       # ServerConfig.json, not from the environment.
       jackett = mkApp {
         name = "jackett";
-        image = "docker.io/linuxserver/jackett:version-v0.24.2864";
+        image = "docker.io/linuxserver/jackett:latest";
       };
 
       # Ours (lab.home.5kw.li/foldu/kickdown): a web UI that searches Jackett and
@@ -130,16 +130,15 @@ in
       #
       # Not an mkApp: the image is our own Nix build rather than a linuxserver
       # one, so there is no PUID/PGID to set and nothing to keep in /config - it
-      # takes its whole configuration from the environment. The tag is a commit
-      # sha, which is what kickdown's CI publishes to the lab registry (alongside
-      # <branch> and latest); bump it to move to a newer build.
+      # takes its whole configuration from the environment. Its CI publishes
+      # latest for every master build, like the other images here.
       kickdown = {
         unitConfig = {
           Requires = "gluetun.service";
           After = [ "gluetun.service" ];
         };
         containerConfig = {
-          image = "container-registry.home.5kw.li/foldu/kickdown:bf872568";
+          image = "container-registry.home.5kw.li/foldu/kickdown:latest";
           environments = {
             HOST = "0.0.0.0";
             PORT = toString kickdownPort;
@@ -172,7 +171,7 @@ in
           After = [ "gluetun.service" ];
         };
         containerConfig = {
-          image = "ghcr.io/flaresolverr/flaresolverr:v3.5.2";
+          image = "ghcr.io/flaresolverr/flaresolverr:latest";
           environments = {
             LOG_LEVEL = "info";
             TZ = "Europe/Amsterdam";

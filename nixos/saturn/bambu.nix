@@ -5,7 +5,7 @@ in
 {
   virtualisation.quadlet.containers.bambuddy = {
     containerConfig = {
-      image = "ghcr.io/maziggy/bambuddy:1.2.5.5";
+      image = "ghcr.io/maziggy/bambuddy:latest";
       volumes = [
         "/var/lib/bambuddy/data:/app/data"
         "/var/lib/bambuddy/logs:/app/logs"

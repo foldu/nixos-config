@@ -56,13 +56,17 @@ in
           ];
           networks = [ "container:gluetun" ];
           pod = pods.gluetun-pott.ref;
+          autoUpdate = "registry";
         };
         gluetun.containerConfig = {
+          # v3 rather than latest: this is the pod every other app's traffic goes
+          # through, so it should not follow a future major on its own.
           image = "docker.io/qmcgaw/gluetun:v3";
           addCapabilities = [ "NET_ADMIN" ];
           devices = [ "/dev/net/tun:/dev/net/tun" ];
           environmentFiles = [ config.sops.secrets."gluetun/env".path ];
           pod = pods.gluetun-pott.ref;
+          autoUpdate = "registry";
         };
       };
     };

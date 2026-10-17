@@ -6,7 +6,7 @@ in
 {
   virtualisation.quadlet.containers.open-webui = {
     containerConfig = {
-      image = "ghcr.io/open-webui/open-webui:v0.11.4";
+      image = "ghcr.io/open-webui/open-webui:latest";
 
       environments = {
         # Authelia (Caddy forward_auth below) is the only way in, so Open WebUI

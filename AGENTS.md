@@ -48,8 +48,10 @@ Do not touch it. Only read it. You can't touch it anyway.
 ## Gotchas
 
 - `hardware-configuration.nix` is generated; touch it only for real hardware changes.
-- quadlet containers pin an image tag _and_ set `autoUpdate = "registry"`. Bump the
-  pin anyway so a fresh machine matches what's running.
+- quadlet containers use `:latest` when the image publishes that tag, and always set
+  `autoUpdate = "registry"`. A pinned tag is for a tag that carries meaning: a major
+  channel (`gluetun:v3`), a variant (`llama.cpp:server-rocm`), a database version
+  (`postgres:16-alpine`) — not a version number to bump by hand.
 
 ## Commits
 

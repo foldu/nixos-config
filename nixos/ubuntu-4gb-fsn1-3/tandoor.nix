@@ -23,6 +23,8 @@ in
 
   virtualisation.quadlet.containers = {
     tandoor-db.containerConfig = {
+      # 16-alpine rather than latest: latest is a different major, and this is
+      # the database behind it.
       image = "docker.io/library/postgres:16-alpine";
       environments = postgresShared;
       environmentFiles = [ config.sops.secrets."tandoor/postgres/env".path ];
