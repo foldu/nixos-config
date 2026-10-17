@@ -8,6 +8,11 @@
 let
   dsh = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.dsh;
 
+  # The window is a flake of its own (lab.home.5kw.li/foldu/dsh-chrome) because it
+  # is only useful beside this service: it reads the URL the unit below publishes
+  # and does nothing else without it.
+  dsh-chrome = inputs.dsh-chrome.packages.${pkgs.stdenv.hostPlatform.system}.dsh-chrome;
+
   # `dsh web` mints a fresh authentication token per process and prints the URL
   # carrying it once, at startup. The service parks that URL in its runtime
   # directory and the Electron window reads it back, so windows attach without
@@ -36,7 +41,7 @@ let
   '';
 in
 {
-  home.packages = [ pkgs.dsh-desktop ];
+  home.packages = [ dsh-chrome ];
 
   systemd.user.services.dsh-web = {
     Unit = {
@@ -50,7 +55,7 @@ in
 
       # systemd creates this 0700 directory with the unit and removes it with
       # the unit, so a restart can never leave the window holding a dead token.
-      # dsh-desktop looks for $XDG_RUNTIME_DIR/dsh-web/url, which this is.
+      # dsh-chrome looks for $XDG_RUNTIME_DIR/dsh-web/url, which this is.
       RuntimeDirectory = "dsh-web";
       RuntimeDirectoryMode = "0700";
 

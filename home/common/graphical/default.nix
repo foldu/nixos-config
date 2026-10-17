@@ -6,7 +6,7 @@
     ./xdg-userdirs.nix
     ./xdg.nix
     ./ghostty.nix
-    ./dsh-desktop.nix
+    ./dsh.nix
     ./niri
     ./firefox.nix
 
