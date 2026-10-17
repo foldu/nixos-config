@@ -76,6 +76,18 @@
 
     llm-agents.url = "github:numtide/llm-agents.nix";
 
+    # The harness GUI in a window of its own. Its llm-agents follows this flake's,
+    # so the wrapper's icon and the `dsh` the dsh-web units run are the same
+    # package rather than two revisions that can drift apart.
+    dsh-chrome = {
+      type = "gitlab";
+      owner = "foldu";
+      repo = "dsh-chrome";
+      ref = "master";
+      host = "lab.home.5kw.li";
+      inputs.llm-agents.follows = "llm-agents";
+    };
+
     nix-topology = {
       url = "github:oddlama/nix-topology";
       inputs.nixpkgs.follows = "nixpkgs";
