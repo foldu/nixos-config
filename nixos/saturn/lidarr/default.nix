@@ -10,6 +10,8 @@ let
   lidarrPort = 8686;
   prowlarrPort = 9696;
   jackettPort = 9117;
+  # 8080 is open-webui's on this host; kickdown takes its listen port from here.
+  kickdownPort = 8088;
 
   # Every app below runs in the gluetun pod: its traffic has to egress the VPN,
   # and sharing that network namespace is also how the apps reach each other on
@@ -81,6 +83,7 @@ in
       "127.0.0.1:${toString lidarrPort}:${toString lidarrPort}"
       "127.0.0.1:${toString prowlarrPort}:${toString prowlarrPort}"
       "127.0.0.1:${toString jackettPort}:${toString jackettPort}"
+      "127.0.0.1:${toString kickdownPort}:${toString kickdownPort}"
     ];
 
     # podman seeds a named volume from the image's own /config, which the
@@ -121,6 +124,37 @@ in
         image = "docker.io/linuxserver/jackett:version-v0.24.2864";
       };
 
+      # Ours (lab.home.5kw.li/foldu/kickdown): a web UI that searches Jackett and
+      # drives Transmission, so it belongs next to both of them - and in this pod
+      # so the tracker requests it makes on our behalf egress the VPN too.
+      #
+      # Not an mkApp: the image is our own Nix build rather than a linuxserver
+      # one, so there is no PUID/PGID to set and nothing to keep in /config - it
+      # takes its whole configuration from the environment. The tag is a commit
+      # sha, which is what kickdown's CI publishes to the lab registry (alongside
+      # <branch> and latest); bump it to move to a newer build.
+      kickdown = {
+        unitConfig = {
+          Requires = "gluetun.service";
+          After = [ "gluetun.service" ];
+        };
+        containerConfig = {
+          image = "container-registry.home.5kw.li/foldu/kickdown:bf872568";
+          environments = {
+            HOST = "0.0.0.0";
+            PORT = toString kickdownPort;
+            JACKETT_URL = "http://127.0.0.1:${toString jackettPort}";
+            TRANSMISSION_URL = "http://127.0.0.1:9091/transmission/rpc";
+          };
+          # the Jackett API key, and transmission's credentials when its RPC
+          # authentication is on: see kickdown/env in secrets.yaml
+          environmentFiles = [ config.sops.secrets."kickdown/env".path ];
+          networks = [ "container:gluetun" ];
+          pod = config.virtualisation.quadlet.pods.gluetun-pott.ref;
+          autoUpdate = "registry";
+        };
+      };
+
       # Cloudflare answers rutracker's login POST with 403 before a single
       # credential is sent, so the fix has to happen below prowlarr. This
       # drives a real browser through the challenge and hands the cookie back.
@@ -152,6 +186,10 @@ in
     };
   };
 
+  # environmentFiles for the kickdown container; decrypted to a root-only file
+  # that podman reads, so it never lands in the container's own environment
+  sops.secrets."kickdown/env" = { };
+
   # podman would create these as root and linuxserver's init would chown them
   # a moment later; creating them with the right owner upfront is one less
   # window where the container can't write its own config
@@ -165,5 +203,6 @@ in
     "lidarr.home.5kw.li".extraConfig = proxyWithAuth lidarrPort;
     "prowlarr.home.5kw.li".extraConfig = proxyWithAuth prowlarrPort;
     "jackett.home.5kw.li".extraConfig = proxyWithAuth jackettPort;
+    "kickdown.home.5kw.li".extraConfig = proxyWithAuth kickdownPort;
   };
 }
