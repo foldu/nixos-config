@@ -38,6 +38,11 @@
   # enable wayland for electron apps
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
+  # gcr-ssh-agent.socket runs `systemctl --user set-environment SSH_AUTH_SOCK=%t/gcr/ssh`
+  # when it starts, which would overwrite the Bitwarden socket that
+  # home/common/graphical sets in environment.d. These hosts use Bitwarden's agent.
+  services.gnome.gcr-ssh-agent.enable = false;
+
   environment.systemPackages = [ pkgs.bitwarden-desktop ];
   # FIXME:
   # bitwarden uses EOL electron

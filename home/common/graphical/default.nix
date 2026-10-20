@@ -1,4 +1,9 @@
-{ inputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ./gtk.nix
@@ -48,6 +53,13 @@
     _7zz
     helium
   ]);
+
+  # Bitwarden's built-in SSH agent is the session agent here. This lands in
+  # ~/.config/environment.d, which only the systemd user manager reads: niri.service
+  # and dms inherit from it and hand it to everything they launch, while sshd
+  # logins never consult the user manager and keep whatever (forwarded) socket
+  # sshd set.
+  systemd.user.sessionVariables.SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
 
   services.pickwp.enable = true;
 }
