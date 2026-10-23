@@ -11,7 +11,7 @@
 }:
 let
   pname = "filmcraft";
-  version = "0.8.0";
+  version = "0.12.0";
 
   # Upstream also publishes an aarch64 AppImage. Like photocraft it is
   # deliberately not packaged: nix-update rewrites the hash of the one system it
@@ -20,7 +20,7 @@ let
   # desktops.
   appimage = fetchurl {
     url = "https://github.com/storytold/${pname}/releases/download/v${version}/${pname}-${version}-linux-x86_64.AppImage";
-    hash = "sha256-QZVel8iTJDXytruCRXg8ZoeGsz0rfflivQl2QdpoIR4=";
+    hash = "sha256-EJM/kXaDWAVFm7YNy4ECOSsGVGfsoRDbfuFbVaEcnpY=";
   };
 
   contents = appimageTools.extract {
