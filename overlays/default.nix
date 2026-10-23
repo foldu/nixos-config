@@ -2,6 +2,7 @@
 {
   customizations = import ./customizations.nix;
   extra = import ./extra.nix;
+  fixes = import ./fixes.nix;
   # extern = inputs.flake-utils.lib.eachDefaultSystem (system: {
   #   extraPackages = inputs.nixpkgs.lib.foldl (acc: x: acc // x.packages.${system}) { } [
   #     inputs.nix-stuff

@@ -29,6 +29,9 @@ is aarch64, so it gets built on a home host under qemu emulation.
 - `packages/<name>/` + `overlays/extra.nix` for local derivations,
   `overlays/customizations.nix` for overriding upstream ones, `lib/default.nix`
   for tiny helpers (`btrfsSubvolOn`, `mkPrometheusRules`).
+- `overlays/fixes.nix` — temporary workarounds for bugs already fixed upstream
+  but not yet in our nixpkgs pin. Each entry says where it was fixed and how to
+  check whether it can be dropped.
 - `ansible/` manages the non-NixOS boxes (Proxmox/Debian).
 
 ## Where does a change go?
