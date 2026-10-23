@@ -8,6 +8,7 @@
   imports = [
     inputs.nixos-hardware.nixosModules.common-cpu-amd
     inputs.nixos-hardware.nixosModules.common-gpu-amd
+    inputs.farchiver.nixosModules.default
 
     ../common/profiles/server.nix
     ../common/home
@@ -43,6 +44,7 @@
     ./materialious.nix
     ./img-bookmark.nix
     ./dsh.nix
+    ./farchiver.nix
     ./grafana
     "${inputs.homeserver-sekret}"
   ];

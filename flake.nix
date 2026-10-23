@@ -34,6 +34,14 @@
       host = "lab.home.5kw.li";
     };
 
+    farchiver = {
+      type = "gitlab";
+      owner = "foldu";
+      repo = "farchiver";
+      ref = "master";
+      host = "lab.home.5kw.li";
+    };
+
     homeserver-sekret = {
       type = "git";
       url = "https://lab.home.5kw.li/foldu/sekret";
