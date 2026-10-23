@@ -11,7 +11,7 @@
 }:
 let
   pname = "photocraft";
-  version = "0.9.0";
+  version = "0.14.0";
 
   # Upstream also publishes an aarch64 AppImage. It is deliberately not
   # packaged: nix-update rewrites the hash of the one system it evaluates, so a
@@ -19,7 +19,7 @@ let
   # scripts/update.sh), and no aarch64 host in this repo runs desktops.
   appimage = fetchurl {
     url = "https://github.com/storytold/photocraft/releases/download/v${version}/${pname}-${version}-linux-x86_64.AppImage";
-    hash = "sha256-SDqaeSAODAhku1TPP6pqVeK3nBQz2s/LFT04YuePMrw=";
+    hash = "sha256-YtMZWSFZ+OaQniUhURltI9m3okP8n5CV5a347LrJ8Dw=";
   };
 
   contents = appimageTools.extract {
