@@ -141,5 +141,7 @@ in
       ruff
 
       (ghidra.withExtensions (_: [ ghidra-mcp ]))
+
+      ansible
     ];
 }
