@@ -1,6 +1,12 @@
 ---
 name: home-assistant
-description: Configure, clean up and prettify a live Home Assistant instance over its REST and WebSocket APIs — automations, entity/device registry work, Lovelace dashboards, Mushroom cards — then verify the result in a real headless browser instead of guessing. Use for any Home Assistant task: editing or deleting automations, renaming or removing entities/devices, building or restyling dashboards, diagnosing a card that looks wrong, or checking why an entity reads unavailable.
+description: >-
+  Configure, clean up and prettify a live Home Assistant instance over its REST and
+  WebSocket APIs — automations, entity/device registry work, Lovelace dashboards,
+  Mushroom cards — then verify the result in a real headless browser instead of
+  guessing. Use for any Home Assistant task: editing or deleting automations,
+  renaming or removing entities/devices, building or restyling dashboards,
+  diagnosing a card that looks wrong, or checking why an entity reads unavailable.
 ---
 
 # Home Assistant
@@ -10,17 +16,37 @@ Distilled from working against a live instance (HA 2026.9.3, `hass.home.5kw.li` 
 1. **Look at the render** before calling a UI change done. The DOM and the API will both lie to you by omission.
 2. **Trust the registry, not the YAML** — entities you cannot find in `configuration.yaml` are usually UI-created (config entry / retained MQTT discovery).
 
+## Auth: you need a token, and only the user can make one
+
+**Nothing you can read will give you credentials.** There is no HA token in this repo, in `secrets/secrets.yaml`, or anywhere on disk — do not go hunting, and do not try to mint one from the VM.
+
+`secrets/secrets.yaml`'s `hassctl` entry is the *power controller's* own token for `hassctl` (`172.25.74.230:8080`), not a Home Assistant API token. It returns 401 against `:8123`.
+
+If `HA_TOKEN` is unset and `HA_TOKEN_FILE` is missing, **stop and ask the user to create a long-lived access token**:
+
+1. Open <http://172.25.74.192:8123> (or <https://hass.home.5kw.li>)
+2. Avatar (bottom-left) → **Security** tab → **Long-lived access tokens** → **Create token**
+3. Name it `dsh`, copy the value — it is shown exactly once
+
+Then have it land on disk without echoing it into the transcript:
+
+```bash
+umask 077 && (read -rs T && printf '%s' "$T" > /tmp/ha-token)   # paste at the prompt
+```
+
+`/tmp/ha-token` disappearing (reboot, `tmpfs` cleanup) is the *normal* failure mode, not a broken setup — ask for a fresh token instead of guessing. A token is valid until revoked in that same dialog, so reuse beats recreating.
+
 ## Setup
 
 ```bash
-export HA_URL=http://172.25.74.192:8123     # hass box; see home-network.toml
-export HA_TOKEN_FILE=/tmp/ha-token           # chmod 600, or pass HA_TOKEN
+export HA_URL=http://172.25.74.192:8123      # hass box; see home-network.toml
+export HA_TOKEN_FILE=/tmp/ha-token           # from the Auth section above, or pass HA_TOKEN
 mkdir -p /tmp/pw && (cd /tmp/pw && npm i playwright-core)   # browser harness; no browser download
 export PW_PATH=/tmp/pw/node_modules/playwright-core
 export CHROME_PATH=$(command -v chromium)    # system chromium is fine
 ```
 
-Node 22+ (global `WebSocket`). Never echo the token into output.
+Node 22+ (global `WebSocket`). Never echo the token into output. If a request 401s, the token is missing or revoked — go back to **Auth** and ask; do not retry with `hassctl`'s token.
 
 ## Which API has what
 
