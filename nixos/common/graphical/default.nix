@@ -8,6 +8,7 @@
   imports = [
     ./fancy-login.nix
     ./fonts.nix
+    ./input-method.nix
     ./pipewire.nix
     ./qt.nix
     ./syncthing.nix
