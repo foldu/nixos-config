@@ -9,7 +9,7 @@
         tags.host = "saturn";
       }
       {
-        urls = [ "https://lidarr.home.5kw.li" ];
+        urls = [ "https://beetsd.home.5kw.li" ];
         # authelia forward-auth rejects the unauthenticated probe
         response_status_code = 401;
         response_timeout = "30s";

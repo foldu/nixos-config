@@ -29,6 +29,7 @@
     ./redlib.nix
     ./transmission
     ./acquisition.nix
+    ./beetsd.nix
     ./vaultwarden.nix
     ./postgresql.nix
     ./metrics

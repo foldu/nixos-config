@@ -42,6 +42,14 @@
       host = "lab.home.5kw.li";
     };
 
+    beetsd = {
+      type = "gitlab";
+      owner = "foldu";
+      repo = "beetsd";
+      ref = "master";
+      host = "lab.home.5kw.li";
+    };
+
     homeserver-sekret = {
       type = "git";
       url = "https://lab.home.5kw.li/foldu/sekret";
