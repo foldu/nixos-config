@@ -7,7 +7,7 @@
     device = "nodev";
   };
   boot.loader.grub.configurationLimit = 5;
-  fileSystems."/boot" = {
+  fileSystems."/boot/efi" = {
     device = "/dev/disk/by-uuid/105A-0CC0";
     fsType = "vfat";
   };

@@ -18,6 +18,11 @@
 
   boot.enableContainers = false;
 
+  # /boot is a plain directory on the ext4 root; the 253 MB ESP is only mounted
+  # for the EFI stub. GRUB then loads kernels from /nix/store instead of copying
+  # ~95 MB per kernel into /boot.
+  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+
   virtualisation.podman = {
     enable = true;
     autoPrune = {
