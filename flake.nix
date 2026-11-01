@@ -50,6 +50,22 @@
       host = "lab.home.5kw.li";
     };
 
+    dtr = {
+      type = "gitlab";
+      owner = "foldu";
+      repo = "dtr";
+      ref = "master";
+      host = "lab.home.5kw.li";
+    };
+
+    baash = {
+      type = "gitlab";
+      owner = "foldu";
+      repo = "baash";
+      ref = "master";
+      host = "lab.home.5kw.li";
+    };
+
     homeserver-sekret = {
       type = "git";
       url = "https://lab.home.5kw.li/foldu/sekret";

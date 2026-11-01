@@ -22,6 +22,9 @@
   home.packages = [
     inputs.eunzip.packages.${pkgs.stdenv.hostPlatform.system}.eunzip
     inputs.wpp-gtk.packages.${pkgs.stdenv.hostPlatform.system}.wpp
+    # Only the graphical hosts have a GUI to put it in; the flake itself is
+    # x86_64-linux only, which is what jupiter and venus are.
+    inputs.dtr.packages.${pkgs.stdenv.hostPlatform.system}.dtr
   ]
   ++ (with pkgs; [
     mumble

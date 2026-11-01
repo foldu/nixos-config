@@ -35,6 +35,10 @@
     fd
     ripgrep
     file
+
+    # Every host: the shell is cheap enough to sit on the Hetzner box too, and
+    # its flake builds for aarch64 as well as x86_64.
+    inputs.baash.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
   programs.nh = {
