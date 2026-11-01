@@ -22,6 +22,7 @@
     ./manual-hardware-configuration.nix
     ../common/graphical/amd-gpu.nix
     ./llama.nix
+    ./winvm.nix
   ];
 
   nix.gc.automatic = lib.mkForce false;

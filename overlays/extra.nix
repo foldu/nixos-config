@@ -9,4 +9,5 @@ final: prev: {
   gitlab-mirror = prev.callPackage ../packages/gitlab-mirror { };
   ovh-dns = prev.callPackage ../packages/ovh-dns { };
   caddy-with-ovh = prev.callPackage ../packages/caddy-with-ovh { };
+  winvm = prev.callPackage ../packages/winvm { };
 }

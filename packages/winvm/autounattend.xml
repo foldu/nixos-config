@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Answer file for the consumer Windows 11 ISO on jupiter.
+
+  The whole point of this file is that OOBE never runs: with SkipMachineOOBE,
+  SkipUserOOBE and a LocalAccounts entry, Windows creates a local administrator
+  and boots straight to a desktop. No Microsoft account, no network requirement,
+  no "let's finish setting up your device". The Home-edition MS-account
+  requirement is simply never reached.
+
+  Alternatively / first logon runs winvm-bootstrap.ps1 from this same medium, so
+  OpenSSH comes up with the agent's key before anyone touches the VM.
+
+  Placeholders are substituted by `winvm install`.
+-->
+<unattend xmlns="urn:schemas-microsoft-com:unattend"
+          xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <settings pass="windowsPE">
+    <component name="Microsoft-Windows-International-Core-WinPE"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS">
+      <SetupUILanguage>
+        <UILanguage>en-US</UILanguage>
+      </SetupUILanguage>
+      <InputLocale>en-US</InputLocale>
+      <SystemLocale>en-US</SystemLocale>
+      <UILanguage>en-US</UILanguage>
+      <UserLocale>en-US</UserLocale>
+    </component>
+
+    <!--
+      VirtIO storage/network drivers for the Setup phase. Drive letters are not
+      predictable when several CD-ROMs are attached, and a path that does not
+      exist is skipped rather than fatal, so list the plausible ones.
+    -->
+    <component name="Microsoft-Windows-PnpCustomizationsWinPE"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS">
+      <DriverPaths>
+@@DRIVER_PATHS@@
+      </DriverPaths>
+    </component>
+
+    <component name="Microsoft-Windows-Setup"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS">
+      <!--
+        A clean install of the consumer media enforces TPM 2.0, Secure Boot and
+        the rest. The VM has a TPM (swtpm) but deliberately no Secure Boot, so
+        the checks are bypassed rather than faked. Harmless when they pass.
+      -->
+      <RunSynchronous>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>1</Order>
+          <Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>2</Order>
+          <Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>3</Order>
+          <Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>4</Order>
+          <Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassCPUCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>5</Order>
+          <Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassStorageCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>6</Order>
+          <Path>reg add HKLM\SYSTEM\Setup\LabConfig /v BypassDeviceCheck /t REG_DWORD /d 1 /f</Path>
+        </RunSynchronousCommand>
+      </RunSynchronous>
+
+      <DiskConfiguration>
+        <WillShowUI>OnError</WillShowUI>
+        <Disk wcm:action="add">
+          <DiskID>0</DiskID>
+          <WillWipeDisk>true</WillWipeDisk>
+          <CreatePartitions>
+            <CreatePartition wcm:action="add">
+              <Order>1</Order>
+              <Type>EFI</Type>
+              <Size>100</Size>
+            </CreatePartition>
+            <CreatePartition wcm:action="add">
+              <Order>2</Order>
+              <Type>MSR</Type>
+              <Size>16</Size>
+            </CreatePartition>
+            <CreatePartition wcm:action="add">
+              <Order>3</Order>
+              <Type>Primary</Type>
+              <Extend>true</Extend>
+            </CreatePartition>
+          </CreatePartitions>
+          <ModifyPartitions>
+            <ModifyPartition wcm:action="add">
+              <Order>1</Order>
+              <PartitionID>1</PartitionID>
+              <Format>FAT32</Format>
+              <Label>System</Label>
+            </ModifyPartition>
+            <ModifyPartition wcm:action="add">
+              <Order>2</Order>
+              <PartitionID>3</PartitionID>
+              <Format>NTFS</Format>
+              <Label>Windows</Label>
+              <Letter>C</Letter>
+            </ModifyPartition>
+          </ModifyPartitions>
+        </Disk>
+      </DiskConfiguration>
+
+      <!--
+        The consumer ISO carries several editions, and answering the edition
+        prompt is not possible in an unattended run. The generic Pro install key
+        both silences the key prompt and selects Pro; it does not activate.
+      -->
+      <ImageInstall>
+        <OSImage>
+          <InstallFrom>
+            <MetaData wcm:action="add">
+              <Key>/IMAGE/NAME</Key>
+              <Value>@@IMAGE_NAME@@</Value>
+            </MetaData>
+          </InstallFrom>
+          <InstallTo>
+            <DiskID>0</DiskID>
+            <PartitionID>3</PartitionID>
+          </InstallTo>
+          <WillShowUI>OnError</WillShowUI>
+        </OSImage>
+      </ImageInstall>
+
+      <UserData>
+        <AcceptEula>true</AcceptEula>
+        <ProductKey>
+          <Key>VK7JG-NPHTM-C97JM-9MPGT-3V66T</Key>
+          <WillShowUI>Never</WillShowUI>
+        </ProductKey>
+      </UserData>
+    </component>
+  </settings>
+
+  <settings pass="specialize">
+    <component name="Microsoft-Windows-Shell-Setup"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS">
+      <ComputerName>@@HOSTNAME@@</ComputerName>
+      <TimeZone>@@TIMEZONE@@</TimeZone>
+    </component>
+  </settings>
+
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-International-Core"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS">
+      <InputLocale>en-US</InputLocale>
+      <SystemLocale>en-US</SystemLocale>
+      <UILanguage>en-US</UILanguage>
+      <UserLocale>en-US</UserLocale>
+    </component>
+    <component name="Microsoft-Windows-Shell-Setup"
+               processorArchitecture="amd64"
+               publicKeyToken="31bf3856ad364e35"
+               language="neutral"
+               versionScope="nonSxS">
+      <OOBE>
+        <HideEULAPage>true</HideEULAPage>
+        <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
+        <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+        <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+        <ProtectYourPC>3</ProtectYourPC>
+        <SkipMachineOOBE>true</SkipMachineOOBE>
+        <SkipUserOOBE>true</SkipUserOOBE>
+      </OOBE>
+      <UserAccounts>
+        <LocalAccounts>
+          <LocalAccount wcm:action="add">
+            <Name>@@USER@@</Name>
+            <DisplayName>@@USER@@</DisplayName>
+            <Group>Administrators</Group>
+            <Password>
+              <Value>@@PASSWORD@@</Value>
+              <PlainText>true</PlainText>
+            </Password>
+          </LocalAccount>
+        </LocalAccounts>
+      </UserAccounts>
+      <!--
+        Auto-logon keeps the console session alive: an RDP session is fine for
+        looking at things, but a GPU-accelerated app may turn acceleration off
+        when it sees SM_REMOTESESSION.
+      -->
+      <AutoLogon>
+        <Enabled>true</Enabled>
+        <Username>@@USER@@</Username>
+        <Password>
+          <Value>@@PASSWORD@@</Value>
+          <PlainText>true</PlainText>
+        </Password>
+        <LogonCount>999999</LogonCount>
+      </AutoLogon>
+      <FirstLogonCommands>
+        <SynchronousCommand wcm:action="add">
+          <Order>1</Order>
+          <Description>winvm bootstrap from the installation medium</Description>
+          <CommandLine>cmd /c for %d in (D: E: F: G:) do @if exist %d\winvm-bootstrap.ps1 powershell -NoProfile -ExecutionPolicy Bypass -File %d\winvm-bootstrap.ps1</CommandLine>
+        </SynchronousCommand>
+      </FirstLogonCommands>
+    </component>
+  </settings>
+</unattend>
