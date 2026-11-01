@@ -1,6 +1,7 @@
 {
   config,
   inputs,
+  lib,
   pkgs,
   ...
 }:
@@ -60,6 +61,27 @@
   # logins never consult the user manager and keep whatever (forwarded) socket
   # sshd set.
   systemd.user.sessionVariables.SSH_AUTH_SOCK = "${config.home.homeDirectory}/.bitwarden-ssh-agent.sock";
+
+  # Flatpak mounts the host font dirs into the sandbox as read-only store paths,
+  # whose files and directories are all mtime 1970. Fontconfig only rescans a
+  # directory when it looks newer than the cache entry for it, so that cache never
+  # goes stale on its own and fonts added by a later generation stay invisible to
+  # flatpak apps -- CJK text renders as tofu until the cache is dropped by hand.
+  # Clear it whenever the merged font dir changes, so `nixos-rebuild switch` is
+  # enough to make new fonts show up.
+  home.activation.refreshFlatpakFontCache = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    fontDir=$(readlink -f /run/current-system/sw/share/X11/fonts)
+    stamp="$HOME/.cache/flatpak-fonts.stamp"
+    if [ "$(cat "$stamp" 2>/dev/null)" != "$fontDir" ]; then
+      for cache in "$HOME"/.var/app/*/cache/fontconfig; do
+        if [ -e "$cache" ]; then
+          run rm -rf "$cache"
+        fi
+      done
+      run mkdir -p "$(dirname "$stamp")"
+      printf '%s\n' "$fontDir" > "$stamp"
+    fi
+  '';
 
   services.pickwp.enable = true;
 }
