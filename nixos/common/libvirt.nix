@@ -20,7 +20,7 @@
   users.groups.libvirtd = { };
   users.users.barnabas.extraGroups = [ "libvirtd" ];
 
-  # virt-manager also brings virt-install and virt-xml, which winvm drives
+  # virt-manager also brings virt-install, which winvm uses for a fresh install
   programs.virt-manager.enable = true;
   virtualisation.spiceUSBRedirection.enable = true;
 

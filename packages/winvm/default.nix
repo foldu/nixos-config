@@ -17,7 +17,6 @@
   domain ? "win",
   ip ? "192.168.122.50",
   guestMac ? "52:54:00:9f:1a:6d",
-  hostdev ? "0000:75:00.0",
   user ? "win",
   computerName ? "winvm",
   timezone ? "W. Europe Standard Time",
@@ -65,12 +64,11 @@ writeShellApplication {
   runtimeInputs = [
     (lib.getBin glibc)
     coreutils
-    gnugrep
     gnutar
     libvirt
     openssh
     qemu-utils
-    virt-manager
+    virt-manager # virt-install
     virt-viewer
     xorriso
   ];
@@ -81,7 +79,6 @@ writeShellApplication {
         "@domain@"
         "@ip@"
         "@mac@"
-        "@hostdev@"
         "@user@"
         "@hostname@"
         "@timezone@"
@@ -94,7 +91,6 @@ writeShellApplication {
         domain
         ip
         guestMac
-        hostdev
         user
         computerName
         timezone

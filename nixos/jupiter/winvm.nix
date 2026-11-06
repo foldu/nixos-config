@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   ...
 }:
@@ -7,14 +6,6 @@ let
   domain = "win";
   mac = "52:54:00:9f:1a:6d";
   ip = "192.168.122.50";
-
-  # 1002:13c0 is the 9950X3D's Radeon iGPU at 0000:75:00.0: alone in IOMMU group
-  # 28, not the boot VGA, and with every connector disconnected -- the host never
-  # needs it, so it can be handed over whole. The discrete 1002:7550 in group 14
-  # stays on amdgpu for niri and Steam. Audio (1002:1640, group 29) stays on the
-  # host: nothing here wants HDMI audio out of the motherboard.
-  igpuIds = "1002:13c0";
-  igpuBdf = "0000:75:00.0";
 
   # libvirt does not create its default NAT network on NixOS. A pinned MAC plus a
   # DHCP reservation is what gives the guest a stable address to ssh to.
@@ -34,25 +25,6 @@ let
 in
 {
   imports = [ ../common/libvirt.nix ];
-
-  # amdgpu ends up in jupiter's initrd (hardware.graphics + nixos-hardware) and
-  # would claim the iGPU before userspace runs, so vfio-pci has to exist in the
-  # initrd and win the probe. softdep keeps that ordering even if amdgpu is what
-  # triggers the module load.
-  boot.initrd.kernelModules = lib.mkBefore [
-    "vfio"
-    "vfio_iommu_type1"
-    "vfio_pci"
-  ];
-  boot.kernelParams = [
-    "amd_iommu=on"
-    "iommu=pt"
-    "vfio-pci.ids=${igpuIds}"
-  ];
-  boot.extraModprobeConfig = ''
-    options vfio-pci disable_vga=1
-    softdep amdgpu pre: vfio-pci
-  '';
 
   # qcow2 on btrfs is COW on top of COW: it fragments and snapshots fight each
   # other. +C on the directory makes new images inherit nocow, and has to happen
@@ -106,7 +78,6 @@ in
     (pkgs.winvm.override {
       inherit domain ip;
       guestMac = mac;
-      hostdev = igpuBdf;
     })
   ];
 }

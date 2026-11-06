@@ -20,8 +20,7 @@ if (-not (Test-Path $akf)) {
 icacls $akf /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F" | Out-Null
 New-NetFirewallRule -DisplayName "OpenSSH Inbound" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 22 | Out-Null
 
-# RDP, for a human. Not for measuring the GPU: a remote session can make a
-# GPU-accelerated app disable acceleration.
+# RDP, for a human looking at the desktop. Automation goes over ssh.
 Set-ItemProperty 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name fDenyTSConnections -Value 0
 Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
 

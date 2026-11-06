@@ -11,7 +11,6 @@ export VIRSH_DEFAULT_CONNECT_URI="qemu:///system"
 domain="@domain@"
 ip="@ip@"
 mac="@mac@"
-hostdev="@hostdev@"
 guest_user="@user@"
 hostname="@hostname@"
 timezone="@timezone@"
@@ -26,13 +25,6 @@ debloat_dir="@debloat@"
 media_dir="${WINVM_MEDIA_DIR:-${XDG_STATE_HOME:-$HOME/.local/share}/winvm}"
 state_dir="$media_dir/save"
 shutdown_timeout="${WINVM_SHUTDOWN_TIMEOUT:-60}"
-
-# pci address as libvirt spells it (0000:75:00.0 -> bus 0x75, slot 0x00, function 0x0)
-bdf="${hostdev#*:}"
-pci_bus="0x${bdf%%:*}"
-rest="${bdf#*:}"
-pci_slot="0x${rest%%.*}"
-pci_func="${rest#*.}"
 
 die() { printf 'winvm: %s\n' "$*" >&2; exit 1; }
 
@@ -79,7 +71,7 @@ usage() {
 usage: winvm <command>
 
 lifecycle
-  status [--json]     domain state, guest address, whether the GPU is attached
+  status [--json]     domain state and guest address
   up                  start the domain
   down [-f]           ACPI shutdown, destroy after ${shutdown_timeout}s (-f: hard stop)
 
@@ -92,7 +84,7 @@ test state
 
 access
   ssh [cmd ...]       run a command in the guest over OpenSSH (winvm's own key)
-  console             virt-viewer (only while the virtual display is attached)
+  console             virt-viewer against the guest's display
   ps 'script'         run PowerShell in the guest, quoting-proof
   key KEYNAME...      inject keys into the guest, e.g. KEY_ENTER
 
@@ -100,29 +92,22 @@ setup
   install             one-shot unattended Windows install
                       (WINVM_ISO and WINVM_PASSWORD required;
                        WINVM_IMAGE_NAME picks the edition, WINVM_ATTENDED=1 goes manual)
-  gpu on|off          attach/detach the passed-through iGPU
-  display on|off      emulated display (off = single adapter, guest must drive the GPU)
   debloat [--dry-run] run the vendored Win11Debloat against the live guest
   bootstrap           re-print the first-logon script, with the key filled in
 EOF
 }
 
 cmd_status() {
-  local state=undefined gpu=no addr
+  local state=undefined addr
   addr="$(guest_ip)"
   if has_domain; then
     state="$(virsh domstate "$domain")"
-    if virsh dumpxml "$domain" |
-      grep -q "bus='$pci_bus' slot='$pci_slot' function='0x$pci_func'"; then
-      gpu=yes
-    fi
   fi
   if [ "${1:-}" = "--json" ]; then
-    printf '{"domain":"%s","state":"%s","ip":"%s","gpu":%s}\n' \
-      "$domain" "$state" "$addr" "$([ "$gpu" = yes ] && echo true || echo false)"
+    printf '{"domain":"%s","state":"%s","ip":"%s"}\n' "$domain" "$state" "$addr"
   else
-    printf 'domain   %s\nstate    %s\naddress  ssh %s@%s\ngpu      %s\n' \
-      "$domain" "$state" "$guest_user" "$addr" "$gpu"
+    printf 'domain   %s\nstate    %s\naddress  ssh %s@%s\n' \
+      "$domain" "$state" "$guest_user" "$addr"
   fi
 }
 
@@ -164,8 +149,7 @@ cmd_down() {
 
 cmd_snapshot() {
   local name="${1:-base}"
-  # a domain with a passed-through device cannot be snapshotted live
-  is_running && die "shut the domain down first (winvm down) -- hostdev blocks live snapshots"
+  is_running && die "shut the domain down first (winvm down) -- snapshots need the disk to itself"
   virsh snapshot-create-as "$domain" "$name" --description "winvm $name" --atomic
 }
 
@@ -244,62 +228,7 @@ cmd_key() {
 
 cmd_console() {
   has_domain || die "domain $domain is not defined"
-  if ! virsh dumpxml "$domain" | grep -q "<graphics"; then
-    die "no emulated display to show -- the iGPU is the guest's display now; run 'winvm gpu off' for a console"
-  fi
   exec virt-viewer --connect qemu:///system --wait "$domain"
-}
-
-cmd_gpu() {
-  has_domain || die "domain $domain is not defined"
-  is_running && die "shut the domain down first (winvm down)"
-  case ${1:-} in
-  on)
-    if virsh dumpxml "$domain" | grep -q "bus='$pci_bus' slot='$pci_slot' function='0x$pci_func'"; then
-      echo "iGPU $hostdev already attached"
-    else
-      virt-xml "$domain" --add-device --hostdev "$hostdev" >/dev/null
-      echo "iGPU $hostdev attached"
-    fi
-    ;;
-  off)
-    if ! virsh dumpxml "$domain" | grep -q "bus='$pci_bus' slot='$pci_slot' function='0x$pci_func'"; then
-      echo "iGPU $hostdev already detached"
-    else
-      virt-xml "$domain" --remove-device --hostdev "$hostdev" >/dev/null
-      echo "iGPU $hostdev detached"
-    fi
-    ;;
-  *)
-    die "usage: winvm gpu on|off"
-    ;;
-  esac
-}
-
-# The emulated display is what makes the guest usable before its own GPU driver
-# works. Turning it off leaves a single adapter (no ambiguity about which one an
-# application renders on), but a guest with neither has been observed to never
-# finish booting, so this is a separate, deliberate step.
-cmd_display() {
-  has_domain || die "domain $domain is not defined"
-  is_running && die "shut the domain down first (winvm down)"
-  case ${1:-} in
-  off)
-    virt-xml "$domain" --remove-device --graphics all >/dev/null 2>&1 || true
-    virt-xml "$domain" --edit --video model.type=none >/dev/null
-    echo "emulated display off; the guest must drive a passed-through GPU to be usable"
-    ;;
-  on)
-    virt-xml "$domain" --edit --video model.type=virtio >/dev/null
-    if ! virsh dumpxml "$domain" | grep -q "<graphics"; then
-      virt-xml "$domain" --add-device --graphics vnc,listen=127.0.0.1 >/dev/null
-    fi
-    echo "emulated display on"
-    ;;
-  *)
-    die "usage: winvm display on|off"
-    ;;
-  esac
 }
 
 # The flags are deliberately conservative: no Edge removal, no Defender or
@@ -474,8 +403,6 @@ ssh) shift && cmd_ssh "$@" ;;
 console) cmd_console ;;
 ps) shift && cmd_ps "$@" ;;
 key) shift && cmd_key "$@" ;;
-gpu) shift && cmd_gpu "$@" ;;
-display) shift && cmd_display "$@" ;;
 install) cmd_install ;;
 debloat) shift && cmd_debloat "$@" ;;
 bootstrap) cmd_bootstrap ;;

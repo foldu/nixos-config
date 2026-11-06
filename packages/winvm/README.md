@@ -6,17 +6,20 @@ commands instead of remembering libvirt flags.
 
 ## Shape
 
-- **Host GPU stays on the host.** The discrete card (`1002:7550`, IOMMU group 14)
-  is `amdgpu` and stays that way: niri, Steam/Proton, LACT.
-- **The iGPU is the guest's only graphics device.** `0000:75:00.0` (`1002:13c0`,
-  group 28, `boot_vga=0`, no connectors) is bound to `vfio-pci` from the initrd,
-  so the host never initializes it and there is nothing to reset or detach later.
-  `amdgpu` is in jupiter's initrd, hence the `softdep amdgpu pre: vfio-pci`.
-- **Its HDMI audio function is not passed.** `1002:1640` sits in its own group
-  (29); nothing in the test setup needs HDMI audio out of the motherboard.
-- **No emulated display.** With a second adapter present, adapter selection
-  inside Windows becomes ambiguous — exactly what you don't want when testing a
-  GPU-accelerated terminal. After `winvm gpu on` the iGPU is the only one.
+- **No GPU passthrough.** Both host GPUs stay on `amdgpu`: the discrete card
+  (`1002:7550`, IOMMU group 14) for niri, Steam/Proton and LACT, the APU's iGPU
+  (`1002:13c0`, group 28) unused. The guest gets libvirt's emulated `virtio-vga`
+  and a VNC display on `127.0.0.1:5900`.
+- **Two ways in.** `winvm console` for a human at a window, `winvm ssh` /
+  `winvm ps` for anything automated. RDP is enabled for a desktop, but ssh is the
+  interface the tests use.
+- **An APU iGPU cannot be passed to a guest.** That was the first attempt: the
+  device binds to `vfio-pci` fine and Windows sees it, but the AMD driver always
+  returns code 43, because an APU's driver needs platform-firmware state (IGD
+  opregion, UMA carve-out) that only the host firmware provides. A real PCIe card
+  would work; the iGPU does not. Nothing in this module depends on it now.
+- **No acceleration.** `virtio-vga` is a framebuffer, not a GPU: fine for driving
+  the desktop and ordinary applications, useless for GPU-accelerated rendering.
 
 ## No Microsoft account
 
@@ -37,9 +40,7 @@ export WINVM_ISO=~/isos/win11.iso     # the ordinary consumer ISO is fine
 export WINVM_PASSWORD='...'           # local admin password
 
 winvm install                         # builds the medium, starts the install
-winvm console                         # optional: watch it, or plug a monitor
-                                      # into the motherboard HDMI -- that output
-                                      # is the guest's
+winvm console                         # optional: watch it
 ```
 
 `install` generates `~/.local/state/winvm/id_ed25519` (override with
@@ -51,19 +52,12 @@ disk is wiped and partitioned, and at first logon `winvm-bootstrap.ps1` enables
 OpenSSH with that key, enables RDP, installs the guest agent, and writes the
 adapter inventory to `C:\winvm-adapters.txt`.
 
-Then:
+After that the guest is reachable and there is nothing left to set up:
 
 ```sh
-winvm down
-winvm gpu on                          # attach the iGPU (the emulated display stays)
-winvm up
-winvm ps 'Get-PnpDevice -Class Display | Format-Table | Out-String'
+winvm status                          # state + address
+winvm ssh -- cmd /c ver
 ```
-
-Dropping the emulated display is a separate step, and only worth taking once the
-guest's own GPU driver is working: a guest with no display device at all did not
-finish booting here, so `winvm display off` is deliberate rather than part of
-`gpu on`.
 
 `winvm ps` encodes the script, so quotes and pipes survive the trip; `winvm ssh`
 passes its arguments straight through and Windows sshd reassembles them, so do not
@@ -100,8 +94,7 @@ on stdout; the script's own `Stop-Transcript` complains when it has no transcrip
 host, which is harmless.
 
 App removals are reversible through the Microsoft Store, settings are registry
-policies. `-SkipExplorerRestart` is set, so most changes land at the next sign-in —
-which is the next boot anyway if you follow this with `winvm gpu on`.
+policies. `-SkipExplorerRestart` is set, so most changes land at the next sign-in.
 
 ## Per-test state
 
@@ -110,11 +103,10 @@ winvm down && winvm snapshot base    # once, after the guest is set up and clean
 winvm reset                          # destroy -> revert to base -> start
 ```
 
-Host devices block live snapshots, so snapshots are taken with the domain shut
-off; `reset` therefore always does a full boot. If `destroy`+`start` turns out to
-wedge the iGPU (APUs have no FLR), `winvm save` / `winvm unsave` give a
-state-preserving path that skips guest-side re-initialization — run the loop
-below before relying on either.
+Snapshots are taken with the domain shut off, so `reset` always does a full boot.
+That is the point: each test starts from the same disk. `winvm save` / `winvm
+unsave` suspend and resume a running guest to `~/.local/state/winvm/save/`, for
+keeping state across a host reboot.
 
 ## Acceptance test (do this before trusting the guest)
 
@@ -125,29 +117,20 @@ for i in $(seq 1 10); do
 done
 ```
 
-If the iGPU fails to re-acquire on the second start, vfio logs
-`Unable to reset device` and the domain won't start until the host reboots. That
-is the one genuinely risky part of iGPU passthrough; the loop is the go/no-go.
+Ten clean boots from the same snapshot with the address coming back each time. If
+`reset` is flaky, that loop is how you find out.
 
 ## Caveats
 
-- **Don't measure GPU performance over RDP.** Many GPU-accelerated apps turn
-  acceleration off when `GetSystemMetrics(SM_REMOTESESSION)` is set. Use the
-  motherboard HDMI output for the real thing, SSH for automation, RDP for
-  convenience only.
-- **No `virsh screenshot`.** Without an emulated graphics device there is no
-  framebuffer to grab; capture inside the guest (the test harness, or
-  `winvm ssh`) instead.
-- **The guest has no VRAM of its own.** The APU splits system memory, which is
-  why it gets 16 GiB while the host keeps the rest.
+- **Don't measure graphics performance here.** There is no GPU: `virtio-vga`
+  renders in software on the host CPU. Fine for a test harness that needs a
+  desktop; not representative of real hardware.
+- **The guest has no VRAM of its own.** It gets 16 GiB of system memory because
+  it is a VM, not because a GPU is carving any out.
 - **The installation medium persists.** It holds the answer file (so, the
   admin password) and the domain XML points at it; the directory is `0700` and
   qemu reads it as root. Deleting it means the guest will not start.
-- `winvm gpu on|off` and `winvm display on|off` only work while the domain is shut
-  off. `gpu on` is idempotent: it will not attach the device twice.
-- The emulated `cirrus`/`virtio` adapter is marked `primary`, so an application may
-  render there even once the passed GPU works. `winvm display off` is the way to
-  force a single adapter — but see above about it being a deliberate step.
+- `winvm snapshot` needs the domain shut off. `winvm reset` handles that itself.
 - The guest agent needs a channel in the domain XML; `install` adds
   `org.qemu.guest_agent.0`. A domain created before that exists needs
   `virt-xml win --add-device --channel unix,target.type=virtio,target.name=org.qemu.guest_agent.0`
