@@ -38,3 +38,11 @@ deploy-hetzner:
 
 # every machine
 deploy-all: (deploy "jupiter") (deploy "saturn") (deploy "venus") deploy-hetzner
+
+# bump flake inputs and AppImage packages, committing each change
+update:
+    ./scripts/update.sh
+
+# build every NixOS and home-manager configuration; pass targets to narrow
+build-all *targets:
+    ./scripts/build-all.sh {{ targets }}
