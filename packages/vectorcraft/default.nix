@@ -11,7 +11,7 @@
 }:
 let
   pname = "vectorcraft";
-  version = "0.16.0";
+  version = "0.22.0";
 
   # Upstream also publishes an aarch64 AppImage. Like photocraft it is
   # deliberately not packaged: nix-update rewrites the hash of the one system it
@@ -20,7 +20,7 @@ let
   # desktops.
   appimage = fetchurl {
     url = "https://github.com/storytold/${pname}/releases/download/v${version}/${pname}-${version}-linux-x86_64.AppImage";
-    hash = "sha256-ih8iRY0rAJQO/RpWneziWEj60Yx1pad9XoxLcZKpIxk=";
+    hash = "sha256-CaaNIiMlMCGcEmQ7t+ntprH2d4y/ny8vxG/5biJZ97A=";
   };
 
   contents = appimageTools.extract {
