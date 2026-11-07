@@ -174,7 +174,7 @@
 
       "org/gnome/shell" = {
         favorite-apps = [
-          "helium.desktop"
+          "brave-origin.desktop"
           "telegramdesktop.desktop"
           "kitty.desktop"
         ];

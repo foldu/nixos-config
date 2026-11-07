@@ -38,6 +38,7 @@
     pass
     imagemagick
     gnupg
+    inputs.brave-browser-nix.packages.${pkgs.stdenv.hostPlatform.system}.brave-origin
     chromium
     pwgen
     d-spy

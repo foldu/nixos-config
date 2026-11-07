@@ -99,6 +99,13 @@
 
     copyparty.url = "github:9001/copyparty";
 
+    # nixpkgs deleted brave-origin, so the package comes from this flake
+    # instead. It follows our nixpkgs so there is only one evaluation of it.
+    brave-browser-nix = {
+      url = "git+https://codeberg.org/buckley310/brave-browser-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     quickshell = {
       url = "git+https://git.outfoxxed.me/quickshell/quickshell/";
       inputs.nixpkgs.follows = "nixpkgs";
