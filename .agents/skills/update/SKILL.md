@@ -48,17 +48,19 @@ saturn/venus instead of recompiled. Builds elsewhere are stranded (see
 into every build below. If `git status` is non-empty, name the dirty paths and ask
 whether to carry them before starting. Do not `git stash` on your own.
 
-Record the base and branch before the script runs (shell variables do not survive
-between agent commands, so also write the base down):
+Record the base before the script runs (shell variables do not survive between
+agent commands, so also write it down):
 
 ```sh
 base="$(git rev-parse HEAD)"
 printf '%s\n' "$base" > /tmp/nixos-update-base
-git switch -c "update/$(date +%Y-%m-%d)"
 ```
 
-Later commands that need it start with `base="$(cat /tmp/nixos-update-base)"`. If
-the branch already exists, add a suffix. Never update on `master`.
+Work directly on `master`; do not create a branch. The update script commits
+straight to whatever is checked out, so stay on `master`.
+
+Later commands that need the base start with
+`base="$(cat /tmp/nixos-update-base)"`.
 
 If `nix-update` is missing, run the script through a shell that provides it:
 
@@ -268,7 +270,7 @@ Report:
   queries run)
 - each fix and the commit that carries it
 - anything unresolved, with the exact command and error
-- the branch name, and that it is **not pushed**
+- the commits added on top of the base, and that they are **not pushed**
 
 Do not deploy, push, or open a merge request unless the user asks for that
 explicitly.
