@@ -52,6 +52,7 @@ in
         noto-fonts-color-emoji
         dejavu_fonts
         inter
+        montserrat
         source-code-pro
         vista-fonts
         et-book
