@@ -24,5 +24,9 @@
   environment.systemPackages = [
     inputs.home-manager.packages.${pkgs.stdenv.hostPlatform.system}.home-manager
     inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim
+
+    # Home hosts only: on the Hetzner box this flake has to be built under qemu
+    # for aarch64, which is not worth it for a shell.
+    inputs.baash.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }
