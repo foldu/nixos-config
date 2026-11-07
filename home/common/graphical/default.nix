@@ -38,7 +38,6 @@
     pass
     imagemagick
     gnupg
-    brave
     chromium
     pwgen
     d-spy

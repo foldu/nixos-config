@@ -209,7 +209,7 @@ in
           "text/html" = desktopFile.browser;
           # Helium advertises these as well, but a default only exists if it is
           # named here: otherwise mimeinfo.cache order picks whichever browser
-          # happens to sort first (brave, epiphany, firefox), and xhtml/xml
+          # happens to sort first (chromium, epiphany, firefox), and xhtml/xml
           # types get caught by the text closure and land in the editor.
           "application/xhtml+xml" = desktopFile.browser;
           "application/xhtml_xml" = desktopFile.browser;
