@@ -44,5 +44,10 @@ update:
     ./scripts/update.sh
 
 # build every NixOS and home-manager configuration; pass targets to narrow
+# (add --nom in a terminal for nix-output-monitor's live tree)
 build-all *targets:
     ./scripts/build-all.sh {{ targets }}
+
+# run build-all --nom in a detached tmux session; attach with `tmux attach -t nix-build`
+build-watch *targets:
+    bash -c 'session=nix-build; if tmux has-session -t "$session" 2>/dev/null; then echo "tmux session $session already exists"; echo "attach with: tmux attach -t $session"; exit 0; fi; tmux new-session -d -s "$session" -c "$PWD" "just build-all --nom {{ targets }}; exec bash"; echo "started tmux session $session"; echo "attach from a DSH terminal with: tmux attach -t $session"'

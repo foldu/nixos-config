@@ -111,6 +111,36 @@ timeout as a failure.
 Long builds: run them in the background and poll, and never start a second copy
 of the same target while the first is still running.
 
+For a human-watchable run, open a DSH terminal (right sidebar → New terminal) and
+use nix-output-monitor:
+
+```sh
+just build-all --nom
+```
+
+That hands every selected target to `nom build --keep-going` in one invocation
+and draws a live derivation tree with timings instead of one log block per
+target. It needs a TTY, so keep plain `just build-all` for the agent's background
+job, where the session-header job control and the per-target logs are the useful
+view. If `nom` is not on `PATH`, the script falls back to
+`nix run nixpkgs#nix-output-monitor`.
+
+If the user wants to watch without running it themselves, start it detached and
+hand them one command:
+
+```sh
+just build-watch
+```
+
+That runs the same `--nom` build in tmux session `nix-build` and returns. Tell
+the user to open a DSH terminal (right sidebar → New terminal) and run
+`tmux attach -t nix-build`; the build keeps running if they detach. Do not run
+`tmux attach` yourself — your shell is not their terminal, it will just block.
+
+Check progress with `tmux capture-pane -p -t nix-build | tail -40`; if the
+session already exists, attach and check it, or kill it before starting a fresh
+one. A failure seen there still follows the ask-first rule below.
+
 ## When something breaks
 
 ### 1. Capture the failure
