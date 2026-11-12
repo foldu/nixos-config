@@ -31,7 +31,18 @@ let
         perl
         git
         rustPlatform.bindgenHook
+        # wreq pulls zstd, and zstd-sys probes pkg-config for libzstd. nixpkgs
+        # normally supplies that through defaultCrateOverrides.zstd-sys, which
+        # only applies when nixpkgs builds the vendor directory itself - ours is
+        # the fetchCargoVendor above, so the crate environment is ours to supply.
+        pkg-config
       ]);
+    buildInputs = (oldAttrs.buildInputs or [ ]) ++ [ pkgs.zstd ];
+    env = (oldAttrs.env or { }) // {
+      # What defaultCrateOverrides sets for the crate, made explicit here so a
+      # future change to that file cannot silently reintroduce the failure.
+      ZSTD_SYS_USE_PKG_CONFIG = true;
+    };
     checkFlags = (oldAttrs.checkFlags or [ ]) ++ [
       "--skip=oauth::tests::test_generic_web_backend"
       "--skip=oauth::tests::test_mobile_spoof_backend"
