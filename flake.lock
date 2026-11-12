@@ -31,11 +31,11 @@
       },
       "locked": {
         "host": "lab.home.5kw.li",
-        "lastModified": 1794506684,
-        "narHash": "sha256-tQcQ0IvAbPt+4Rl3Exgu3Ol4KIlKHX8XhwOay4NP6wg=",
+        "lastModified": 1794518050,
+        "narHash": "sha256-9omoVDXsmFZ0LcMwmFRdhTAeuxbcKc/Wb8kvJ4YrIks=",
         "owner": "foldu",
         "repo": "baash",
-        "rev": "8c3b0906432baa82f661397b6ee4f64ab46c7ce6",
+        "rev": "c2e87f60d464556e9a9378883c9b93125a1ca1fd",
         "type": "gitlab"
       },
       "original": {
@@ -284,11 +284,11 @@
       },
       "locked": {
         "host": "lab.home.5kw.li",
-        "lastModified": 1794508149,
-        "narHash": "sha256-B9c5GCKY1eNbftVLtT+NAJCxdtrK+3SdGx/XyvbQpKg=",
+        "lastModified": 1794516562,
+        "narHash": "sha256-6HIY2Gi+e306sFj84erW966k8NwQ1l12u4rMk8NRoXQ=",
         "owner": "foldu",
         "repo": "dtr",
-        "rev": "680dfa1921b73d967995f708bc085e87154534b8",
+        "rev": "4f2306c621fc64279fd38cfad8892c6cd65a5c59",
         "type": "gitlab"
       },
       "original": {
