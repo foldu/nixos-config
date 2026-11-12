@@ -334,7 +334,7 @@ window-rule {
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     match app-id="Alacritty"
     match app-id="zen"
-    match app-id="com.mitchellh.ghostty"
+    match app-id="dtr"
     match app-id="kitty"
     draw-border-with-background false
 }
@@ -371,7 +371,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal" { spawn "ghostty"; }
+    Mod+T hotkey-overlay-title="Open a Terminal" { spawn "dtr"; }
     Mod+Slash hotkey-overlay-title="Lawnchair" { spawn "dms" "ipc" "call" "launcher" "toggle"; }
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
