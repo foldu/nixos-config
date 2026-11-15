@@ -66,6 +66,16 @@
       host = "lab.home.5kw.li";
     };
 
+    yutooob = {
+      type = "gitlab";
+      owner = "foldu";
+      repo = "yutooob";
+      ref = "master";
+      host = "lab.home.5kw.li";
+      # its own flake pins a nixpkgs; follow ours so there is one evaluation
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     homeserver-sekret = {
       type = "git";
       url = "https://lab.home.5kw.li/foldu/sekret";

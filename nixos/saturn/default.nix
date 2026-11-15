@@ -46,6 +46,7 @@
     ./img-bookmark.nix
     ./dsh.nix
     ./farchiver.nix
+    ./yutooob.nix
     ./grafana
     "${inputs.homeserver-sekret}"
   ];

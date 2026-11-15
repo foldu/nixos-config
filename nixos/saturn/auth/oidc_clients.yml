@@ -43,3 +43,24 @@ identity_providers:
         access_token_signed_response_alg: "none"
         userinfo_signed_response_alg: "none"
         token_endpoint_auth_method: "client_secret_basic"
+      - client_id: "yutooob"
+        client_name: "Yutooob"
+        client_secret: "$argon2id$v=19$m=65536,t=3,p=4$Bh+3FAiiqQCCt+yfHMDJ5A$NtbwyvoL5AUY69SiHFyO9qNqncoHvkSF50RZTCLhLc4"
+        public: false
+        authorization_policy: "one_factor"
+        require_pkce: true
+        pkce_challenge_method: "S256"
+        redirect_uris:
+          - "https://yutooob.home.5kw.li/api/auth/callback"
+        scopes:
+          - "openid"
+          - "profile"
+          - "groups"
+          - "email"
+        response_types:
+          - "code"
+        grant_types:
+          - "authorization_code"
+        access_token_signed_response_alg: "none"
+        userinfo_signed_response_alg: "none"
+        token_endpoint_auth_method: "client_secret_post"
