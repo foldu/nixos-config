@@ -31,11 +31,11 @@
       },
       "locked": {
         "host": "lab.home.5kw.li",
-        "lastModified": 1794667492,
-        "narHash": "sha256-GlyO5x0q38PX+Gr6orbrqF6/q6QXQnREtzwGi0+wIaA=",
+        "lastModified": 1794767147,
+        "narHash": "sha256-wo3yElZelzI9yBtFUmS2H6WCEZModlOFPqZrc9vFDyU=",
         "owner": "foldu",
         "repo": "baash",
-        "rev": "711ea7edd980395d261ca0f8cdf385f4a27a8933",
+        "rev": "595d78a37229380d786ede374a14735087e6a240",
         "type": "gitlab"
       },
       "original": {
