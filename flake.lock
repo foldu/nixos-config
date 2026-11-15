@@ -31,11 +31,11 @@
       },
       "locked": {
         "host": "lab.home.5kw.li",
-        "lastModified": 1794518050,
-        "narHash": "sha256-9omoVDXsmFZ0LcMwmFRdhTAeuxbcKc/Wb8kvJ4YrIks=",
+        "lastModified": 1794667492,
+        "narHash": "sha256-GlyO5x0q38PX+Gr6orbrqF6/q6QXQnREtzwGi0+wIaA=",
         "owner": "foldu",
         "repo": "baash",
-        "rev": "c2e87f60d464556e9a9378883c9b93125a1ca1fd",
+        "rev": "711ea7edd980395d261ca0f8cdf385f4a27a8933",
         "type": "gitlab"
       },
       "original": {
@@ -284,11 +284,11 @@
       },
       "locked": {
         "host": "lab.home.5kw.li",
-        "lastModified": 1794516562,
-        "narHash": "sha256-6HIY2Gi+e306sFj84erW966k8NwQ1l12u4rMk8NRoXQ=",
+        "lastModified": 1794582601,
+        "narHash": "sha256-40ymZhvxGHTc69FD67+J43S/lyDnirRZHIlXrbWkUW0=",
         "owner": "foldu",
         "repo": "dtr",
-        "rev": "4f2306c621fc64279fd38cfad8892c6cd65a5c59",
+        "rev": "70b9603dd8fd91d9e5eff69095fd4dda8179b1ff",
         "type": "gitlab"
       },
       "original": {
@@ -1137,7 +1137,8 @@
         "quickshell": "quickshell",
         "sops-nix": "sops-nix",
         "treefmt-nix": "treefmt-nix_2",
-        "wpp-gtk": "wpp-gtk"
+        "wpp-gtk": "wpp-gtk",
+        "yutooob": "yutooob"
       }
     },
     "rust-overlay": {
@@ -1391,6 +1392,29 @@
       "original": {
         "type": "git",
         "url": "https://lab.home.5kw.li/foldu/wpp-gtk"
+      }
+    },
+    "yutooob": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "host": "lab.home.5kw.li",
+        "lastModified": 1794741153,
+        "narHash": "sha256-sOGcGm05gyUyvdwHv5H1dYwrW267fkdHL5sveUWPv5I=",
+        "owner": "foldu",
+        "repo": "yutooob",
+        "rev": "c1aa9a6b6257b9f56df7db9d340263404927954a",
+        "type": "gitlab"
+      },
+      "original": {
+        "host": "lab.home.5kw.li",
+        "owner": "foldu",
+        "ref": "master",
+        "repo": "yutooob",
+        "type": "gitlab"
       }
     }
   },
