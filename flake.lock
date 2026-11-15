@@ -1402,11 +1402,11 @@
       },
       "locked": {
         "host": "lab.home.5kw.li",
-        "lastModified": 1794770016,
-        "narHash": "sha256-I2u3XJBLRORbbZXrnkTaeG4SvQRX/B9X5xoSfqEHCgY=",
+        "lastModified": 1794773857,
+        "narHash": "sha256-7Q60hh+QQcyQhqoYPkLkVPoHhzHHCgXybxIMtMa5N/M=",
         "owner": "foldu",
         "repo": "yutooob",
-        "rev": "4cf6a3c8318159da52fcf06425aa05e82c74aed2",
+        "rev": "6f79a2251abd47631f1b3b1daa560d4ca0d77103",
         "type": "gitlab"
       },
       "original": {
