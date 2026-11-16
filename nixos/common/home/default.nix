@@ -39,6 +39,7 @@
   programs.baash = {
     enable = true;
     zoxide.enable = true;
+    direnv.enable = true;
   };
 
   environment.systemPackages = [
